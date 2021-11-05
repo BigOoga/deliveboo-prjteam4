@@ -20,11 +20,11 @@ class RestaurantSeeder extends Seeder
             $restaurant->password = bcrypt($faker->password());
             $restaurant->address = $faker->address();
             $restaurant->iva = $faker->isbn10();
-            $restaurant->avatar = $faker->imageUrl(640, 480, 'animals', true);
+            $restaurant->image = $faker->imageUrl(640, 480, 'animals', true);
             $restaurant->delivery_fee = $faker->randomFloat(2, 1, 10);
-            $restaurant->vote=$faker->numberBetween(0, 5);
+            $restaurant->votes=$faker->numberBetween(0, 5);
             $restaurant->description=$faker->text(100);
-            $restaurant->open=$faker->boolean();
+            $restaurant->is_open=$faker->boolean();
             $restaurant->opening_time=$faker->time();
             $restaurant->closing_time=$faker->time();
             $restaurant->save();
