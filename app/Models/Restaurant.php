@@ -10,4 +10,9 @@ class Restaurant extends Model
     {
         return $this->belongsToMany('App\Models\Type');
     }
+
+    public function dishes()
+    {
+        return $this->hasMany(Dish::class);
+    }
 }
