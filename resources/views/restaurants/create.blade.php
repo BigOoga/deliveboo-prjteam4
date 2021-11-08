@@ -56,7 +56,7 @@
       <div class="form-row">
         <div class="form-group col-2">
           <label for="deliveryFee">Spese di spedizione</label>
-          <input type="number" class="form-control" min="0" max="100" step="0.01" name="delivery_fee" id="deliveryFee" value="0.00">
+          <input type="number" class="form-control" min="0.00" step="0.01" name="delivery_fee" id="deliveryFee" value="0.00">
         </div>
       </div>
       {{-- TYPES --}}
@@ -65,15 +65,15 @@
           <h6>Categoria</h6>
           @foreach($types as $type)
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" value="type{{$type->id}}" id="type{{$type->id}}"
-              name="types[]" @if(in_array($type->id, old('types', []))) checked @endif>
+              <input class="form-check-input" type="checkbox" value="type{{$type->id}}" id="type{{$type->id}}">
+              {{-- name="types[]" @if(in_array($type->id, old('types', []))) checked @endif> --}}
               <label class="form-check-label" for="type{{$type->id}}">{{$type->name}}</label>
             </div>
           @endforeach
         </div>
       </div>
       <div class="form-row">
-        <div class="form-group">
+        <div class="form-group col-2">
           <button type="submit" class="btn btn-primary">Sign in</button>
         </div>
       </div>
