@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Restaurant;
+use App\Models\Type;
 
 
 class RestaurantController extends Controller
@@ -27,8 +28,8 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        // Pagina per l'iscrizione del ristoratore
-        return view('restaurants.create');
+        $types = type::all();
+        return view('restaurants.create', compact('types'));
     }
 
     /**
@@ -39,6 +40,19 @@ class RestaurantController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'address' => 'required',
+            'iva' => 'required|unsigned',
+            'description' => 'nullable',
+            'opening_time' => 'required',
+            'closing_time' => 'required',
+            'delivery_fee' => 'required|numeric',
+        ]);
+
         $data = $request->all();
         $newRestaurant = new Restaurant();
         $newRestaurant->fill($data);
