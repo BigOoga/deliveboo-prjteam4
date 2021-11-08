@@ -41,7 +41,6 @@ class RestaurantController extends Controller
         $newRestaurant = new Restaurant();
         $newRestaurant->fill($data);
         $newRestaurant->password = bcrypt($data['password']);
-        $newRestaurant->image = 
     }
 
     /**
