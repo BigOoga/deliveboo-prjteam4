@@ -14,7 +14,11 @@ class OrderController extends Controller
      */
     public function index()
     {
+<<<<<<< HEAD
+        $orders= Order::all();
+=======
         $orders = Order::all();
+>>>>>>> 2c7ca8e95c3234083c95c0a0188a0e18bd27b177
         return view('orders.index', compact('orders'));
     }
 
@@ -25,7 +29,11 @@ class OrderController extends Controller
      */
     public function create()
     {
+<<<<<<< HEAD
+        return view('orders.create');
+=======
         //
+>>>>>>> 2c7ca8e95c3234083c95c0a0188a0e18bd27b177
     }
 
     /**
@@ -36,7 +44,14 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+<<<<<<< HEAD
+        $data = $request->all();
+        $newOrder = new Order();
+        $newOrder->fill($data);
+        $newOrder->save();
+=======
         //
+>>>>>>> 2c7ca8e95c3234083c95c0a0188a0e18bd27b177
     }
 
     /**
@@ -45,9 +60,15 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+<<<<<<< HEAD
+    public function show(Order $order)
+    {
+        return view('orders.show', compact('order'));
+=======
     public function show($id)
     {
         //
+>>>>>>> 2c7ca8e95c3234083c95c0a0188a0e18bd27b177
     }
 
     /**
@@ -79,8 +100,15 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+<<<<<<< HEAD
+    public function destroy(Order $order)
+    {
+        $order->delete();
+        return redirect()->route('orders.index');
+=======
     public function destroy($id)
     {
         //
+>>>>>>> 2c7ca8e95c3234083c95c0a0188a0e18bd27b177
     }
 }
