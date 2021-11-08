@@ -18,3 +18,6 @@ Route::get('/', function () {
 });
 
 Route::resource('restaurants','RestaurantController');
+
+Route::resource('orders','OrderController');
+

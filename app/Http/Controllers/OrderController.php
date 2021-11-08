@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Restaurant;
+use App\Models\Order;
 
-
-class RestaurantController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,8 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        $restaurants= Restaurant::all();
-        return view('restaurants.index', compact('restaurants'));
+        $orders= Order::all();
+        return view('orders.index', compact('orders'));
     }
 
     /**
@@ -26,7 +25,7 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        return view('restaurants.create');
+        return view('orders.create');
     }
 
     /**
@@ -38,9 +37,9 @@ class RestaurantController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $newRestaurant = new Restaurant();
-        $newRestaurant->fill($data);
-        $newRestaurant->password = bcrypt($data['password']);
+        $newOrder = new Order();
+        $newOrder->fill($data);
+        $newOrder->save();
     }
 
     /**
@@ -49,9 +48,9 @@ class RestaurantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Order $order)
     {
-        //
+        return view('orders.show', compact('order'));
     }
 
     /**
@@ -83,8 +82,9 @@ class RestaurantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Order $order)
     {
-        //
+        $order->delete();
+        return redirect()->route('orders.index');
     }
 }
