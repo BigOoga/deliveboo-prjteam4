@@ -37,7 +37,11 @@ class RestaurantController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $newRestaurant = new Restaurant();
+        $newRestaurant->fill($data);
+        $newRestaurant->password = bcrypt($data['password']);
+        $newRestaurant->image = 
     }
 
     /**
