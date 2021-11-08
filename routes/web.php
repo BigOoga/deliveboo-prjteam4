@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Route::resource('restaurants','RestaurantController');
 
 Route::resource('orders','OrderController');
@@ -25,3 +26,6 @@ Route::resource('orders','OrderController');
 =======
 Route::resource('restaurants', 'RestaurantController');
 >>>>>>> 2c7ca8e95c3234083c95c0a0188a0e18bd27b177
+=======
+Route::resource('restaurants', 'RestaurantController');
+>>>>>>> 3e0e0974c4518f8664b1794027e8f25976f377e6
