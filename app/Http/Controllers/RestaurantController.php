@@ -15,7 +15,7 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        $restaurants= Restaurant::all();
+        $restaurants = Restaurant::all();
         return view('restaurants.index', compact('restaurants'));
     }
 
@@ -26,6 +26,7 @@ class RestaurantController extends Controller
      */
     public function create()
     {
+        // Pagina per l'iscrizione del ristoratore
         return view('restaurants.create');
     }
 
@@ -41,7 +42,6 @@ class RestaurantController extends Controller
         $newRestaurant = new Restaurant();
         $newRestaurant->fill($data);
         $newRestaurant->password = bcrypt($data['password']);
-        $newRestaurant->image = 
     }
 
     /**
@@ -63,7 +63,7 @@ class RestaurantController extends Controller
      */
     public function edit($id)
     {
-        //
+        //todo pagina in cui il ristoratore può cambiare i propri dati
     }
 
     /**

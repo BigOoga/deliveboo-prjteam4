@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Dish;
+use App\Models\Order;
 
-
-class DishController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,8 @@ class DishController extends Controller
      */
     public function index()
     {
-        $dishes = Dish::all();
-        return view('dishes.index', compact('dishes'));
+        $orders = Order::all();
+        return view('orders.index', compact('orders'));
     }
 
     /**
@@ -26,7 +25,7 @@ class DishController extends Controller
      */
     public function create()
     {
-        return view('dishes.create');
+        //
     }
 
     /**
@@ -37,13 +36,7 @@ class DishController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        $newDish = new Dish();
-        $newDish->fill($data);
-        //todo passare in qualche modo l'id del ristoratore loggato
-        //$newDish->restaurant_id = ;
-        //todo store image
-        $newDish->save();
+        //
     }
 
     /**
@@ -54,7 +47,7 @@ class DishController extends Controller
      */
     public function show($id)
     {
-        //? Vogliamo una pagina di dettaglio del piatto (per il ristoratore)?
+        //
     }
 
     /**
@@ -63,9 +56,9 @@ class DishController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Dish $dish)
+    public function edit($id)
     {
-        return view('dishes.edit', compact('dish'));
+        //
     }
 
     /**
@@ -75,12 +68,9 @@ class DishController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Dish $dish)
+    public function update(Request $request, $id)
     {
-        $data = $request->all();
-        $dish->fill($data);
-        $dish->save();
-        return redirect()->route('dishes.index');
+        //
     }
 
     /**
@@ -89,10 +79,8 @@ class DishController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Dish $dish)
+    public function destroy($id)
     {
-        $target = Dish::find($dish->id);
-        $target->delete();
-        return redirect()->route('dishes.index')->with('deleted', $dish->name);
+        //
     }
 }
