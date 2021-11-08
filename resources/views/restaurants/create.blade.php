@@ -1,9 +1,8 @@
 <form >
 @csrf 
-
 <div class="container">
-    <h3>Registrazione</h3>
-    
+  <p> </p>
+    <h3>Registrazione</h3>    
         <div class="form-row">
           <div class="form-group col-6">
             <label for="email">Email</label>
@@ -29,21 +28,13 @@
               <label for="address">Indirizzo</label>
               <input type="text" class="form-control" id="address">
             </div>
-           
           </div>
-     
-        <div class="form-row">
-          
-          <div class="form-group col-md-4">
-            <label for="type">Categoria</label>
-            <select id="type" class="form-control">
-              <option selected>Scegli</option>
-              <option>...</option>
-            </select>
-          </div>
-          
-        </div>
-        
+          {{-- <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+             
+            </label>
+          </div> --}}
         <button type="submit" class="btn btn-primary">Sign in</button>
     </div>
 </form>
