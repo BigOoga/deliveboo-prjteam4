@@ -17,6 +17,13 @@
             <li><strong>email: </strong>{{$order->email}}</li>
             <li><strong>totale: </strong>{{$order->total}}</li>
             <li>{{$order->created_at}}</li>
+            <li><a href="{{route('orders.show', $order->id)}}">dettaglio</a></li>
+            <form action="{{ route('orders.destroy', $order)}}"
+            method="post">
+                @csrf
+                @method('DELETE')
+                <input type="submit" value="elimina">
+            </form>
             <br>
         @endforeach
     </ul>
