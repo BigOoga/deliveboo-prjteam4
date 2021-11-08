@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Dish;
 
 
@@ -42,7 +43,8 @@ class DishController extends Controller
         $newDish->fill($data);
         //todo passare in qualche modo l'id del ristoratore loggato
         //$newDish->restaurant_id = ;
-        //todo store image
+        $img_path = Storage::put('uploads', $data['image']);
+        $newDish->image = $img_path;
         $newDish->save();
     }
 
