@@ -7,6 +7,7 @@
     <title>Document</title>
 </head>
 <body>
+    <a href="{{route('orders.create')}}">crea nuovo ordine</a>
     <ul>
         @foreach ($orders as $order)
             <li><strong>ID: </strong>{{$order->id}}</li>
