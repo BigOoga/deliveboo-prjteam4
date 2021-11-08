@@ -1,5 +1,5 @@
-{{-- method="POST" action="{{ route('admin.posts.store') }}" --}}
-<form>
+{{-- method="POST" action="{{ route('restaurants.store') }}" --}}
+<form method="POST" action="{{ route('restaurants.store')}}" >
   @csrf 
   <div class="container">
     {{-- EMAIL    --}}
