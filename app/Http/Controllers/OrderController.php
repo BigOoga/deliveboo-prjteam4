@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Restaurant;
+use App\Models\Order;
 
-
-class RestaurantController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,12 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        $restaurants = Restaurant::all();
-        return view('restaurants.index', compact('restaurants'));
+<<<<<<< HEAD
+        $orders= Order::all();
+=======
+        $orders = Order::all();
+>>>>>>> 2c7ca8e95c3234083c95c0a0188a0e18bd27b177
+        return view('orders.index', compact('orders'));
     }
 
     /**
@@ -26,8 +29,11 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        // Pagina per l'iscrizione del ristoratore
-        return view('restaurants.create');
+<<<<<<< HEAD
+        return view('orders.create');
+=======
+        //
+>>>>>>> 2c7ca8e95c3234083c95c0a0188a0e18bd27b177
     }
 
     /**
@@ -38,14 +44,14 @@ class RestaurantController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        $newRestaurant = new Restaurant();
-        $newRestaurant->fill($data);
-        $newRestaurant->password = bcrypt($data['password']);
 <<<<<<< HEAD
+        $data = $request->all();
+        $newOrder = new Order();
+        $newOrder->fill($data);
+        $newOrder->save();
 =======
-        // $newRestaurant->image = 
->>>>>>> e171de0985692c15f3d193f22a12c1639ea7f305
+        //
+>>>>>>> 2c7ca8e95c3234083c95c0a0188a0e18bd27b177
     }
 
     /**
@@ -54,9 +60,15 @@ class RestaurantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+<<<<<<< HEAD
+    public function show(Order $order)
+    {
+        return view('orders.show', compact('order'));
+=======
     public function show($id)
     {
         //
+>>>>>>> 2c7ca8e95c3234083c95c0a0188a0e18bd27b177
     }
 
     /**
@@ -67,7 +79,7 @@ class RestaurantController extends Controller
      */
     public function edit($id)
     {
-        //todo pagina in cui il ristoratore può cambiare i propri dati
+        //
     }
 
     /**
@@ -88,8 +100,15 @@ class RestaurantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+<<<<<<< HEAD
+    public function destroy(Order $order)
+    {
+        $order->delete();
+        return redirect()->route('orders.index');
+=======
     public function destroy($id)
     {
         //
+>>>>>>> 2c7ca8e95c3234083c95c0a0188a0e18bd27b177
     }
 }
