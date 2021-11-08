@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Restaurant;
+use App\Models\Dish;
 
 
-class RestaurantController extends Controller
+class DishController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        $restaurants = Restaurant::all();
-        return view('restaurants.index', compact('restaurants'));
+        $dishes = Dish::all();
+        return view('dishes.index', compact('dishes'));
     }
 
     /**
@@ -26,8 +26,7 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        // Pagina per l'iscrizione del ristoratore
-        return view('restaurants.create');
+        return view('dishes.create');
     }
 
     /**
@@ -39,9 +38,12 @@ class RestaurantController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $newRestaurant = new Restaurant();
-        $newRestaurant->fill($data);
-        $newRestaurant->password = bcrypt($data['password']);
+        $newDish = new Dish();
+        $newDish->fill($data);
+        //todo passare in qualche modo l'id del ristoratore loggato
+        //$newDish->restaurant_id = ;
+        //todo store image
+        $newDish->save();
     }
 
     /**
@@ -52,7 +54,7 @@ class RestaurantController extends Controller
      */
     public function show($id)
     {
-        //
+        //? Vogliamo una pagina di dettaglio del piatto (per il ristoratore)?
     }
 
     /**
@@ -61,9 +63,9 @@ class RestaurantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Dish $dish)
     {
-        //todo pagina in cui il ristoratore può cambiare i propri dati
+        return view('dishes.edit', compact('dish'));
     }
 
     /**
@@ -73,9 +75,12 @@ class RestaurantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Dish $dish)
     {
-        //
+        $data = $request->all();
+        $dish->fill($data);
+        $dish->save();
+        return redirect()->route('dishes.index');
     }
 
     /**
@@ -84,8 +89,10 @@ class RestaurantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Dish $dish)
     {
-        //
+        $target = Dish::find($dish->id);
+        $target->delete();
+        return redirect()->route('dishes.index')->with('deleted', $dish->name);
     }
 }

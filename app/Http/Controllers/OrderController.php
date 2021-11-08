@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Restaurant;
+use App\Models\Order;
 
-
-class RestaurantController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,8 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        $restaurants = Restaurant::all();
-        return view('restaurants.index', compact('restaurants'));
+        $orders = Order::all();
+        return view('orders.index', compact('orders'));
     }
 
     /**
@@ -26,8 +25,7 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        // Pagina per l'iscrizione del ristoratore
-        return view('restaurants.create');
+        //
     }
 
     /**
@@ -38,10 +36,7 @@ class RestaurantController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        $newRestaurant = new Restaurant();
-        $newRestaurant->fill($data);
-        $newRestaurant->password = bcrypt($data['password']);
+        //
     }
 
     /**
@@ -63,7 +58,7 @@ class RestaurantController extends Controller
      */
     public function edit($id)
     {
-        //todo pagina in cui il ristoratore può cambiare i propri dati
+        //
     }
 
     /**
