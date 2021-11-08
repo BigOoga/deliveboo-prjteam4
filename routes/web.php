@@ -14,10 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('guest.home');
 });
 
+<<<<<<< HEAD
 Route::resource('restaurants','RestaurantController');
 
 Route::resource('orders','OrderController');
 
+=======
+Route::resource('restaurants', 'RestaurantController');
+>>>>>>> 2c7ca8e95c3234083c95c0a0188a0e18bd27b177

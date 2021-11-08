@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Order;
+use App\Models\Dish;
 
-class OrderController extends Controller
+
+class DishController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,12 +15,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-<<<<<<< HEAD
-        $orders= Order::all();
-=======
-        $orders = Order::all();
->>>>>>> 2c7ca8e95c3234083c95c0a0188a0e18bd27b177
-        return view('orders.index', compact('orders'));
+        $dishes = Dish::all();
+        return view('dishes.index', compact('dishes'));
     }
 
     /**
@@ -29,11 +26,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-<<<<<<< HEAD
-        return view('orders.create');
-=======
-        //
->>>>>>> 2c7ca8e95c3234083c95c0a0188a0e18bd27b177
+        return view('dishes.create');
     }
 
     /**
@@ -44,14 +37,13 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-<<<<<<< HEAD
         $data = $request->all();
-        $newOrder = new Order();
-        $newOrder->fill($data);
-        $newOrder->save();
-=======
-        //
->>>>>>> 2c7ca8e95c3234083c95c0a0188a0e18bd27b177
+        $newDish = new Dish();
+        $newDish->fill($data);
+        //todo passare in qualche modo l'id del ristoratore loggato
+        //$newDish->restaurant_id = ;
+        //todo store image
+        $newDish->save();
     }
 
     /**
@@ -60,15 +52,9 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-<<<<<<< HEAD
-    public function show(Order $order)
-    {
-        return view('orders.show', compact('order'));
-=======
     public function show($id)
     {
-        //
->>>>>>> 2c7ca8e95c3234083c95c0a0188a0e18bd27b177
+        //? Vogliamo una pagina di dettaglio del piatto (per il ristoratore)?
     }
 
     /**
@@ -77,9 +63,9 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Dish $dish)
     {
-        //
+        return view('dishes.edit', compact('dish'));
     }
 
     /**
@@ -89,9 +75,12 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Dish $dish)
     {
-        //
+        $data = $request->all();
+        $dish->fill($data);
+        $dish->save();
+        return redirect()->route('dishes.index');
     }
 
     /**
@@ -100,15 +89,10 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-<<<<<<< HEAD
-    public function destroy(Order $order)
+    public function destroy(Dish $dish)
     {
-        $order->delete();
-        return redirect()->route('orders.index');
-=======
-    public function destroy($id)
-    {
-        //
->>>>>>> 2c7ca8e95c3234083c95c0a0188a0e18bd27b177
+        $target = Dish::find($dish->id);
+        $target->delete();
+        return redirect()->route('dishes.index')->with('deleted', $dish->name);
     }
 }
