@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Restaurant;
 
 
@@ -42,10 +43,8 @@ class RestaurantController extends Controller
         $newRestaurant = new Restaurant();
         $newRestaurant->fill($data);
         $newRestaurant->password = bcrypt($data['password']);
-<<<<<<< HEAD
-=======
-        // $newRestaurant->image = 
->>>>>>> e171de0985692c15f3d193f22a12c1639ea7f305
+        $img_path = Storage::put('uploads', $data['image']);
+        $newRestaurant->image = $img_path;
     }
 
     /**
