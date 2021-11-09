@@ -36,10 +36,9 @@
                             {{-- Sidebar --}}
                             <div id="mySidenav" class="sidenav">
                                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                                <a href="#">About</a>
-                                <a href="#">Services</a>
-                                <a href="#">Clients</a>
-                                <a href="#">Contact</a>
+                                <a class="btn btn-light" href="{{ route('login') }}" role="button">Accedi o registrati</a>
+                                <hr>
+                                <a href="{{ route('restaurants.create') }}">Aggiungi il tuo ristorante</a>
                               </div>
                         </nav>
                     </div>
@@ -227,7 +226,7 @@
                     z-index: 1;
                     top: 0;
                     right: 0;
-                    background-color: #111;
+                    background-color: #fff;
                     overflow-x: hidden;
                     transition: 0.5s;
                     padding-top: 60px;
@@ -237,7 +236,7 @@
                     padding: 8px 8px 8px 32px;
                     text-decoration: none;
                     font-size: 25px;
-                    color: #818181;
+                    color: #000;
                     display: block;
                     transition: 0.3s;
                 }
