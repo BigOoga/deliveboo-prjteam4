@@ -48,7 +48,7 @@ class RestaurantController extends Controller
             'password' => 'required',
             'address' => 'required',
 
-            //? prima era required|Unsigned ma dava errore
+            //? prima era required|Unsigned che non esiste
             'iva' => 'required|unique:restaurants',
 
             'description' => 'nullable',
