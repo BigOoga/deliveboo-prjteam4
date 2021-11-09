@@ -9,39 +9,34 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Nome piatto:</th>
-                    {{-- <th scope="col">Descrizione:</th> --}}
-                    <th scope="col">Portata:</th>
-                    <th scope="col">Prezzo:</th>
                     <th scope="col">Disponibile:</th>
-                    <th scope="col">Gluten Free:</th>
-                    <th scope="col">Vegetariano:</th>
-                    <th scope="col">Vegano:</th>
-                    <th scope="col">Surgelato:</th>
+                    <th scope="col">Prezzo:</th>
+
                 </tr>
             </thead>
             <tbody>
                 {{-- CICLO FOR E STAMPA DETTAGLIO PIATTI --}}
-                @forelse($restaurants as $restaurant)
+                @forelse($dishes as $dish)
                     <tr>
-                        <td scope="row">{{ $restaurant->id }} </td>
-                        <td>{{ $restaurant->name }}</td>
-                        {{-- <td>{{ $restaurant->description }}</td> --}}
-                        <td>{{ $restaurant->entry }}</td>
-                        <td>{{ $restaurant->price }}</td>
-                        <td>{{ $restaurant->gluten_free }}</td>
-                        <td>{{ $restaurant->vegetarian }}</td>
-                        <td>{{ $restaurant->vegan }}</td>
-                        <td>{{ $restaurant->frozen }}</td>
-                        {{-- <td class="">
-                            <a href="{{ route('admin.restaurant.show', $restaurant->id) }}" class="btn btn-info p-2">Dettaglio</a>
-                            <a href="{{ route('admin.restaurant.edit', $restaurant->id) }}" class="btn btn-secondary p-2">Modifica</a>
-                            <form action="{{ route('admin.restaurant.destroy', $restaurant->id) }}" method="POST"
+                        <td scope="row">{{ $dish->id }} </td>
+                        <td><h5>{{ $dish->name }}</h5></td>
+                        <td>{{ $dish->available }}</td>
+                        <td>€{{ $dish->price }}</td>
+
+                        <td class="">
+                            <a 
+                            {{-- href="{{ route('admin.dish.show', $dish->id) }}"  --}}
+                            class="btn btn-info p-2">Dettaglio</a>
+                            <a 
+                            {{-- href="{{ route('admin.dish.edit', $dish->id) }}"  --}}
+                            class="btn btn-secondary p-2">Modifica</a>
+                            {{-- <form action="{{ route('admin.dish.destroy', $dish->id) }}" method="POST"
                                 class="d-inline delete-form" data-post="{{ $post->title }}">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Elimina</button>
-                            </form>
-                        </td> --}}
+                            </form> --}}
+                        </td>
                     </tr>
                 @empty
                     <tr>
