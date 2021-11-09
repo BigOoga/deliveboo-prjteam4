@@ -8,6 +8,7 @@ use App\Models\Restaurant;
 use App\Models\Type;
 
 
+
 class RestaurantController extends Controller
 {
     /**
@@ -46,7 +47,10 @@ class RestaurantController extends Controller
             'email' => 'required',
             'password' => 'required',
             'address' => 'required',
-            'iva' => 'required|unsigned',
+
+            //? prima era required|Unsigned ma dava errore
+            'iva' => 'required|unique:restaurants',
+
             'description' => 'nullable',
             'opening_time' => 'required',
             'closing_time' => 'required',
@@ -57,8 +61,16 @@ class RestaurantController extends Controller
         $newRestaurant = new Restaurant();
         $newRestaurant->fill($data);
         $newRestaurant->password = bcrypt($data['password']);
-        $img_path = Storage::put('uploads', $data['image']);
-        $newRestaurant->image = $img_path;
+
+        //? Non sono sicuro sia il modo migliore di controllare se è presente un'immagine
+        if ($request->has('image')) {
+            $img_path = Storage::put('uploads', $data['image']);
+            $newRestaurant->image = $img_path;
+        }
+
+        // Forziamo is_open a true durante la registrazione
+        $newRestaurant->is_open = true;
+        $newRestaurant->save();
     }
 
     /**
