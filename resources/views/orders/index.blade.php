@@ -14,8 +14,6 @@
             <li><strong>indirizzo: </strong>{{$order->address}}</li>
             <li><strong>nome: </strong>{{$order->user_name}}</li>
             <li><strong>cognome: </strong>{{$order->user_surname}}</li>
-            <li><strong>telefono: </strong>{{$order->phone}}</li>
-            <li><strong>email: </strong>{{$order->email}}</li>
             <li><strong>totale: </strong>{{$order->total}}</li>
             <li>{{$order->created_at}}</li>
             <li><a href="{{route('orders.show', $order->id)}}">dettaglio</a></li>
