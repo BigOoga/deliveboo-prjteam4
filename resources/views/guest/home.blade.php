@@ -47,11 +47,12 @@
                         </nav>
                     </div>
                     
-                    <div>
+                    <div id="header-background">
+                        
                         <div class="container">
                             <div class="row">
                                 {{-- Search location --}}
-                                <div class="col-6">
+                                <div id="search-form" class="col-6">
                                     <form class="form-inline mr-auto d-flex">
                                         <input class="form-control" type="text" placeholder="Search" aria-label="Search">
                                         <button class="btn btn-rounded btn-sm my-0 ml-sm-2" type="submit">Search</button>
@@ -62,6 +63,7 @@
                                 </div>
                             </div>
                         </div>
+                        
                     </div>
 
 
@@ -214,15 +216,17 @@
                 .clickable{
                     cursor: pointer;
                 }
-                #nav-bg{
-                    background: rgb(0,204,188);
-                }
                 
-                #header-background{
-                    background: rgb(0,204,188);
-                    background: linear-gradient(177deg, rgba(0,204,188,1) 50%, rgba(208,235,153,1) 50%);
-                }
                 
+                header{
+                    height: 455px;
+                    background: rgb(0,204,188);
+                    background: linear-gradient(176deg, rgba(0,204,188,1) 49.7%, rgba(208,235,153,1) 50%);
+                    background-position-y: ;
+                }
+                #search-form{
+
+                }
                 .sidenav {
                     height: 100%;
                     width: 0;
