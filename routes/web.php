@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('guest.home');
+    return view('guest/home');
 });
 
 Route::resource('restaurants', 'RestaurantController');
