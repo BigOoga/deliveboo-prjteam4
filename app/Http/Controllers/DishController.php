@@ -65,6 +65,7 @@ class DishController extends Controller
         }
 
         $newDish->save();
+        return redirect()->route('restaurants.dishes.index');
     }
 
     /**
