@@ -18,7 +18,7 @@ class DishController extends Controller
     public function index()
     {
         $dishes = Dish::all();
-        return view('restaurants.dishes.index', compact('dishes'));
+        return view('dishes.index', compact('dishes'));
     }
 
     /**
@@ -28,7 +28,7 @@ class DishController extends Controller
      */
     public function create()
     {
-        return view('restaurants.dishes.create');
+        return view('dishes.create');
     }
 
     /**
@@ -65,7 +65,7 @@ class DishController extends Controller
         }
 
         $newDish->save();
-        return redirect()->route('restaurants.dishes.index');
+        return redirect()->route('dishes.index');
     }
 
     /**
@@ -87,7 +87,7 @@ class DishController extends Controller
      */
     public function edit(Dish $dish)
     {
-        return view('restaurants.dishes.edit', compact('dish'));
+        return view('dishes.edit', compact('dish'));
     }
 
     /**
@@ -102,7 +102,7 @@ class DishController extends Controller
         $data = $request->all();
         $dish->fill($data);
         $dish->save();
-        return redirect()->route('restaurants.dishes.index');
+        return redirect()->route('dishes.index');
     }
 
     /**
@@ -115,6 +115,6 @@ class DishController extends Controller
     {
         $target = Dish::find($dish->id);
         $target->delete();
-        return redirect()->route('restaurants.dishes.index')->with('deleted', $dish->name);
+        return redirect()->route('dishes.index')->with('deleted', $dish->name);
     }
 }
