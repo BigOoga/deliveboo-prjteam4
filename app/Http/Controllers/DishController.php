@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Dish;
+use Illuminate\Support\Facades\Auth;
 
 
 class DishController extends Controller
@@ -43,8 +44,13 @@ class DishController extends Controller
         $newDish->fill($data);
         //! Se vi segna un errore su Auth non fateci caso
         $newDish->restaurant_id = Auth::id();
-        $img_path = Storage::put('uploads', $data['image']);
-        $newDish->image = $img_path;
+
+        //? Non sono sicuro sia il modo migliore di controllare se è presente un'immagine
+        if ($request->has('image')) {
+            $img_path = Storage::put('uploads', $data['image']);
+            $newDish->image = $img_path;
+        }
+
         $newDish->save();
     }
 
