@@ -8,7 +8,7 @@
       {{-- EMAIL  --}}
       <div class="col-6">
         <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email">
+        <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{old('email')}}">
         @error('email') 
           <div class="invalid-feedback">
             {{$message}}
@@ -30,7 +30,7 @@
       {{-- NAME --}} 
       <div class="col-6">
         <label for="name" class="form-label">Nome attività</label>
-        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name">
+        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{old('name')}}">
         @error('name') 
           <div class="invalid-feedback">
             {{$message}}
@@ -40,7 +40,7 @@
       {{-- P.IVA  --}}
       <div class="col-4">
         <label for="iva" class="form-label">Partita Iva</label>
-        <input type="text" class="form-control @error('iva') is-invalid @enderror" id="iva" name="iva">
+        <input type="text" class="form-control @error('iva') is-invalid @enderror" id="iva" name="iva" value="{{old('iva')}}">
         @error('iva') 
           <div class="invalid-feedback">
             {{$message}}
@@ -52,7 +52,7 @@
       {{-- ADDRESS  --}}
       <div class="col-10">
       <label for="address" class="form-label">Indirizzo</label>
-      <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address">
+      <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" value="{{old('address')}}">
       @error('address') 
         <div class="invalid-feedback">
           {{$message}}
@@ -62,14 +62,14 @@
       {{-- DESCRIPTION  --}}
       <div class="col-10 mt-3">
         <label for="description" class="form-label">Descrizione</label>
-        <textarea class="form-control" id="description" name="description" rows="5"></textarea>
+        <textarea class="form-control" id="description" name="description" rows="5">{{old('description')}}</textarea>
       </div> 
     </div>
     <div class="row my-3">
       {{-- OPENING TIME  --}} 
       <div class="col-2">
         <label for="opening_time" class="form-label">Orario di apertura</label>
-        <input type="time" class="form-control @error('opening_time') is-invalid @enderror" name="opening_time" id="opening_time">
+        <input type="time" class="form-control @error('opening_time') is-invalid @enderror" name="opening_time" id="opening_time" value="{{old('opening_time')}}">
         @error('opening_time') 
         <div class="invalid-feedback">
           {{$message}}
@@ -79,7 +79,7 @@
       {{-- CLOSING TIME  --}} 
       <div class="col-2">
         <label for="closing_time" class="form-label">Orario di chiusura</label>
-        <input type="time" class="form-control @error('closing_time') is-invalid @enderror" name="closing_time" id="closing_time">
+        <input type="time" class="form-control @error('closing_time') is-invalid @enderror" name="closing_time" id="closing_time" value="{{old('closing_time')}}">
         @error('closing_time') 
           <div class="invalid-feedback">
             {{$message}}
@@ -91,7 +91,7 @@
       {{-- DELIVERY FEE  --}}
       <div class="col-2">
       <label for="deliveryFee" class="form-label">Spese di spedizione</label>
-      <input type="number" class="form-control @error('delivery_fee') is-invalid @enderror" min="0.00" step="0.01" name="delivery_fee" id="deliveryFee">
+      <input type="number" class="form-control @error('delivery_fee') is-invalid @enderror" min="0.00" step="0.01" name="delivery_fee" id="deliveryFee" value="{{old('delivery_fee')}}">
       @error('delivery_fee') 
         <div class="invalid-feedback">
           {{$message}}
@@ -105,8 +105,8 @@
         <h5 class="mb-2">Categoria</h5>
         @foreach($types as $type)
         <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" value="type{{$type->id}}" id="type{{$type->id}}" name="type[]">
-          <label class="form-check-label" for="type{{$type->id}}">{{$type->name}}</label>
+          <input class="form-check-input" type="checkbox" value="{{$type->id}}" id="type-{{$type->id}}" name="types[]" @if(in_array($type->id, old('types', []))) checked @endif>
+          <label class="form-check-label" for="type-{{$type->id}}">{{$type->name}}</label>
         </div>
         @endforeach
       </div>
