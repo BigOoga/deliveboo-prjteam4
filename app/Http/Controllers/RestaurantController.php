@@ -46,12 +46,9 @@ class RestaurantController extends Controller
             [
                 'name' => 'required',
                 'email' => 'required',
-                'password' => 'required',
+                'password' => 'required|min:8',
                 'address' => 'required',
-
-                //? prima era required|Unsigned che non esiste
                 'iva' => 'required|unique:restaurants|numeric',
-
                 'description' => 'nullable',
                 'opening_time' => 'required',
                 'closing_time' => 'required',
@@ -60,7 +57,7 @@ class RestaurantController extends Controller
             [
                 'required' => 'Questo campo è obbligatorio',
                 'numeric' => 'Questo campo deve essere numerico',
-
+                'password.min' => 'La password richiede almeno 8 caratteri',
             ]
         );
 
