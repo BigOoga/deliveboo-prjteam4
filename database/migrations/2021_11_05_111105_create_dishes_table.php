@@ -22,11 +22,11 @@ class CreateDishesTable extends Migration
             $table->boolean('available');
             $table->string('entry', 50);
             $table->string('picture')->nullable();
-            $table->float('price', 6,2);
-            $table->boolean('gluten_free');
-            $table->boolean('vegetarian');
-            $table->boolean('vegan');
-            $table->boolean('frozen');
+            $table->float('price', 6, 2);
+            $table->boolean('gluten_free')->default(0);
+            $table->boolean('vegetarian')->default(0);
+            $table->boolean('vegan')->default(0);
+            $table->boolean('frozen')->default(0);
             $table->timestamps();
         });
     }
