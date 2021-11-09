@@ -19,3 +19,8 @@ Route::get('/', function () {
 
 Route::resource('restaurants', 'RestaurantController');
 Route::resource('orders', 'OrderController');
+
+//! Se vi segna un errore su Auth non fateci caso
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
