@@ -1,4 +1,13 @@
-{{-- method="POST" action="{{ route('restaurants.store') }}" --}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  <title>Document</title>
+</head>
+<body>
 <form method="POST" action="{{ route('restaurants.store')}}" >
   @csrf 
   <div class="container">
@@ -7,31 +16,31 @@
       <div class="form-row mt-3">
         <div class="form-group col-4">
           <label for="email">Email</label>
-          <input type="email" class="form-control" id="email" name="email">
+          <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email">
         </div>
         {{-- PASSWORD --}}
         <div class="form-group col-4">
           <label for="password">Password</label>
-          <input type="password" class="form-control" id="password" name="password">
+          <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password">
         </div>
       </div>
       {{-- NAME --}}
       <div class="form-row">
         <div class="form-group col-4">
           <label for="name">Nome attività</label>
-          <input type="text" class="form-control" id="name" name="name">
+          <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" id="name" name="name">
         </div>
         {{-- P.IVA  --}}
         <div class="form-group col-4">
           <label for="iva">Partita Iva</label>
-          <input type="text" class="form-control" id="iva" name="iva">
+          <input type="text" class="form-control @error('iva') is-invalid @enderror" id="iva" name="iva" id="iva" name="iva">
         </div>
       </div>
       {{-- ADDRESS  --}}
       <div class="form-row">
         <div class="form-group col-8">
           <label for="address">Indirizzo</label>
-          <input type="text" class="form-control" id="address" name="address">
+          <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" id="address" name="address">
         </div>
       </div>
       {{-- DESCRIPTION  --}}
@@ -45,18 +54,18 @@
       <div class="form-row"> 
         <div class="form-group col-2">
           <label for="openingTime">Orario di apertura</label>
-          <input type="time" class="form-control" name="opening_time" id="openingTime" value="09:00">
+          <input type="time" class="form-control @error('opening_time') is-invalid @enderror" name="opening_time" id="openingTime">
         </div>
-        <div class="form-group col-2 px-3">
+        <div class="form-group col-2">
           <label for="closingTime">Orario di chiusura</label>
-          <input type="time" class="form-control" name="closing_time" id="closingTime" value="20:00">
+          <input type="time" class="form-control @error('closing_time') is-invalid @enderror" name="closing_time" id="closingTime">
         </div>
       </div>  
       {{-- DELIVERY FEE  --}}
       <div class="form-row">
         <div class="form-group col-2">
           <label for="deliveryFee">Spese di spedizione</label>
-          <input type="number" class="form-control" min="0.00" step="0.01" name="delivery_fee" id="deliveryFee" value="0.00">
+          <input type="number" class="form-control @error('delivery_fee') is-invalid @enderror" min="0.00" step="0.01" name="delivery_fee" id="deliveryFee">
         </div>
       </div>
       {{-- TYPES --}}
@@ -65,7 +74,7 @@
           <h6>Categoria</h6>
           @foreach($types as $type)
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" value="type{{$type->id}}" id="type{{$type->id}}">
+              <input class="form-check-input " type="checkbox" value="type{{$type->id}}" id="type{{$type->id}}">
               {{-- name="types[]" @if(in_array($type->id, old('types', []))) checked @endif> --}}
               <label class="form-check-label" for="type{{$type->id}}">{{$type->name}}</label>
             </div>
@@ -74,9 +83,12 @@
       </div>
       <div class="form-row">
         <div class="form-group col-2">
-          <button type="submit" class="btn btn-primary">Sign in</button>
+          <button type="submit" class="btn btn-primary">Sign up</button>
         </div>
       </div>
   </div>
 </form>
 
+
+</body>
+</html>
