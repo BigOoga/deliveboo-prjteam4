@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
     <title>Document</title>
 </head>
 <body>
-    <div class="container">
+    <div class="container mt-5 mb-5">
         <form action="{{route('orders.update', $order)}}"
         method="post">
             @csrf
@@ -30,8 +31,11 @@
         
             <label for="total">totale</label>
             <input type="text" name="total" id="total"  value="{{$order->total}}">
-        
-            <input type="submit" value="invia">
+
+            <div class="mb-2 mt-2">
+                <button type="submit" class="btn btn-outline-success">conferma modifiche</button>
+            </div>
+            <div class="mb-2 mt-2"><a href="{{route('orders.index')}}" class="btn btn-outline-primary">torna all'indice</a></div>
         </form>
     </div>
 </body>

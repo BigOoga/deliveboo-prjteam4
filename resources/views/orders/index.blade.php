@@ -12,7 +12,7 @@
         <button type="button" class="btn btn-outline-success mb-5"><a href="{{route('orders.create')}}" class="link-dark text-decoration-none">Crea nuovo ordine</a></button>
         <ul class="list-group list-unstyled">
             @foreach ($orders as $order)
-                <div class="border p-5 d-inline-block">
+                <div class="border p-5">
                     <li class="mb-2"><strong>ID: </strong>{{$order->id}}</li>
                     <li class="mb-2"><strong>indirizzo: </strong>{{$order->address}}</li>
                     <li class="mb-2"><strong>nome: </strong>{{$order->user_name}}</li>
