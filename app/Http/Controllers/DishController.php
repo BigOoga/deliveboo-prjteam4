@@ -60,9 +60,9 @@ class DishController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Dish $dish)
     {
-        //? Vogliamo una pagina di dettaglio del piatto (per il ristoratore)?
+        return view('dishes.show', compact('dish'));
     }
 
     /**
