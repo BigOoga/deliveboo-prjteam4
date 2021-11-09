@@ -29,7 +29,7 @@
                             </div>
                             {{-- Navbar buttons --}}
                             <div>
-                                <a class="btn btn-light" href="#" role="button">carrello</a>
+                                <a class="btn btn-light" href="#" role="button">Carrello</a>
                                 <a class="btn btn-light" href="{{ route('login') }}" role="button">Accedi o registrati</a>
                                 <a class="btn btn-light" href="#" role="button" onclick="openNav()">Menu</a>
                             </div>
@@ -47,7 +47,7 @@
                         </nav>
                     </div>
                     
-                    <div id="header-background">
+                    <div id="hero">
                         
                         <div class="container">
                             <div class="row">
@@ -217,15 +217,19 @@
                     cursor: pointer;
                 }
                 
-                
+                #hero{
+                    height: 400px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                }
+               
                 header{
                     height: 455px;
-                    background: rgb(0,204,188);
                     background: linear-gradient(176deg, rgba(0,204,188,1) 49.7%, rgba(208,235,153,1) 50%);
-                    background-position-y: ;
                 }
                 #search-form{
-
+                    align-self: flex-end;
                 }
                 .sidenav {
                     height: 100%;
