@@ -41,8 +41,8 @@ class DishController extends Controller
         $data = $request->all();
         $newDish = new Dish();
         $newDish->fill($data);
-        //todo passare in qualche modo l'id del ristoratore loggato
-        //$newDish->restaurant_id = ;
+        //! Se vi segna un errore su Auth non fateci caso
+        $newDish->restaurant_id = Auth::id();
         $img_path = Storage::put('uploads', $data['image']);
         $newDish->image = $img_path;
         $newDish->save();
