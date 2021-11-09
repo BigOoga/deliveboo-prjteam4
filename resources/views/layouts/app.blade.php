@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Title -->
-    <title>{{ config('app.name', 'Deliveboo') }}</title>
+    <title>Deliveboo</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -20,7 +20,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Deliveboo') }}
+                    Deliveboo
                 </a>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 </div>
