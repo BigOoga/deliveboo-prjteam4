@@ -42,24 +42,27 @@ class RestaurantController extends Controller
     public function store(Request $request)
     {
 
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'password' => 'required',
-            'address' => 'required',
+        $request->validate(
+            [
+                'name' => 'required',
+                'email' => 'required',
+                'password' => 'required',
+                'address' => 'required',
 
-            //? prima era required|Unsigned che non esiste
-            'iva' => 'required|unique:restaurants|numeric',
+                //? prima era required|Unsigned che non esiste
+                'iva' => 'required|unique:restaurants|numeric',
 
-            'description' => 'nullable',
-            'opening_time' => 'required|numeric',
-            'closing_time' => 'required|numeric',
-            'delivery_fee' => 'required|numeric',
-        ], 
-            ['required' => 'Questo campo è obbligatorio',
-            'numeric' => 'Questo campo deve essere numerico', 
-            
-        ]);
+                'description' => 'nullable',
+                'opening_time' => 'required',
+                'closing_time' => 'required',
+                'delivery_fee' => 'required|numeric',
+            ],
+            [
+                'required' => 'Questo campo è obbligatorio',
+                'numeric' => 'Questo campo deve essere numerico',
+
+            ]
+        );
 
         $data = $request->all();
         $newRestaurant = new Restaurant();

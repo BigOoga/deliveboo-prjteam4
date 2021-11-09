@@ -1,7 +1,7 @@
 {{-- method="POST" action="{{ route('restaurants.store') }}" --}}
-<form method="POST" action="{{ route('dishes.store') }}">
+<form method="POST" action="{{ route('dishes.store') }}" enctype="multipart/form-data">
     @csrf
-    <div class="container">
+    <div class=" container">
 
         <h2>Crea Piatto</h2>
 
@@ -61,6 +61,14 @@
             </div>
         </div>
 
+
+        {{-- UPLOAD --}}
+        <div class="form-row">
+            <div class="form-group col-2">
+                <label for="price">Immagine</label>
+                <input type="file" name="picture" id="picture">
+            </div>
+        </div>
 
         <div class="form-row">
             <div class="form-group col-2">
