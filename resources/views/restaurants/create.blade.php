@@ -30,7 +30,7 @@
       {{-- NAME --}} 
       <div class="col-6">
         <label for="name" class="form-label">Nome attività</label>
-        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" id="name" name="name">
+        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name">
         @error('name') 
           <div class="invalid-feedback">
             {{$message}}
@@ -40,7 +40,7 @@
       {{-- P.IVA  --}}
       <div class="col-4">
         <label for="iva" class="form-label">Partita Iva</label>
-        <input type="text" class="form-control @error('iva') is-invalid @enderror" id="iva" name="iva" id="iva" name="iva">
+        <input type="text" class="form-control @error('iva') is-invalid @enderror" id="iva" name="iva">
         @error('iva') 
           <div class="invalid-feedback">
             {{$message}}
@@ -52,7 +52,7 @@
       {{-- ADDRESS  --}}
       <div class="col-10">
       <label for="address" class="form-label">Indirizzo</label>
-      <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" id="address" name="address">
+      <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address">
       @error('address') 
         <div class="invalid-feedback">
           {{$message}}
