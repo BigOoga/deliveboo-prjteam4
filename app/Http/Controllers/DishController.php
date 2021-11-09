@@ -18,7 +18,7 @@ class DishController extends Controller
     public function index()
     {
         $dishes = Dish::all();
-        return view('dishes.index', compact('dishes'));
+        return view('restaurants.dishes.index', compact('dishes'));
     }
 
     /**
@@ -28,7 +28,7 @@ class DishController extends Controller
      */
     public function create()
     {
-        return view('dishes.create');
+        return view('restaurants.dishes.create');
     }
 
     /**
@@ -44,6 +44,19 @@ class DishController extends Controller
         $newDish->fill($data);
         //! Se vi segna un errore su Auth non fateci caso
         $newDish->restaurant_id = Auth::id();
+
+        // Controllo se ho ricevuto i checkbox
+        $gluten_free = isset($request->gluten_free) ? 1 : 0;
+        $vegan = isset($request->vegan) ? 1 : 0;
+        $vegetarian = isset($request->vegetarian) ? 1 : 0;
+        $available = isset($request->available) ? 1 : 0;
+        $frozen = isset($request->frozen) ? 1 : 0;
+
+        $newDish->gluten_free = $gluten_free;
+        $newDish->vegan = $vegan;
+        $newDish->vegetarian = $vegetarian;
+        $newDish->frozen = $frozen;
+        $newDish->available = $available;
 
         //? Non sono sicuro sia il modo migliore di controllare se è presente un'immagine
         if ($request->has('image')) {
@@ -73,7 +86,7 @@ class DishController extends Controller
      */
     public function edit(Dish $dish)
     {
-        return view('dishes.edit', compact('dish'));
+        return view('restaurants.dishes.edit', compact('dish'));
     }
 
     /**
@@ -88,7 +101,7 @@ class DishController extends Controller
         $data = $request->all();
         $dish->fill($data);
         $dish->save();
-        return redirect()->route('dishes.index');
+        return redirect()->route('restaurants.dishes.index');
     }
 
     /**
@@ -101,6 +114,6 @@ class DishController extends Controller
     {
         $target = Dish::find($dish->id);
         $target->delete();
-        return redirect()->route('dishes.index')->with('deleted', $dish->name);
+        return redirect()->route('restaurants.dishes.index')->with('deleted', $dish->name);
     }
 }
