@@ -39,6 +39,7 @@ class DishController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request);
         $data = $request->all();
         $newDish = new Dish();
         $newDish->fill($data);
