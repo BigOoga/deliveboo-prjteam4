@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 
 Route::resource('restaurants', 'RestaurantController');
+Route::resource('dishes', 'DishController');
 Route::resource('orders', 'OrderController');
 
 //! Se vi segna un errore su Auth non fateci caso
