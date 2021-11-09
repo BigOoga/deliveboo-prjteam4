@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 <div class="container">
-  <form method="POST" action="{{ route('restaurants.store')}}" >
+  <form method="POST" enctype="multipart/form-data" action="{{ route('restaurants.store')}}" >
   @csrf 
     <h2 class="my-4">Registrazione</h2> 
     <div class="row my-3">
@@ -66,6 +66,13 @@
       </div> 
     </div>
     <div class="row my-3">
+      {{-- UPLOAD --}}
+    <div class="row">
+      <div class="col-5 form-group my-3">
+        <input type="file" class="form-control" id="image" name="image">
+        <label for="image" class="form-label"></label>
+      </div>
+    </div>  
       {{-- OPENING TIME  --}} 
       <div class="col-2">
         <label for="opening_time" class="form-label">Orario di apertura</label>
@@ -111,6 +118,7 @@
         @endforeach
       </div>
     </div>  
+    {{-- SIGN UP  --}}
     <div class="row mt-4">
       <div class="col-2">
         <button type="submit" class="btn btn-primary">Sign up</button>
