@@ -10,7 +10,7 @@
 
        
     </head>
-    <body>
+    <body id="root">
        
 
                 {{-- Header --}}
@@ -40,9 +40,13 @@
                                     <img src="{{ asset('images/logo-small.png') }}" width="30" height="30" alt="Deliveboo">
                                     <h4 class="mx-3">Deliveboo</h4>
                                 </span>
-                                <hr>
-                                <a class="btn btn-primary mx-3" href="{{ route('login') }}" role="button">Accedi o registrati</a>
-                                <a href="{{ route('restaurants.create') }}">Aggiungi il tuo ristorante</a>
+                                <hr class="mx-3">
+                                <div class="d-flex justify-content-center p-3">
+                                    <a class="btn btn-primary text-center" href="{{ route('login') }}" role="button">Accedi</a>
+                                    <a class="btn btn-primary text-center" href="{{ route('register') }}" role="button">Registrati</a>
+                                </div>
+                                <hr class="mx-3">
+                                <a class="ps-5" href="{{ route('restaurants.create') }}">Aggiungi il tuo ristorante</a>
                               </div>
                         </nav>
                     </div>
@@ -213,6 +217,9 @@
                     box-sizing: border-box;
                     
                 }
+                #root{
+                    overflow: auto;
+                }
                 .clickable{
                     cursor: pointer;
                 }
@@ -223,7 +230,7 @@
                     align-items: center;
                     justify-content: space-between;
                 }
-               
+                
                 header{
                     height: 455px;
                     background: linear-gradient(176deg, rgba(0,204,188,1) 49.7%, rgba(208,235,153,1) 50%);
@@ -246,12 +253,17 @@
                 }
 
                 .sidenav a {
-                    padding: 8px 8px 8px 32px;
+                    padding: 8px 8px 8px 8px;
                     text-decoration: none;
                     font-size: 1rem;
                     color: #000;
                     display: block;
                     transition: 0.3s;
+                }
+                .sidenav .btn{
+                    width: 100%;
+                    margin: 10px;
+                    color: #fff;
                 }
 
                 .sidenav a:hover {
@@ -274,10 +286,12 @@
             <script>
                 function openNav() {
                     document.getElementById("mySidenav").style.width = "375px";
+                    document.getElementById("root").style.overflow = "hidden";
                 }
 
                 function closeNav() {
-                document.getElementById("mySidenav").style.width = "0";
+                    document.getElementById("mySidenav").style.width = "0";
+                    document.getElementById("root").style.overflow = "auto";
                 }
             </script>
         
