@@ -46,12 +46,9 @@ class RestaurantController extends Controller
             [
                 'name' => 'required',
                 'email' => 'required',
-                'password' => 'required',
+                'password' => 'required|min:8',
                 'address' => 'required',
-
-                //? prima era required|Unsigned che non esiste
-                'iva' => 'required|unique:restaurants|numeric',
-
+                'iva' => 'required|unique:restaurants|numeric|min:11',
                 'description' => 'nullable',
                 'opening_time' => 'required',
                 'closing_time' => 'required',
@@ -60,7 +57,9 @@ class RestaurantController extends Controller
             [
                 'required' => 'Questo campo è obbligatorio',
                 'numeric' => 'Questo campo deve essere numerico',
-
+                'password.min' => 'La password richiede almeno 8 caratteri',
+                'iva.min' => 'Questo campo richiede 11 numeri',
+                'unique' => 'Esiste già!',
             ]
         );
 
@@ -78,6 +77,7 @@ class RestaurantController extends Controller
         // Forziamo is_open a true durante la registrazione
         $newRestaurant->is_open = true;
         $newRestaurant->save();
+        return redirect()->route('login');
     }
 
     /**
