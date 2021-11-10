@@ -64,9 +64,12 @@ class RestaurantController extends Controller
         );
 
         $data = $request->all();
+        //dd($data);
         $newRestaurant = new Restaurant();
         $newRestaurant->fill($data);
         $newRestaurant->password = bcrypt($data['password']);
+
+
 
         //? Non sono sicuro sia il modo migliore di controllare se è presente un'immagine
         if ($request->has('image')) {
@@ -77,6 +80,7 @@ class RestaurantController extends Controller
         // Forziamo is_open a true durante la registrazione
         $newRestaurant->is_open = true;
         $newRestaurant->save();
+        $newRestaurant->types()->attach($data['types']);
         return redirect()->route('login');
     }
 
