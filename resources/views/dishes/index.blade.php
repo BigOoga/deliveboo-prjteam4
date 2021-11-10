@@ -4,6 +4,7 @@
 
     <div class="container">
         <h1 class="text-center mb-5">I miei piatti</h1>
+        <div><a href="{{ route('dishes.create') }}" class="btn btn-primary p-2  my-1">Aggiungi un piatto</a></div>
         {{-- PRINT DISHES --}}
         @forelse($dishes as $dish)
             <section class="container">
