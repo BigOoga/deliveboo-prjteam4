@@ -14,7 +14,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders= Order::all();
+        $orders = Order::all();
         return view('orders.index', compact('orders'));
     }
 
@@ -37,12 +37,13 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        dd($data);
         $newOrder = new Order();
         $newOrder->fill($data);
         $newOrder->status = 0;
         $newOrder->save();
+        $newOrder->dishes()->attach();
         return redirect()->route('orders.show', $newOrder);
-
     }
 
     /**
@@ -80,7 +81,6 @@ class OrderController extends Controller
         $order->update($data);
 
         return redirect()->route('orders.show', $order->id);
-
     }
 
     /**
