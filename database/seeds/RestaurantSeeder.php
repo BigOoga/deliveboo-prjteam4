@@ -13,20 +13,20 @@ class RestaurantSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        for ($i = 0; $i < 10; $i++){
+        for ($i = 0; $i < 10; $i++) {
             $restaurant = new Restaurant();
             $restaurant->name = $faker->name();
             $restaurant->email = $faker->email();
-            $restaurant->password = bcrypt($faker->password());
+            $restaurant->password = bcrypt('password');
             $restaurant->address = $faker->address();
             $restaurant->iva = $faker->isbn10();
             $restaurant->image = $faker->imageUrl(640, 480, 'animals', true);
             $restaurant->delivery_fee = $faker->randomFloat(2, 1, 10);
-            $restaurant->votes=$faker->numberBetween(0, 5);
-            $restaurant->description=$faker->text(100);
-            $restaurant->is_open=$faker->boolean();
-            $restaurant->opening_time=$faker->time();
-            $restaurant->closing_time=$faker->time();
+            $restaurant->votes = $faker->numberBetween(0, 5);
+            $restaurant->description = $faker->text(100);
+            $restaurant->is_open = $faker->boolean();
+            $restaurant->opening_time = $faker->time();
+            $restaurant->closing_time = $faker->time();
             $restaurant->save();
         }
     }
