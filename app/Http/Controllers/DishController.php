@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Dish;
-
+use Illuminate\Support\Facades\Auth;
 
 class DishController extends Controller
 {
@@ -16,7 +17,10 @@ class DishController extends Controller
      */
     public function index()
     {
-        $dishes = Dish::all();
+
+        $user_id = Auth::id();
+        $dishes = DB::table('dishes')->where('restaurant_id', $user_id)->get();
+
         return view('dishes.index', compact('dishes'));
     }
 
@@ -41,11 +45,30 @@ class DishController extends Controller
         $data = $request->all();
         $newDish = new Dish();
         $newDish->fill($data);
-        //todo passare in qualche modo l'id del ristoratore loggato
-        //$newDish->restaurant_id = ;
-        $img_path = Storage::put('uploads', $data['image']);
-        $newDish->image = $img_path;
+        //! Se vi segna un errore su Auth non fateci caso
+        $newDish->restaurant_id = Auth::id();
+
+        // Controllo se ho ricevuto i checkbox
+        $gluten_free = isset($request->gluten_free) ? 1 : 0;
+        $vegan = isset($request->vegan) ? 1 : 0;
+        $vegetarian = isset($request->vegetarian) ? 1 : 0;
+        $available = isset($request->available) ? 1 : 0;
+        $frozen = isset($request->frozen) ? 1 : 0;
+
+        $newDish->gluten_free = $gluten_free;
+        $newDish->vegan = $vegan;
+        $newDish->vegetarian = $vegetarian;
+        $newDish->frozen = $frozen;
+        $newDish->available = $available;
+
+        //? Non sono sicuro sia il modo migliore di controllare se è presente un'immagine
+        if ($request->has('picture')) {
+            $img_path = Storage::put('uploads', $data['picture']);
+            $newDish->picture = $img_path;
+        }
+
         $newDish->save();
+        return redirect()->route('dishes.index');
     }
 
     /**
@@ -54,9 +77,9 @@ class DishController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Dish $dish)
     {
-        //? Vogliamo una pagina di dettaglio del piatto (per il ristoratore)?
+        return view('dishes.show', compact('dish'));
     }
 
     /**
