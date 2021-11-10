@@ -14,7 +14,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders= Order::all();
+        $orders = Order::all();
         return view('orders.index', compact('orders'));
     }
 
@@ -36,13 +36,23 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+        //!debugging-----
+        $dish_id = 1;
+        $quantity = 3;
+        //!--------------
+
         $data = $request->all();
+
         $newOrder = new Order();
         $newOrder->fill($data);
         $newOrder->status = 0;
         $newOrder->save();
-        return redirect()->route('orders.show', $newOrder);
 
+        // Scrive nella tabella pivot dopo aver creato la relazione
+        $newOrder->dishes()->attach([$dish_id => ['quantity' => $quantity]]);
+        //
+
+        return redirect()->route('orders.show', $newOrder);
     }
 
     /**
@@ -80,7 +90,6 @@ class OrderController extends Controller
         $order->update($data);
 
         return redirect()->route('orders.show', $order->id);
-
     }
 
     /**
