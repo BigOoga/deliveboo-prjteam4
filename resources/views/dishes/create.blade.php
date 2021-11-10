@@ -8,7 +8,7 @@
         {{-- NAME --}}
         <div class="form-row mt-3">
             <div class="form-group col-4">
-                <label for="name">name</label>
+                <label for="name">Nome Piatto</label>
                 <input type="text" class="form-control" id="name" name="name">
             </div>
         </div>
@@ -40,24 +40,24 @@
         {{-- BOOLEANS --}}
         <div class="form-row">
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="bool-1" name="gluten_free" value="1">
+                <input class="form-check-input" type="checkbox" id="available" name="available" value="1">
+                <label class="form-check-label" for="available">Disponibile</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="gluten_free" name="gluten_free" value="1">
                 <label class="form-check-label" for="bool-1">Gluten Free</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="bool-2" name="vegetarian" value="1">
-                <label class="form-check-label" for="bool-2">Vegetariano</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="bool-3" name="vegan" value="1">
-                <label class="form-check-label" for="bool-3">Vegano</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="bool-4" name="frozen" value="1">
+                <input class="form-check-input" type="checkbox" id="frozen" name="frozen" value="1">
                 <label class="form-check-label" for="bool-4">Surgelato</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="available" name="available" value="1">
-                <label class="form-check-label" for="available">Disponibile</label>
+                <input class="form-check-input" type="checkbox" id="vegetarian" name="vegetarian" value="1">
+                <label class="form-check-label" for="bool-2">Vegetariano</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="vegan" name="vegan" value="1">
+                <label class="form-check-label" for="bool-3">Vegano</label>
             </div>
         </div>
 
