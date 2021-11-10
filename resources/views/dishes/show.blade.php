@@ -5,7 +5,7 @@
         <div class="card mb-2">
             <div class="row">
                 <div class="col-md-3">
-                    <img class="img-fluid" src="{{ $dish->picture }}" alt="{{ $dish->name }}">
+                    <img class="img-fluid" src="{{ asset('storage/' . $dish->picture) }}" alt="{{ $dish->name }}">
                 </div>
                 <div class="col-md-9">
                     <div class="card-body">
