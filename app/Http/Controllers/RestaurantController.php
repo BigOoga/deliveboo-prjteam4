@@ -88,7 +88,7 @@ class RestaurantController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('restaurants.show');
     }
 
     /**
