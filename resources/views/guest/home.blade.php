@@ -51,20 +51,23 @@
                         </nav>
                     </div>
                     
-                    <div id="hero">
-                        
+                    <div id="hero" class="d-flex align-items-end py-4">
                         <div class="container">
-                            <div class="row">
+                            <h1>I piatti che ami, a domicilio.</h1>
+                            <div class="row mt-5">
                                 {{-- Search location --}}
-                                <div id="search-form" class="col-6">
-                                    <form class="form-inline mr-auto d-flex">
-                                        <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-                                        <button class="btn btn-rounded btn-sm my-0 ml-sm-2" type="submit">Search</button>
-                                    </form>
+                                <div id="search-form" class="col-6 px-4">
+                                        <form class="form-inline mr-auto">
+                                            <label for="search" class="w-100 d-block">Inserisci il tuo indirizzo per trovare ristoranti nei dintorni</label>
+                                            <div class="d-flex">
+                                                <input class="form-control me-3" type="text" placeholder="Search" aria-label="Search" id="search">
+                                                <button class="btn btn-rounded btn-primary text-white btn-sm my-0 ml-sm-2" type="submit">Search</button>
+                                            </div>
+                                        </form>
+                                        
+                                    <p><a href="{{ route('login') }}">Accedi</a> per visualizzare i tuoi indirizzi recenti.</p>
                                 </div>
-                                <div class="col-6">
-                                    image
-                                </div>
+                                
                             </div>
                         </div>
                         

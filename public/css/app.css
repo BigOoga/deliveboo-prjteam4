@@ -18,6 +18,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background-image: url(https://cwa.roocdn.com/_next/static/campaign.5add8e18.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: bottom 0% right 25%;
+}
+#hero h1, #hero .h1 {
+  color: #440063;
+  font-weight: bold;
 }
 
 header {
@@ -26,7 +34,9 @@ header {
 }
 
 #search-form {
-  align-self: flex-end;
+  line-height: 59px;
+  background-color: #fff;
+  border-radius: 5px;
 }
 
 .sidenav {
