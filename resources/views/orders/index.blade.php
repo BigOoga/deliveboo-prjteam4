@@ -11,7 +11,7 @@
     <div class="container mt-5 mb-5">
         <button type="button" class="btn btn-outline-success mb-5"><a href="{{route('orders.create')}}" class="link-dark text-decoration-none">Crea nuovo ordine</a></button>
         <ul class="list-group list-unstyled">
-            @foreach ($orders as $order)
+            @forelse ($orders as $order)
                 <div class="border p-5">
                     <li class="mb-2"><strong>ID: </strong>{{$order->id}}</li>
                     <li class="mb-2"><strong>indirizzo: </strong>{{$order->address}}</li>
@@ -33,7 +33,9 @@
                     </form>
                 </div>
                 <br>
-            @endforeach
+                @empty
+                    <h2 class="mt-5 mb-5">Non ci sono ordini</h2>
+            @endforelse
         </ul>
     </div>
 </body>
