@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Dish;
 use Illuminate\Support\Facades\Auth;
-
 
 class DishController extends Controller
 {
@@ -17,7 +17,10 @@ class DishController extends Controller
      */
     public function index()
     {
-        $dishes = Dish::all();
+
+        $user_id = Auth::id();
+        $dishes = DB::table('dishes')->where('restaurant_id', $user_id)->get();
+
         return view('dishes.index', compact('dishes'));
     }
 
