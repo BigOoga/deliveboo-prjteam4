@@ -29,7 +29,7 @@
                 <label for="description" class="form-label">Descrizione</label>
                 <textarea class="form-control @error('description') is-invalid @enderror" id="description"
                     name="description" rows="3" value="">{{ old('description', $dish->description) }}</textarea>
-                @error('content')
+                @error('description')
                     <div class="invalid-feedback">
                         Inserisci una descrizione di almeno 10 lettere
                     </div>
@@ -51,20 +51,21 @@
                 <label for="price" class="form-label">Prezzo</label>
                 <textarea class="form-control @error('price') is-invalid @enderror" id="price" name="price" rows="3"
                     value="">{{ old('price', $dish->price) }}</textarea>
-                @error('content')
+                @error('price')
                     <div class="invalid-feedback">
-                        Inserisci un prezzo
+                        Inserisci un importo
                     </div>
                 @enderror
             </div>
-            {{-- BOOLEANS --}}
+            {{-- BOOLEANS -- DA CONCLUDERE--}}
             <div class="form-row">
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="checkbox" id="available" name="available" value="1">
                     <label class="form-check-label" for="available">Disponibile</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="gluten_free" name="gluten_free" value="0">
+                    <input class="form-check-input" type="checkbox" id="gluten_free" name="gluten_free" value="1"
+                    @if ($dish->gluten_free == 1) ? checked : 0 @endif>
                     <label class="form-check-label" for="bool-1">Gluten Free</label>
                 </div>
                 <div class="form-check form-check-inline">

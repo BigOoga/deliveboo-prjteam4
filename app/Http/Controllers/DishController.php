@@ -102,10 +102,17 @@ class DishController extends Controller
      */
     public function update(Request $request, Dish $dish)
     {
+        $request->validate([
+            'name' => 'required|min:2|max:50',
+            'description' => 'required|max:255',
+            'entry' => 'required|max:50',
+            'picture' => 'nullable',
+            'price' => 'required|numeric',
+        ]);
         $data = $request->all();
         $dish->fill($data);
         $dish->save();
-        return redirect()->route('dishes.index');
+        return redirect()->route('dishes.show', $dish->id);
     }
 
     /**
