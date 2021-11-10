@@ -39,7 +39,6 @@ class DishController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
         $data = $request->all();
         $newDish = new Dish();
         $newDish->fill($data);
@@ -60,9 +59,9 @@ class DishController extends Controller
         $newDish->available = $available;
 
         //? Non sono sicuro sia il modo migliore di controllare se è presente un'immagine
-        if ($request->has('image')) {
-            $img_path = Storage::put('uploads', $data['image']);
-            $newDish->image = $img_path;
+        if ($request->has('picture')) {
+            $img_path = Storage::put('uploads', $data['picture']);
+            $newDish->picture = $img_path;
         }
 
         $newDish->save();

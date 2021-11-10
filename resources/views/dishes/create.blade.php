@@ -65,8 +65,8 @@
         {{-- UPLOAD --}}
         <div class="form-row">
             <div class="form-group col-2">
-                <label for="price">Immagine</label>
-                <input type="file" name="picture" id="picture">
+                <label for="picture">Immagine</label>
+                <input type="file" size='500' name="picture" id="picture">
             </div>
         </div>
 
