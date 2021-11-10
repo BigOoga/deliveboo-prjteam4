@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Restaurant;
@@ -92,7 +94,10 @@ class RestaurantController extends Controller
      */
     public function show($id)
     {
-        return view('restaurants.show');
+        $user_id = Auth::id();
+        $restaurant = DB::table('restaurants')->where('id', $user_id)->get()[0];
+
+        return view('restaurants.show', compact('restaurant'));
     }
 
     /**
