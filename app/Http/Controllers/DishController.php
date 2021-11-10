@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Dish;
-use Illuminate\Support\Facades\Auth;
 
 class DishController extends Controller
 {
