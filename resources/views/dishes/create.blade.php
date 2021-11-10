@@ -40,8 +40,16 @@
         {{-- BOOLEANS --}}
         <div class="form-row">
             <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="available" name="available" value="1">
+                <label class="form-check-label" for="available">Disponibile</label>
+            </div>
+            <div class="form-check form-check-inline">
                 <input class="form-check-input" type="checkbox" id="gluten_free" name="gluten_free" value="1">
                 <label class="form-check-label" for="bool-1">Gluten Free</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="frozen" name="frozen" value="1">
+                <label class="form-check-label" for="bool-4">Surgelato</label>
             </div>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="checkbox" id="vegetarian" name="vegetarian" value="1">
@@ -50,14 +58,6 @@
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="checkbox" id="vegan" name="vegan" value="1">
                 <label class="form-check-label" for="bool-3">Vegano</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="frozen" name="frozen" value="1">
-                <label class="form-check-label" for="bool-4">Surgelato</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="available" name="available" value="1">
-                <label class="form-check-label" for="available">Disponibile</label>
             </div>
         </div>
 

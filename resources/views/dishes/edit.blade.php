@@ -62,7 +62,7 @@
                 @enderror
             </div>
             {{-- BOOLEANS -- DA CONCLUDERE--}}
-            <div class="form-row">
+            <div class="form-row col-md-12">
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="checkbox" id="available" name="available" value="1"
                     @if ($dish->available === 1) ? checked @endif>
@@ -74,6 +74,11 @@
                     <label class="form-check-label" for="bool-1">Gluten Free</label>
                 </div>
                 <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="frozen" name="frozen" value="1"
+                    @if ($dish->frozen === 1) ? checked @endif>
+                    <label class="form-check-label" for="bool-4">Surgelato</label>
+                </div>
+                <div class="form-check form-check-inline">
                     <input class="form-check-input" type="checkbox" id="vegetarian" name="vegetarian" value="1"
                     @if ($dish->vegetarian === 1) ? checked @endif>
                     <label class="form-check-label" for="bool-2">Vegetariano</label>
@@ -82,15 +87,9 @@
                     <input class="form-check-input" type="checkbox" id="vegan" name="vegan" value="1"
                     @if ($dish->vegan === 1) ? checked @endif>
                     <label class="form-check-label" for="bool-3">Vegano</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="frozen" name="frozen" value="1"
-                    @if ($dish->frozen === 1) ? checked @endif>
-                    <label class="form-check-label" for="bool-4">Surgelato</label>
-                </div>
-                
+                </div>                
             </div>
-            <div class="col-12">
+            <div class="col-12 mt-3">
                 <button type="submit" class="btn btn-secondary">Conferma Modifica</button>
             </div>
         </form>
