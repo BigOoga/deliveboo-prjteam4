@@ -36,13 +36,22 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+        //!debugging-----
+        $dish_id = 1;
+        $quantity = 3;
+        //!--------------
+
         $data = $request->all();
-        dd($data);
+
         $newOrder = new Order();
         $newOrder->fill($data);
         $newOrder->status = 0;
         $newOrder->save();
-        $newOrder->dishes()->attach();
+
+        // Scrive nella tabella pivot dopo aver creato la relazione
+        $newOrder->dishes()->attach([$dish_id => ['quantity' => $quantity]]);
+        //
+
         return redirect()->route('orders.show', $newOrder);
     }
 
