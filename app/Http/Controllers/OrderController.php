@@ -36,11 +36,6 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //!debugging-----
-        $dish_id = 1;
-        $quantity = 3;
-        //!--------------
-
         $data = $request->all();
 
         $newOrder = new Order();
@@ -48,9 +43,19 @@ class OrderController extends Controller
         $newOrder->status = 0;
         $newOrder->save();
 
-        // Scrive nella tabella pivot dopo aver creato la relazione
-        $newOrder->dishes()->attach([$dish_id => ['quantity' => $quantity]]);
-        //
+        // storo l'array di IDs
+        $IDArray = $data['dish_ids'];
+        $QuantityArray = $data['quantity'];
+        $arrayLength = count($IDArray);
+
+        // Ciclo una volta per ogni piatto contenuto nell'ordine, salvo la relazione e la sua quantità
+        for ($i = 0; $i < $arrayLength; $i++) {
+            $dish_id = $IDArray[$i];
+            // Scrive nella tabella pivot dopo aver creato la relazione
+            $newOrder->dishes()->attach([$dish_id => ['quantity' => $QuantityArray[$i]]]);
+            //
+        }
+
 
         return redirect()->route('orders.show', $newOrder);
     }
