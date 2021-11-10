@@ -24,6 +24,10 @@
                 <input type="text" class="form-control" id="picture" name="picture"
                     value="{{ old('picture', $dish->picture) }}">
             </div>
+            {{-- PREVIEW IMMAGINE DA GESTIRE CON JAVASCRIPT --}}
+            {{-- <div class="col-md-2 d-flex align-items-center justify-content-center">
+                <img src="{{ $dish->picture ?? 'https://montagnolirino.it/wp-content/uploads/2015/12/immagine-non-disponibile.png' }}" alt="picture">
+            </div> --}}
             {{-- DESCRIPTION --}}
             <div class="col-md-12  mb-4">
                 <label for="description" class="form-label">Descrizione</label>
@@ -60,24 +64,28 @@
             {{-- BOOLEANS -- DA CONCLUDERE--}}
             <div class="form-row">
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="available" name="available" value="1">
+                    <input class="form-check-input" type="checkbox" id="available" name="available" value="1"
+                    @if ($dish->available === 1) ? checked @endif>
                     <label class="form-check-label" for="available">Disponibile</label>
                 </div>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="checkbox" id="gluten_free" name="gluten_free" value="1"
-                    @if ($dish->gluten_free == 1) ? checked : 0 @endif>
+                    @if ($dish->gluten_free === 1) ? checked @endif>
                     <label class="form-check-label" for="bool-1">Gluten Free</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="bool-2" name="vegetarian" value="1">
+                    <input class="form-check-input" type="checkbox" id="vegetarian" name="vegetarian" value="1"
+                    @if ($dish->vegetarian === 1) ? checked @endif>
                     <label class="form-check-label" for="bool-2">Vegetariano</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="bool-3" name="vegan" value="1">
+                    <input class="form-check-input" type="checkbox" id="vegan" name="vegan" value="1"
+                    @if ($dish->vegan === 1) ? checked @endif>
                     <label class="form-check-label" for="bool-3">Vegano</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="bool-4" name="frozen" value="1">
+                    <input class="form-check-input" type="checkbox" id="frozen" name="frozen" value="1"
+                    @if ($dish->frozen === 1) ? checked @endif>
                     <label class="form-check-label" for="bool-4">Surgelato</label>
                 </div>
                 
