@@ -51,20 +51,23 @@
                         </nav>
                     </div>
                     
-                    <div id="hero">
-                        
+                    <div id="hero" class="d-flex align-items-end py-4">
                         <div class="container">
-                            <div class="row">
+                            <h1>I piatti che ami, a domicilio.</h1>
+                            <div class="row mt-5">
                                 {{-- Search location --}}
-                                <div id="search-form" class="col-6">
-                                    <form class="form-inline mr-auto d-flex">
-                                        <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-                                        <button class="btn btn-rounded btn-sm my-0 ml-sm-2" type="submit">Search</button>
-                                    </form>
+                                <div id="search-form" class="col-6 px-4">
+                                        <form class="form-inline mr-auto">
+                                            <label for="search" class="w-100 d-block">Inserisci il tuo indirizzo per trovare ristoranti nei dintorni</label>
+                                            <div class="d-flex">
+                                                <input class="form-control me-3" type="text" placeholder="Search" aria-label="Search" id="search">
+                                                <button class="btn btn-rounded btn-primary text-white btn-sm my-0 ml-sm-2" type="submit">Search</button>
+                                            </div>
+                                        </form>
+                                        
+                                    <p><a href="{{ route('login') }}">Accedi</a> per visualizzare i tuoi indirizzi recenti.</p>
                                 </div>
-                                <div class="col-6">
-                                    image
-                                </div>
+                                
                             </div>
                         </div>
                         
@@ -174,7 +177,7 @@
                                   </div>
                               </div>
                               <div class="col-4 d-flex py-3">
-                                <div class="card flex-grow-1 clickable" style="width: 18rem;">
+                                <div class="card flex-grow-1 clickable" style="width: 18rem; max-width: 100%;">
                                     {{-- Card image --}}
                                     <img src="..." class="card-img-top" alt="...">
                                     <div class="card-body">
@@ -204,82 +207,6 @@
 
                 {{-- Footer --}}
                 <footer></footer>
-
-
-
-
-
-            {{-- Styles --}}
-            <style>
-                *{
-                    margin: 0;
-                    padding: 0;
-                    box-sizing: border-box;
-                    
-                }
-                #root{
-                    overflow: auto;
-                }
-                .clickable{
-                    cursor: pointer;
-                }
-                
-                #hero{
-                    height: 400px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                }
-                
-                header{
-                    height: 455px;
-                    background: linear-gradient(176deg, rgba(0,204,188,1) 49.7%, rgba(208,235,153,1) 50%);
-                }
-                #search-form{
-                    align-self: flex-end;
-                }
-                .sidenav {
-                    height: 100%;
-                    width: 0;
-                    position: fixed;
-                    z-index: 1;
-                    top: 0;
-                    right: 0;
-                    background-color: #fff;
-                    overflow-x: hidden;
-                    transition: 0.5s;
-                    padding-top: 1rem;
-                    border-left: 1px solid #eee;
-                }
-
-                .sidenav a {
-                    padding: 8px 8px 8px 8px;
-                    text-decoration: none;
-                    font-size: 1rem;
-                    color: #000;
-                    display: block;
-                    transition: 0.3s;
-                }
-                .sidenav .btn{
-                    width: 100%;
-                    margin: 10px;
-                    color: #fff;
-                }
-
-                .sidenav a:hover {
-                    color: #ccc;
-                }
-
-                .sidenav .closebtn {
-                    position: absolute;
-                    top: 0;
-                    right: 25px;
-                    font-size: 2rem;
-                    margin-left: 50px;
-                }
-
-                
-            </style>
 
 
             {{-- Scripts --}}
