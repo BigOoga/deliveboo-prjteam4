@@ -28,6 +28,20 @@ class RestaurantSeeder extends Seeder
             $restaurant->opening_time = $faker->time();
             $restaurant->closing_time = $faker->time();
             $restaurant->save();
+
+            // Numero dei tipi disponibili hardcodato
+            $total_types = 18;
+
+            // Randomizzo quanti ruoli attachare tra 1 e 10 (arbitrariamente)
+            $randomTypesNum = rand(1, 10);
+
+            $randomTypeIds = [];
+            for ($j = 0; $j < $randomTypesNum; $j++) {
+                $randomTypeId = rand(1, $total_types);
+                $randomTypeIds[] = $randomTypeId;
+            };
+
+            $restaurant->types()->attach($randomTypeIds);
         }
     }
 }
