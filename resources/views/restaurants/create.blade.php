@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-<form method="POST" action="{{ route('restaurants.store') }}">
+<form method="POST" action="{{ route('restaurants.store') }}" enctype="multipart/form-data">
     @csrf
     <div class="container">
         {{-- EMAIL --}}
@@ -69,6 +69,15 @@
                 </div>
             @endforeach
         </div>
+
+        {{-- UPLOAD --}}
+        <div class="form-row">
+            <div class="form-group col-2">
+                <label for="image">Immagine</label>
+                <input type="file" size='500' name="image" id="image">
+            </div>
+        </div>
+
         <div class="form-row">
             <div class="form-group col-2">
                 <button type="submit" class="btn btn-primary">Sign up</button>
