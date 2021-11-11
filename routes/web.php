@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,13 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('guest.home');
-});
+// Landing page home
+Route::get('/', 'Guest\HomeController@index')->name('home');
 
+
+// Other pages
 Route::resource('restaurants', 'RestaurantController');
 Route::resource('dishes', 'DishController');
 Route::resource('orders', 'OrderController');
+
 
 //! Se vi segna un errore su Auth non fateci caso
 Auth::routes();
@@ -40,4 +43,5 @@ $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 */
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::redirect('register', 'restaurants/create');
+Route::redirect('login', 'restaurants/login');
