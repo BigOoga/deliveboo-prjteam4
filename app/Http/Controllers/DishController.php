@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Dish;
+
 class DishController extends Controller
 {
     /**
@@ -18,8 +19,8 @@ class DishController extends Controller
     {
 
         $user_id = Auth::id();
-        $dishes = Dish::all();
-        // $dishes = DB::table('dishes')->where('restaurant_id', $user_id)->get();
+        //$dishes = Dish::all();
+        $dishes = DB::table('dishes')->where('restaurant_id', $user_id)->get();
 
         return view('dishes.index', compact('dishes'));
     }
@@ -109,7 +110,7 @@ class DishController extends Controller
             'picture' => 'nullable',
             'price' => 'required|numeric',
         ]);
-        
+
         $data = $request->all();
 
         //SETTO I BOOLEANI A 0
@@ -118,7 +119,7 @@ class DishController extends Controller
         $dish->frozen = 0;
         $dish->vegetarian = 0;
         $dish->vegan = 0;
-        
+
         $dish->fill($data);
         $dish->save();
         return redirect()->route('dishes.show', $dish->id);
