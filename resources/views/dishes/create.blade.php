@@ -75,5 +75,8 @@
                 <button type="submit" class="btn btn-primary">Invia</button>
             </div>
         </div>
+        <a class="btn btn-success my-2" href="{{ route('dishes.index') }}">Torna alla lista</a>
+        {{-- Inserire rotta dashboard --}}
+        <a href=""></a>
     </div>
 </form>
