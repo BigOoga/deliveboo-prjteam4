@@ -7,7 +7,7 @@
         <div class="row">
             {{-- RESTAURANT PIC  --}}
             <div>
-                <img src="{{ $restaurant->image }}" alt="immagine ristorante" class="img-fluid rounded px-3" style="max-width: 450px;"> 
+                <img src="{{ asset('storage/' . $restaurant->image) }}" alt="{{ $restaurant->name }}" class="img-fluid rounded px-3" style="max-width: 450px;"> 
             </div>
             <div>
                 <h1>{{$restaurant->name}}</h1>
@@ -29,7 +29,7 @@
                 <div class="card m-3 shadow" style="max-width: 500px;">
                     <div class="row g-0">
                         <div class="col-4">
-                            <img src="{{$dish->picture}}" class="img-fluid rounded-start" alt="foto del piatto">
+                            <img src="{{ asset('storage/' . $dish->image) }}" class="img-fluid rounded-start" alt="{{$dish->name}}">
                         </div>
                         <div class="col-8">
                             <div class="card-body">

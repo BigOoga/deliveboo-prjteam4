@@ -112,6 +112,14 @@ class RestaurantController extends Controller
         //todo pagina in cui il ristoratore può cambiare i propri dati
     }
 
+
+    public function dashboard(Restaurant $restaurant, Dish $dish)
+    {
+    
+        return view('restaurants.dashboard', compact('restaurant', 'dish'));
+    }
+
+
     /**
      * Update the specified resource in storage.
      *
