@@ -9,10 +9,12 @@
                 </div>
                 <div class="col-md-9">
                     <div class="card-body">
+                        {{-- PRINT DISHES --}}
                         <h5 class="card-title">{{ $dish->name }}</h5>
                         <p class="card-text">{{ $dish->description }}</p>
                         <p class="card-text">{{ $dish->entry }}</p>
                         <p class="card-text">€ {{ $dish->price }}</p>
+                        {{-- BOOLEANS --}}
                         <div class="card-text d-flex justify-content-between">
                             <span>Disponibile: @if ($dish->available)
                                 Si @else No
@@ -34,6 +36,7 @@
                         </div>
                         {{-- LINK AND BUTTON --}}
                         <div>
+                            <a href="{{ route('dishes.index', $dish->id) }}" class="btn btn-success my-2">Lista</a>
                             <a href="{{ route('dishes.edit', $dish->id) }}" class="btn btn-info my-2">Modifica</a>
                             <form action="{{ route('dishes.destroy', $dish->id) }}" method="POST"
                                 class="d-inline delete-form my-2">
