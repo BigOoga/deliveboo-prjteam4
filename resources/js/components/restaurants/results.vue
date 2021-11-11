@@ -31,6 +31,7 @@ export default {
         // Fetch restaurants with an API call
         getRestaurants() {
             this.isLoading = true;
+            // Azzero restaurants per far ricomparire il loader e far scomparire i vecchi risultare
             this.restaurants = [];
             if (this.$store.state.searchInput === "") {
                 console.log("Fetching ALL restaurants...");
