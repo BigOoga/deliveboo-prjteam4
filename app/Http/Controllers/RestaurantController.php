@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Restaurant;
 use App\Models\Type;
+use App\Models\Dish;
 
 
 
@@ -92,12 +93,12 @@ class RestaurantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Restaurant $restaurant, Dish $dish)
     {
-        $user_id = Auth::id();
-        $restaurant = DB::table('restaurants')->where('id', $user_id)->get()[0];
-
-        return view('restaurants.show', compact('restaurant'));
+        // $user_id = Auth::id();
+        // $restaurant = DB::table('restaurants')->where('id', $user_id)->get()[0];
+        $dishes = dish::all();
+        return view('restaurants.show', compact('restaurant', 'dishes'));
     }
 
     /**
