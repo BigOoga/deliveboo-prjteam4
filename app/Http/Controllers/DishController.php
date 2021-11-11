@@ -32,7 +32,8 @@ class DishController extends Controller
      */
     public function create()
     {
-        return view('dishes.create');
+        $dish= new Dish();
+        return view('dishes.create', compact('dish'));
     }
 
     /**
@@ -63,10 +64,10 @@ class DishController extends Controller
         $newDish->available = $available;
 
         //? Non sono sicuro sia il modo migliore di controllare se è presente un'immagine
-        if ($request->has('picture')) {
-            $img_path = Storage::put('uploads', $data['picture']);
-            $newDish->picture = $img_path;
-        }
+        // if ($request->has('picture')) {
+        //     $img_path = Storage::put('uploads', $data['picture']);
+        //     $newDish->picture = $img_path;
+        // }
 
         $newDish->save();
         return redirect()->route('dishes.index');
