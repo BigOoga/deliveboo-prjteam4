@@ -43,5 +43,12 @@ $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 */
 
+
+// redirect default laravel routes to custom routes
 Route::redirect('register', 'restaurants/create');
-Route::redirect('login', 'restaurants/login');
+// Route::redirect('login', 'restaurants/login');
+
+// Redirect not registered routes to homepage
+Route::get('{any?}', function () {
+    return view('guest.home');
+});
