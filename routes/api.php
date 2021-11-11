@@ -17,3 +17,16 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::namespace('Api')->group(function () {
+    //l We can create all the CRUD routes manually as usual
+    //Route::get('/posts', 'PostController@index');
+    //Route::get('/posts/{post}', 'PostController@show');
+    //Route::delete('/posts/{post}', 'PostController@destroy');
+    //l Or use the Route::resource method
+    Route::resource('restaurants', 'RestaurantController');
+
+    Route::get('/restaurants/{restaurantID}/dishes', 'DishController@indexByRestaurant');
+    Route::resource('dishes', 'DishController');
+});
