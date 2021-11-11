@@ -29,7 +29,7 @@
                 <div class="card m-3 shadow" style="max-width: 500px;">
                     <div class="row g-0">
                         <div class="col-4">
-                            <img src="{{ asset('storage/' . $dish->image) }}" class="img-fluid rounded-start" alt="{{$dish->name}}">
+                            <img src="{{ asset('storage/' . $dish->picture) }}" class="img-fluid rounded-start" alt="{{$dish->name}}">
                         </div>
                         <div class="col-8">
                             <div class="card-body">

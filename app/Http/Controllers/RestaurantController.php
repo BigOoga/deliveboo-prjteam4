@@ -48,10 +48,10 @@ class RestaurantController extends Controller
         $request->validate(
             [
                 'name' => 'required',
-                'email' => 'required',
+                'email' => 'required|unique:restaurants|email',
                 'password' => 'required|min:8',
                 'address' => 'required',
-                'iva' => 'required|unique:restaurants|numeric|min:11',
+                'iva' => 'required|unique:restaurants|digits:11',
                 'description' => 'nullable',
                 'opening_time' => 'required',
                 'closing_time' => 'required',
@@ -61,8 +61,8 @@ class RestaurantController extends Controller
                 'required' => 'Questo campo è obbligatorio',
                 'numeric' => 'Questo campo deve essere numerico',
                 'password.min' => 'La password richiede almeno 8 caratteri',
-                'iva.min' => 'Questo campo richiede 11 numeri',
-                'unique' => 'Esiste già!',
+                'iva.digits' => 'Questo campo richiede 11 numeri',
+                'unique' => 'Il parametro che hai inserito esiste già!',
             ]
         );
 
