@@ -45,19 +45,19 @@
             </div>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="checkbox" id="gluten_free" name="gluten_free" value="1">
-                <label class="form-check-label" for="bool-1">Gluten Free</label>
+                <label class="form-check-label" for="gluten_free">Gluten Free</label>
             </div>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="checkbox" id="frozen" name="frozen" value="1">
-                <label class="form-check-label" for="bool-4">Surgelato</label>
+                <label class="form-check-label" for="frozen">Surgelato</label>
             </div>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="checkbox" id="vegetarian" name="vegetarian" value="1">
-                <label class="form-check-label" for="bool-2">Vegetariano</label>
+                <label class="form-check-label" for="vegetarian">Vegetariano</label>
             </div>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="checkbox" id="vegan" name="vegan" value="1">
-                <label class="form-check-label" for="bool-3">Vegano</label>
+                <label class="form-check-label" for="vegan">Vegano</label>
             </div>
         </div>
 
