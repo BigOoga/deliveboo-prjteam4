@@ -2,7 +2,7 @@
     <div class="col-3">
         <div class="card" style="width: 18rem">
             <img
-                :src="'/storage/uploads/' + restaurant.image"
+                :src="'/storage/' + restaurant.image"
                 class="card-img-top"
                 alt="foto ristorante"
             />
