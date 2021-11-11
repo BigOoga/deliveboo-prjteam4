@@ -22,9 +22,9 @@
                     v-model="searchInput"
                 />
                 <button
-                    @click="launchSearch"
+                    @click="startSearch"
                     class="btn btn-outline-success my-2 my-sm-0"
-                    type="submit"
+                    type="button"
                 >
                     Search
                 </button>
@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import { eventBus } from "../../../js/app";
 export default {
     name: "Topbar",
     data() {
@@ -45,6 +46,9 @@ export default {
     methods: {
         startSearch() {
             console.log("Starting search...");
+            this.$store.commit("changeSearchInput", this.searchInput);
+
+            eventBus.$emit("fireMethod");
         },
     },
     mounted() {

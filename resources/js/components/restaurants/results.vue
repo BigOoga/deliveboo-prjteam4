@@ -16,6 +16,7 @@
 
 <script>
 import restaurantcard from "./restaurantcard.vue";
+import { eventBus } from "../../../js/app";
 export default {
     components: { restaurantcard },
     name: "Results",
@@ -27,23 +28,46 @@ export default {
         };
     },
     methods: {
-        // Fetch all posts with an API call
+        // Fetch restaurants with an API call
         getRestaurants() {
             this.isLoading = true;
-            axios
-                .get(`${this.baseUri}/api/restaurants`)
-                .then((r) => {
-                    const data = r.data;
-                    this.restaurants = data;
-                    this.isLoading = false;
-                })
-                .catch((e) => {
-                    console.error(e);
-                });
+            this.restaurants = [];
+            if (this.$store.state.searchInput === "") {
+                console.log("Fetching ALL restaurants...");
+                axios
+                    .get(`${this.baseUri}/api/restaurants`)
+                    .then((r) => {
+                        const data = r.data;
+                        this.restaurants = data;
+                        this.isLoading = false;
+                    })
+                    .catch((e) => {
+                        console.error(e);
+                    });
+            } else {
+                console.log(
+                    `Fetching restaurants containing string ${this.$store.state.searchInput}`
+                );
+                axios
+                    .get(
+                        `${this.baseUri}/api/restaurants/test?search=${this.$store.state.searchInput}`
+                    )
+                    .then((r) => {
+                        const data = r.data;
+                        this.restaurants = data;
+                        this.isLoading = false;
+                    })
+                    .catch((e) => {
+                        console.error(e);
+                    });
+            }
         },
     },
     created() {
         this.getRestaurants();
+        eventBus.$on("fireMethod", () => {
+            this.getRestaurants();
+        });
     },
 };
 </script>
