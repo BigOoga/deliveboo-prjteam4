@@ -3,25 +3,48 @@
         <div class="row">
             <h3>Risultati della ricerca:</h3>
         </div>
+        <Loader v-if="isLoading" />
         <div class="row">
-            <div class="col-3">
-                <div class="card" style="width: 18rem">
-                    <img src="" class="card-img-top" alt="foto ristorante" />
-                    <div class="card-body">
-                        <h5 class="card-title">Nome Ristorante</h5>
-                        <p class="card-text">
-                            descrizione ristorante lorem ipsum cazzi mazzi
-                        </p>
-                    </div>
-                </div>
-            </div>
+            <restaurantcard
+                v-for="(restaurant, i) in restaurants"
+                :key="i"
+                :restaurant="restaurants[i]"
+            />
         </div>
     </div>
 </template>
 
 <script>
+import restaurantcard from "./restaurantcard.vue";
 export default {
+    components: { restaurantcard },
     name: "Results",
+    data() {
+        return {
+            baseUri: "http://127.0.0.1:8000",
+            restaurants: [],
+            isLoading: false,
+        };
+    },
+    methods: {
+        // Fetch all posts with an API call
+        getRestaurants() {
+            this.isLoading = true;
+            axios
+                .get(`${this.baseUri}/api/restaurants`)
+                .then((r) => {
+                    const data = r.data;
+                    this.restaurants = data;
+                    this.isLoading = false;
+                })
+                .catch((e) => {
+                    console.error(e);
+                });
+        },
+    },
+    created() {
+        this.getRestaurants();
+    },
 };
 </script>
 
