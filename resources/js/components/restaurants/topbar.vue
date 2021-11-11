@@ -37,7 +37,7 @@
 
 <script>
 export default {
-    name: "topbar",
+    name: "Topbar",
     data() {
         return { searchInput: "" };
     },
@@ -46,3 +46,4 @@ export default {
     },
 };
 </script>
+<style></style>

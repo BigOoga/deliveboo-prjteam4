@@ -23,7 +23,13 @@
                 <div class="col-2 border">
                     <sidebar></sidebar>
                 </div>
-                <div class="col-10 border">search results</div>
+                <div class="col-10 border">
+
+                    <results></results>
+
+
+
+                </div>
             </div>
         </div>
     </div>

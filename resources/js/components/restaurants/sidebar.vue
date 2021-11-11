@@ -30,8 +30,10 @@
 
 <script>
 export default {
+    name: "Sidebar",
     mounted() {
         console.log("Component mounted.");
     },
 };
 </script>
+<style></style>
