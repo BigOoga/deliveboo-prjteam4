@@ -29,6 +29,13 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+// import Vuex
+ import store from "./src/store";
+
+ // event bus
+ export const eventBus = new Vue();
+
 const app = new Vue({
+    store,
     el: '#app',
 });
