@@ -6,11 +6,12 @@
     <div class="container">
         <form method="POST" enctype="multipart/form-data" action="{{ route('restaurants.store') }}">
             @csrf
-            <h2 class="my-4">Registrazione</h2>
-            <div class="row my-3">
+            <h2 class="mt-4">Registrazione</h2>
+            <p>(*) i campi contrassegnati con l'asterisco sono obbligatori</p>
+            <div class="row my-4">
                 {{-- EMAIL --}}
                 <div class="col-6">
-                    <label for="email" class="form-label">Email</label>
+                    <label for="email" class="form-label">Email(*)</label>
                     <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email"
                         value="{{ old('email') }}">
                     @error('email')
@@ -21,7 +22,7 @@
                 </div>
                 {{-- PASSWORD --}}
                 <div class="col-4">
-                    <label for="password" class="form-label">Password</label>
+                    <label for="password" class="form-label">Password(*)</label>
                     <input type="password" class="form-control @error('password') is-invalid @enderror" id="password"
                         name="password">
                     @error('password')
@@ -34,7 +35,7 @@
             <div class="row my-3">
                 {{-- NAME --}}
                 <div class="col-6">
-                    <label for="name" class="form-label">Nome attività</label>
+                    <label for="name" class="form-label">Nome attività(*)</label>
                     <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
                         value="{{ old('name') }}">
                     @error('name')
@@ -45,7 +46,7 @@
                 </div>
                 {{-- P.IVA --}}
                 <div class="col-4">
-                    <label for="iva" class="form-label">Partita Iva</label>
+                    <label for="iva" class="form-label">Partita Iva(*)</label>
                     <input type="text" class="form-control @error('iva') is-invalid @enderror" id="iva" name="iva"
                         value="{{ old('iva') }}">
                     @error('iva')
@@ -58,7 +59,7 @@
             <div class="row my-3">
                 {{-- ADDRESS --}}
                 <div class="col-10">
-                    <label for="address" class="form-label">Indirizzo</label>
+                    <label for="address" class="form-label">Indirizzo(*)</label>
                     <input type="text" class="form-control @error('address') is-invalid @enderror" id="address"
                         name="address" value="{{ old('address') }}">
                     @error('address')
@@ -74,17 +75,17 @@
                         rows="5">{{ old('description') }}</textarea>
                 </div>
             </div>
-            <div class="row my-3">
+            <div class="row">
                 {{-- UPLOAD --}}
-                <div class="row">
-                    <div class="col-5 form-group my-3">
-                        <input type="file" class="form-control" id="image" name="image">
-                        <label for="image" class="form-label"></label>
-                    </div>
+                <div class="col-5 form-group my-3">
+                    <input type="file" class="form-control" id="image" name="image">
+                    <label for="image" class="form-label"></label>
                 </div>
+            </div>
+            <div class="row">
                 {{-- OPENING TIME --}}
                 <div class="col-2">
-                    <label for="opening_time" class="form-label">Orario di apertura</label>
+                    <label for="opening_time" class="form-label">Orario di apertura(*)</label>
                     <input type="time" class="form-control @error('opening_time') is-invalid @enderror" name="opening_time"
                         id="opening_time" value="{{ old('opening_time') }}">
                     @error('opening_time')
@@ -92,10 +93,10 @@
                             {{ $message }}
                         </div>
                     @enderror
-                </div>
+                </div>    
                 {{-- CLOSING TIME --}}
                 <div class="col-2">
-                    <label for="closing_time" class="form-label">Orario di chiusura</label>
+                    <label for="closing_time" class="form-label">Orario di chiusura(*)</label>
                     <input type="time" class="form-control @error('closing_time') is-invalid @enderror" name="closing_time"
                         id="closing_time" value="{{ old('closing_time') }}">
                     @error('closing_time')
@@ -108,7 +109,7 @@
             <div class="row my-3">
                 {{-- DELIVERY FEE --}}
                 <div class="col-2">
-                    <label for="deliveryFee" class="form-label">Spese di spedizione</label>
+                    <label for="deliveryFee" class="form-label">Spese di spedizione(*)</label>
                     <input type="number" class="form-control @error('delivery_fee') is-invalid @enderror" min="0.00"
                         step="0.01" name="delivery_fee" id="deliveryFee" value="{{ old('delivery_fee') }}">
                     @error('delivery_fee')
