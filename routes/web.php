@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('guest.home');
 });
 
-
+Route::get('restaurants/dashboard', 'RestaurantController@dashboard')->name('restaurants.dashboard');
 
 
 Route::resource('restaurants', 'RestaurantController');
@@ -44,4 +44,3 @@ $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 */
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('restaurants/dashboard', 'RestaurantController@dashboard')->name('restaurants.dashboard');

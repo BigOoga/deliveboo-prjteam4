@@ -33,6 +33,7 @@
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-outline-danger mb-2">elimina</button>
+                    <a href="{{ route('restaurants.dashboard') }}" class="btn btn-primary">Torna alla dashboard</a>
                 </form>
             </div>
         </ul>
