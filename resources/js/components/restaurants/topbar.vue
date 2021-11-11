@@ -22,6 +22,7 @@
                     v-model="searchInput"
                 />
                 <button
+                    @click="launchSearch"
                     class="btn btn-outline-success my-2 my-sm-0"
                     type="submit"
                 >
@@ -40,6 +41,11 @@ export default {
     name: "Topbar",
     data() {
         return { searchInput: "" };
+    },
+    methods: {
+        startSearch() {
+            console.log("Starting search...");
+        },
     },
     mounted() {
         console.log("Component mounted.");
