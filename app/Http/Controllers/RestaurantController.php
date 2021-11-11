@@ -77,6 +77,7 @@ class RestaurantController extends Controller
         if ($request->has('image')) {
             $img_path = Storage::put('uploads', $data['image']);
             $newRestaurant->image = $img_path;
+            //$newRestaurant->image = url($newRestaurant->image);
         }
 
         // Forziamo is_open a true durante la registrazione
