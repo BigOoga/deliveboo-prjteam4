@@ -46,5 +46,5 @@
 @endsection
     
 @section('scripts')
-    <script src="{{ asset('js/delete_confirmation.js')}}"></script>    
+    <script src="{{ asset('js/deleteconfirmation.js')}}"></script>    
 @endsection

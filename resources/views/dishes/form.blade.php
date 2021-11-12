@@ -12,7 +12,7 @@
         value="{{ old('name', $dish->name) }}">
     @error('name')
         <div class="invalid-feedback">
-            Inserisci un nome valido
+            {{ $message }}
         </div>
     @enderror
 </div>
@@ -21,9 +21,9 @@
     <label for="entry" class="form-label">Portata</label>
     <input type="text" class="form-control @error('entry') is-invalid @enderror" id="entry" name="entry"
         value="{{ old('entry', $dish->entry) }}">
-    @error('content')
+    @error('entry')
         <div class="invalid-feedback">
-            Inserisci la portata
+            {{ $message }}
         </div>
     @enderror
 </div>
@@ -34,7 +34,7 @@
         id="price" value="{{ old('price', $dish->price) }}">
     @error('price')
         <div class="invalid-feedback">
-            Inserisci un importo
+            {{ $message }}
         </div>
     @enderror
 </div>
@@ -62,7 +62,7 @@
         rows="3" value="">{{ old('description', $dish->description) }}</textarea>
     @error('description')
         <div class="invalid-feedback">
-            Inserisci una descrizione di almeno 10 lettere
+            {{ $message }}
         </div>
     @enderror
 </div>
