@@ -31,7 +31,7 @@ class DishController extends Controller
      */
     public function create()
     {
-        $dish= new Dish();
+        $dish = new Dish();
         return view('dishes.create', compact('dish'));
     }
 
@@ -58,6 +58,8 @@ class DishController extends Controller
             ]
         );
 
+
+
         $data = $request->all();
         $newDish = new Dish();
         $newDish->fill($data);
@@ -78,10 +80,10 @@ class DishController extends Controller
         $newDish->available = $available;
 
         //? Non sono sicuro sia il modo migliore di controllare se è presente un'immagine
-        // if ($request->has('picture')) {
-        //     $img_path = Storage::put('uploads', $data['picture']);
-        //     $newDish->picture = $img_path;
-        // }
+        if ($request->has('picture')) {
+            $img_path = Storage::put('uploads', $data['picture']);
+            $newDish->picture = $img_path;
+        }
 
         $newDish->save();
         return redirect()->route('dishes.index');
@@ -134,14 +136,25 @@ class DishController extends Controller
 
         $data = $request->all();
 
-        //SETTO I BOOLEANI A 0
-        $dish->available = 0;
-        $dish->gluten_free = 0;
-        $dish->frozen = 0;
-        $dish->vegetarian = 0;
-        $dish->vegan = 0;
-
         $dish->fill($data);
+
+        $gluten_free = isset($request->gluten_free) ? 1 : 0;
+        $vegan = isset($request->vegan) ? 1 : 0;
+        $vegetarian = isset($request->vegetarian) ? 1 : 0;
+        $available = isset($request->available) ? 1 : 0;
+        $frozen = isset($request->frozen) ? 1 : 0;
+
+        $dish->gluten_free = $gluten_free;
+        $dish->vegan = $vegan;
+        $dish->vegetarian = $vegetarian;
+        $dish->frozen = $frozen;
+        $dish->available = $available;
+
+        if ($request->has('picture')) {
+            $img_path = Storage::put('uploads', $data['picture']);
+            $dish->picture = $img_path;
+        }
+
         $dish->save();
         return redirect()->route('dishes.show', $dish->id);
     }
