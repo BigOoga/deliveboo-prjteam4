@@ -18,9 +18,8 @@
             </div>
         @endif
         {{-- PRINT DISHES --}}
-
-        <div class="row">
-            @forelse($dishes as $dish)
+        @forelse($dishes as $dish)
+            <div class="row">
                 <div class="col-md-3">
                     <div class="card m-3" style="width: 18rem">
                         <img class="img-fluid" src="{{ asset('storage/' . $dish->picture) }}"
@@ -46,22 +45,19 @@
                                 @method('DELETE')
                                 {{-- <button type="submit" class="btn btn-danger p-2">Elimina</button> --}}
                                 @include('dishes.includes.modal')
-                                <button type="submit" class="btn">
-                                    <i class="far fa-trash-alt fs-4"></i>
-                                </button>
                             </form>
                         </div>
                     </div>
                 </div>
-        </div>
-    @empty
-        <tr>
-            <th colspan="3" class="text-center">Non ci sono piatti</th>
-        </tr>
+            </div>
+        @empty
+            <div>
+                <h3 class="text-center">Non ci sono piatti</h3>
+            </div>
         @endforelse
     </section>
 @endsection
-    
+
 @section('secondaryscript')
-    <script src="{{ asset('js/delete_confirmation.js')}}"></script>    
+    <script src="{{ asset('js/delete_confirmation.js') }}"></script>
 @endsection

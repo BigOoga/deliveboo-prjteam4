@@ -1,9 +1,10 @@
+
 @if ($dish->exists)
     <form action="{{ route('dishes.update', $dish->id) }}" method="POST" class="row g-3"
         enctype="multipart/form-data">
         @method('PATCH')
-    @else
-        <form method="POST" action="{{ route('dishes.store') }}" class="row g-3" enctype="multipart/form-data">
+@else
+<form method="POST" action="{{ route('dishes.store') }}" class="row g-3" enctype="multipart/form-data">
 @endif
 @csrf
 {{-- NAME --}}
@@ -40,12 +41,11 @@
     @enderror
 </div>
 {{-- PICTURE --}}
-<div class="col-md-3">
-    <div class="col-2">
-        <label for="picture">Foto piatto:</label>
-        <input type="file" size='500' name="picture" id="picture">
-    </div>
+<div class="offset-md-2 col-md-6">
+        <label for="picture" class="form-label">Foto piatto:</label>
+        <input type="file" class="form-control" name="picture" id="picture">
 </div>
+
 {{-- PICTURE VIA URL GOES HERE - !EXTRA --}}
 {{-- <div class="col-md-7  mb-4">
     <label for="picture" class="form-label">Link immagine</label>
