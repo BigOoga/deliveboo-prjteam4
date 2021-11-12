@@ -15,13 +15,27 @@ use App\Http\Controllers\HomeController;
 */
 
 // Landing page home
-Route::get('/', 'Guest\HomeController@index')->name('home');
+// Route::get('/', 'Guest\HomeController@index')->name('home');
 
+// 
+Route::middleware('auth')->prefix('restaurants')->group(function () {
+
+    Route::get('/', 'Guest\HomeController@index')->name('home');
+    Route::resource('restaurants', 'RestaurantController', ['except' => ['create']]);
+    Route::resource('dishes', 'DishController', ['except' => ['index', 'show']]);
+    Route::resource('orders', 'OrderController', ['except' => ['index']]);
+    Route::get('/{any}', function () {
+        abort(404);
+    });
+});
+
+Route::get('/create', 'RestaurantController@create');
+Route::get('/index', 'DishController@index');
+Route::get('/show', 'DishController@show');
+Route::get('/index', 'OrderController@index');
 
 // Other pages
-Route::resource('restaurants', 'RestaurantController');
-Route::resource('dishes', 'DishController');
-Route::resource('orders', 'OrderController');
+// Route::resource('restaurants', 'RestaurantController');
 
 
 //! Se vi segna un errore su Auth non fateci caso
@@ -45,7 +59,7 @@ $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 
 
 // redirect default laravel routes to custom routes
-Route::redirect('register', 'restaurants/create');
+Route::redirect('register', '/create');
 // Route::redirect('login', 'restaurants/login');
 
 // Redirect not registered routes to homepage
