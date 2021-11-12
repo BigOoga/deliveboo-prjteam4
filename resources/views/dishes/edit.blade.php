@@ -91,7 +91,7 @@
             </div>
             <div class="col-12 mt-3">
                 <button type="submit" class="btn btn-secondary">Conferma Modifica</button>
-                <a class="btn btn-success my-2" href="{{ route('dishes.index') }}">Torna alla lista</a>
+                <a class="btn btn-success" href="{{ route('dishes.index') }}">Torna alla lista</a>
             </div>
         </form>
     </div>

@@ -132,12 +132,16 @@
                     @endforeach
                 </div>
             </div>
-            {{-- SIGN UP --}}
+            {{-- SIGN UP & LINK HOME--}}
             <div class="row mt-4">
                 <div class="col-2">
-                    <button type="submit" class="btn btn-primary">Sign up</button>
+                    <button type="submit" class="btn btn-primary px-4">Sign up</button>
+                </div>
+                <div class="col-2">
+                    <a href="{{ url('/') }}" class="btn btn-primary">Torna alla home</a>
                 </div>
             </div>
+            
         </form>
     </div>
 

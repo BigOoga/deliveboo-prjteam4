@@ -17,6 +17,9 @@ Route::get('/', function () {
     return view('guest.home');
 });
 
+Route::get('restaurants/dashboard', 'RestaurantController@dashboard')->name('restaurants.dashboard');
+
+
 Route::resource('restaurants', 'RestaurantController');
 Route::resource('dishes', 'DishController');
 Route::resource('orders', 'OrderController');
