@@ -55,6 +55,7 @@ class RestaurantController extends Controller
                 'opening_time' => 'required',
                 'closing_time' => 'required',
                 'delivery_fee' => 'required|numeric',
+                'image' => 'mimes:jpeg,png'
             ],
             [
                 'required' => 'Questo campo è obbligatorio',
@@ -62,6 +63,7 @@ class RestaurantController extends Controller
                 'password.min' => 'La password richiede almeno 8 caratteri',
                 'iva.min' => 'Questo campo richiede 11 numeri',
                 'unique' => 'Esiste già!',
+                'image' => 'Il file dev\'essere in formato .jpg o .png'
             ]
         );
 

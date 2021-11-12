@@ -80,6 +80,11 @@
                 <div class="col-5 form-group my-3">
                     <input type="file" class="form-control" id="image" name="image">
                     <label for="image" class="form-label"></label>
+                    @error('image')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
             </div>
             <div class="row">
@@ -93,7 +98,7 @@
                             {{ $message }}
                         </div>
                     @enderror
-                </div>    
+                </div>
                 {{-- CLOSING TIME --}}
                 <div class="col-2">
                     <label for="closing_time" class="form-label">Orario di chiusura(*)</label>
