@@ -82,9 +82,7 @@
     <!-- Scripts -->
     @yield('scripts')
     <script src="{{ asset('js/app.js') }}"></script>
-    
-    @yield('secondaryscript')
-    <script src="{{ asset('js/secondary.js') }}"></script>
+
 </body>
 
 
