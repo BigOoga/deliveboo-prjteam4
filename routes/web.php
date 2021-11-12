@@ -38,9 +38,9 @@ Route::get('/index', 'OrderController@index');
 Route::get('restaurants/dashboard', 'RestaurantController@dashboard')->name('restaurants.dashboard');
 
 
-Route::resource('restaurants', 'RestaurantController');
-Route::resource('dishes', 'DishController');
-Route::resource('orders', 'OrderController');
+// Route::resource('restaurants', 'RestaurantController');
+// Route::resource('dishes', 'DishController');
+// Route::resource('orders', 'OrderController');
 // Route::resource('restaurants', 'RestaurantController');
 
 
