@@ -38,7 +38,7 @@
                         <div>
                             <a href="{{ route('dishes.index', $dish->id) }}" class="btn btn-success my-2">Lista</a>
                             <a href="{{ route('dishes.edit', $dish->id) }}" class="btn btn-info my-2">Modifica</a>
-                            <form action="{{ route('dishes.destroy', $dish->id) }}" method="POST"
+                            <form action="{{ route('dishes.destroy', $dish->id) }}" method="POST" class="delete-form"
                                 class="d-inline delete-form my-2">
                                 @csrf
                                 @method('DELETE')
@@ -52,4 +52,8 @@
     </section>
 
 
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('js/delete_confirmation.js')}}"></script>    
 @endsection

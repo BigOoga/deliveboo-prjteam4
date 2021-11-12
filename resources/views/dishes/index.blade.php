@@ -47,8 +47,8 @@
                             <a href="{{ route('dishes.show', $dish->id) }}" class="btn btn-info p-2">Dettaglio</a>
                             <a href="{{ route('dishes.edit', $dish->id) }}" class="btn btn-primary p-2  my-1">Modifica</a>
                             <a href="{{ route('restaurants.dashboard',) }}" class="btn btn-primary">Torna alla dashboard</a>
-                            <form action="{{ route('dishes.destroy', $dish->id) }}" method="POST"
-                                class="d-inline delete-form  my-1">
+                            <form action="{{ route('dishes.destroy', $dish->id) }}" method="POST" id="delete-form"
+                                class="d-inline delete-form  my-1" >
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger p-2">Elimina</button>
@@ -63,4 +63,8 @@
             </tr>
         @endforelse
     </div>
+@endsection
+    
+@section('scripts')
+    <script src="{{ asset('js/delete_confirmation.js')}}"></script>    
 @endsection

@@ -77,6 +77,5 @@
         </div>
         <a class="btn btn-success my-2" href="{{ route('dishes.index') }}">Torna alla lista</a>
         <a class="btn btn-success" href="{{ route('restaurants.dashboard') }}">Torna alla dashboard</a>
-        <a href=""></a>
     </div>
 </form>
