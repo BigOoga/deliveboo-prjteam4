@@ -1,11 +1,17 @@
 <template>
     <div class="col-3">
-        <div class="card" style="width: 18rem">
-            <img
-                :src="'/storage/' + restaurant.image"
-                class="card-img-top"
-                alt="foto ristorante"
-            />
+        <div @click="goToRestaurant" class="card" style="width: 18rem">
+            <div class="img-container">
+                <img
+                    :src="
+                        restaurant.image
+                            ? '/storage/' + restaurant.image
+                            : '/img/placeholder.svg'
+                    "
+                    class="card-img-top"
+                    alt="foto ristorante"
+                />
+            </div>
             <div class="card-body">
                 <h5 class="card-title">{{ restaurant.name }}</h5>
                 <p class="card-text">
@@ -22,7 +28,23 @@ export default {
     props: {
         restaurant: Object,
     },
+    methods: {
+        goToRestaurant() {
+            console.log("Firing");
+            window.location.href = `${this.restaurant.id}`;
+        },
+    },
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.card:hover {
+    cursor: pointer;
+}
+
+img {
+    object-fit: cover;
+    width: 200px;
+    height: 200px;
+}
+</style>
