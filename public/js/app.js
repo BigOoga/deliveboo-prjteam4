@@ -42734,7 +42734,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticClass: "row border p-5", attrs: { id: "main-row" } },
+      { staticClass: "col-3 border p-5", attrs: { id: "main-row" } },
       [
         _c("div", { staticClass: "col-12" }, [
           _c("h4", [_vm._v("Il tuo ordine")]),

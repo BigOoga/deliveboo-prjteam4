@@ -1,5 +1,5 @@
 <template>
-    <div class="row border p-5" id="main-row">
+    <div class="col-3 border p-5" id="main-row">
         <div class="col-12">
             <h4>Il tuo ordine</h4>
             <!-- qui ci andranno i prodotti selezionati -->
