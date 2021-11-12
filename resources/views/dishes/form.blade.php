@@ -1,8 +1,9 @@
 @if ($dish->exists)
-    <form action="{{ route('dishes.update', $dish->id) }}" method="POST" class="row g-3">
+    <form action="{{ route('dishes.update', $dish->id) }}" method="POST" class="row g-3"
+        enctype="multipart/form-data">
         @method('PATCH')
     @else
-        <form method="POST" action="{{ route('dishes.store') }}">
+        <form method="POST" action="{{ route('dishes.store') }}" class="row g-3" enctype="multipart/form-data">
 @endif
 @csrf
 {{-- NAME --}}
@@ -39,17 +40,18 @@
     @enderror
 </div>
 {{-- PICTURE --}}
-<div class="col-md-7  mb-4">
+<div class="col-md-3">
+    <div class="col-2">
+        <label for="picture">Foto piatto:</label>
+        <input type="file" size='500' name="picture" id="picture">
+    </div>
+</div>
+{{-- PICTURE VIA URL GOES HERE - !EXTRA --}}
+{{-- <div class="col-md-7  mb-4">
     <label for="picture" class="form-label">Link immagine</label>
     <input type="text" class="form-control" id="picture" name="picture"
         value="{{ old('picture', $dish->picture) }}">
-</div>
-{{-- <div class="col-md-3">
-        <div class="col-2">
-            <label for="picture">Oppure scegli file</label>
-            <input type="file" size='500' name="picture" id="picture">
-        </div>
-    </div> --}}
+</div> --}}
 {{-- PREVIEW IMMAGINE DA GESTIRE CON JAVASCRIPT --}}
 <div class="col-md-2 d-flex align-items-center justify-content-center">
     <img src="{{ $dish->picture ?? 'https://montagnolirino.it/wp-content/uploads/2015/12/immagine-non-disponibile.png' }}"
