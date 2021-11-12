@@ -56,7 +56,8 @@
                                 class="d-inline delete-form my-2">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Elimina</button>
+                                {{-- <button type="submit" class="btn btn-danger">Elimina</button> --}}
+                                @include('dishes.includes.modal')
                             </form>
                         </div>
                     </div>
@@ -64,10 +65,8 @@
             </div>
         </div>
     </section>
-
-
 @endsection
 
-@section('scripts')
+@section('secondaryscript')
     <script src="{{ asset('js/delete_confirmation.js')}}"></script>    
 @endsection
