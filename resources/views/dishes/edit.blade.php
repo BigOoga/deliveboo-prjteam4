@@ -11,5 +11,6 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('js/preview.js') }}"></script>
+{{-- VALUTARE PREVIEW IMMAGINE --}}
+    {{-- <script src="{{ asset('js/preview.js') }}"></script> --}}
 @endsection

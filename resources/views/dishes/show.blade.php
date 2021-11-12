@@ -10,9 +10,12 @@
                 <div class="col-md-9">
                     <div class="card-body">
                         {{-- PRINT DISHES --}}
-                        <h5 class="card-title">
-                            Nome piatto: <strong>{{ $dish->name }}</strong>
-                        </h5>
+                        <div class="card-title d-flex align-items-center justify-content-between">
+                            <h5>Nome piatto: <strong>{{ $dish->name }}</strong></h5>
+                            <a href="{{ route('dishes.edit', $dish->id) }}" class="btn my-2">
+                                <i class="fas fa-pen fs-4"></i>
+                            </a>
+                        </div>
                         <p class="card-text">
                             Descrizione: <strong>{{ $dish->description }}</strong>
                         </p>
@@ -49,14 +52,15 @@
                             </span>
                         </div>
                         {{-- LINK AND BUTTON --}}
-                        <div>
+                        <div class="d-flex">
                             <a href="{{ route('dishes.index', $dish->id) }}" class="btn btn-success my-2">Lista</a>
-                            <a href="{{ route('dishes.edit', $dish->id) }}" class="btn btn-info my-2">Modifica</a>
                             <form action="{{ route('dishes.destroy', $dish->id) }}" method="POST" class="delete-form"
-                                class="d-inline delete-form my-2">
+                                class="delete-form">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Elimina</button>
+                                <button type="submit" class="btn m-2">
+                                    <i class="far fa-trash-alt fs-4"></i>
+                                </button>
                             </form>
                         </div>
                     </div>

@@ -17,6 +17,7 @@ class DishController extends Controller
      */
     public function index()
     {
+
         $user_id = Auth::id();
         //$dishes = Dish::all();
         $dishes = DB::table('dishes')->where('restaurant_id', $user_id)->get();
@@ -43,21 +44,6 @@ class DishController extends Controller
      */
     public function store(Request $request)
     {
-
-        $request->validate(
-            [
-                'name' => 'required|min:2|max:50',
-                'description' => 'required|max:255',
-                'entry' => 'required|max:50',
-                'picture' => 'nullable|mimes:jpeg,png',
-                'price' => 'required|numeric',
-            ],
-            [
-                'required' => 'Questo campo è obbligatorio',
-                'image.mimes' => 'Il file dev\'essere in formato .jpg o .png'
-            ]
-        );
-
         $data = $request->all();
         $newDish = new Dish();
         $newDish->fill($data);
@@ -118,19 +104,13 @@ class DishController extends Controller
      */
     public function update(Request $request, Dish $dish)
     {
-        $request->validate(
-            [
-                'name' => 'required|min:2|max:50',
-                'description' => 'required|max:255',
-                'entry' => 'required|max:50',
-                'picture' => 'nullable|mimes:jpeg,png',
-                'price' => 'required|numeric',
-            ],
-            [
-                'required' => 'Questo campo è obbligatorio',
-                'image.mimes' => 'Il file dev\'essere in formato .jpg o .png'
-            ]
-        );
+        $request->validate([
+            'name' => 'required|min:2|max:50',
+            'description' => 'required|max:255',
+            'entry' => 'required|min:5|max:50',
+            'picture' => 'nullable',
+            'price' => 'required|numeric',
+        ]);
 
         $data = $request->all();
 
@@ -143,6 +123,8 @@ class DishController extends Controller
 
         $dish->fill($data);
         $dish->save();
+
+        
         return redirect()->route('dishes.show', $dish->id);
     }
 

@@ -28,7 +28,7 @@
     @enderror
 </div>
 {{-- PRICE --}}
-<div class="col-md-3  mb-4">
+<div class="col-md-4  mb-4">
     <label for="price" class="form-label">Prezzo</label>
     <input type="number" class="form-control @error('price') is-invalid @enderror" min="0.00" step="0.01" name="price"
         id="price" value="{{ old('price', $dish->price) }}">
@@ -39,22 +39,22 @@
     @enderror
 </div>
 {{-- PICTURE --}}
-<div class="col-md-7  mb-4">
+{{-- <div class="col-md-7 mb-4">
     <label for="picture" class="form-label">Link immagine</label>
     <input type="text" class="form-control" id="picture" name="picture"
         value="{{ old('picture', $dish->picture) }}">
-</div>
-{{-- <div class="col-md-3">
+</div> --}}
+<div class="offset-md-2 col-md-6">
         <div class="col-2">
-            <label for="picture">Oppure scegli file</label>
-            <input type="file" size='500' name="picture" id="picture">
+            <label for="picture" class="form-label">Immagine</label>
+            <input type="file" class="form-control" name="picture" id="picture" value=""{{ old('picture', $dish->picture)}}>
         </div>
-    </div> --}}
+    </div>
 {{-- PREVIEW IMMAGINE DA GESTIRE CON JAVASCRIPT --}}
-<div class="col-md-2 d-flex align-items-center justify-content-center">
+{{-- <div class="col-md-2 d-flex align-items-center justify-content-center">
     <img src="{{ $dish->picture ?? 'https://montagnolirino.it/wp-content/uploads/2015/12/immagine-non-disponibile.png' }}"
         alt="picture" width="60" class="img-fluid">
-</div>
+</div> --}}
 {{-- DESCRIPTION --}}
 <div class="col-md-12  mb-4">
     <label for="description" class="form-label">Descrizione</label>
@@ -62,7 +62,7 @@
         rows="3" value="">{{ old('description', $dish->description) }}</textarea>
     @error('description')
         <div class="invalid-feedback">
-            Inserisci una descrizione di almeno 10 lettere
+            Inserisci una descrizione di almeno 10 caratteri
         </div>
     @enderror
 </div>
@@ -96,5 +96,8 @@
 </div>
 <div class="col-12 mt-3">
     <button type="submit" class="btn btn-primary">Salva</button>
+    <a class="btn btn-success my-2" href="{{ route('dishes.index') }}">Torna alla lista</a>
+    <a class="btn btn-success" href="{{ route('restaurants.dashboard') }}">Torna alla dashboard</a>
+
 </div>
 </form>
