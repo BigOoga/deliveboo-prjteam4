@@ -116,10 +116,13 @@ class RestaurantController extends Controller
     }
 
 
-    public function dashboard(Restaurant $restaurant, Dish $dish)
+    public function dashboard()
     {
+        $user_id = Auth::id();
 
-        return view('restaurants.dashboard', compact('restaurant', 'dish'));
+        $restaurants = Restaurant::all();
+        $restaurant = $restaurants->find($user_id);
+        return view('restaurants.dashboard', compact('restaurant'));
     }
 
 
