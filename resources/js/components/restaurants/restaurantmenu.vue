@@ -95,13 +95,16 @@ export default {
             eventBus.$emit("update");
         },
         initCart() {
-            let cart = {
-                restaurantID: 0,
-                orders: [],
-            };
-
-            cart.restaurantID = this.currenRestaurantID;
-            sessionStorage.setItem("cart", JSON.stringify(cart));
+            console.log("Initializing cart...");
+            if (sessionStorage.getItem("cart") === null) {
+                console.log("Cart did not exist, creating...");
+                let cart = {
+                    restaurantID: 0,
+                    orders: [],
+                };
+                cart.restaurantID = this.currenRestaurantID;
+                sessionStorage.setItem("cart", JSON.stringify(cart));
+            }
         },
     },
     created() {

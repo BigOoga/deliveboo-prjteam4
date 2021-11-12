@@ -5,25 +5,24 @@
             <!-- qui ci andranno i prodotti selezionati -->
         </div>
         <div v-for="(dish, i) in dishes" :key="i">
-            <p>Order number {{ i }}</p>
-            <p>{{ dish.name }} - €{{ dish.price }}</p>
+            <p>€{{ dish.price }} {{ dish.name }}</p>
         </div>
         <hr />
         <!-- subtotal -->
         <div class="col-12 d-flex justify-content-between">
             <span>Subtotale</span>
-            <span>{{ subTotal }}</span>
+            <span>€{{ subTotal }}</span>
         </div>
         <!-- delivery fee -->
         <div class="col-12 d-flex justify-content-between">
-            <span>spese di consegna</span>
-            <span>2.50$</span>
+            <span>Spese di consegna</span>
+            <span>|| WORK IN PROGRESS ||</span>
         </div>
         <hr class="mt-2 mb-2" />
         <!-- total -->
         <div class="col-12 d-flex justify-content-between">
             <span>Total</span>
-            <span>124.50$</span>
+            <span>|| WORK IN PROGRESS ||</span>
         </div>
     </div>
 </template>
@@ -50,6 +49,19 @@ export default {
         },
     },
     methods: {
+        restoreCart() {
+            // prendo il cart dallo storage
+            const currentCart = JSON.parse(sessionStorage.getItem("cart"));
+            // storo gli ordini per comodità
+            const orders = currentCart.orders;
+
+            // carico un array con tutti gli ID di piatti presenti nel carrello
+            const id_array = [];
+            orders.forEach((order) => {
+                id_array.push(order.dish_id);
+            });
+            this.getDishesByID(id_array);
+        },
         updateLength(newLen) {
             console.log(`Updating this.length to ${newLen}`);
             this.length = newLen;
@@ -72,6 +84,7 @@ export default {
         },
     },
     created() {
+        this.restoreCart();
         //# listeners
         eventBus.$on("update", (length) => {
             // prendo il cart dallo storage
