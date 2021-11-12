@@ -15,8 +15,24 @@ use App\Http\Controllers\HomeController;
 */
 
 // Landing page home
-Route::get('/', 'Guest\HomeController@index')->name('home');
+// Route::get('/', 'Guest\HomeController@index')->name('home');
 
+// 
+Route::middleware('auth')->prefix('restaurants')->group(function () {
+
+    Route::get('/', 'Guest\HomeController@index')->name('home');
+    Route::resource('restaurants', 'RestaurantController', ['except' => ['create']]);
+    Route::resource('dishes', 'DishController', ['except' => ['index', 'show']]);
+    Route::resource('orders', 'OrderController', ['except' => ['index']]);
+    Route::get('/{any}', function () {
+        abort(404);
+    });
+});
+
+Route::get('/create', 'RestaurantController@create');
+Route::get('/index', 'DishController@index');
+Route::get('/show', 'DishController@show');
+Route::get('/index', 'OrderController@index');
 
 // Other pages
 Route::get('restaurants/dashboard', 'RestaurantController@dashboard')->name('restaurants.dashboard');
@@ -25,6 +41,7 @@ Route::get('restaurants/dashboard', 'RestaurantController@dashboard')->name('res
 Route::resource('restaurants', 'RestaurantController');
 Route::resource('dishes', 'DishController');
 Route::resource('orders', 'OrderController');
+// Route::resource('restaurants', 'RestaurantController');
 
 
 //! Se vi segna un errore su Auth non fateci caso
@@ -46,5 +63,12 @@ $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 */
 
-Route::redirect('register', 'restaurants/create');
-Route::redirect('login', 'restaurants/login');
+
+// redirect default laravel routes to custom routes
+Route::redirect('register', '/create');
+// Route::redirect('login', 'restaurants/login');
+
+// Redirect not registered routes to homepage
+Route::get('{any?}', function () {
+    return view('guest.home');
+});
