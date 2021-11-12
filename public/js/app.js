@@ -10777,7 +10777,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "#main-row[data-v-d059fab8] {\n  position: fixed;\n}", ""]);
 
 // exports
 

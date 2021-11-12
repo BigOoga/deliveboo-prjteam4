@@ -41,6 +41,6 @@ export default {
 
 <style lang="scss" scoped>
     #main-row{
-    
+        position: fixed;
     }
 </style>
