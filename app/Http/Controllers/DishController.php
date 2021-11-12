@@ -46,15 +46,19 @@ class DishController extends Controller
 
         $request->validate(
             [
-                'name' => 'required|min:2|max:50',
-                'description' => 'required|max:255',
-                'entry' => 'required|max:50',
+                'name' => 'required|between:2,50',
+                'description' => 'required|between:15,250',
+                'entry' => 'required|between:5,10',
                 'picture' => 'nullable|mimes:jpeg,png',
                 'price' => 'required|numeric',
             ],
             [
                 'required' => 'Questo campo è obbligatorio',
-                'image.mimes' => 'Il file dev\'essere in formato .jpg o .png'
+                'image.mimes' => 'Il file dev\'essere in formato .jpg o .png',
+                'numeric' => 'Questo campo deve essere numerico',
+                'name.between' => 'Questo campo deve avere tra 2 e 50 caratteri',
+                'entry.between' => 'Questo campo deve avere tra 5 e 50 caratteri',
+                'description.between' => 'Questo campo deve avere tra 15 e 255 caratteri',
             ]
         );
 
@@ -120,15 +124,19 @@ class DishController extends Controller
     {
         $request->validate(
             [
-                'name' => 'required|min:2|max:50',
-                'description' => 'required|max:255',
-                'entry' => 'required|max:50',
+                'name' => 'required|between:2,50',
+                'description' => 'required|between:15,250',
+                'entry' => 'required|between:5,10',
                 'picture' => 'nullable|mimes:jpeg,png',
                 'price' => 'required|numeric',
             ],
             [
                 'required' => 'Questo campo è obbligatorio',
-                'image.mimes' => 'Il file dev\'essere in formato .jpg o .png'
+                'image.mimes' => 'Il file dev\'essere in formato .jpg o .png',
+                'numeric' => 'Questo campo deve essere numerico',
+                'name.between' => 'Questo campo deve avere tra 2 e 50 caratteri',
+                'entry.between' => 'Questo campo deve avere tra 5 e 50 caratteri',
+                'description.between' => 'Questo campo deve avere tra 15 e 255 caratteri',
             ]
         );
 
