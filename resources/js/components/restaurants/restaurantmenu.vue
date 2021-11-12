@@ -1,28 +1,24 @@
 <template>
-    <div class="col-8">
+    <div class="col-8 d-flex flex-wrap">
         <div
             v-for="(dish, i) in dishes"
             :key="i"
-            class="card m-3 shadow col-6"
-            style="max-width: 500px"
+            class="card col-6"
+            style="width: 18rem"
         >
-            <div class="row g-0">
-                <div class="col-4">
-                    <img
-                        :src="
-                            dish.picture
-                                ? '/storage/' + dish.picture
-                                : '/img/placeholder.svg'
-                        "
-                        alt=""
-                    />
-                </div>
-                <div class="col-6">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ dish.name }}</h5>
-                        <p class="card-text">{{ dish.description }}</p>
-                    </div>
-                </div>
+            <img
+                :src="
+                    dish.picture
+                        ? '/storage/' + dish.picture
+                        : '/img/placeholder.svg'
+                "
+                alt=""
+            />
+            <div class="card-body">
+                <h5 class="card-title">{{ dish.name }}</h5>
+                <p class="card-text">{{ dish.description }}</p>
+                <p class="card-text">€{{ dish.price }}</p>
+                <a href="#" class="btn btn-primary">Add</a>
             </div>
         </div>
     </div>
@@ -69,7 +65,7 @@ export default {
 
 <style scoped lang="scss">
 .card:hover {
-    cursor: pointer;
+    // cursor: pointer;
 }
 
 img {

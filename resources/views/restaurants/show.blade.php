@@ -42,7 +42,10 @@
 
             {{-- MENU --}}
             <h1>Menu</h1>
-            <restaurantmenu></restaurantmenu>
+            <div class="row">
+                <restaurantmenu></restaurantmenu>
+                {{-- CART GOES HERE --}}
+            </div>
         </div>
     </div>
 
