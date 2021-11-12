@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Restaurant;
 use App\Models\Type;
+use App\Models\Dish;
 
 
 
@@ -47,21 +48,23 @@ class RestaurantController extends Controller
         $request->validate(
             [
                 'name' => 'required',
-                'email' => 'required',
+                'email' => 'required|unique:restaurants|email',
                 'password' => 'required|min:8',
                 'address' => 'required',
-                'iva' => 'required|unique:restaurants|numeric|min:11',
+                'iva' => 'required|unique:restaurants|digits:11',
                 'description' => 'nullable',
                 'opening_time' => 'required',
                 'closing_time' => 'required',
                 'delivery_fee' => 'required|numeric',
+                'image' => 'mimes:jpeg,png'
             ],
             [
                 'required' => 'Questo campo è obbligatorio',
                 'numeric' => 'Questo campo deve essere numerico',
                 'password.min' => 'La password richiede almeno 8 caratteri',
-                'iva.min' => 'Questo campo richiede 11 numeri',
-                'unique' => 'Esiste già!',
+                'iva.digits' => 'Questo campo richiede 11 numeri',
+                'unique' => 'Il parametro che hai inserito esiste già!',
+                'image.mimes' => 'Il file dev\'essere in formato .jpg o .png'
             ]
         );
 
@@ -77,6 +80,7 @@ class RestaurantController extends Controller
         if ($request->has('image')) {
             $img_path = Storage::put('uploads', $data['image']);
             $newRestaurant->image = $img_path;
+            //$newRestaurant->image = url($newRestaurant->image);
         }
 
         // Forziamo is_open a true durante la registrazione
@@ -92,12 +96,12 @@ class RestaurantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Restaurant $restaurant, Dish $dish)
     {
-        $user_id = Auth::id();
-        $restaurant = DB::table('restaurants')->where('id', $user_id)->get()[0];
-
-        return view('restaurants.show', compact('restaurant'));
+        // $user_id = Auth::id();
+        // $restaurant = DB::table('restaurants')->where('id', $user_id)->get()[0];
+        $dishes = dish::all();
+        return view('restaurants.show', compact('restaurant', 'dishes'));
     }
 
     /**
@@ -110,6 +114,14 @@ class RestaurantController extends Controller
     {
         //todo pagina in cui il ristoratore può cambiare i propri dati
     }
+
+
+    public function dashboard(Restaurant $restaurant, Dish $dish)
+    {
+
+        return view('restaurants.dashboard', compact('restaurant', 'dish'));
+    }
+
 
     /**
      * Update the specified resource in storage.

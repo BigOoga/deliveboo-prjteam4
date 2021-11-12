@@ -78,8 +78,13 @@
             <div class="row">
                 {{-- UPLOAD --}}
                 <div class="col-5 form-group my-3">
-                    <input type="file" class="form-control" id="image" name="image">
+                    <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image">
                     <label for="image" class="form-label"></label>
+                    @error('image')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
             </div>
             <div class="row">
@@ -93,7 +98,7 @@
                             {{ $message }}
                         </div>
                     @enderror
-                </div>    
+                </div>
                 {{-- CLOSING TIME --}}
                 <div class="col-2">
                     <label for="closing_time" class="form-label">Orario di chiusura(*)</label>
@@ -132,12 +137,16 @@
                     @endforeach
                 </div>
             </div>
-            {{-- SIGN UP --}}
+            {{-- SIGN UP & LINK HOME--}}
             <div class="row mt-4">
                 <div class="col-2">
-                    <button type="submit" class="btn btn-primary">Sign up</button>
+                    <button type="submit" class="btn btn-primary px-4">Sign up</button>
+                </div>
+                <div class="col-2">
+                    <a href="{{ url('/') }}" class="btn btn-primary">Torna alla home</a>
                 </div>
             </div>
+            
         </form>
     </div>
 

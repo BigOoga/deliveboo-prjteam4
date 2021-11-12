@@ -31,7 +31,8 @@ class DishController extends Controller
      */
     public function create()
     {
-        return view('dishes.create');
+        $dish= new Dish();
+        return view('dishes.create', compact('dish'));
     }
 
     /**
@@ -42,6 +43,21 @@ class DishController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate(
+            [
+                'name' => 'required|min:2|max:50',
+                'description' => 'required|max:255',
+                'entry' => 'required|max:50',
+                'picture' => 'nullable|mimes:jpeg,png',
+                'price' => 'required|numeric',
+            ],
+            [
+                'required' => 'Questo campo è obbligatorio',
+                'image.mimes' => 'Il file dev\'essere in formato .jpg o .png'
+            ]
+        );
+
         $data = $request->all();
         $newDish = new Dish();
         $newDish->fill($data);
@@ -62,10 +78,10 @@ class DishController extends Controller
         $newDish->available = $available;
 
         //? Non sono sicuro sia il modo migliore di controllare se è presente un'immagine
-        if ($request->has('picture')) {
-            $img_path = Storage::put('uploads', $data['picture']);
-            $newDish->picture = $img_path;
-        }
+        // if ($request->has('picture')) {
+        //     $img_path = Storage::put('uploads', $data['picture']);
+        //     $newDish->picture = $img_path;
+        // }
 
         $newDish->save();
         return redirect()->route('dishes.index');
@@ -102,13 +118,19 @@ class DishController extends Controller
      */
     public function update(Request $request, Dish $dish)
     {
-        $request->validate([
-            'name' => 'required|min:2|max:50',
-            'description' => 'required|max:255',
-            'entry' => 'required|max:50',
-            'picture' => 'nullable',
-            'price' => 'required|numeric',
-        ]);
+        $request->validate(
+            [
+                'name' => 'required|min:2|max:50',
+                'description' => 'required|max:255',
+                'entry' => 'required|max:50',
+                'picture' => 'nullable|mimes:jpeg,png',
+                'price' => 'required|numeric',
+            ],
+            [
+                'required' => 'Questo campo è obbligatorio',
+                'image.mimes' => 'Il file dev\'essere in formato .jpg o .png'
+            ]
+        );
 
         $data = $request->all();
 

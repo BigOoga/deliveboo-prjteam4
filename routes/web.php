@@ -19,6 +19,9 @@ Route::get('/', 'Guest\HomeController@index')->name('home');
 
 
 // Other pages
+Route::get('restaurants/dashboard', 'RestaurantController@dashboard')->name('restaurants.dashboard');
+
+
 Route::resource('restaurants', 'RestaurantController');
 Route::resource('dishes', 'DishController');
 Route::resource('orders', 'OrderController');
