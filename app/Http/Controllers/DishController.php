@@ -17,6 +17,7 @@ class DishController extends Controller
      */
     public function index()
     {
+
         $user_id = Auth::id();
         //$dishes = Dish::all();
         $dishes = DB::table('dishes')->where('restaurant_id', $user_id)->get();
@@ -164,6 +165,8 @@ class DishController extends Controller
         }
 
         $dish->save();
+
+        
         return redirect()->route('dishes.show', $dish->id);
     }
 
