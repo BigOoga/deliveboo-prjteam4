@@ -52,7 +52,7 @@
                             </span>
                         </div>
                         {{-- LINK AND BUTTON --}}
-                        <div class="d-flex">
+                        <div class="d-flex align-items-center">
                             <a href="{{ route('dishes.index', $dish->id) }}" class="btn btn-success my-2">Lista</a>
                             <form action="{{ route('dishes.destroy', $dish->id) }}" method="POST" class="delete-form"
                                 class="delete-form">
@@ -60,9 +60,6 @@
                                 @method('DELETE')
                                 {{-- <button type="submit" class="btn btn-danger">Elimina</button> --}}
                                 @include('dishes.includes.modal')
-                                <button type="submit" class="btn m-2">
-                                    <i class="far fa-trash-alt fs-4"></i>
-                                </button>
                             </form>
                         </div>
                     </div>
