@@ -1,9 +1,9 @@
 <template>
-    <div class="row">
+    <div class="col-8">
         <div
             v-for="(dish, i) in dishes"
             :key="i"
-            class="card m-3 shadow"
+            class="card m-3 shadow col-6"
             style="max-width: 500px"
         >
             <div class="row g-0">
@@ -17,7 +17,7 @@
                         alt=""
                     />
                 </div>
-                <div class="col-8">
+                <div class="col-6">
                     <div class="card-body">
                         <h5 class="card-title">{{ dish.name }}</h5>
                         <p class="card-text">{{ dish.description }}</p>
