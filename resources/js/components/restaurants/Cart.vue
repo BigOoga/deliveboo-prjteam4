@@ -6,13 +6,13 @@
         </div>
         <div v-for="(dish, i) in dishes" :key="i">
             <p>Order number {{ i }}</p>
-            <p>{{ dish.name }}</p>
+            <p>{{ dish.name }} - €{{ dish.price }}</p>
         </div>
         <hr />
         <!-- subtotal -->
         <div class="col-12 d-flex justify-content-between">
-            <span>subtotale</span>
-            <span>12.90$</span>
+            <span>Subtotale</span>
+            <span>{{ subTotal }}</span>
         </div>
         <!-- delivery fee -->
         <div class="col-12 d-flex justify-content-between">
@@ -40,35 +40,55 @@ export default {
             dishes: [],
         };
     },
+    computed: {
+        subTotal: function () {
+            let subTotal = 0;
+            this.dishes.forEach((dish) => {
+                subTotal += dish.price;
+            });
+            return subTotal;
+        },
+    },
     methods: {
         updateLength(newLen) {
             console.log(`Updating this.length to ${newLen}`);
             this.length = newLen;
         },
         getDishesByID(id_array) {
-            console.log(`Getting dish by id ${dish_id}..`);
-            axios
-                .get(`${this.baseUri}/api/dishes/${dish_id}`)
-                .then((r) => {
-                    const data = r.data;
-                    this.dishes.push = data;
-                    this.isLoading = false;
-                })
-                .catch((e) => {
-                    console.error(e);
-                });
+            id_array.forEach((id) => {
+                this.dishes = [];
+                console.log(`Getting dish by id ${id}..`);
+                axios
+                    .get(`${this.baseUri}/api/dishes/${id}`)
+                    .then((r) => {
+                        const data = r.data;
+
+                        this.dishes.push(data);
+                    })
+                    .catch((e) => {
+                        console.error(e);
+                    });
+            });
         },
     },
     created() {
         //# listeners
         eventBus.$on("update", (length) => {
+            // prendo il cart dallo storage
             const currentCart = JSON.parse(sessionStorage.getItem("cart"));
+            // computo quanti ordini (cioè ID unici) abbiamo in storage
             const cartLength = currentCart.orders.length;
+            // storo gli ordini per comodità
             const orders = currentCart.orders;
+            // tengo traccia della quantità di ordini
             this.updateLength(cartLength);
+
+            // carico un array con tutti gli ID di piatti presenti nel carrello
+            const id_array = [];
             orders.forEach((order) => {
-                this.getDishByID(order.dish_id);
+                id_array.push(order.dish_id);
             });
+            this.getDishesByID(id_array);
         });
     },
 };
