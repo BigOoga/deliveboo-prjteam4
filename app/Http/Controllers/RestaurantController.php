@@ -63,7 +63,7 @@ class RestaurantController extends Controller
                 'password.min' => 'La password richiede almeno 8 caratteri',
                 'iva.min' => 'Questo campo richiede 11 numeri',
                 'unique' => 'Esiste già!',
-                'image' => 'Il file dev\'essere in formato .jpg o .png'
+                'image.mimes' => 'Il file dev\'essere in formato .jpg o .png'
             ]
         );
 

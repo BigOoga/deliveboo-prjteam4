@@ -78,7 +78,7 @@
             <div class="row">
                 {{-- UPLOAD --}}
                 <div class="col-5 form-group my-3">
-                    <input type="file" class="form-control" id="image" name="image">
+                    <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image">
                     <label for="image" class="form-label"></label>
                     @error('image')
                         <div class="invalid-feedback">
