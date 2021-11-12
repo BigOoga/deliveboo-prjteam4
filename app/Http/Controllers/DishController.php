@@ -42,6 +42,21 @@ class DishController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate(
+            [
+                'name' => 'required|min:2|max:50',
+                'description' => 'required|max:255',
+                'entry' => 'required|max:50',
+                'picture' => 'nullable|mimes:jpeg,png',
+                'price' => 'required|numeric',
+            ],
+            [
+                'required' => 'Questo campo è obbligatorio',
+                'image.mimes' => 'Il file dev\'essere in formato .jpg o .png'
+            ]
+        );
+
         $data = $request->all();
         $newDish = new Dish();
         $newDish->fill($data);
@@ -102,13 +117,19 @@ class DishController extends Controller
      */
     public function update(Request $request, Dish $dish)
     {
-        $request->validate([
-            'name' => 'required|min:2|max:50',
-            'description' => 'required|max:255',
-            'entry' => 'required|max:50',
-            'picture' => 'nullable',
-            'price' => 'required|numeric',
-        ]);
+        $request->validate(
+            [
+                'name' => 'required|min:2|max:50',
+                'description' => 'required|max:255',
+                'entry' => 'required|max:50',
+                'picture' => 'nullable|mimes:jpeg,png',
+                'price' => 'required|numeric',
+            ],
+            [
+                'required' => 'Questo campo è obbligatorio',
+                'image.mimes' => 'Il file dev\'essere in formato .jpg o .png'
+            ]
+        );
 
         $data = $request->all();
 

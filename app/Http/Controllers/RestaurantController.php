@@ -56,6 +56,7 @@ class RestaurantController extends Controller
                 'opening_time' => 'required',
                 'closing_time' => 'required',
                 'delivery_fee' => 'required|numeric',
+                'image' => 'mimes:jpeg,png'
             ],
             [
                 'required' => 'Questo campo è obbligatorio',
@@ -63,6 +64,7 @@ class RestaurantController extends Controller
                 'password.min' => 'La password richiede almeno 8 caratteri',
                 'iva.digits' => 'Questo campo richiede 11 numeri',
                 'unique' => 'Il parametro che hai inserito esiste già!',
+                'image.mimes' => 'Il file dev\'essere in formato .jpg o .png'
             ]
         );
 
@@ -116,7 +118,7 @@ class RestaurantController extends Controller
 
     public function dashboard(Restaurant $restaurant, Dish $dish)
     {
-    
+
         return view('restaurants.dashboard', compact('restaurant', 'dish'));
     }
 
