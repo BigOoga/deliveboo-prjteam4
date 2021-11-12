@@ -5,7 +5,7 @@
     <div class="container">
         {{-- FORM FOR EDIT --}}
         <h1 class="text-center mb-3">Modifica Piatto</h1>
-        @include('dishes.form')
+        @include('dishes.includes.form')
     </div>
 
 @endsection
