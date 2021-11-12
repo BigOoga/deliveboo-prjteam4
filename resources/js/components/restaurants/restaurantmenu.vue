@@ -18,13 +18,19 @@
                 <h5 class="card-title">{{ dish.name }}</h5>
                 <p class="card-text">{{ dish.description }}</p>
                 <p class="card-text">€{{ dish.price }}</p>
-                <a href="#" class="btn btn-primary">Add</a>
+                <button
+                    @click="addToCart(dish.id, dish.price)"
+                    class="btn btn-primary"
+                >
+                    Add
+                </button>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import { eventBus } from "../../../js/app";
 export default {
     name: "restaurantmenu",
     data() {
@@ -33,6 +39,15 @@ export default {
             dishes: [],
             isLoading: false,
         };
+    },
+    computed: {
+        currenRestaurantID: function () {
+            const restaurantID = window.location.pathname.replace(
+                "/restaurants/",
+                ""
+            );
+            return restaurantID;
+        },
     },
     methods: {
         // Fetch dishes with an API call
@@ -55,10 +70,44 @@ export default {
                     console.error(e);
                 });
         },
+        addToCart(dish_id, price) {
+            const currentCart = JSON.parse(sessionStorage.getItem("cart"));
+            //console.log(currentCart);
+            // const ordLen = currentCart.orders.orderLength;
+            // currentCart.orders[ordLen].dish_id = dish_id;
+            currentCart.orders.push({
+                dish_id: dish_id,
+                quantity: 1,
+                price: price,
+            });
+            sessionStorage.setItem("cart", JSON.stringify(currentCart));
+            eventBus.$emit("update", currentCart.orders.length);
+        },
+        removeFromCart(index) {
+            const currentCart = JSON.parse(sessionStorage.getItem("cart"));
+            if ((currentCart.orders[index].quantity = 1)) {
+                currentCart.orders.splice(index, 1);
+            } else {
+                currentCart.orders[index].quantity =
+                    currentCart.orders[index].quantity - 1;
+            }
+            sessionStorage.setItem("cart", JSON.stringify(currentCart));
+            eventBus.$emit("update");
+        },
+        initCart() {
+            let cart = {
+                restaurantID: 0,
+                orders: [],
+            };
+
+            cart.restaurantID = this.currenRestaurantID;
+            sessionStorage.setItem("cart", JSON.stringify(cart));
+        },
     },
     created() {
         console.log("---Currently in restaurantmenu---");
         this.getDishes();
+        this.initCart();
     },
 };
 </script>
