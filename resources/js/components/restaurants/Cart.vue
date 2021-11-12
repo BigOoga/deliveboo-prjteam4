@@ -16,13 +16,13 @@
         <!-- delivery fee -->
         <div class="col-12 d-flex justify-content-between">
             <span>Spese di consegna</span>
-            <span>|| WORK IN PROGRESS ||</span>
+            <span>€{{ restaurant.delivery_fee }}</span>
         </div>
         <hr class="mt-2 mb-2" />
         <!-- total -->
         <div class="col-12 d-flex justify-content-between">
             <span>Total</span>
-            <span>|| WORK IN PROGRESS ||</span>
+            <span>€{{ total }}</span>
         </div>
     </div>
 </template>
@@ -37,6 +37,8 @@ export default {
             length: 0,
             baseUri: "http://127.0.0.1:8000",
             dishes: [],
+            restaurant: {},
+            isLoading: false,
         };
     },
     computed: {
@@ -46,6 +48,10 @@ export default {
                 subTotal += dish.price;
             });
             return subTotal;
+        },
+        total: function () {
+            let total = this.subTotal + this.restaurant.delivery_fee;
+            return total;
         },
     },
     methods: {
@@ -66,6 +72,25 @@ export default {
             console.log(`Updating this.length to ${newLen}`);
             this.length = newLen;
         },
+        getRestaurantByID() {
+            this.isLoading = true;
+            const restaurantID = window.location.pathname.replace(
+                "/restaurants/",
+                ""
+            );
+            console.log(`Fetching restaurant by id: ${restaurantID}`);
+            axios
+                //restaurants/{restaurantID}/dishes
+                .get(`${this.baseUri}/api/restaurants/${restaurantID}`)
+                .then((r) => {
+                    const data = r.data;
+                    this.restaurant = data;
+                    this.isLoading = false;
+                })
+                .catch((e) => {
+                    console.error(e);
+                });
+        },
         getDishesByID(id_array) {
             id_array.forEach((id) => {
                 this.dishes = [];
@@ -84,6 +109,7 @@ export default {
         },
     },
     created() {
+        this.getRestaurantByID();
         this.restoreCart();
         //# listeners
         eventBus.$on("update", (length) => {
