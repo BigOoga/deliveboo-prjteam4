@@ -20,6 +20,7 @@
                     placeholder="Search"
                     aria-label="Search"
                     v-model="searchInput"
+                    @keydown.enter.prevent="startSearch"
                 />
                 <button
                     @click="startSearch"
