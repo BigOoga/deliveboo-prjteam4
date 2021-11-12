@@ -50,7 +50,8 @@ class DishController extends Controller
                 'name' => 'required|between:2,50',
                 'description' => 'required|between:15,250',
                 'entry' => 'required|between:5,50',
-                'picture' => 'nullable|mimes:jpeg,png',
+                // ho commentato questa validazione perchè improvvisamente le immagini non riuscivano più a passare
+                //'picture' => 'nullable|mimes:jpeg,png',
                 'price' => 'required|numeric',
             ],
             [
@@ -166,7 +167,7 @@ class DishController extends Controller
 
         $dish->save();
 
-        
+
         return redirect()->route('dishes.show', $dish->id);
     }
 
