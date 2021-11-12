@@ -10,10 +10,21 @@
                 <div class="col-md-9">
                     <div class="card-body">
                         {{-- PRINT DISHES --}}
-                        <h5 class="card-title">{{ $dish->name }}</h5>
-                        <p class="card-text">{{ $dish->description }}</p>
-                        <p class="card-text">{{ $dish->entry }}</p>
-                        <p class="card-text">€ {{ $dish->price }}</p>
+                        <h5 class="card-title">
+                            Nome piatto: <strong>{{ $dish->name }}</strong>
+                        </h5>
+                        <p class="card-text">
+                            Descrizione: <strong>{{ $dish->description }}</strong>
+                        </p>
+                        <p class="card-text">
+                            Portata: <strong>{{ $dish->entry }}</strong>
+                        </p>
+                        <p class="card-text">
+                            Prezzo: <strong>€ {{ $dish->price }}</strong>
+                        </p>
+                        <p class="card-text">
+                            Id: <strong>{{ $dish->id }}</strong>
+                        </p>
                         {{-- BOOLEANS --}}
                         <div class="card-text d-flex justify-content-between">
                             <span>Disponibile: @if ($dish->available)
@@ -23,13 +34,16 @@
                             <span>Gluten-free: @if ($dish->gluten_free)
                                 Si @else No
                                 @endif
-                            </span><span>Surgelato: @if ($dish->frozen)
+                            </span>
+                            <span>Surgelato: @if ($dish->frozen)
                                 Si @else No
                                 @endif
-                            </span><span>Vegetariano: @if ($dish->vegetarian)
+                            </span>
+                            <span>Vegetariano: @if ($dish->vegetarian)
                                 Si @else No
                                 @endif
-                            </span><span>Vegano: @if ($dish->vegan)
+                            </span>
+                            <span>Vegano: @if ($dish->vegan)
                                 Si @else No
                                 @endif
                             </span>
