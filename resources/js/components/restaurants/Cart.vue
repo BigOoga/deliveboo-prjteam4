@@ -9,6 +9,7 @@
         <div class="col-12 d-flex justify-content-between">
             <span>subtotale</span>
             <span>12.90$</span>
+            
         </div>
         <!-- delivery fee -->
         <div class="col-12 d-flex justify-content-between">

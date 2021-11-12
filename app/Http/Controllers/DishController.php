@@ -17,6 +17,7 @@ class DishController extends Controller
      */
     public function index()
     {
+
         $user_id = Auth::id();
         //$dishes = Dish::all();
         $dishes = DB::table('dishes')->where('restaurant_id', $user_id)->get();
@@ -31,7 +32,8 @@ class DishController extends Controller
      */
     public function create()
     {
-        return view('dishes.create');
+        $dish = new Dish();
+        return view('dishes.create', compact('dish'));
     }
 
     /**
@@ -45,17 +47,24 @@ class DishController extends Controller
 
         $request->validate(
             [
-                'name' => 'required|min:2|max:50',
-                'description' => 'required|max:255',
-                'entry' => 'required|max:50',
-                'picture' => 'nullable|mimes:jpeg,png',
+                'name' => 'required|between:2,50',
+                'description' => 'required|between:15,250',
+                'entry' => 'required|between:5,50',
+                // ho commentato questa validazione perchè improvvisamente le immagini non riuscivano più a passare
+                //'picture' => 'nullable|mimes:jpeg,png',
                 'price' => 'required|numeric',
             ],
             [
                 'required' => 'Questo campo è obbligatorio',
-                'image.mimes' => 'Il file dev\'essere in formato .jpg o .png'
+                'image.mimes' => 'Il file dev\'essere in formato .jpg o .png',
+                'numeric' => 'Questo campo deve essere numerico',
+                'name.between' => 'Questo campo deve avere tra 2 e 50 caratteri',
+                'entry.between' => 'Questo campo deve avere tra 5 e 50 caratteri',
+                'description.between' => 'Questo campo deve avere tra 15 e 255 caratteri',
             ]
         );
+
+
 
         $data = $request->all();
         $newDish = new Dish();
@@ -119,29 +128,46 @@ class DishController extends Controller
     {
         $request->validate(
             [
-                'name' => 'required|min:2|max:50',
-                'description' => 'required|max:255',
-                'entry' => 'required|max:50',
-                'picture' => 'nullable|mimes:jpeg,png',
+                'name' => 'required|between:2,50',
+                'description' => 'required|between:15,250',
+                'entry' => 'required|between:5,50',
+                //'picture' => 'nullable|mimes:jpeg,png',
                 'price' => 'required|numeric',
             ],
             [
                 'required' => 'Questo campo è obbligatorio',
-                'image.mimes' => 'Il file dev\'essere in formato .jpg o .png'
+                'image.mimes' => 'Il file dev\'essere in formato .jpg o .png',
+                'numeric' => 'Questo campo deve essere numerico',
+                'name.between' => 'Questo campo deve avere tra 2 e 50 caratteri',
+                'entry.between' => 'Questo campo deve avere tra 5 e 50 caratteri',
+                'description.between' => 'Questo campo deve avere tra 15 e 255 caratteri',
             ]
         );
 
         $data = $request->all();
 
-        //SETTO I BOOLEANI A 0
-        $dish->available = 0;
-        $dish->gluten_free = 0;
-        $dish->frozen = 0;
-        $dish->vegetarian = 0;
-        $dish->vegan = 0;
-
         $dish->fill($data);
+
+        $gluten_free = isset($request->gluten_free) ? 1 : 0;
+        $vegan = isset($request->vegan) ? 1 : 0;
+        $vegetarian = isset($request->vegetarian) ? 1 : 0;
+        $available = isset($request->available) ? 1 : 0;
+        $frozen = isset($request->frozen) ? 1 : 0;
+
+        $dish->gluten_free = $gluten_free;
+        $dish->vegan = $vegan;
+        $dish->vegetarian = $vegetarian;
+        $dish->frozen = $frozen;
+        $dish->available = $available;
+
+        if ($request->has('picture')) {
+            $img_path = Storage::put('uploads', $data['picture']);
+            $dish->picture = $img_path;
+        }
+
         $dish->save();
+
+
         return redirect()->route('dishes.show', $dish->id);
     }
 
