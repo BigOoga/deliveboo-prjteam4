@@ -29,6 +29,9 @@ window.Vue = require('vue');
 //  * or customize the JavaScript scaffolding to fit your unique needs.
 //  */
 
+Vue.component('product', require('./components/restaurants/Product.vue'));
+
+import Vue from "vue";
 // import Vuex
  import store from "./src/store";
 
