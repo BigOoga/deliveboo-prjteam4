@@ -31,7 +31,7 @@ export default {
     methods: {
         goToRestaurant() {
             console.log("Firing");
-            window.location.href = `${this.restaurant.id}`;
+            window.location.href = `http://127.0.0.1:8000/restaurants/${this.restaurant.id}`;
         },
     },
 };
