@@ -3,49 +3,30 @@
 @section('content')
 
     <div class="container">
-        <h1 class="text-center mb-5">I miei piatti</h1>
-        <div><a href="{{ route('dishes.create') }}" class="btn btn-primary p-2  my-1">Aggiungi un piatto</a></div>
+        <div class="d-flex justify-content-between m-3">        
+            <h1>I miei piatti</h1>
+            <div><a href="{{ route('dishes.create') }}" class="btn btn-primary p-2  my-1">Aggiungi un piatto</a></div>
+        </div>
         {{-- PRINT DISHES --}}
         @forelse($dishes as $dish)
-            <section class="container">
-                <div class="card mb-2">
-                    <div class="row">
-                        <div class="col-md-2">
-                            <img class="img-fluid" src="{{ asset('storage/' . $dish->picture) }}"
-                                alt="{{ $dish->name }}">
+            <section class="row">
+                <div class="col-md-4">
+                    <div class="card m-3">
+                        <img class="img-fluid" src="{{ asset('storage/' . $dish->picture) }}"
+                            alt="{{ $dish->name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">Nome Piatto{{ $dish->name }}</h5>
                         </div>
-                        <div class="col-md-9">
-                            <div class="card-body">
-                                <p class="card-title"><strong>{{ $dish->name }}</strong></p>
-                                <p class="card-text">{{ $dish->description }}</p>
-                                <p class="card-text">{{ $dish->entry }}</p>
-                                <p class="card-text">€ {{ $dish->price }}</p>
-                                {{-- BOOLEANS --}}
-                                <div class="card-text d-flex justify-content-between">
-                                    <span>Disponibile: @if ($dish->available)
-                                        Si @else No
-                                        @endif
-                                    </span>
-                                    <span>Gluten-free: @if ($dish->gluten_free)
-                                        Si @else No
-                                        @endif
-                                    </span><span>Surgelato: @if ($dish->frozen)
-                                        Si @else No
-                                        @endif
-                                    </span><span>Vegetariano: @if ($dish->vegetarian)
-                                        Si @else No
-                                        @endif
-                                    </span><span>Vegano: @if ($dish->vegan)
-                                        Si @else No
-                                        @endif
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        {{-- LINK AND BUTTON --}}
-                        <div class="col-md-1 d-flex align-items-center flex-column justify-content-center">
-                            <a href="{{ route('dishes.show', $dish->id) }}" class="btn btn-info p-2">Dettaglio</a>
-                            <a href="{{ route('dishes.edit', $dish->id) }}" class="btn btn-primary p-2  my-1">Modifica</a>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Portata: {{ $dish->entry }}</li>
+                            <li class="list-group-item">Prezzo: € {{ $dish->price }}</li>
+                            <li class="list-group-item">ID: {{ $dish->id }}</li>
+                        </ul>
+                        <div class="card-body">
+                            {{-- LINK AND BUTTON --}}
+
+                            <a href="{{ route('dishes.show', $dish->id) }}" class="btn btn-info my-1">Dettaglio</a>
+                            <a href="{{ route('dishes.edit', $dish->id) }}" class="btn btn-primary my-1">Modifica</a>
                             <form action="{{ route('dishes.destroy', $dish->id) }}" method="POST"
                                 class="d-inline delete-form  my-1">
                                 @csrf
