@@ -14,6 +14,7 @@ class OrderController extends Controller
      */
     public function index()
     {
+        //todo return only logged user orders
         $orders = Order::all();
         return view('orders.index', compact('orders'));
     }
