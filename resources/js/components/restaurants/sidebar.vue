@@ -16,13 +16,18 @@
             </div>
         </div>
         <div class="row">
-            Categorie:
+            <div>Categorie:</div>
             <div>
-                <ul>
-                    <li>sushi</li>
-                    <li>pizza</li>
-                    <li>pesce</li>
-                </ul>
+                <div v-for="(type, i) in types" :key="i">
+                    <label :for="type.name">{{ type.name }}</label>
+                    <input
+                        type="checkbox"
+                        :name="type.name"
+                        :id="type.name"
+                        v-model="selection"
+                        :value="type.id"
+                    />
+                </div>
             </div>
         </div>
     </div>
@@ -31,8 +36,30 @@
 <script>
 export default {
     name: "Sidebar",
+    data() {
+        return {
+            baseUri: "http://127.0.0.1:8000",
+            types: [],
+            selection: [],
+        };
+    },
+    methods: {
+        getTypes() {
+            console.log(`Fetching all types from API...`);
+            axios
+                .get(`${this.baseUri}/api/types`)
+                .then((r) => {
+                    const data = r.data;
+                    this.types = data;
+                })
+                .catch((e) => {
+                    console.error(e);
+                });
+        },
+    },
     mounted() {
         console.log("Component mounted.");
+        this.getTypes();
     },
 };
 </script>
