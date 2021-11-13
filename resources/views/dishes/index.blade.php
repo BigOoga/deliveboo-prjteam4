@@ -57,7 +57,4 @@
         @endforelse
     </section>
 @endsection
-
-@section('secondaryscript')
-    <script src="{{ asset('js/delete_confirmation.js') }}"></script>
-@endsection
+    
