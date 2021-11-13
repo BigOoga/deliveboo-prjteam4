@@ -56,7 +56,7 @@ class DishController extends Controller
             ],
             [
                 'required' => 'Questo campo è obbligatorio',
-                'image.mimes' => 'Il file dev\'essere in formato .jpg o .png',
+                'picture.mimes' => 'Il file dev\'essere in formato .jpg o .png',
                 'numeric' => 'Questo campo deve essere numerico',
                 'name.between' => 'Questo campo deve avere tra 2 e 50 caratteri',
                 'entry.between' => 'Questo campo deve avere tra 5 e 50 caratteri',
@@ -136,7 +136,7 @@ class DishController extends Controller
             ],
             [
                 'required' => 'Questo campo è obbligatorio',
-                'image.mimes' => 'Il file dev\'essere in formato .jpg o .png',
+                'picure.mimes' => 'Il file dev\'essere in formato .jpg o .png',
                 'numeric' => 'Questo campo deve essere numerico',
                 'name.between' => 'Questo campo deve avere tra 2 e 50 caratteri',
                 'entry.between' => 'Questo campo deve avere tra 5 e 50 caratteri',
