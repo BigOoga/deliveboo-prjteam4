@@ -36,7 +36,7 @@ export default {
             // caso: ricerca vuota e nessuna categoria selezionata
             if (
                 this.$store.state.searchInput === "" &&
-                this.$store.state.selection.length > 0
+                this.$store.state.selection.length == 0
             ) {
                 console.log("Fetching ALL restaurants...");
                 axios
@@ -49,13 +49,41 @@ export default {
                     .catch((e) => {
                         console.error(e);
                     });
-            } else {
+            }
+            //caso ricerca compilata
+            else if (!this.$store.state.searchInput == "") {
                 console.log(
                     `Fetching restaurants containing string ${this.$store.state.searchInput}`
                 );
                 axios
                     .get(
                         `${this.baseUri}/api/restaurants/search?search=${this.$store.state.searchInput}`
+                    )
+                    .then((r) => {
+                        const data = r.data;
+                        this.restaurants = data;
+                        this.isLoading = false;
+                    })
+                    .catch((e) => {
+                        console.error(e);
+                    });
+            } else if (this.$store.state.selection.length > 0) {
+                //caso categorie selezionata
+                const selection = this.$store.state.selection;
+
+                selection.forEach((type) => {
+                    // fetchare tutti i ristoranti per quel tipo
+                    // ciclare su questi ristoranti, se non già presenti nell' array, pushare in variabile d'appoggio
+                    //
+                });
+
+                console.log(
+                    `Fetching restaurants with type_id ${this.$store.state.selection[0]}`
+                );
+                //`${this.baseUri}/api/restaurants/search?search=${this.$store.state.searchInput}&id=${this.$store.state.selection[0]}`
+                axios
+                    .get(
+                        `${this.baseUri}/api/types/${this.$store.state.selection[0]}`
                     )
                     .then((r) => {
                         const data = r.data;

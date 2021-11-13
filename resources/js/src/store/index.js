@@ -14,11 +14,9 @@ export default new Vuex.Store({
          state.searchInput = payload;
      },
      changeSelection (state, payload){
-         console.log('Changing selection to...');
-         console.table(payload);
-         console.log('------');
+         console.log('Changing selection...');
          state.selection = payload;
-         console.table(state.selection);
+
      }
  },
  actions: {}
