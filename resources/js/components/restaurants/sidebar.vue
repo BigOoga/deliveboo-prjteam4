@@ -3,20 +3,9 @@
         <div class="row">
             <h4>This is the sidebar component :)</h4>
         </div>
-        <div class="row">Order by (menù dropdown):</div>
+
         <div class="row">
-            Regimi alimentari:
-            <div>
-                <ul>
-                    <li>gluten free</li>
-                    <li>surgelato</li>
-                    <li>vegano</li>
-                    <li>vegetariano</li>
-                </ul>
-            </div>
-        </div>
-        <div class="row">
-            <div>Categorie:</div>
+            <div class="col-12">Categorie:</div>
             <div>
                 <div v-for="(type, i) in types" :key="i">
                     <label :for="type.name">{{ type.name }}</label>
