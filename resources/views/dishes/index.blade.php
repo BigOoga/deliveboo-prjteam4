@@ -13,7 +13,7 @@
                     <use xlink:href="#check-circle-fill" />
                 </svg>
                 <div>
-                    <i class="far fa-check-circle text-success"></i> Il post {{ session('deleted') }} è stato eliminato!
+                    <i class="far fa-check-circle text-success"></i> Il piatto {{ session('deleted') }} è stato eliminato!
                 </div>
             </div>
         @endif
