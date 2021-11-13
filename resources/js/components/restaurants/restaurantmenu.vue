@@ -1,34 +1,36 @@
 <template>
-    <div class="row">
+    <div class="col-8 d-flex flex-wrap">
         <div
             v-for="(dish, i) in dishes"
             :key="i"
-            class="card m-3 shadow"
-            style="max-width: 500px"
+            class="card col-6"
+            style="width: 18rem"
         >
-            <div class="row g-0">
-                <div class="col-4">
-                    <img
-                        :src="
-                            dish.picture
-                                ? '/storage/' + dish.picture
-                                : '/img/placeholder.svg'
-                        "
-                        alt=""
-                    />
-                </div>
-                <div class="col-8">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ dish.name }}</h5>
-                        <p class="card-text">{{ dish.description }}</p>
-                    </div>
-                </div>
+            <img
+                :src="
+                    dish.picture
+                        ? '/storage/' + dish.picture
+                        : '/img/placeholder.svg'
+                "
+                alt=""
+            />
+            <div class="card-body">
+                <h5 class="card-title">{{ dish.name }}</h5>
+                <p class="card-text">{{ dish.description }}</p>
+                <p class="card-text">€{{ dish.price }}</p>
+                <button
+                    @click="addToCart(dish.id, dish.price)"
+                    class="btn btn-primary"
+                >
+                    Add
+                </button>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import { eventBus } from "../../../js/app";
 export default {
     name: "restaurantmenu",
     data() {
@@ -37,6 +39,15 @@ export default {
             dishes: [],
             isLoading: false,
         };
+    },
+    computed: {
+        currenRestaurantID: function () {
+            const restaurantID = window.location.pathname.replace(
+                "/restaurants/",
+                ""
+            );
+            return restaurantID;
+        },
     },
     methods: {
         // Fetch dishes with an API call
@@ -59,17 +70,73 @@ export default {
                     console.error(e);
                 });
         },
+        addToCart(dish_id, price) {
+            const currentCart = JSON.parse(sessionStorage.getItem("cart"));
+            //console.log(currentCart);
+            // const ordLen = currentCart.orders.orderLength;
+            // currentCart.orders[ordLen].dish_id = dish_id;
+            currentCart.orders.push({
+                dish_id: dish_id,
+                quantity: 1,
+                price: price,
+            });
+            sessionStorage.setItem("cart", JSON.stringify(currentCart));
+            eventBus.$emit("update", currentCart.orders.length);
+        },
+        //! probably goes inside cart.vue
+        removeFromCart(index) {
+            const currentCart = JSON.parse(sessionStorage.getItem("cart"));
+            if ((currentCart.orders[index].quantity = 1)) {
+                currentCart.orders.splice(index, 1);
+            } else {
+                currentCart.orders[index].quantity =
+                    currentCart.orders[index].quantity - 1;
+            }
+            sessionStorage.setItem("cart", JSON.stringify(currentCart));
+            eventBus.$emit("update");
+        },
+        initCart() {
+            console.log("Initializing cart...");
+            if (sessionStorage.getItem("cart") === null) {
+                console.log("Cart did not exist, creating...");
+                let cart = {
+                    restaurantID: 0,
+                    orders: [],
+                };
+
+                console.log("everything's fine");
+                cart.restaurantID = this.currenRestaurantID;
+                sessionStorage.setItem("cart", JSON.stringify(cart));
+            }
+            // se esiste già, ne leggiamo il contenuto
+            const currentCart = JSON.parse(sessionStorage.getItem("cart"));
+            // soluzione provvisoria: svuota il carrello se visito un'altro ristorante
+            if (currentCart.restaurantID !== this.currenRestaurantID) {
+                console.log("restaurant id did not match");
+                let cart = {
+                    restaurantID: 0,
+                    orders: [],
+                };
+
+                console.log("reinitializing...");
+                cart.restaurantID = this.currenRestaurantID;
+                sessionStorage.setItem("cart", JSON.stringify(cart));
+            } else {
+                console.log("restaurant id match");
+            }
+        },
     },
     created() {
         console.log("---Currently in restaurantmenu---");
         this.getDishes();
+        this.initCart();
     },
 };
 </script>
 
 <style scoped lang="scss">
 .card:hover {
-    cursor: pointer;
+    // cursor: pointer;
 }
 
 img {

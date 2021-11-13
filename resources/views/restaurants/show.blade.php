@@ -20,14 +20,10 @@
         <topbar></topbar>
         <div class="container">
             {{-- RESTAURANT DETAILS --}}
-            <h1>PROVA TEST</h1>
-            <div class="row">
-                {{-- RESTAURANT PIC --}}
-                <div>
-                    <img src="{{ asset('storage/' . $restaurant->image) }}" alt="{{ $restaurant->name }}"
-                        class="img-fluid rounded px-3" style="max-width: 450px;">
-                </div>
-                <div>
+
+            <div class="row border">
+
+                <div class="col-8 border">
                     <h1>{{ $restaurant->name }}</h1>
                     {{-- RESTAURANT INFO --}}
                     <ul class="list-unstyled">
@@ -38,11 +34,19 @@
                         {{-- INSERT DESCRIPTION --}}
                     </ul>
                 </div>
+                {{-- RESTAURANT PIC --}}
+                <div class="col-4 border">
+                    <img src="{{ asset('storage/' . $restaurant->image) }}" alt="{{ $restaurant->name }}"
+                        class="img-fluid rounded px-3" style="max-width: 450px;">
+                </div>
             </div>
 
             {{-- MENU --}}
-            <h1>Menu</h1>
-            <restaurantmenu></restaurantmenu>
+            <h2>I nostri piatti</h2>
+            <div class="row">
+                <restaurantmenu></restaurantmenu>
+                <Cart></Cart>
+            </div>
         </div>
     </div>
 

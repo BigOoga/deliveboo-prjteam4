@@ -31,42 +31,85 @@ export default {
         // Fetch restaurants with an API call
         getRestaurants() {
             this.isLoading = true;
-            // Azzero restaurants per far ricomparire il loader e far scomparire i vecchi risultare
+            // Azzero restaurants per far ricomparire il loader e far scomparire i vecchi risultati
             this.restaurants = [];
-            if (this.$store.state.searchInput === "") {
+            // caso: ricerca vuota e nessuna categoria selezionata
+            if (this.$store.state.selection.length == 0) {
                 console.log("Fetching ALL restaurants...");
                 axios
                     .get(`${this.baseUri}/api/restaurants`)
                     .then((r) => {
                         const data = r.data;
                         this.restaurants = data;
-                        this.isLoading = false;
-                    })
-                    .catch((e) => {
-                        console.error(e);
-                    });
-            } else {
-                console.log(
-                    `Fetching restaurants containing string ${this.$store.state.searchInput}`
-                );
-                axios
-                    .get(
-                        `${this.baseUri}/api/restaurants/test?search=${this.$store.state.searchInput}`
-                    )
-                    .then((r) => {
-                        const data = r.data;
-                        this.restaurants = data;
+                        console.log(data);
+                        if (this.$store.state.searchInput != "") {
+                            this.restaurants = this.filterByName(data);
+                        }
                         this.isLoading = false;
                     })
                     .catch((e) => {
                         console.error(e);
                     });
             }
+
+            //caso categorie selezionata
+            else {
+                const selection = this.$store.state.selection;
+                const baseUri = this.baseUri;
+                //# variabile d'appoggio
+                let verifiedRestaurants = [];
+                // inizio a ciclare su ogni tipo
+                selection.forEach((type) => {
+                    // fetchare tutti i ristoranti per quel tipo
+                    console.log(`Fetching restaurants with type_id: ${type}`);
+                    async function resolveId() {
+                        let r = await axios.get(`${baseUri}/api/types/${type}`);
+                        return r.data;
+                    }
+
+                    resolveId().then((data) => {
+                        //# ciclare su questi ristoranti, se non già presenti nell' array, pushare in variabile d'appoggio
+                        console.log("ATTEMPTING TO CYCLE THROUGH DATA");
+                        data.forEach((o) => {
+                            verifiedRestaurants.push(o);
+                        });
+                        //???
+                        verifiedRestaurants = this.getUniqueListBy(
+                            verifiedRestaurants,
+                            "id"
+                        );
+                        console.log("Finished Filtering");
+                        console.log(verifiedRestaurants);
+                        if (this.$store.state.searchInput != "") {
+                            this.restaurants =
+                                this.filterByName(verifiedRestaurants);
+                        } else {
+                            this.restaurants = verifiedRestaurants;
+                        }
+                        this.isLoading = false;
+                    });
+                });
+            }
+        },
+        getUniqueListBy(myArr, prop) {
+            return myArr.filter((obj, pos, arr) => {
+                return (
+                    arr.map((mapObj) => mapObj[prop]).indexOf(obj[prop]) === pos
+                );
+            });
+        },
+        filterByName(arr) {
+            let searchInput = this.$store.state.searchInput.trim();
+            let x = arr.filter((x) => {
+                return x.name.toLowerCase().trim().includes(searchInput);
+            });
+            console.log(x);
+            return x;
         },
     },
     created() {
         this.getRestaurants();
-        eventBus.$on("fireMethod", () => {
+        eventBus.$on("startSearch", () => {
             this.getRestaurants();
         });
     },
