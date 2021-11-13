@@ -102,8 +102,26 @@ export default {
                     restaurantID: 0,
                     orders: [],
                 };
+
+                console.log("everything's fine");
                 cart.restaurantID = this.currenRestaurantID;
                 sessionStorage.setItem("cart", JSON.stringify(cart));
+            }
+            // se esiste già, ne leggiamo il contenuto
+            const currentCart = JSON.parse(sessionStorage.getItem("cart"));
+            // soluzione provvisoria: svuota il carrello se visito un'altro ristorante
+            if (currentCart.restaurantID !== this.currenRestaurantID) {
+                console.log("restaurant id did not match");
+                let cart = {
+                    restaurantID: 0,
+                    orders: [],
+                };
+
+                console.log("reinitializing...");
+                cart.restaurantID = this.currenRestaurantID;
+                sessionStorage.setItem("cart", JSON.stringify(cart));
+            } else {
+                console.log("restaurant id match");
             }
         },
     },
