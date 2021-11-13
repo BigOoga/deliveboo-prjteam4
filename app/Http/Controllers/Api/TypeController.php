@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Type;
+use App\Models\Restaurant;
 use DB;
 
 class TypeController extends Controller
@@ -18,6 +19,14 @@ class TypeController extends Controller
     {
         $types = Type::all();
         return response()->json($types);
+    }
+
+    public function restaurantByType($type_id)
+    {
+        $type = Type::find($type_id);
+        $restaurant = $type->restaurants;
+
+        return response()->json($restaurant);
     }
 
     /**

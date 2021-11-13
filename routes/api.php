@@ -28,6 +28,8 @@ Route::namespace('Api')->group(function () {
 
     Route::get('/restaurants/search', 'RestaurantController@searchRestaurants');
     Route::resource('restaurants', 'RestaurantController');
+
+    Route::get('/types/{type_id}', 'TypeController@restaurantByType');
     Route::resource('types', 'TypeController');
 
     Route::get('/restaurants/{restaurantID}/dishes', 'DishController@indexByRestaurant');

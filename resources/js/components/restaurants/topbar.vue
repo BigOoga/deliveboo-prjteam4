@@ -49,7 +49,8 @@ export default {
             console.log("Starting search...");
             this.$store.commit("changeSearchInput", this.searchInput);
 
-            eventBus.$emit("fireMethod");
+            eventBus.$emit("requestSelection");
+            eventBus.$emit("startSearch");
         },
     },
     mounted() {

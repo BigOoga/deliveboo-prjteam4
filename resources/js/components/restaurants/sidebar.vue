@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import { eventBus } from "../../../js/app";
 export default {
     name: "Sidebar",
     data() {
@@ -56,10 +57,17 @@ export default {
                     console.error(e);
                 });
         },
+        // sends selection to searchbar when requested
+        sendSelection() {
+            this.$store.commit("changeSelection", this.selection);
+        },
     },
     mounted() {
         console.log("Component mounted.");
         this.getTypes();
+        eventBus.$on("requestSelection", () => {
+            this.sendSelection();
+        });
     },
 };
 </script>

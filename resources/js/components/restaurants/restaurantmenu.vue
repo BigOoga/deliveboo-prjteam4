@@ -83,6 +83,7 @@ export default {
             sessionStorage.setItem("cart", JSON.stringify(currentCart));
             eventBus.$emit("update", currentCart.orders.length);
         },
+        //! probably goes inside cart.vue
         removeFromCart(index) {
             const currentCart = JSON.parse(sessionStorage.getItem("cart"));
             if ((currentCart.orders[index].quantity = 1)) {

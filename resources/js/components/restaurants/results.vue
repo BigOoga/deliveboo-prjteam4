@@ -33,7 +33,11 @@ export default {
             this.isLoading = true;
             // Azzero restaurants per far ricomparire il loader e far scomparire i vecchi risultati
             this.restaurants = [];
-            if (this.$store.state.searchInput === "") {
+            // caso: ricerca vuota e nessuna categoria selezionata
+            if (
+                this.$store.state.searchInput === "" &&
+                this.$store.state.selection.length > 0
+            ) {
                 console.log("Fetching ALL restaurants...");
                 axios
                     .get(`${this.baseUri}/api/restaurants`)
@@ -66,7 +70,7 @@ export default {
     },
     created() {
         this.getRestaurants();
-        eventBus.$on("fireMethod", () => {
+        eventBus.$on("startSearch", () => {
             this.getRestaurants();
         });
     },
