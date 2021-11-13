@@ -31,7 +31,7 @@ export default {
         // Fetch restaurants with an API call
         getRestaurants() {
             this.isLoading = true;
-            // Azzero restaurants per far ricomparire il loader e far scomparire i vecchi risultare
+            // Azzero restaurants per far ricomparire il loader e far scomparire i vecchi risultati
             this.restaurants = [];
             if (this.$store.state.searchInput === "") {
                 console.log("Fetching ALL restaurants...");
@@ -51,7 +51,7 @@ export default {
                 );
                 axios
                     .get(
-                        `${this.baseUri}/api/restaurants/test?search=${this.$store.state.searchInput}`
+                        `${this.baseUri}/api/restaurants/search?search=${this.$store.state.searchInput}`
                     )
                     .then((r) => {
                         const data = r.data;
