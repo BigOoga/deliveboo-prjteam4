@@ -26,8 +26,9 @@ Route::namespace('Api')->group(function () {
     //Route::delete('/posts/{post}', 'PostController@destroy');
     //l Or use the Route::resource method
 
-    Route::get('/restaurants/test', 'RestaurantController@searchRestaurants');
+    Route::get('/restaurants/search', 'RestaurantController@searchRestaurants');
     Route::resource('restaurants', 'RestaurantController');
+    Route::resource('types', 'TypeController');
 
     Route::get('/restaurants/{restaurantID}/dishes', 'DishController@indexByRestaurant');
     Route::resource('dishes', 'DishController');
