@@ -23,6 +23,10 @@ class OrderSeeder extends Seeder
             $newOrder->email = $faker->email();
             $newOrder->total = $faker->randomFloat(2, 6, 100);
             $newOrder->save();
+            // L'attach delle relazioni ai piatti random va qui (dopo il save)
+            // v v v v v v v v v v v v v v v v v v v v v v v v
+
+
         }
     }
 }
