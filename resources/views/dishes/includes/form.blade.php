@@ -43,20 +43,13 @@
 {{-- PICTURE --}}
 <div class="offset-md-2 col-md-6">
         <label for="picture" class="form-label">Foto piatto:</label>
-        <input type="file" class="form-control" name="picture" id="picture">
+        <input type="file" class="form-control @error('picture') is-invalid @enderror" name="picture" id="picture">
+    @error('picture')
+        <div class="invalid-feedback">
+            {{ $message }}
+        </div>
+    @enderror
 </div>
-
-{{-- PICTURE VIA URL GOES HERE - !EXTRA --}}
-{{-- <div class="col-md-7  mb-4">
-    <label for="picture" class="form-label">Link immagine</label>
-    <input type="text" class="form-control" id="picture" name="picture"
-        value="{{ old('picture', $dish->picture) }}">
-</div> --}}
-{{-- PREVIEW IMMAGINE DA GESTIRE CON JAVASCRIPT --}}
-{{-- <div class="col-md-2 d-flex align-items-center justify-content-center">
-    <img src="{{ $dish->picture ?? 'https://montagnolirino.it/wp-content/uploads/2015/12/immagine-non-disponibile.png' }}"
-        alt="picture" width="60" class="img-fluid">
-</div> --}}
 {{-- DESCRIPTION --}}
 <div class="col-md-12  mb-4">
     <label for="description" class="form-label">Descrizione</label>
