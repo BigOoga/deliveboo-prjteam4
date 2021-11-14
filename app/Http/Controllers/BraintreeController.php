@@ -10,15 +10,13 @@ class BraintreeController extends Controller
     public function token(Request $request)
     {
 
-
-
-
         $gateway = new \Braintree\Gateway([
             'environment' => 'sandbox',
             'merchantId' => 'jgvy755pfvwdcjzx',
             'publicKey' => 'qqpm93srfgwtx6dp',
             'privateKey' => 'd13ce21a7642606db73b12bb1300d3fd'
         ]);
+
         $clientToken = $gateway->clientToken()->generate();
 
         if ($request->input('nonce') != null) {
@@ -32,11 +30,9 @@ class BraintreeController extends Controller
                     'submitForSettlement' => True
                 ]
             ]);
-            return view('dashboard');
+            return view('orders.dashboard');
         }
 
-
-
-        return view('orders.checkout', ['token' => $clientToken]);
+        return view('orders.braintree', ['token' => $clientToken]);
     }
 }
