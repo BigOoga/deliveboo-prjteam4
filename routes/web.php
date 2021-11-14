@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BraintreeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,10 @@ Route::get('/', function () {
 });
 
 Route::get('restaurants/dashboard', 'RestaurantController@dashboard')->name('restaurants.dashboard');
+
+
+
+
 
 
 Route::resource('restaurants', 'RestaurantController');
@@ -44,3 +49,7 @@ $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 */
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+// Braintree controller
+Route::any('/payment', [BraintreeController::class, 'token'])->name('token');
