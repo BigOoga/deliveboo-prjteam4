@@ -449,11 +449,22 @@
                 }
             }
 
+            .redirect-buttons{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .redirect-buttons a {
+                margin: 10px 10px 0 0;
+            }
+
             @media (min-width: 992px) {
                 .lg\:bg-center {
                     background-position: center;
                 }
             }
+
+
         </style>
     </head>
     <body class="antialiased font-sans">
@@ -470,11 +481,18 @@
                         @yield('message')
                     </p>
 
-                    <a href="{{ app('router')->has('home') ? route('home') : url('/') }}">
-                        <button class="bg-transparent text-grey-darkest font-bold uppercase tracking-wide py-3 px-6 border-2 border-grey-light hover:border-grey rounded-lg">
-                            {{ __('Go Home') }}
-                        </button>
-                    </a>
+                    <div class="redirect-buttons">
+                        <a href="{{ route('restaurants.dashboard') }}">
+                            <button class="bg-transparent text-grey-darkest font-bold uppercase tracking-wide py-3 px-6 border-2 border-grey-light hover:border-grey rounded-lg">
+                                {{ __('Ritorna alla dashboard') }}
+                            </button>
+                        </a>
+                        <a href="{{ route('dishes.index') }}">
+                            <button class="bg-transparent text-grey-darkest font-bold uppercase tracking-wide py-3 px-6 border-2 border-grey-light hover:border-grey rounded-lg">
+                                {{ __('Ritorna ai piatti') }}
+                            </button>
+                        </a>
+                    </div>
                 </div>
             </div>
 

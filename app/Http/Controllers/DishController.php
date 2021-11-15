@@ -113,8 +113,7 @@ class DishController extends Controller
         if ($user_id === $dish->restaurant_id) {
             return view('dishes.show', compact('dish'));
         } else {
-            //todo REDIRECT A 404?
-
+            return redirect()->intended('errors.404');
         }
     }
 
