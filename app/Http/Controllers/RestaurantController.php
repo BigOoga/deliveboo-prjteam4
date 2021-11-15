@@ -56,7 +56,7 @@ class RestaurantController extends Controller
                 'opening_time' => 'required',
                 'closing_time' => 'required',
                 'delivery_fee' => 'required|numeric',
-                'image' => 'mimes:jpeg,png'
+                'image' => 'mimes:jpeg,png,jpg'
             ],
             [
                 'required' => 'Questo campo è obbligatorio',
