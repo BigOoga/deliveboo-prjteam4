@@ -32,7 +32,13 @@
             </form>
         </div>
         <div class="button-container">
-            <button type="button" class="btn btn-primary">Carrello</button>
+            <button
+                @click="goToRestaurant"
+                type="button"
+                class="btn btn-primary"
+            >
+                Carrello
+            </button>
         </div>
     </nav>
 </template>
@@ -51,6 +57,13 @@ export default {
 
             eventBus.$emit("requestSelection");
             eventBus.$emit("startSearch");
+        },
+        goToRestaurant() {
+            const currentCart = JSON.parse(sessionStorage.getItem("cart"));
+            let openSessionId = currentCart.restaurantID;
+            if (openSessionId) {
+                window.location.href = `http://127.0.0.1:8000/restaurants/${openSessionId}`;
+            }
         },
     },
     mounted() {
