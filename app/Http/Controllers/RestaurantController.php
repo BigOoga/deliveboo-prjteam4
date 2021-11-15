@@ -14,6 +14,11 @@ use App\Models\Type;
 
 class RestaurantController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show', 'create']);
+    }
+
     /**
      * Display a listing of the resource.
      *
