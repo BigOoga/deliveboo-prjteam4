@@ -73,6 +73,22 @@ export default {
     },
     methods: {
         goToCheckout() {
+            let order = {
+                subTotal: this.subTotal,
+                total: this.total,
+                delivery_fee: this.restaurant.delivery_fee,
+                dishes: [],
+            };
+            this.loadedDishes.forEach((dish) => {
+                let reducedDish = {
+                    name: dish.name,
+                    quantity: dish.quantity,
+                    dish_id: dish.id,
+                };
+                order.dishes.push(reducedDish);
+            });
+
+            sessionStorage.setItem("order", JSON.stringify(order));
             window.location.href = `http://127.0.0.1:8000/payment`;
         },
         emptyCart() {

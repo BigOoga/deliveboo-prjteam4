@@ -113,6 +113,8 @@ export default {
                     restaurantID: 0,
                     orders: [],
                 };
+                console.log("dropping order...");
+                sessionStorage.removeItem("order");
 
                 console.log("reinitializing...");
                 cart.restaurantID = this.currenRestaurantID;
