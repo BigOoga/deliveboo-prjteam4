@@ -76,6 +76,15 @@
             let address = document.getElementById('address').value;
             let email = document.getElementById('email').value;
             const currentOrder = JSON.parse(sessionStorage.getItem("order"));
+            let arr_id = [];
+            currentOrder.dishes.forEach(dish => {
+                arr_id.push(dish.dish_id);
+            });
+            let arr_quant = [];
+            currentOrder.dishes.forEach(dish => {
+                arr_quant.push(dish.quantity);
+            });
+
             let total = currentOrder.total;
             console.log(name);
             console.log(last_name);
@@ -83,6 +92,8 @@
             console.log(address);
             console.log(email);
             console.log(total);
+            console.log(arr_id);
+            console.log(arr_quant);
 
             instance.requestPaymentMethod(function(err, payload) {
                 (function($) {
@@ -105,6 +116,8 @@
                                 address: address,
                                 email: email,
                                 last_name: last_name,
+                                arr_id: arr_id,
+                                arr_quant: arr_quant
                             },
                             success: function(data) {
                                 console.log('success', payload.nonce)

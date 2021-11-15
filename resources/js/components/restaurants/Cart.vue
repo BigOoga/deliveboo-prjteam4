@@ -83,6 +83,7 @@ export default {
                 let reducedDish = {
                     name: dish.name,
                     quantity: dish.quantity,
+                    dish_id: dish.id,
                 };
                 order.dishes.push(reducedDish);
             });
