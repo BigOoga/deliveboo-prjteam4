@@ -4,6 +4,7 @@
             v-for="(dish, i) in dishes"
             :key="i"
             class="card col-6"
+            :class="[dish.available ? 'available' : 'unavailable']"
             style="width: 18rem"
         >
             <img
@@ -138,5 +139,9 @@ img {
     object-fit: cover;
     width: 100px;
     height: 100px;
+}
+
+.card.unavailable {
+    display: none;
 }
 </style>
