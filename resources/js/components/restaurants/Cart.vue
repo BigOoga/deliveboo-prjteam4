@@ -4,8 +4,18 @@
             <h4>Il tuo ordine</h4>
             <!-- qui ci andranno i prodotti selezionati -->
         </div>
-        <div v-for="(dish, i) in dishes" :key="i">
-            <p>€{{ dish.price }} {{ dish.name }}</p>
+        <div>
+            <div v-for="(dish, i) in loadedDishes" :key="i">
+                <p>
+                    €{{ dish.price }} {{ dish.name }}
+                    <button @click="decreaseQuant(i)" class="btn btn-primary">
+                        -</button
+                    >{{ dish.quantity }}
+                    <button @click="increaseQuant(i)" class="btn btn-primary">
+                        +
+                    </button>
+                </p>
+            </div>
         </div>
         <hr />
         <!-- subtotal -->
@@ -24,6 +34,12 @@
             <span>Total</span>
             <span>€{{ total }}</span>
         </div>
+        <div class="mt-3">
+            <button @click="goToCheckout" class="btn btn-primary">
+                Checkout
+            </button>
+            <button @click="emptyCart" class="btn btn-danger">Empty</button>
+        </div>
     </div>
 </template>
 
@@ -37,6 +53,7 @@ export default {
             length: 0,
             baseUri: "http://127.0.0.1:8000",
             dishes: [],
+            loadedDishes: [],
             restaurant: {},
             isLoading: false,
         };
@@ -44,8 +61,8 @@ export default {
     computed: {
         subTotal: function () {
             let subTotal = 0;
-            this.dishes.forEach((dish) => {
-                subTotal += dish.price;
+            this.loadedDishes.forEach((dish) => {
+                subTotal += dish.price * dish.quantity;
             });
             return subTotal;
         },
@@ -55,6 +72,43 @@ export default {
         },
     },
     methods: {
+        goToCheckout() {
+            window.location.href = `http://127.0.0.1:8000/payment`;
+        },
+        emptyCart() {
+            const currentCart = JSON.parse(sessionStorage.getItem("cart"));
+            currentCart.orders = [];
+            sessionStorage.setItem("cart", JSON.stringify(currentCart));
+            this.dishes = [];
+            this.loadedDishes = [];
+            eventBus.$emit("update", currentCart.orders.length);
+        },
+        decreaseQuant(i) {
+            const currentCart = JSON.parse(sessionStorage.getItem("cart"));
+            console.log("checking if 1");
+            if (this.loadedDishes[i].quantity === 1) {
+                console.log("attempting to delete");
+                // delete from cart AND this.dishes
+                this.loadedDishes.splice(i, 1);
+                currentCart.orders.splice(i, 1);
+                sessionStorage.setItem("cart", JSON.stringify(currentCart));
+                eventBus.$emit("update", currentCart.orders.length);
+            } else {
+                console.log("decreasing");
+                this.loadedDishes[i].quantity--;
+                currentCart.orders[i].quantity =
+                    currentCart.orders[i].quantity - 1;
+            }
+            sessionStorage.setItem("cart", JSON.stringify(currentCart));
+        },
+        increaseQuant(i) {
+            const currentCart = JSON.parse(sessionStorage.getItem("cart"));
+
+            this.dishes[i].quantity++;
+            currentCart.orders[i].quantity = currentCart.orders[i].quantity + 1;
+
+            sessionStorage.setItem("cart", JSON.stringify(currentCart));
+        },
         restoreCart() {
             // prendo il cart dallo storage
             const currentCart = JSON.parse(sessionStorage.getItem("cart"));
@@ -62,18 +116,14 @@ export default {
             const orders = currentCart.orders;
 
             // carico un array con tutti gli ID di piatti presenti nel carrello
-            const id_array = [];
+
             orders.forEach((order) => {
-                id_array.push(order.dish_id);
+                this.getDishByID(order.dish_id, order.quantity);
             });
-            this.getDishesByID(id_array);
-        },
-        updateLength(newLen) {
-            console.log(`Updating this.length to ${newLen}`);
-            this.length = newLen;
         },
         getRestaurantByID() {
             this.isLoading = true;
+
             const restaurantID = window.location.pathname.replace(
                 "/restaurants/",
                 ""
@@ -85,27 +135,31 @@ export default {
                 .then((r) => {
                     const data = r.data;
                     this.restaurant = data;
-                    this.isLoading = false;
                 })
                 .catch((e) => {
                     console.error(e);
                 });
         },
-        getDishesByID(id_array) {
-            id_array.forEach((id) => {
-                this.dishes = [];
-                console.log(`Getting dish by id ${id}..`);
-                axios
-                    .get(`${this.baseUri}/api/dishes/${id}`)
-                    .then((r) => {
-                        const data = r.data;
+        getDishByID(id, quantity) {
+            const currentCart = JSON.parse(sessionStorage.getItem("cart"));
+            this.dishes = [];
+            this.isLoading = true;
 
-                        this.dishes.push(data);
-                    })
-                    .catch((e) => {
-                        console.error(e);
-                    });
-            });
+            console.log(`Getting dish by id ${id}..`);
+            axios
+                .get(`${this.baseUri}/api/dishes/${id}`)
+                .then((r) => {
+                    const data = r.data;
+                    data.quantity = quantity;
+                    this.dishes.push(data);
+                    if (this.dishes.length === currentCart.orders.length) {
+                        this.isLoading = false;
+                        this.loadedDishes = this.dishes;
+                    }
+                })
+                .catch((e) => {
+                    console.error(e);
+                });
         },
     },
     created() {
@@ -115,19 +169,14 @@ export default {
         eventBus.$on("update", (length) => {
             // prendo il cart dallo storage
             const currentCart = JSON.parse(sessionStorage.getItem("cart"));
-            // computo quanti ordini (cioè ID unici) abbiamo in storage
-            const cartLength = currentCart.orders.length;
             // storo gli ordini per comodità
             const orders = currentCart.orders;
-            // tengo traccia della quantità di ordini
-            this.updateLength(cartLength);
-
             // carico un array con tutti gli ID di piatti presenti nel carrello
             const id_array = [];
             orders.forEach((order) => {
                 id_array.push(order.dish_id);
             });
-            this.getDishesByID(id_array);
+            this.restoreCart();
         });
     },
 };
