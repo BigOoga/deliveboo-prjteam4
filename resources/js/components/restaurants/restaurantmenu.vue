@@ -72,28 +72,23 @@ export default {
         },
         addToCart(dish_id, price) {
             const currentCart = JSON.parse(sessionStorage.getItem("cart"));
-            //console.log(currentCart);
-            // const ordLen = currentCart.orders.orderLength;
-            // currentCart.orders[ordLen].dish_id = dish_id;
-            currentCart.orders.push({
-                dish_id: dish_id,
-                quantity: 1,
-                price: price,
+            let isDuplicate = false;
+            currentCart.orders.forEach((order) => {
+                if (order.dish_id === dish_id) {
+                    isDuplicate = true;
+                }
             });
-            sessionStorage.setItem("cart", JSON.stringify(currentCart));
-            eventBus.$emit("update", currentCart.orders.length);
-        },
-        //! probably goes inside cart.vue
-        removeFromCart(index) {
-            const currentCart = JSON.parse(sessionStorage.getItem("cart"));
-            if ((currentCart.orders[index].quantity = 1)) {
-                currentCart.orders.splice(index, 1);
-            } else {
-                currentCart.orders[index].quantity =
-                    currentCart.orders[index].quantity - 1;
+            console.log(`isDuplicate? ${isDuplicate}`);
+            if (!isDuplicate) {
+                currentCart.orders.push({
+                    dish_id: dish_id,
+                    quantity: 1,
+                    price: price,
+                });
+
+                sessionStorage.setItem("cart", JSON.stringify(currentCart));
+                eventBus.$emit("update", currentCart.orders.length);
             }
-            sessionStorage.setItem("cart", JSON.stringify(currentCart));
-            eventBus.$emit("update");
         },
         initCart() {
             console.log("Initializing cart...");
