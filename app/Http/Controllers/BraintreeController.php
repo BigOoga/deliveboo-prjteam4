@@ -19,12 +19,28 @@ class BraintreeController extends Controller
 
         $clientToken = $gateway->clientToken()->generate();
 
+
+
         if ($request->input('nonce') != null) {
+
+
+            $request->validate([
+                'name' => 'required',
+                'last_name' => 'required',
+                'phone' => 'required',
+                'address' => 'required',
+                'email' => 'email:rfc',
+                'amount' => 'required',
+            ]);
+
+
+
+
             var_dump($request->input('nonce'));
             $nonceFromTheClient = $request->input('nonce');
-
+            $amount = $request->input('amount');
             $gateway->transaction()->sale([
-                'amount' => '10.00',
+                'amount' => $amount,
                 'paymentMethodNonce' => $nonceFromTheClient,
                 'options' => [
                     'submitForSettlement' => True

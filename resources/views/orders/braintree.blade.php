@@ -18,24 +18,22 @@
 <body>
     <div class="container" id="checkout">
         <div class="row">
-            <div class="col-6">
-                <form action="{{ route('orders.store') }}" method="post">
-                    @csrf
-                    <div>
+
+            <div class="col-3 py-3">
+                {{-- formnew --}}
+                <form>
+                    <div class="form-group">
+                        <label for="name">Nome</label>
+                        <input type="text" class="form-control" id="name">
+                        <label for="last_name">Cognome</label>
+                        <input type="text" class="form-control" id="last_name">
                         <label for="address">Indirizzo</label>
-                        <input type="text" name="address" id="address">
-                        <label for="user_name">Nome</label>
-                        <input type="text" name="user_name" id="user_name">
-                        <label for="user_surname">Cognome</label>
-                        <input type="text" name="user_surname" id="user_surname">
+                        <input type="text" class="form-control" id="address">
                         <label for="phone">Telefono</label>
-                        <input type="text" name="phone" id="phone">
+                        <input type="text" class="form-control" id="phone">
                         <label for="email">Email</label>
-                        <input type="text" name="email" id="email">
-                        <label for="total">Totale</label>
-                        <input type="text" name="total" id="total">
+                        <input type="email" class="form-control" id="email">
                     </div>
-                    <input type="submit" value="invia">
                 </form>
             </div>
 
@@ -56,18 +54,36 @@
                 </div>
             </div>
         </div>
+        <div id="app" class="row">
+            {{-- Riepologo carrello qui --}}
+            <Receipt></Receipt>
+        </div>
 
 
 </body>
 <script>
-    var button = document.querySelector('#submit-button');
-
+    let button = document.querySelector('#submit-button');
     braintree.dropin.create({
         // Insert your tokenization key here
         authorization: '{{ $token }}',
         container: '#dropin-container'
     }, function(createErr, instance) {
         button.addEventListener('click', function() {
+
+            let name = document.getElementById('name').value;
+            let last_name = document.getElementById('last_name').value;
+            let phone = document.getElementById('phone').value;
+            let address = document.getElementById('address').value;
+            let email = document.getElementById('email').value;
+            const currentOrder = JSON.parse(sessionStorage.getItem("order"));
+            let total = currentOrder.total;
+            console.log(name);
+            console.log(last_name);
+            console.log(phone);
+            console.log(address);
+            console.log(email);
+            console.log(total);
+
             instance.requestPaymentMethod(function(err, payload) {
                 (function($) {
                     $(function() {
@@ -82,7 +98,13 @@
                             type: "POST",
                             url: "{{ route('token') }}",
                             data: {
-                                nonce: payload.nonce
+                                nonce: payload.nonce,
+                                amount: total,
+                                name: name,
+                                phone: phone,
+                                address: address,
+                                email: email,
+                                last_name: last_name,
                             },
                             success: function(data) {
                                 console.log('success', payload.nonce)
