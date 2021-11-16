@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Order;
 
@@ -113,5 +114,18 @@ class OrderController extends Controller
     {
         $order->delete();
         return redirect()->route('orders.index');
+    }
+
+    public function statistic()
+    {
+        $user_id = Auth::id();
+        $orders = DB::table('orders')
+        ->select('orders.*')
+        ->join('dish_order', 'dish_order.order_id', '=','orders.id')
+        ->join('dishes', 'dish_order.dish_id','=','dishes.id')
+        ->join('restaurants', 'dishes.restaurant_id', '=', 'restaurants.id')
+        ->where('restaurants.id', $user_id)
+        ->get();
+        return view('orders.statistic', compact('orders'));
     }
 }

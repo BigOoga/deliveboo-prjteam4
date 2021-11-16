@@ -86,6 +86,18 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./node_modules/@babel/runtime/regenerator/index.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! regenerator-runtime */ "./node_modules/regenerator-runtime/runtime.js");
+
+
+/***/ }),
+
 /***/ "./node_modules/@popperjs/core/lib/createPopper.js":
 /*!*********************************************************!*\
   !*** ./node_modules/@popperjs/core/lib/createPopper.js ***!
@@ -5443,6 +5455,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _js_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../js/app */ "./resources/js/app.js");
 //
 //
 //
@@ -5470,13 +5483,107 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Cart",
   props: [],
   data: function data() {
-    return {};
+    return {
+      length: 0,
+      baseUri: "http://127.0.0.1:8000",
+      dishes: [],
+      restaurant: {},
+      isLoading: false
+    };
   },
-  methods: {}
+  computed: {
+    subTotal: function subTotal() {
+      var subTotal = 0;
+      this.dishes.forEach(function (dish) {
+        subTotal += dish.price;
+      });
+      return subTotal;
+    },
+    total: function total() {
+      var total = this.subTotal + this.restaurant.delivery_fee;
+      return total;
+    }
+  },
+  methods: {
+    restoreCart: function restoreCart() {
+      // prendo il cart dallo storage
+      var currentCart = JSON.parse(sessionStorage.getItem("cart")); // storo gli ordini per comodità
+
+      var orders = currentCart.orders; // carico un array con tutti gli ID di piatti presenti nel carrello
+
+      var id_array = [];
+      orders.forEach(function (order) {
+        id_array.push(order.dish_id);
+      });
+      this.getDishesByID(id_array);
+    },
+    updateLength: function updateLength(newLen) {
+      console.log("Updating this.length to ".concat(newLen));
+      this.length = newLen;
+    },
+    getRestaurantByID: function getRestaurantByID() {
+      var _this = this;
+
+      this.isLoading = true;
+      var restaurantID = window.location.pathname.replace("/restaurants/", "");
+      console.log("Fetching restaurant by id: ".concat(restaurantID));
+      axios //restaurants/{restaurantID}/dishes
+      .get("".concat(this.baseUri, "/api/restaurants/").concat(restaurantID)).then(function (r) {
+        var data = r.data;
+        _this.restaurant = data;
+        _this.isLoading = false;
+      })["catch"](function (e) {
+        console.error(e);
+      });
+    },
+    getDishesByID: function getDishesByID(id_array) {
+      var _this2 = this;
+
+      id_array.forEach(function (id) {
+        _this2.dishes = [];
+        console.log("Getting dish by id ".concat(id, ".."));
+        axios.get("".concat(_this2.baseUri, "/api/dishes/").concat(id)).then(function (r) {
+          var data = r.data;
+
+          _this2.dishes.push(data);
+        })["catch"](function (e) {
+          console.error(e);
+        });
+      });
+    }
+  },
+  created: function created() {
+    var _this3 = this;
+
+    this.getRestaurantByID();
+    this.restoreCart(); //# listeners
+
+    _js_app__WEBPACK_IMPORTED_MODULE_0__["eventBus"].$on("update", function (length) {
+      // prendo il cart dallo storage
+      var currentCart = JSON.parse(sessionStorage.getItem("cart")); // computo quanti ordini (cioè ID unici) abbiamo in storage
+
+      var cartLength = currentCart.orders.length; // storo gli ordini per comodità
+
+      var orders = currentCart.orders; // tengo traccia della quantità di ordini
+
+      _this3.updateLength(cartLength); // carico un array con tutti gli ID di piatti presenti nel carrello
+
+
+      var id_array = [];
+      orders.forEach(function (order) {
+        id_array.push(order.dish_id);
+      });
+
+      _this3.getDishesByID(id_array);
+    });
+  }
 });
 
 /***/ }),
@@ -5593,6 +5700,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _js_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../js/app */ "./resources/js/app.js");
 //
 //
 //
@@ -5623,6 +5731,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "restaurantmenu",
   data: function data() {
@@ -5631,6 +5741,12 @@ __webpack_require__.r(__webpack_exports__);
       dishes: [],
       isLoading: false
     };
+  },
+  computed: {
+    currenRestaurantID: function currenRestaurantID() {
+      var restaurantID = window.location.pathname.replace("/restaurants/", "");
+      return restaurantID;
+    }
   },
   methods: {
     // Fetch dishes with an API call
@@ -5648,11 +5764,68 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (e) {
         console.error(e);
       });
+    },
+    addToCart: function addToCart(dish_id, price) {
+      var currentCart = JSON.parse(sessionStorage.getItem("cart")); //console.log(currentCart);
+      // const ordLen = currentCart.orders.orderLength;
+      // currentCart.orders[ordLen].dish_id = dish_id;
+
+      currentCart.orders.push({
+        dish_id: dish_id,
+        quantity: 1,
+        price: price
+      });
+      sessionStorage.setItem("cart", JSON.stringify(currentCart));
+      _js_app__WEBPACK_IMPORTED_MODULE_0__["eventBus"].$emit("update", currentCart.orders.length);
+    },
+    //! probably goes inside cart.vue
+    removeFromCart: function removeFromCart(index) {
+      var currentCart = JSON.parse(sessionStorage.getItem("cart"));
+
+      if (currentCart.orders[index].quantity = 1) {
+        currentCart.orders.splice(index, 1);
+      } else {
+        currentCart.orders[index].quantity = currentCart.orders[index].quantity - 1;
+      }
+
+      sessionStorage.setItem("cart", JSON.stringify(currentCart));
+      _js_app__WEBPACK_IMPORTED_MODULE_0__["eventBus"].$emit("update");
+    },
+    initCart: function initCart() {
+      console.log("Initializing cart...");
+
+      if (sessionStorage.getItem("cart") === null) {
+        console.log("Cart did not exist, creating...");
+        var cart = {
+          restaurantID: 0,
+          orders: []
+        };
+        console.log("everything's fine");
+        cart.restaurantID = this.currenRestaurantID;
+        sessionStorage.setItem("cart", JSON.stringify(cart));
+      } // se esiste già, ne leggiamo il contenuto
+
+
+      var currentCart = JSON.parse(sessionStorage.getItem("cart")); // soluzione provvisoria: svuota il carrello se visito un'altro ristorante
+
+      if (currentCart.restaurantID !== this.currenRestaurantID) {
+        console.log("restaurant id did not match");
+        var _cart = {
+          restaurantID: 0,
+          orders: []
+        };
+        console.log("reinitializing...");
+        _cart.restaurantID = this.currenRestaurantID;
+        sessionStorage.setItem("cart", JSON.stringify(_cart));
+      } else {
+        console.log("restaurant id match");
+      }
     }
   },
   created: function created() {
     console.log("---Currently in restaurantmenu---");
     this.getDishes();
+    this.initCart();
   }
 });
 
@@ -5667,8 +5840,16 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _restaurantcard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./restaurantcard.vue */ "./resources/js/components/restaurants/restaurantcard.vue");
-/* harmony import */ var _js_app__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../js/app */ "./resources/js/app.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _restaurantcard_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./restaurantcard.vue */ "./resources/js/components/restaurants/restaurantcard.vue");
+/* harmony import */ var _js_app__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../js/app */ "./resources/js/app.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -5689,7 +5870,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    restaurantcard: _restaurantcard_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    restaurantcard: _restaurantcard_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   name: "Results",
   data: function data() {
@@ -5704,36 +5885,107 @@ __webpack_require__.r(__webpack_exports__);
     getRestaurants: function getRestaurants() {
       var _this = this;
 
-      this.isLoading = true; // Azzero restaurants per far ricomparire il loader e far scomparire i vecchi risultare
+      this.isLoading = true; // Azzero restaurants per far ricomparire il loader e far scomparire i vecchi risultati
 
-      this.restaurants = [];
+      this.restaurants = []; // caso: ricerca vuota e nessuna categoria selezionata
 
-      if (this.$store.state.searchInput === "") {
+      if (this.$store.state.selection.length == 0) {
         console.log("Fetching ALL restaurants...");
         axios.get("".concat(this.baseUri, "/api/restaurants")).then(function (r) {
           var data = r.data;
           _this.restaurants = data;
+          console.log(data);
+
+          if (_this.$store.state.searchInput != "") {
+            _this.restaurants = _this.filterByName(data);
+          }
+
           _this.isLoading = false;
         })["catch"](function (e) {
           console.error(e);
         });
-      } else {
-        console.log("Fetching restaurants containing string ".concat(this.$store.state.searchInput));
-        axios.get("".concat(this.baseUri, "/api/restaurants/test?search=").concat(this.$store.state.searchInput)).then(function (r) {
-          var data = r.data;
-          _this.restaurants = data;
-          _this.isLoading = false;
-        })["catch"](function (e) {
-          console.error(e);
+      } //caso categorie selezionata
+      else {
+        var selection = this.$store.state.selection;
+        var baseUri = this.baseUri; //# variabile d'appoggio
+
+        var verifiedRestaurants = []; // inizio a ciclare su ogni tipo
+
+        selection.forEach(function (type) {
+          // fetchare tutti i ristoranti per quel tipo
+          console.log("Fetching restaurants with type_id: ".concat(type));
+
+          function resolveId() {
+            return _resolveId.apply(this, arguments);
+          }
+
+          function _resolveId() {
+            _resolveId = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+              var r;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+                while (1) {
+                  switch (_context.prev = _context.next) {
+                    case 0:
+                      _context.next = 2;
+                      return axios.get("".concat(baseUri, "/api/types/").concat(type));
+
+                    case 2:
+                      r = _context.sent;
+                      return _context.abrupt("return", r.data);
+
+                    case 4:
+                    case "end":
+                      return _context.stop();
+                  }
+                }
+              }, _callee);
+            }));
+            return _resolveId.apply(this, arguments);
+          }
+
+          resolveId().then(function (data) {
+            //# ciclare su questi ristoranti, se non già presenti nell' array, pushare in variabile d'appoggio
+            console.log("ATTEMPTING TO CYCLE THROUGH DATA");
+            data.forEach(function (o) {
+              verifiedRestaurants.push(o);
+            }); //???
+
+            verifiedRestaurants = _this.getUniqueListBy(verifiedRestaurants, "id");
+            console.log("Finished Filtering");
+            console.log(verifiedRestaurants);
+
+            if (_this.$store.state.searchInput != "") {
+              _this.restaurants = _this.filterByName(verifiedRestaurants);
+            } else {
+              _this.restaurants = verifiedRestaurants;
+            }
+
+            _this.isLoading = false;
+          });
         });
       }
+    },
+    getUniqueListBy: function getUniqueListBy(myArr, prop) {
+      return myArr.filter(function (obj, pos, arr) {
+        return arr.map(function (mapObj) {
+          return mapObj[prop];
+        }).indexOf(obj[prop]) === pos;
+      });
+    },
+    filterByName: function filterByName(arr) {
+      var searchInput = this.$store.state.searchInput.trim();
+      var x = arr.filter(function (x) {
+        return x.name.toLowerCase().trim().includes(searchInput);
+      });
+      console.log(x);
+      return x;
     }
   },
   created: function created() {
     var _this2 = this;
 
     this.getRestaurants();
-    _js_app__WEBPACK_IMPORTED_MODULE_1__["eventBus"].$on("fireMethod", function () {
+    _js_app__WEBPACK_IMPORTED_MODULE_2__["eventBus"].$on("startSearch", function () {
       _this2.getRestaurants();
     });
   }
@@ -5750,6 +6002,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _js_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../js/app */ "./resources/js/app.js");
 //
 //
 //
@@ -5774,16 +6027,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Sidebar",
+  data: function data() {
+    return {
+      baseUri: "http://127.0.0.1:8000",
+      types: [],
+      selection: []
+    };
+  },
+  methods: {
+    getTypes: function getTypes() {
+      var _this = this;
+
+      console.log("Fetching all types from API...");
+      axios.get("".concat(this.baseUri, "/api/types")).then(function (r) {
+        var data = r.data;
+        _this.types = data;
+      })["catch"](function (e) {
+        console.error(e);
+      });
+    },
+    // sends selection to searchbar when requested
+    sendSelection: function sendSelection() {
+      this.$store.commit("changeSelection", this.selection);
+    }
+  },
   mounted: function mounted() {
+    var _this2 = this;
+
     console.log("Component mounted.");
+    this.getTypes();
+    _js_app__WEBPACK_IMPORTED_MODULE_0__["eventBus"].$on("requestSelection", function () {
+      _this2.sendSelection();
+    });
   }
 });
 
@@ -5850,7 +6128,8 @@ __webpack_require__.r(__webpack_exports__);
     startSearch: function startSearch() {
       console.log("Starting search...");
       this.$store.commit("changeSearchInput", this.searchInput);
-      _js_app__WEBPACK_IMPORTED_MODULE_0__["eventBus"].$emit("fireMethod");
+      _js_app__WEBPACK_IMPORTED_MODULE_0__["eventBus"].$emit("requestSelection");
+      _js_app__WEBPACK_IMPORTED_MODULE_0__["eventBus"].$emit("startSearch");
     }
   },
   mounted: function mounted() {
@@ -10885,25 +11164,6 @@ defineJQueryPlugin(Toast);
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/restaurants/Cart.vue?vue&type=style&index=0&id=d059fab8&lang=scss&scoped=true&":
-/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/restaurants/Cart.vue?vue&type=style&index=0&id=d059fab8&lang=scss&scoped=true& ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "#main-row[data-v-d059fab8] {\n  position: fixed;\n}", ""]);
-
-// exports
-
-
-/***/ }),
-
 /***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/restaurants/Loader.vue?vue&type=style&index=0&id=6acb09d2&lang=scss&scoped=true&":
 /*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/restaurants/Loader.vue?vue&type=style&index=0&id=6acb09d2&lang=scss&scoped=true& ***!
@@ -10954,7 +11214,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".card[data-v-3b843080]:hover {\n  cursor: pointer;\n}\nimg[data-v-3b843080] {\n  -o-object-fit: cover;\n     object-fit: cover;\n  width: 100px;\n  height: 100px;\n}", ""]);
+exports.push([module.i, "img[data-v-3b843080] {\n  -o-object-fit: cover;\n     object-fit: cover;\n  width: 100px;\n  height: 100px;\n}", ""]);
 
 // exports
 
@@ -41979,6 +42239,771 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
+/***/ "./node_modules/regenerator-runtime/runtime.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/regenerator-runtime/runtime.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Copyright (c) 2014-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+var runtime = (function (exports) {
+  "use strict";
+
+  var Op = Object.prototype;
+  var hasOwn = Op.hasOwnProperty;
+  var undefined; // More compressible than void 0.
+  var $Symbol = typeof Symbol === "function" ? Symbol : {};
+  var iteratorSymbol = $Symbol.iterator || "@@iterator";
+  var asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator";
+  var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
+
+  function define(obj, key, value) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+    return obj[key];
+  }
+  try {
+    // IE 8 has a broken Object.defineProperty that only works on DOM objects.
+    define({}, "");
+  } catch (err) {
+    define = function(obj, key, value) {
+      return obj[key] = value;
+    };
+  }
+
+  function wrap(innerFn, outerFn, self, tryLocsList) {
+    // If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.
+    var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator;
+    var generator = Object.create(protoGenerator.prototype);
+    var context = new Context(tryLocsList || []);
+
+    // The ._invoke method unifies the implementations of the .next,
+    // .throw, and .return methods.
+    generator._invoke = makeInvokeMethod(innerFn, self, context);
+
+    return generator;
+  }
+  exports.wrap = wrap;
+
+  // Try/catch helper to minimize deoptimizations. Returns a completion
+  // record like context.tryEntries[i].completion. This interface could
+  // have been (and was previously) designed to take a closure to be
+  // invoked without arguments, but in all the cases we care about we
+  // already have an existing method we want to call, so there's no need
+  // to create a new function object. We can even get away with assuming
+  // the method takes exactly one argument, since that happens to be true
+  // in every case, so we don't have to touch the arguments object. The
+  // only additional allocation required is the completion record, which
+  // has a stable shape and so hopefully should be cheap to allocate.
+  function tryCatch(fn, obj, arg) {
+    try {
+      return { type: "normal", arg: fn.call(obj, arg) };
+    } catch (err) {
+      return { type: "throw", arg: err };
+    }
+  }
+
+  var GenStateSuspendedStart = "suspendedStart";
+  var GenStateSuspendedYield = "suspendedYield";
+  var GenStateExecuting = "executing";
+  var GenStateCompleted = "completed";
+
+  // Returning this object from the innerFn has the same effect as
+  // breaking out of the dispatch switch statement.
+  var ContinueSentinel = {};
+
+  // Dummy constructor functions that we use as the .constructor and
+  // .constructor.prototype properties for functions that return Generator
+  // objects. For full spec compliance, you may wish to configure your
+  // minifier not to mangle the names of these two functions.
+  function Generator() {}
+  function GeneratorFunction() {}
+  function GeneratorFunctionPrototype() {}
+
+  // This is a polyfill for %IteratorPrototype% for environments that
+  // don't natively support it.
+  var IteratorPrototype = {};
+  define(IteratorPrototype, iteratorSymbol, function () {
+    return this;
+  });
+
+  var getProto = Object.getPrototypeOf;
+  var NativeIteratorPrototype = getProto && getProto(getProto(values([])));
+  if (NativeIteratorPrototype &&
+      NativeIteratorPrototype !== Op &&
+      hasOwn.call(NativeIteratorPrototype, iteratorSymbol)) {
+    // This environment has a native %IteratorPrototype%; use it instead
+    // of the polyfill.
+    IteratorPrototype = NativeIteratorPrototype;
+  }
+
+  var Gp = GeneratorFunctionPrototype.prototype =
+    Generator.prototype = Object.create(IteratorPrototype);
+  GeneratorFunction.prototype = GeneratorFunctionPrototype;
+  define(Gp, "constructor", GeneratorFunctionPrototype);
+  define(GeneratorFunctionPrototype, "constructor", GeneratorFunction);
+  GeneratorFunction.displayName = define(
+    GeneratorFunctionPrototype,
+    toStringTagSymbol,
+    "GeneratorFunction"
+  );
+
+  // Helper for defining the .next, .throw, and .return methods of the
+  // Iterator interface in terms of a single ._invoke method.
+  function defineIteratorMethods(prototype) {
+    ["next", "throw", "return"].forEach(function(method) {
+      define(prototype, method, function(arg) {
+        return this._invoke(method, arg);
+      });
+    });
+  }
+
+  exports.isGeneratorFunction = function(genFun) {
+    var ctor = typeof genFun === "function" && genFun.constructor;
+    return ctor
+      ? ctor === GeneratorFunction ||
+        // For the native GeneratorFunction constructor, the best we can
+        // do is to check its .name property.
+        (ctor.displayName || ctor.name) === "GeneratorFunction"
+      : false;
+  };
+
+  exports.mark = function(genFun) {
+    if (Object.setPrototypeOf) {
+      Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
+    } else {
+      genFun.__proto__ = GeneratorFunctionPrototype;
+      define(genFun, toStringTagSymbol, "GeneratorFunction");
+    }
+    genFun.prototype = Object.create(Gp);
+    return genFun;
+  };
+
+  // Within the body of any async function, `await x` is transformed to
+  // `yield regeneratorRuntime.awrap(x)`, so that the runtime can test
+  // `hasOwn.call(value, "__await")` to determine if the yielded value is
+  // meant to be awaited.
+  exports.awrap = function(arg) {
+    return { __await: arg };
+  };
+
+  function AsyncIterator(generator, PromiseImpl) {
+    function invoke(method, arg, resolve, reject) {
+      var record = tryCatch(generator[method], generator, arg);
+      if (record.type === "throw") {
+        reject(record.arg);
+      } else {
+        var result = record.arg;
+        var value = result.value;
+        if (value &&
+            typeof value === "object" &&
+            hasOwn.call(value, "__await")) {
+          return PromiseImpl.resolve(value.__await).then(function(value) {
+            invoke("next", value, resolve, reject);
+          }, function(err) {
+            invoke("throw", err, resolve, reject);
+          });
+        }
+
+        return PromiseImpl.resolve(value).then(function(unwrapped) {
+          // When a yielded Promise is resolved, its final value becomes
+          // the .value of the Promise<{value,done}> result for the
+          // current iteration.
+          result.value = unwrapped;
+          resolve(result);
+        }, function(error) {
+          // If a rejected Promise was yielded, throw the rejection back
+          // into the async generator function so it can be handled there.
+          return invoke("throw", error, resolve, reject);
+        });
+      }
+    }
+
+    var previousPromise;
+
+    function enqueue(method, arg) {
+      function callInvokeWithMethodAndArg() {
+        return new PromiseImpl(function(resolve, reject) {
+          invoke(method, arg, resolve, reject);
+        });
+      }
+
+      return previousPromise =
+        // If enqueue has been called before, then we want to wait until
+        // all previous Promises have been resolved before calling invoke,
+        // so that results are always delivered in the correct order. If
+        // enqueue has not been called before, then it is important to
+        // call invoke immediately, without waiting on a callback to fire,
+        // so that the async generator function has the opportunity to do
+        // any necessary setup in a predictable way. This predictability
+        // is why the Promise constructor synchronously invokes its
+        // executor callback, and why async functions synchronously
+        // execute code before the first await. Since we implement simple
+        // async functions in terms of async generators, it is especially
+        // important to get this right, even though it requires care.
+        previousPromise ? previousPromise.then(
+          callInvokeWithMethodAndArg,
+          // Avoid propagating failures to Promises returned by later
+          // invocations of the iterator.
+          callInvokeWithMethodAndArg
+        ) : callInvokeWithMethodAndArg();
+    }
+
+    // Define the unified helper method that is used to implement .next,
+    // .throw, and .return (see defineIteratorMethods).
+    this._invoke = enqueue;
+  }
+
+  defineIteratorMethods(AsyncIterator.prototype);
+  define(AsyncIterator.prototype, asyncIteratorSymbol, function () {
+    return this;
+  });
+  exports.AsyncIterator = AsyncIterator;
+
+  // Note that simple async functions are implemented on top of
+  // AsyncIterator objects; they just return a Promise for the value of
+  // the final result produced by the iterator.
+  exports.async = function(innerFn, outerFn, self, tryLocsList, PromiseImpl) {
+    if (PromiseImpl === void 0) PromiseImpl = Promise;
+
+    var iter = new AsyncIterator(
+      wrap(innerFn, outerFn, self, tryLocsList),
+      PromiseImpl
+    );
+
+    return exports.isGeneratorFunction(outerFn)
+      ? iter // If outerFn is a generator, return the full iterator.
+      : iter.next().then(function(result) {
+          return result.done ? result.value : iter.next();
+        });
+  };
+
+  function makeInvokeMethod(innerFn, self, context) {
+    var state = GenStateSuspendedStart;
+
+    return function invoke(method, arg) {
+      if (state === GenStateExecuting) {
+        throw new Error("Generator is already running");
+      }
+
+      if (state === GenStateCompleted) {
+        if (method === "throw") {
+          throw arg;
+        }
+
+        // Be forgiving, per 25.3.3.3.3 of the spec:
+        // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorresume
+        return doneResult();
+      }
+
+      context.method = method;
+      context.arg = arg;
+
+      while (true) {
+        var delegate = context.delegate;
+        if (delegate) {
+          var delegateResult = maybeInvokeDelegate(delegate, context);
+          if (delegateResult) {
+            if (delegateResult === ContinueSentinel) continue;
+            return delegateResult;
+          }
+        }
+
+        if (context.method === "next") {
+          // Setting context._sent for legacy support of Babel's
+          // function.sent implementation.
+          context.sent = context._sent = context.arg;
+
+        } else if (context.method === "throw") {
+          if (state === GenStateSuspendedStart) {
+            state = GenStateCompleted;
+            throw context.arg;
+          }
+
+          context.dispatchException(context.arg);
+
+        } else if (context.method === "return") {
+          context.abrupt("return", context.arg);
+        }
+
+        state = GenStateExecuting;
+
+        var record = tryCatch(innerFn, self, context);
+        if (record.type === "normal") {
+          // If an exception is thrown from innerFn, we leave state ===
+          // GenStateExecuting and loop back for another invocation.
+          state = context.done
+            ? GenStateCompleted
+            : GenStateSuspendedYield;
+
+          if (record.arg === ContinueSentinel) {
+            continue;
+          }
+
+          return {
+            value: record.arg,
+            done: context.done
+          };
+
+        } else if (record.type === "throw") {
+          state = GenStateCompleted;
+          // Dispatch the exception by looping back around to the
+          // context.dispatchException(context.arg) call above.
+          context.method = "throw";
+          context.arg = record.arg;
+        }
+      }
+    };
+  }
+
+  // Call delegate.iterator[context.method](context.arg) and handle the
+  // result, either by returning a { value, done } result from the
+  // delegate iterator, or by modifying context.method and context.arg,
+  // setting context.delegate to null, and returning the ContinueSentinel.
+  function maybeInvokeDelegate(delegate, context) {
+    var method = delegate.iterator[context.method];
+    if (method === undefined) {
+      // A .throw or .return when the delegate iterator has no .throw
+      // method always terminates the yield* loop.
+      context.delegate = null;
+
+      if (context.method === "throw") {
+        // Note: ["return"] must be used for ES3 parsing compatibility.
+        if (delegate.iterator["return"]) {
+          // If the delegate iterator has a return method, give it a
+          // chance to clean up.
+          context.method = "return";
+          context.arg = undefined;
+          maybeInvokeDelegate(delegate, context);
+
+          if (context.method === "throw") {
+            // If maybeInvokeDelegate(context) changed context.method from
+            // "return" to "throw", let that override the TypeError below.
+            return ContinueSentinel;
+          }
+        }
+
+        context.method = "throw";
+        context.arg = new TypeError(
+          "The iterator does not provide a 'throw' method");
+      }
+
+      return ContinueSentinel;
+    }
+
+    var record = tryCatch(method, delegate.iterator, context.arg);
+
+    if (record.type === "throw") {
+      context.method = "throw";
+      context.arg = record.arg;
+      context.delegate = null;
+      return ContinueSentinel;
+    }
+
+    var info = record.arg;
+
+    if (! info) {
+      context.method = "throw";
+      context.arg = new TypeError("iterator result is not an object");
+      context.delegate = null;
+      return ContinueSentinel;
+    }
+
+    if (info.done) {
+      // Assign the result of the finished delegate to the temporary
+      // variable specified by delegate.resultName (see delegateYield).
+      context[delegate.resultName] = info.value;
+
+      // Resume execution at the desired location (see delegateYield).
+      context.next = delegate.nextLoc;
+
+      // If context.method was "throw" but the delegate handled the
+      // exception, let the outer generator proceed normally. If
+      // context.method was "next", forget context.arg since it has been
+      // "consumed" by the delegate iterator. If context.method was
+      // "return", allow the original .return call to continue in the
+      // outer generator.
+      if (context.method !== "return") {
+        context.method = "next";
+        context.arg = undefined;
+      }
+
+    } else {
+      // Re-yield the result returned by the delegate method.
+      return info;
+    }
+
+    // The delegate iterator is finished, so forget it and continue with
+    // the outer generator.
+    context.delegate = null;
+    return ContinueSentinel;
+  }
+
+  // Define Generator.prototype.{next,throw,return} in terms of the
+  // unified ._invoke helper method.
+  defineIteratorMethods(Gp);
+
+  define(Gp, toStringTagSymbol, "Generator");
+
+  // A Generator should always return itself as the iterator object when the
+  // @@iterator function is called on it. Some browsers' implementations of the
+  // iterator prototype chain incorrectly implement this, causing the Generator
+  // object to not be returned from this call. This ensures that doesn't happen.
+  // See https://github.com/facebook/regenerator/issues/274 for more details.
+  define(Gp, iteratorSymbol, function() {
+    return this;
+  });
+
+  define(Gp, "toString", function() {
+    return "[object Generator]";
+  });
+
+  function pushTryEntry(locs) {
+    var entry = { tryLoc: locs[0] };
+
+    if (1 in locs) {
+      entry.catchLoc = locs[1];
+    }
+
+    if (2 in locs) {
+      entry.finallyLoc = locs[2];
+      entry.afterLoc = locs[3];
+    }
+
+    this.tryEntries.push(entry);
+  }
+
+  function resetTryEntry(entry) {
+    var record = entry.completion || {};
+    record.type = "normal";
+    delete record.arg;
+    entry.completion = record;
+  }
+
+  function Context(tryLocsList) {
+    // The root entry object (effectively a try statement without a catch
+    // or a finally block) gives us a place to store values thrown from
+    // locations where there is no enclosing try statement.
+    this.tryEntries = [{ tryLoc: "root" }];
+    tryLocsList.forEach(pushTryEntry, this);
+    this.reset(true);
+  }
+
+  exports.keys = function(object) {
+    var keys = [];
+    for (var key in object) {
+      keys.push(key);
+    }
+    keys.reverse();
+
+    // Rather than returning an object with a next method, we keep
+    // things simple and return the next function itself.
+    return function next() {
+      while (keys.length) {
+        var key = keys.pop();
+        if (key in object) {
+          next.value = key;
+          next.done = false;
+          return next;
+        }
+      }
+
+      // To avoid creating an additional object, we just hang the .value
+      // and .done properties off the next function object itself. This
+      // also ensures that the minifier will not anonymize the function.
+      next.done = true;
+      return next;
+    };
+  };
+
+  function values(iterable) {
+    if (iterable) {
+      var iteratorMethod = iterable[iteratorSymbol];
+      if (iteratorMethod) {
+        return iteratorMethod.call(iterable);
+      }
+
+      if (typeof iterable.next === "function") {
+        return iterable;
+      }
+
+      if (!isNaN(iterable.length)) {
+        var i = -1, next = function next() {
+          while (++i < iterable.length) {
+            if (hasOwn.call(iterable, i)) {
+              next.value = iterable[i];
+              next.done = false;
+              return next;
+            }
+          }
+
+          next.value = undefined;
+          next.done = true;
+
+          return next;
+        };
+
+        return next.next = next;
+      }
+    }
+
+    // Return an iterator with no values.
+    return { next: doneResult };
+  }
+  exports.values = values;
+
+  function doneResult() {
+    return { value: undefined, done: true };
+  }
+
+  Context.prototype = {
+    constructor: Context,
+
+    reset: function(skipTempReset) {
+      this.prev = 0;
+      this.next = 0;
+      // Resetting context._sent for legacy support of Babel's
+      // function.sent implementation.
+      this.sent = this._sent = undefined;
+      this.done = false;
+      this.delegate = null;
+
+      this.method = "next";
+      this.arg = undefined;
+
+      this.tryEntries.forEach(resetTryEntry);
+
+      if (!skipTempReset) {
+        for (var name in this) {
+          // Not sure about the optimal order of these conditions:
+          if (name.charAt(0) === "t" &&
+              hasOwn.call(this, name) &&
+              !isNaN(+name.slice(1))) {
+            this[name] = undefined;
+          }
+        }
+      }
+    },
+
+    stop: function() {
+      this.done = true;
+
+      var rootEntry = this.tryEntries[0];
+      var rootRecord = rootEntry.completion;
+      if (rootRecord.type === "throw") {
+        throw rootRecord.arg;
+      }
+
+      return this.rval;
+    },
+
+    dispatchException: function(exception) {
+      if (this.done) {
+        throw exception;
+      }
+
+      var context = this;
+      function handle(loc, caught) {
+        record.type = "throw";
+        record.arg = exception;
+        context.next = loc;
+
+        if (caught) {
+          // If the dispatched exception was caught by a catch block,
+          // then let that catch block handle the exception normally.
+          context.method = "next";
+          context.arg = undefined;
+        }
+
+        return !! caught;
+      }
+
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        var record = entry.completion;
+
+        if (entry.tryLoc === "root") {
+          // Exception thrown outside of any try block that could handle
+          // it, so set the completion value of the entire function to
+          // throw the exception.
+          return handle("end");
+        }
+
+        if (entry.tryLoc <= this.prev) {
+          var hasCatch = hasOwn.call(entry, "catchLoc");
+          var hasFinally = hasOwn.call(entry, "finallyLoc");
+
+          if (hasCatch && hasFinally) {
+            if (this.prev < entry.catchLoc) {
+              return handle(entry.catchLoc, true);
+            } else if (this.prev < entry.finallyLoc) {
+              return handle(entry.finallyLoc);
+            }
+
+          } else if (hasCatch) {
+            if (this.prev < entry.catchLoc) {
+              return handle(entry.catchLoc, true);
+            }
+
+          } else if (hasFinally) {
+            if (this.prev < entry.finallyLoc) {
+              return handle(entry.finallyLoc);
+            }
+
+          } else {
+            throw new Error("try statement without catch or finally");
+          }
+        }
+      }
+    },
+
+    abrupt: function(type, arg) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc <= this.prev &&
+            hasOwn.call(entry, "finallyLoc") &&
+            this.prev < entry.finallyLoc) {
+          var finallyEntry = entry;
+          break;
+        }
+      }
+
+      if (finallyEntry &&
+          (type === "break" ||
+           type === "continue") &&
+          finallyEntry.tryLoc <= arg &&
+          arg <= finallyEntry.finallyLoc) {
+        // Ignore the finally entry if control is not jumping to a
+        // location outside the try/catch block.
+        finallyEntry = null;
+      }
+
+      var record = finallyEntry ? finallyEntry.completion : {};
+      record.type = type;
+      record.arg = arg;
+
+      if (finallyEntry) {
+        this.method = "next";
+        this.next = finallyEntry.finallyLoc;
+        return ContinueSentinel;
+      }
+
+      return this.complete(record);
+    },
+
+    complete: function(record, afterLoc) {
+      if (record.type === "throw") {
+        throw record.arg;
+      }
+
+      if (record.type === "break" ||
+          record.type === "continue") {
+        this.next = record.arg;
+      } else if (record.type === "return") {
+        this.rval = this.arg = record.arg;
+        this.method = "return";
+        this.next = "end";
+      } else if (record.type === "normal" && afterLoc) {
+        this.next = afterLoc;
+      }
+
+      return ContinueSentinel;
+    },
+
+    finish: function(finallyLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.finallyLoc === finallyLoc) {
+          this.complete(entry.completion, entry.afterLoc);
+          resetTryEntry(entry);
+          return ContinueSentinel;
+        }
+      }
+    },
+
+    "catch": function(tryLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc === tryLoc) {
+          var record = entry.completion;
+          if (record.type === "throw") {
+            var thrown = record.arg;
+            resetTryEntry(entry);
+          }
+          return thrown;
+        }
+      }
+
+      // The context.catch method must only be called with a location
+      // argument that corresponds to a known catch block.
+      throw new Error("illegal catch attempt");
+    },
+
+    delegateYield: function(iterable, resultName, nextLoc) {
+      this.delegate = {
+        iterator: values(iterable),
+        resultName: resultName,
+        nextLoc: nextLoc
+      };
+
+      if (this.method === "next") {
+        // Deliberately forget the last sent value so that we don't
+        // accidentally pass it on to the delegate.
+        this.arg = undefined;
+      }
+
+      return ContinueSentinel;
+    }
+  };
+
+  // Regardless of whether this script is executing as a CommonJS module
+  // or not, return the runtime object so that we can declare the variable
+  // regeneratorRuntime in the outer scope, which allows this module to be
+  // injected easily by `bin/regenerator --include-runtime script.js`.
+  return exports;
+
+}(
+  // If this script is executing as a CommonJS module, use module.exports
+  // as the regeneratorRuntime namespace. Otherwise create a new empty
+  // object. Either way, the resulting object will be used to initialize
+  // the regeneratorRuntime variable at the top of this file.
+   true ? module.exports : undefined
+));
+
+try {
+  regeneratorRuntime = runtime;
+} catch (accidentalStrictMode) {
+  // This module should not be running in strict mode, so the above
+  // assignment should always work unless something is misconfigured. Just
+  // in case runtime.js accidentally runs in strict mode, in modern engines
+  // we can explicitly access globalThis. In older engines we can escape
+  // strict mode using a global Function call. This could conceivably fail
+  // if a Content Security Policy forbids using Function, but in that case
+  // the proper solution is to fix the accidental strict mode problem. If
+  // you've misconfigured your bundler to force strict mode and applied a
+  // CSP to forbid Function, and you're not willing to fix either of those
+  // problems, please detail your unique predicament in a GitHub issue.
+  if (typeof globalThis === "object") {
+    globalThis.regeneratorRuntime = runtime;
+  } else {
+    Function("r", "regeneratorRuntime = r")(runtime);
+  }
+}
+
+
+/***/ }),
+
 /***/ "./node_modules/setimmediate/setImmediate.js":
 /*!***************************************************!*\
   !*** ./node_modules/setimmediate/setImmediate.js ***!
@@ -42174,36 +43199,6 @@ process.umask = function() { return 0; };
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js"), __webpack_require__(/*! ./../process/browser.js */ "./node_modules/process/browser.js")))
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/restaurants/Cart.vue?vue&type=style&index=0&id=d059fab8&lang=scss&scoped=true&":
-/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/restaurants/Cart.vue?vue&type=style&index=0&id=d059fab8&lang=scss&scoped=true& ***!
-  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../../../node_modules/css-loader!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--7-2!../../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../../node_modules/vue-loader/lib??vue-loader-options!./Cart.vue?vue&type=style&index=0&id=d059fab8&lang=scss&scoped=true& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/restaurants/Cart.vue?vue&type=style&index=0&id=d059fab8&lang=scss&scoped=true&");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
 
 /***/ }),
 
@@ -42943,44 +43938,51 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    { staticClass: "col-4 border p-5", attrs: { id: "main-row" } },
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _vm._l(_vm.dishes, function (dish, i) {
+        return _c("div", { key: i }, [
+          _c("p", [_vm._v("€" + _vm._s(dish.price) + " " + _vm._s(dish.name))]),
+        ])
+      }),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-12 d-flex justify-content-between" }, [
+        _c("span", [_vm._v("Subtotale")]),
+        _vm._v(" "),
+        _c("span", [_vm._v("€" + _vm._s(_vm.subTotal))]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-12 d-flex justify-content-between" }, [
+        _c("span", [_vm._v("Spese di consegna")]),
+        _vm._v(" "),
+        _c("span", [_vm._v("€" + _vm._s(_vm.restaurant.delivery_fee))]),
+      ]),
+      _vm._v(" "),
+      _c("hr", { staticClass: "mt-2 mb-2" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-12 d-flex justify-content-between" }, [
+        _c("span", [_vm._v("Total")]),
+        _vm._v(" "),
+        _c("span", [_vm._v("€" + _vm._s(_vm.total))]),
+      ]),
+    ],
+    2
+  )
 }
 var staticRenderFns = [
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "col-3 border p-5", attrs: { id: "main-row" } },
-      [
-        _c("div", { staticClass: "col-12" }, [
-          _c("h4", [_vm._v("Il tuo ordine")]),
-        ]),
-        _vm._v(" "),
-        _c("hr"),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-12 d-flex justify-content-between" }, [
-          _c("span", [_vm._v("subtotale")]),
-          _vm._v(" "),
-          _c("span", [_vm._v("12.90$")]),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-12 d-flex justify-content-between" }, [
-          _c("span", [_vm._v("spese di consegna")]),
-          _vm._v(" "),
-          _c("span", [_vm._v("2.50$")]),
-        ]),
-        _vm._v(" "),
-        _c("hr", { staticClass: "mt-2 mb-2" }),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-12 d-flex justify-content-between" }, [
-          _c("span", [_vm._v("Total")]),
-          _vm._v(" "),
-          _c("span", [_vm._v("124.50$")]),
-        ]),
-      ]
-    )
+    return _c("div", { staticClass: "col-12" }, [
+      _c("h4", [_vm._v("Il tuo ordine")]),
+    ])
   },
 ]
 render._withStripped = true
@@ -43163,39 +44165,46 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "row" },
+    { staticClass: "col-8 d-flex flex-wrap" },
     _vm._l(_vm.dishes, function (dish, i) {
       return _c(
         "div",
-        {
-          key: i,
-          staticClass: "card m-3 shadow",
-          staticStyle: { "max-width": "500px" },
-        },
+        { key: i, staticClass: "card col-6", staticStyle: { width: "18rem" } },
         [
-          _c("div", { staticClass: "row g-0" }, [
-            _c("div", { staticClass: "col-4" }, [
-              _c("img", {
-                attrs: {
-                  src: dish.picture
-                    ? "/storage/" + dish.picture
-                    : "/img/placeholder.svg",
-                  alt: "",
-                },
-              }),
+          _c("img", {
+            attrs: {
+              src: dish.picture
+                ? "/storage/" + dish.picture
+                : "/img/placeholder.svg",
+              alt: "",
+            },
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c("h5", { staticClass: "card-title" }, [
+              _vm._v(_vm._s(dish.name)),
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-8" }, [
-              _c("div", { staticClass: "card-body" }, [
-                _c("h5", { staticClass: "card-title" }, [
-                  _vm._v(_vm._s(dish.name)),
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "card-text" }, [
-                  _vm._v(_vm._s(dish.description)),
-                ]),
-              ]),
+            _c("p", { staticClass: "card-text" }, [
+              _vm._v(_vm._s(dish.description)),
             ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "card-text" }, [
+              _vm._v("€" + _vm._s(dish.price)),
+            ]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary",
+                on: {
+                  click: function ($event) {
+                    return _vm.addToCart(dish.id, dish.price)
+                  },
+                },
+              },
+              [_vm._v("\n                Add\n            ")]
+            ),
           ]),
         ]
       )
@@ -43279,47 +44288,72 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container-fluid" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-12" }, [_vm._v("Categorie:")]),
+      _vm._v(" "),
+      _c(
+        "div",
+        _vm._l(_vm.types, function (type, i) {
+          return _c("div", { key: i }, [
+            _c("label", { attrs: { for: type.name } }, [
+              _vm._v(_vm._s(type.name)),
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.selection,
+                  expression: "selection",
+                },
+              ],
+              attrs: { type: "checkbox", name: type.name, id: type.name },
+              domProps: {
+                value: type.id,
+                checked: Array.isArray(_vm.selection)
+                  ? _vm._i(_vm.selection, type.id) > -1
+                  : _vm.selection,
+              },
+              on: {
+                change: function ($event) {
+                  var $$a = _vm.selection,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = type.id,
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 && (_vm.selection = $$a.concat([$$v]))
+                    } else {
+                      $$i > -1 &&
+                        (_vm.selection = $$a
+                          .slice(0, $$i)
+                          .concat($$a.slice($$i + 1)))
+                    }
+                  } else {
+                    _vm.selection = $$c
+                  }
+                },
+              },
+            }),
+          ])
+        }),
+        0
+      ),
+    ]),
+  ])
 }
 var staticRenderFns = [
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container-fluid" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("h4", [_vm._v("This is the sidebar component :)")]),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [_vm._v("Order by (menù dropdown):")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _vm._v("\n        Regimi alimentari:\n        "),
-        _c("div", [
-          _c("ul", [
-            _c("li", [_vm._v("gluten free")]),
-            _vm._v(" "),
-            _c("li", [_vm._v("surgelato")]),
-            _vm._v(" "),
-            _c("li", [_vm._v("vegano")]),
-            _vm._v(" "),
-            _c("li", [_vm._v("vegetariano")]),
-          ]),
-        ]),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _vm._v("\n        Categorie:\n        "),
-        _c("div", [
-          _c("ul", [
-            _c("li", [_vm._v("sushi")]),
-            _vm._v(" "),
-            _c("li", [_vm._v("pizza")]),
-            _vm._v(" "),
-            _c("li", [_vm._v("pesce")]),
-          ]),
-        ]),
-      ]),
+    return _c("div", { staticClass: "row" }, [
+      _c("h4", [_vm._v("This is the sidebar component :)")]),
     ])
   },
 ]
@@ -57147,9 +58181,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Cart_vue_vue_type_template_id_d059fab8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Cart.vue?vue&type=template&id=d059fab8&scoped=true& */ "./resources/js/components/restaurants/Cart.vue?vue&type=template&id=d059fab8&scoped=true&");
 /* harmony import */ var _Cart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Cart.vue?vue&type=script&lang=js& */ "./resources/js/components/restaurants/Cart.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _Cart_vue_vue_type_style_index_0_id_d059fab8_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Cart.vue?vue&type=style&index=0&id=d059fab8&lang=scss&scoped=true& */ "./resources/js/components/restaurants/Cart.vue?vue&type=style&index=0&id=d059fab8&lang=scss&scoped=true&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -57157,7 +58189,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _Cart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _Cart_vue_vue_type_template_id_d059fab8_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
   _Cart_vue_vue_type_template_id_d059fab8_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -57186,22 +58218,6 @@ component.options.__file = "resources/js/components/restaurants/Cart.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Cart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Cart.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/restaurants/Cart.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Cart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/restaurants/Cart.vue?vue&type=style&index=0&id=d059fab8&lang=scss&scoped=true&":
-/*!****************************************************************************************************************!*\
-  !*** ./resources/js/components/restaurants/Cart.vue?vue&type=style&index=0&id=d059fab8&lang=scss&scoped=true& ***!
-  \****************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Cart_vue_vue_type_style_index_0_id_d059fab8_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--7-2!../../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../../node_modules/vue-loader/lib??vue-loader-options!./Cart.vue?vue&type=style&index=0&id=d059fab8&lang=scss&scoped=true& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/restaurants/Cart.vue?vue&type=style&index=0&id=d059fab8&lang=scss&scoped=true&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Cart_vue_vue_type_style_index_0_id_d059fab8_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Cart_vue_vue_type_style_index_0_id_d059fab8_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Cart_vue_vue_type_style_index_0_id_d059fab8_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Cart_vue_vue_type_style_index_0_id_d059fab8_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-
 
 /***/ }),
 
@@ -57777,12 +58793,17 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: {
-    searchInput: ''
+    searchInput: '',
+    selection: []
   },
   getters: {},
   mutations: {
     changeSearchInput: function changeSearchInput(state, payload) {
       state.searchInput = payload;
+    },
+    changeSelection: function changeSelection(state, payload) {
+      console.log('Changing selection...');
+      state.selection = payload;
     }
   },
   actions: {}
@@ -57808,8 +58829,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\laravel\deliveboo-prjteam4\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\laravel\deliveboo-prjteam4\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Laravel\deliveboo-prjteam4\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Laravel\deliveboo-prjteam4\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

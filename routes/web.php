@@ -22,6 +22,7 @@ Route::get('restaurants/dashboard', 'RestaurantController@dashboard')->name('res
 
 Route::resource('restaurants', 'RestaurantController');
 Route::resource('dishes', 'DishController');
+Route::get('orders/statistic', 'OrderController@statistic')->name('orders.statistic');
 Route::resource('orders', 'OrderController');
 
 //! Se vi segna un errore su Auth non fateci caso
