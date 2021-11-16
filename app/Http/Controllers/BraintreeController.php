@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\Dish;
 
 class BraintreeController extends Controller
 {
@@ -20,10 +21,6 @@ class BraintreeController extends Controller
 
         $clientToken = $gateway->clientToken()->generate();
 
-
-
-
-
         if ($request->input('nonce') != null) {
             $request->validate([
                 'name' => 'required',
@@ -31,7 +28,6 @@ class BraintreeController extends Controller
                 'phone' => 'required',
                 'address' => 'required',
                 'email' => 'email:rfc',
-                'amount' => 'required',
             ]);
 
             //# Storo l'ordine
@@ -40,9 +36,20 @@ class BraintreeController extends Controller
             $address = $request->input('address');
             $phone = $request->input('phone');
             $email = $request->input('email');
-            $amount = $request->input('amount');
             $arr_id = $request->input('arr_id');
             $arr_quant = $request->input('arr_quant');
+            $delivery_fee = $request->input('delivery_fee');
+            //# Recupero tutti i piatti dell'ordine per calcolarne il totale
+            $dishes = Dish::findMany($arr_id);
+            $arrayLength = count($arr_id);
+            $amount = 0;
+            for ($i = 0; $i < $arrayLength; $i++) {
+                $amount +=  $dishes[$i]->price * $arr_quant[$i];
+            }
+            $amount += $delivery_fee;
+
+            //#
+
 
             $newOrder = new Order();
             $newOrder->status = 1;
@@ -55,7 +62,7 @@ class BraintreeController extends Controller
             $newOrder->save();
 
             // // storo l'array di IDs
-            $arrayLength = count($arr_id);
+
 
             // Ciclo una volta per ogni piatto contenuto nell'ordine, salvo la relazione e la sua quantità
             for ($i = 0; $i < $arrayLength; $i++) {
@@ -67,6 +74,7 @@ class BraintreeController extends Controller
 
             //#
 
+
             var_dump($request->input('nonce'));
             $nonceFromTheClient = $request->input('nonce');
             $gateway->transaction()->sale([
@@ -76,9 +84,14 @@ class BraintreeController extends Controller
                     'submitForSettlement' => True
                 ]
             ]);
-            return view('orders.dashboard');
+            return view('orders.success');
         }
 
         return view('orders.braintree', ['token' => $clientToken]);
+    }
+
+    public function success(Request $request)
+    {
+        return view('orders.success');
     }
 }
