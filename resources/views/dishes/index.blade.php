@@ -18,12 +18,14 @@
             </div>
         @endif
         {{-- PRINT DISHES --}}
-        @forelse($dishes as $dish)
-            <div class="row">
+        <div id="dish-container" class="row">
+            @forelse($dishes as $dish)
                 <div class="col-md-3">
                     <div class="card m-3" style="width: 18rem">
-                        <img class="img-fluid" src="{{ asset('storage/' . $dish->picture) }}"
+
+                        <img class="dish-thumb" src="{{ asset('storage/' . $dish->picture) }}"
                             alt="{{ $dish->name }}">
+
                         <div class="card-body  d-flex align-items-center justify-content-between">
                             <h5>Nome piatto: <strong>{{ $dish->name }}</strong></h5>
                             <a href="{{ route('dishes.edit', $dish->id) }}" class="btn my-2">
@@ -49,12 +51,12 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        @empty
-            <div>
-                <h3 class="text-center">Non ci sono piatti</h3>
-            </div>
-        @endforelse
+            @empty
+                <div>
+                    <h3 class="text-center">Non ci sono piatti</h3>
+                </div>
+            @endforelse
+        </div>
+
     </section>
 @endsection
-    
