@@ -16,6 +16,8 @@ class Dish extends Model
 
     public function restaurant()
     {
-        return $this->belongsToMany(Restaurant::class);
+        // return $this->belongsToMany(Restaurant::class);
+        return $this->belongsToMany('App\Models\Restaurant');
+
     }
 }

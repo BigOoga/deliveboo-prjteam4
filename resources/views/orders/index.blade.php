@@ -24,7 +24,7 @@
                     {{-- tasto edit --}}
                     <li class="mb-2"><a href="{{route('orders.edit', $order->id)}}" class="btn btn-outline-warning">modifica</a></li>
                     {{-- tasto delete --}}
-                    <form action="{{ route('orders.destroy', $order)}}"
+                    <form action="{{ route('orders.destroy', $order->id)}}"
                     method="post">
                         @csrf
                         @method('DELETE')

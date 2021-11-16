@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Order;
 
@@ -15,7 +17,14 @@ class OrderController extends Controller
     public function index()
     {
         //todo return only logged user orders
-        $orders = Order::all();
+        $user_id = Auth::id();
+        $orders = DB::table('orders')
+        ->select('orders.*')
+        ->join('dish_order', 'dish_order.order_id', '=','orders.id')
+        ->join('dishes', 'dish_order.dish_id','=','dishes.id')
+        ->join('restaurants', 'dishes.restaurant_id', '=', 'restaurants.id')
+        ->where('restaurants.id', $user_id)
+        ->get();
         return view('orders.index', compact('orders'));
     }
 
