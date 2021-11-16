@@ -47,4 +47,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::redirect('register', 'restaurants/create');
 
 // Braintree controller
+Route::get('/payment/success', 'BraintreeController@success')->name('orders.success');
 Route::any('/payment', [BraintreeController::class, 'token'])->name('token');
