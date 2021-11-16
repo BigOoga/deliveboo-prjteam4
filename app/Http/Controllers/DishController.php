@@ -7,9 +7,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Dish;
+use App\Models\Restaurant;
 
 class DishController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -103,7 +109,12 @@ class DishController extends Controller
      */
     public function show(Dish $dish)
     {
-        return view('dishes.show', compact('dish'));
+        $user_id = Auth::id();
+        if ($user_id === $dish->restaurant_id) {
+            return view('dishes.show', compact('dish'));
+        } else {
+            return redirect()->intended('errors.404');
+        }
     }
 
     /**

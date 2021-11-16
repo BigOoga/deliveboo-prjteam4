@@ -50,7 +50,7 @@
                             role="button">Registrati</a>
                     </div>
                     <hr class="mx-3">
-                    <a class="ps-5" href="{{ route('restaurants.create') }}">Aggiungi il tuo ristorante</a>
+                    
                 </div>
             </nav>
         </div>
