@@ -76,6 +76,7 @@
             let address = document.getElementById('address').value;
             let email = document.getElementById('email').value;
             const currentOrder = JSON.parse(sessionStorage.getItem("order"));
+            const delivery_fee = currentOrder.delivery_fee;
             let arr_id = [];
             currentOrder.dishes.forEach(dish => {
                 arr_id.push(dish.dish_id);
@@ -85,13 +86,12 @@
                 arr_quant.push(dish.quantity);
             });
 
-            let total = currentOrder.total;
+
             console.log(name);
             console.log(last_name);
             console.log(phone);
             console.log(address);
             console.log(email);
-            console.log(total);
             console.log(arr_id);
             console.log(arr_quant);
 
@@ -110,9 +110,9 @@
                             url: "{{ route('token') }}",
                             data: {
                                 nonce: payload.nonce,
-                                amount: total,
                                 name: name,
                                 phone: phone,
+                                delivery_fee: delivery_fee,
                                 address: address,
                                 email: email,
                                 last_name: last_name,
@@ -121,6 +121,9 @@
                             },
                             success: function(data) {
                                 console.log('success', payload.nonce)
+                                sessionStorage.removeItem('order');
+                                window.location.replace(
+                                    '/payment/success');
                             },
                             error: function(data) {
                                 console.log('error', payload.nonce)
