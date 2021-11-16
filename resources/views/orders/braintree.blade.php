@@ -121,7 +121,7 @@
                             },
                             success: function(data) {
                                 console.log('success', payload.nonce)
-
+                                sessionStorage.removeItem('order');
                                 window.location.replace(
                                     '/payment/success');
                             },
