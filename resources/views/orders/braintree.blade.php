@@ -122,6 +122,7 @@
                             success: function(data) {
                                 console.log('success', payload.nonce)
                                 sessionStorage.removeItem('order');
+                                sessionStorage.removeItem('cart');
                                 window.location.replace(
                                     '/payment/success');
                             },
