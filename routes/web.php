@@ -16,7 +16,7 @@ use App\Http\Controllers\BraintreeController;
 
 Route::redirect('/', '/home');
 
-Route::get('restaurants/dashboard', 'RestaurantController@dashboard')->name('restaurants.dashboard');
+Route::get('dashboard', 'RestaurantController@dashboard')->name('restaurants.dashboard');
 
 Route::resource('restaurants', 'RestaurantController');
 Route::resource('dishes', 'DishController');
