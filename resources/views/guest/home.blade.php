@@ -210,9 +210,9 @@
         <div id="suggested">
 
             <div class="container">
-                {{-- @foreach ($suggestions as $suggestion) --}}
-                <a href="#" class="btn btn-light">categoria</a>
-                {{-- @endforeach --}}
+                @foreach ($types as $type)
+                <a href="{{route('restaurants.index')}}" class="btn btn-secondary m-2">{{$type->name}}</a>
+                @endforeach
             </div>
         </div>
     </main>
