@@ -102,62 +102,70 @@
                 <h2 class="mb-3">La selezione di Deliveboo</h2>
                 <div class="row">
                     <div class="col-5 d-flex py-3">
-                        <div class="card flex-grow-1 clickable" style="width: 18rem;">
-                            {{-- Card image --}}
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body">
-                                {{-- Card title --}}
-                                <h5 class="card-title">Comfort food</h5>
-                                {{-- Description --}}
-                                <p class="card-text">I grandi classici che scaldano il cuore, perfetti in ogni
-                                    momento.</p>
-                                {{-- Link to card object --}}
-                                <p>Scopri Comfort Food</p>
-                            </div>
+                        <div class="card flex-grow-1" style="width: 18rem;">
+                            <a class="text-decoration-none text-dark" href="{{ route('restaurants.index')}}">
+                                {{-- Card image --}}
+                                <img src="..." class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    {{-- Card title --}}
+                                    <h5 class="card-title">Comfort food</h5>
+                                    {{-- Description --}}
+                                    <p class="card-text">I grandi classici che scaldano il cuore, perfetti in ogni
+                                        momento.</p>
+                                    {{-- Link to card object --}}
+                                    <p>Scopri Comfort Food</p>
+                                </div>
+                            </a>    
                         </div>
                     </div>
                     <div class="col-7 d-flex py-3">
-                        <div class="card flex-grow-1 clickable" style="width: 18rem;">
-                            {{-- Card image --}}
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body">
-                                {{-- Card title --}}
-                                <h5 class="card-title">Dolci e dessert</h5>
-                                {{-- Description --}}
-                                <p class="card-text">Dolci piaceri per rendere la giornata ancora più gustosa.</p>
-                                {{-- Link to card object --}}
-                                <p>Scopri Dolci e dessert</p>
-                            </div>
+                        <div class="card flex-grow-1" style="width: 18rem;">
+                            <a class="text-decoration-none text-dark" href="{{ route('restaurants.index')}}">
+                                {{-- Card image --}}
+                                <img src="..." class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    {{-- Card title --}}
+                                    <h5 class="card-title">Dolci e dessert</h5>
+                                    {{-- Description --}}
+                                    <p class="card-text">Dolci piaceri per rendere la giornata ancora più gustosa.</p>
+                                    {{-- Link to card object --}}
+                                    <p>Scopri Dolci e dessert</p>
+                                </div>
+                            </a>    
                         </div>
                     </div>
                     <div class="col-7 d-flex py-3">
-                        <div class="card flex-grow-1 clickable" style="width: 18rem;">
-                            {{-- Card image --}}
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body">
-                                {{-- Card title --}}
-                                <h5 class="card-title">Perfetti da condividere</h5>
-                                {{-- Description --}}
-                                <p class="card-text">Serve una scusa per stare insieme? Ordina dai ristoranti che
-                                    trasformeranno la tua serata in un vera festa.</p>
-                                {{-- Link to card object --}}
-                                <p>Scopri Perfetti da condividere</p>
-                            </div>
+                        <div class="card flex-grow-1" style="width: 18rem;">
+                            <a class="text-decoration-none text-dark" href="{{ route('restaurants.index')}}">
+                                {{-- Card image --}}
+                                <img src="..." class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    {{-- Card title --}}
+                                    <h5 class="card-title">Perfetti da condividere</h5>
+                                    {{-- Description --}}
+                                    <p class="card-text">Serve una scusa per stare insieme? Ordina dai ristoranti che
+                                        trasformeranno la tua serata in un vera festa.</p>
+                                    {{-- Link to card object --}}
+                                    <p>Scopri Perfetti da condividere</p>
+                                </div>
+                            </a>    
                         </div>
                     </div>
                     <div class="col-5 d-flex py-3">
-                        <div class="card flex-grow-1 clickable" style="width: 18rem;">
-                            {{-- Card image --}}
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body">
-                                {{-- Card title --}}
-                                <h5 class="card-title">Esclusiva deliveroo</h5>
-                                {{-- Description --}}
-                                <p class="card-text">I più famosi, i più buoni, i preferiti. Quelli che trovi solo
-                                    su Deliveboo.</p>
-                                {{-- Link to card object --}}
-                                <p>Scopri Esclusiva Deliveboo</p>
-                            </div>
+                        <div class="card flex-grow-1" style="width: 18rem;">
+                            <a class="text-decoration-none text-dark" href="{{ route('restaurants.index')}}">
+                                {{-- Card image --}}
+                                <img src="..." class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    {{-- Card title --}}
+                                    <h5 class="card-title">Esclusiva deliveroo</h5>
+                                    {{-- Description --}}
+                                    <p class="card-text">I più famosi, i più buoni, i preferiti. Quelli che trovi solo
+                                        su Deliveboo.</p>
+                                    {{-- Link to card object --}}
+                                    <p>Scopri Esclusiva Deliveboo</p>
+                                </div>
+                            </a>    
                         </div>
                     </div>
                 </div>
@@ -172,41 +180,47 @@
                 <h2 class="mb-3">La selezione di Deliveboo</h2>
                 <div class="row">
                     <div class="col-4 d-flex py-3">
-                        <div class="card flex-grow-1 clickable" style="width: 18rem;">
-                            {{-- Card image --}}
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body">
-                                {{-- Card title --}}
-                                <h5 class="card-title">Comfort food</h5>
-                                {{-- Description --}}
-                                <p class="card-text">I grandi classici che scaldano il cuore, perfetti in ogni
-                                    momento.</p>
-                            </div>
+                        <div class="card flex-grow-1" style="width: 18rem;">
+                            <a class="text-decoration-none text-dark" href="{{ route('restaurants.index')}}">
+                                {{-- Card image --}}
+                                <img src="..." class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    {{-- Card title --}}
+                                    <h5 class="card-title">Comfort food</h5>
+                                    {{-- Description --}}
+                                    <p class="card-text">I grandi classici che scaldano il cuore, perfetti in ogni
+                                        momento.</p>
+                                </div>
+                            </a>    
                         </div>
                     </div>
                     <div class="col-4 d-flex py-3">
-                        <div class="card flex-grow-1 clickable" style="width: 18rem;">
-                            {{-- Card image --}}
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body">
-                                {{-- Card title --}}
-                                <h5 class="card-title">Dolci e dessert</h5>
-                                {{-- Description --}}
-                                <p class="card-text">Dolci piaceri per rendere la giornata ancora più gustosa.</p>
-                            </div>
+                        <div class="card flex-grow-1" style="width: 18rem;">
+                            <a class="text-decoration-none text-dark" href="{{ route('restaurants.index')}}">
+                                {{-- Card image --}}
+                                <img src="..." class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    {{-- Card title --}}
+                                    <h5 class="card-title">Dolci e dessert</h5>
+                                    {{-- Description --}}
+                                    <p class="card-text">Dolci piaceri per rendere la giornata ancora più gustosa.</p>
+                                </div>
+                            </a>    
                         </div>
                     </div>
                     <div class="col-4 d-flex py-3">
-                        <div class="card flex-grow-1 clickable" style="width: 18rem; max-width: 100%;">
-                            {{-- Card image --}}
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body">
-                                {{-- Card title --}}
-                                <h5 class="card-title">Perfetti da condividere</h5>
-                                {{-- Description --}}
-                                <p class="card-text">Serve una scusa per stare insieme? Ordina dai ristoranti che
-                                    trasformeranno la tua serata in un vera festa.</p>
-                            </div>
+                        <div class="card flex-grow-1" style="width: 18rem; max-width: 100%;">
+                            <a class="text-decoration-none text-dark" href="{{ route('restaurants.index')}}">
+                                {{-- Card image --}}
+                                <img src="..." class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    {{-- Card title --}}
+                                    <h5 class="card-title">Perfetti da condividere</h5>
+                                    {{-- Description --}}
+                                    <p class="card-text">Serve una scusa per stare insieme? Ordina dai ristoranti che
+                                        trasformeranno la tua serata in un vera festa.</p>
+                                </div>
+                            </a>    
                         </div>
                     </div>
 
