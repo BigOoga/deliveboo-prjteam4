@@ -11,6 +11,7 @@
 
 <body>
     <div class="container">
+        <h2 class="text-center my-5">Statistiche Ristorante</h2>
         <div class="m-5">
             <canvas id="myChart"></canvas>
         </div>
