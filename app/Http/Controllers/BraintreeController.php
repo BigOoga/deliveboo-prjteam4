@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Dish;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PaymentConfirmationMail;
 
 class BraintreeController extends Controller
 {
@@ -84,8 +86,12 @@ class BraintreeController extends Controller
                     'submitForSettlement' => True
                 ]
             ]);
+
+            //TODO: rendere dinamico l'indirizzo mail
+            Mail::to('client@test')->send(new PaymentConfirmationMail());
             return view('orders.success');
         }
+
 
         return view('orders.braintree', ['token' => $clientToken]);
     }
