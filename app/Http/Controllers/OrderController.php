@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Dish;
+
+use DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\Dish;
 
 class OrderController extends Controller
 {
@@ -22,7 +24,15 @@ class OrderController extends Controller
     public function index()
     {
         //todo return only logged user orders
-        $orders = Order::all();
+        $user_id = Auth::id();
+        $dishes = Dish::where('restaurant_id', $user_id)->get();
+
+        foreach ($dishes as $dish => $value) {
+            $orders = $value->orders;
+            foreach ($orders as $order => $value) {
+                $response[] = $value;
+            }
+        }
         return view('orders.index', compact('orders'));
     }
 

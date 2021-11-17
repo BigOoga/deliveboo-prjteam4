@@ -17,6 +17,7 @@
                     <li class="mb-2"><strong>indirizzo: </strong>{{$order->address}}</li>
                     <li class="mb-2"><strong>nome: </strong>{{$order->user_name}}</li>
                     <li class="mb-2"><strong>cognome: </strong>{{$order->user_surname}}</li>
+                    <li class="mb-2"><strong>quantità: </strong>{{$order->pivot->quantity}}</li>
                     <li class="mb-2"><strong>totale: </strong>{{$order->total}}</li>
                     <li class="mb-2">{{$order->created_at}}</li>
                     {{-- tasto show dettaglio --}}
@@ -24,7 +25,7 @@
                     {{-- tasto edit --}}
                     <li class="mb-2"><a href="{{route('orders.edit', $order->id)}}" class="btn btn-outline-warning">modifica</a></li>
                     {{-- tasto delete --}}
-                    <form action="{{ route('orders.destroy', $order)}}"
+                    <form action="{{ route('orders.destroy', $order->id)}}"
                     method="post">
                         @csrf
                         @method('DELETE')
