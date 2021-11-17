@@ -33,6 +33,7 @@ class OrderController extends Controller
                 $response[] = $value;
             }
         }
+        $orders = $response;
         return view('orders.index', compact('orders'));
     }
 
