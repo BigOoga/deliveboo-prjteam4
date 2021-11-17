@@ -34,4 +34,7 @@ Route::namespace('Api')->group(function () {
 
     Route::get('/restaurants/{restaurantID}/dishes', 'DishController@indexByRestaurant');
     Route::resource('dishes', 'DishController');
+
+    Route::get('/orders/PTR/{restaurantID}', 'OrderController@index');
+    Route::resource('orders', 'OrderController');
 });
