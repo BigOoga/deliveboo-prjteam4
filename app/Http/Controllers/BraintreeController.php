@@ -84,7 +84,6 @@ class BraintreeController extends Controller
                     'submitForSettlement' => True
                 ]
             ]);
-            return view('orders.success');
         }
 
         return view('orders.braintree', ['token' => $clientToken]);

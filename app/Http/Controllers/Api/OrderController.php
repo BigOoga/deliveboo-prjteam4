@@ -25,6 +25,7 @@ class OrderController extends Controller
             }
         }
 
+        $orders = $response;
 
         return response()->json($response);
     }

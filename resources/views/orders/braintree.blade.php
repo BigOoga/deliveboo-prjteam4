@@ -24,17 +24,16 @@
                 <form>
                     <div class="form-group">
                         <label for="name">Nome</label>
-                        <input type="text" class="form-control" id="name">
+                        <input type="text" class="form-control" id="name" required>
                         <label for="last_name">Cognome</label>
-                        <input type="text" class="form-control" id="last_name">
+                        <input type="text" class="form-control" id="last_name" required>
                         <label for="address">Indirizzo</label>
-                        <input type="text" class="form-control" id="address">
+                        <input type="text" class="form-control" id="address" required>
                         <label for="phone">Telefono</label>
-                        <input type="text" class="form-control" id="phone">
+                        <input type="text" class="form-control" id="phone" required>
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email">
+                        <input type="email" class="form-control" id="email" required>
                     </div>
-                </form>
             </div>
 
             <div class="col-6">
@@ -50,6 +49,7 @@
                         </div>
                         {{-- BRAINTREE TEST --}}
 
+                        </form>
                     </div>
                 </div>
             </div>
