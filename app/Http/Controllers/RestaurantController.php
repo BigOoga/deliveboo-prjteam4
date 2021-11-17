@@ -112,9 +112,11 @@ class RestaurantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Restaurant $restaurant)
     {
-        //todo pagina in cui il ristoratore può cambiare i propri dati
+
+        $types = Type::all();
+        return view('restaurants.edit', compact('restaurant', 'types'));
     }
 
 
@@ -135,9 +137,13 @@ class RestaurantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Restaurant $restaurant)
     {
-        //
+        $data = $request->all();
+
+        $restaurant->fill($data);
+        $restaurant->save();
+        return redirect()->route('restaurants.show', $restaurant->id);
     }
 
     /**
