@@ -17,17 +17,15 @@
 
 <body>
     <div id="app">
-        <topbar></topbar>
+        <searchbar></searchbar>
         <div class="container-fluid ">
             <div class="row">
-                <div class="col-2 border">
+                <div class="col-4 col-md-3 col-lg-2 border">
                     <sidebar></sidebar>
                 </div>
-                <div class="col-10 border">
+                <div class="col-8 col-md-9 col-lg-10 border">
 
                     <results></results>
-
-
 
                 </div>
             </div>

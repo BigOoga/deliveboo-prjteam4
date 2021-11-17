@@ -17,43 +17,44 @@
                 </div>
             </div>
         @endif
-        {{-- PRINT DISHES --}}
-        @forelse($dishes as $dish)
-            <div class="row">
-                <div class="card m-3" style="width: 18rem">
-                    <img class="img-fluid" src="{{ asset('storage/' . $dish->picture) }}" alt="{{ $dish->name }}">
-                    <div class="card-body d-flex align-items-center justify-content-between">
-                        <h5>Nome piatto: <strong>{{ $dish->name }}</strong></h5>
-                        <a href="{{ route('dishes.edit', $dish->id) }}" class="btn my-2">
-                            <i class="fas fa-pen fs-4"></i>
-                        </a>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Portata: {{ $dish->entry }}</li>
-                        <li class="list-group-item">Prezzo: € {{ $dish->price }}</li>
-                        <li class="list-group-item">ID: {{ $dish->id }}</li>
-                    </ul>
-                    <div class="card-body">
-                        {{-- LINK AND BUTTON --}}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Foto</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Prezzo</th>
+                    <th scope="col">Portata</th>
+                    <th scope="col">Controlli</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($dishes as $dish)
+                    <tr>
+                        <td><img class="dish-thumb" src="{{ asset('storage/' . $dish->picture) }}"
+                                alt="{{ $dish->name }}"></td>
+                        <td>{{ $dish->name }}</td>
+                        <td>€{{ $dish->price }}</td>
+                        <td>{{ $dish->entry }}</td>
+                        <td><a href="{{ route('dishes.show', $dish->id) }}" class="btn btn-info my-1">Dettaglio</a>
+                            <form action="{{ route('dishes.destroy', $dish->id) }}" method="POST"
+                                class="d-inline delete-form  my-1">
+                                @csrf
+                                @method('DELETE')
+                                {{-- <button type="submit" class="btn btn-danger p-2">Elimina</button> --}}
+                                @include('dishes.includes.modal')
+                            </form>
+                        </td>
 
-                        <a href="{{ route('dishes.show', $dish->id) }}" class="btn btn-info my-1">Dettaglio</a>
-                        <form action="{{ route('dishes.destroy', $dish->id) }}" method="POST"
-                            class="d-inline delete-form  my-1">
-                            @csrf
-                            @method('DELETE')
-                            {{-- <button type="submit" class="btn btn-danger p-2">Elimina</button> --}}
-                            @include('dishes.includes.modal')
-                        </form>
+                    </tr>
+                @empty
+                    <div>
+                        <h3 class="text-center">Non ci sono piatti</h3>
                     </div>
-                </div>
-            </div>
-        @empty
-            <div>
-                <h3 class="text-center">Non ci sono piatti</h3>
-            </div>
-        @endforelse
+                @endforelse
+            </tbody>
+        </table>
+
     </section>
 @endsection
-@section('secondaryscript')
-    <script src="{{ asset('js/delete_confirmation.js') }}"></script>
-@endsection
+<<<<<<< HEAD @section('secondaryscript') <script src="{{ asset('js/delete_confirmation.js') }}"></script> @endsection=======>>>>>>>
+    53ce3e916ccfebd3fa5c18d7ae4dd882d1269522

@@ -1,8 +1,9 @@
 <template>
-    <div class="col-3">
-        <div @click="goToRestaurant" class="card" style="width: 18rem">
+    <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
+        <div @click="goToRestaurant" class="card mb-2 h-100">
             <div class="img-container">
                 <img
+                    style="object-fit: cover"
                     :src="
                         restaurant.image
                             ? '/storage/' + restaurant.image
@@ -43,8 +44,7 @@ export default {
 }
 
 img {
-    object-fit: cover;
-    width: 200px;
-    height: 200px;
+    //max-width: 200px;
+    max-height: 200px;
 }
 </style>

@@ -12,63 +12,12 @@
         >
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <form class="form-inline my-2 my-lg-0 mx-auto">
-                <input
-                    class="form-control mr-sm-2"
-                    type="search"
-                    placeholder="Search"
-                    aria-label="Search"
-                    v-model="searchInput"
-                    @keydown.enter.prevent="startSearch"
-                />
-                <button
-                    @click="startSearch"
-                    class="btn btn-outline-success my-2 my-sm-0"
-                    type="button"
-                >
-                    Search
-                </button>
-            </form>
-        </div>
-        <div class="button-container">
-            <button
-                @click="goToRestaurant"
-                type="button"
-                class="btn btn-primary"
-            >
-                Carrello
-            </button>
-        </div>
     </nav>
 </template>
 
 <script>
-import { eventBus } from "../../../js/app";
 export default {
     name: "Topbar",
-    data() {
-        return { searchInput: "" };
-    },
-    methods: {
-        startSearch() {
-            console.log("Starting search...");
-            this.$store.commit("changeSearchInput", this.searchInput);
-
-            eventBus.$emit("requestSelection");
-            eventBus.$emit("startSearch");
-        },
-        goToRestaurant() {
-            const currentCart = JSON.parse(sessionStorage.getItem("cart"));
-            let openSessionId = currentCart.restaurantID;
-            if (openSessionId) {
-                window.location.href = `http://127.0.0.1:8000/restaurants/${openSessionId}`;
-            }
-        },
-    },
-    mounted() {
-        console.log("Component mounted.");
-    },
 };
 </script>
 <style></style>
