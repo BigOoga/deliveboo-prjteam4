@@ -11,6 +11,7 @@
 
 <body>
     <h1>Ordine avvenuto con successo</h1>
+    <a href="{{route('restaurants.index')}}" class="btn btn-primary rounded">Ritorna ai ristoranti</a>
 </body>
 
 </html>
