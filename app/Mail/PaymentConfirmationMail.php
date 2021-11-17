@@ -28,6 +28,6 @@ class PaymentConfirmationMail extends Mailable
      */
     public function build()
     {
-        return $this->view('mails.payment_confirmation_mail.name');
+        return $this->view('mails.payment_confirmation_mail');
     }
 }
