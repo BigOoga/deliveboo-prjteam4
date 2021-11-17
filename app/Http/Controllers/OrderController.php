@@ -6,6 +6,7 @@ use DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\Dish;
 
 class OrderController extends Controller
 {
@@ -18,13 +19,14 @@ class OrderController extends Controller
     {
         //todo return only logged user orders
         $user_id = Auth::id();
-        $orders = DB::table('orders')
-        ->select('orders.*')
-        ->join('dish_order', 'dish_order.order_id', '=','orders.id')
-        ->join('dishes', 'dish_order.dish_id','=','dishes.id')
-        ->join('restaurants', 'dishes.restaurant_id', '=', 'restaurants.id')
-        ->where('restaurants.id', $user_id)
-        ->get();
+        $dishes = Dish::where('restaurant_id', $user_id)->get();
+
+        foreach ($dishes as $dish => $value) {
+            $orders = $value->orders;
+            foreach ($orders as $order => $value) {
+                $response[] = $value;
+            }
+        }
         return view('orders.index', compact('orders'));
     }
 

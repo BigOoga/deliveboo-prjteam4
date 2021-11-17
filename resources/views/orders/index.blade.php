@@ -17,6 +17,7 @@
                     <li class="mb-2"><strong>indirizzo: </strong>{{$order->address}}</li>
                     <li class="mb-2"><strong>nome: </strong>{{$order->user_name}}</li>
                     <li class="mb-2"><strong>cognome: </strong>{{$order->user_surname}}</li>
+                    <li class="mb-2"><strong>quantità: </strong>{{$order->pivot->quantity}}</li>
                     <li class="mb-2"><strong>totale: </strong>{{$order->total}}</li>
                     <li class="mb-2">{{$order->created_at}}</li>
                     {{-- tasto show dettaglio --}}
