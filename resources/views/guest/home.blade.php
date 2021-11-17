@@ -33,7 +33,12 @@
                 {{-- Navbar buttons --}}
                 <div>
                     <a class="btn btn-light" href="#" role="button">Carrello</a>
+                    @if (Auth::guest())
                     <a class="btn btn-light" href="{{ route('login') }}" role="button">Accedi o registrati</a>
+                    @endif
+                    @if (Auth::check())
+                    <a class="btn btn-light" href="{{ route('restaurants.dashboard') }}" role="button">Vai alla tua dashboard</a>
+                    @endif
                     <a class="btn btn-light" href="#" role="button" onclick="openNav()">Menu</a>
                 </div>
                 {{-- Sidebar --}}
@@ -45,9 +50,13 @@
                     </span>
                     <hr class="mx-3">
                     <div class="d-flex justify-content-center p-3">
+                        @if (Auth::guest())
                         <a class="btn btn-primary text-center" href="{{ route('login') }}" role="button">Accedi</a>
-                        <a class="btn btn-primary text-center" href="{{ route('register') }}"
-                            role="button">Registrati</a>
+                        <a class="btn btn-primary text-center" href="{{ route('register') }}" role="button">Registrati</a>
+                        @endif
+                        @if (Auth::check())
+                        <a class="btn btn-primary" href="{{ route('restaurants.dashboard') }}" role="button">Vai alla tua dashboard</a>
+                        @endif
                     </div>
                     <hr class="mx-3">
                     
@@ -210,9 +219,9 @@
         <div id="suggested">
 
             <div class="container">
-                {{-- @foreach ($suggestions as $suggestion) --}}
-                <a href="#" class="btn btn-light">categoria</a>
-                {{-- @endforeach --}}
+                @foreach ($types as $type)
+                <a href="{{route('restaurants.index')}}" class="btn btn-secondary m-2">{{$type->name}}</a>
+                @endforeach
             </div>
         </div>
     </main>
