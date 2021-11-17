@@ -14,9 +14,7 @@ use App\Http\Controllers\BraintreeController;
 |
 */
 
-Route::get('/', function () {
-    return view('guest.home');
-});
+Route::redirect('/', '/home');
 
 Route::get('restaurants/dashboard', 'RestaurantController@dashboard')->name('restaurants.dashboard');
 
@@ -44,7 +42,7 @@ $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 */
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'Guest\HomeController@index')->name('home');
 Route::redirect('register', 'restaurants/create');
 
 // Braintree controller
