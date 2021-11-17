@@ -14,11 +14,11 @@
             @foreach ($orders as $order)
                 <div class="border p-5">
                     <li class="mb-2"><strong>ID: </strong>{{$order->id}}</li>
-                    <li class="mb-2"><strong>indirizzo: </strong>{{$order->address}}</li>
-                    <li class="mb-2"><strong>nome: </strong>{{$order->user_name}}</li>
-                    <li class="mb-2"><strong>cognome: </strong>{{$order->user_surname}}</li>
-                    <li class="mb-2"><strong>totale: </strong>{{$order->total}}</li>
-                    <li class="mb-2">{{$order->created_at}}</li>
+                    <li class="mb-2"><strong>Nome: </strong>{{$order->user_name}}</li>
+                    <li class="mb-2"><strong>Cognome: </strong>{{$order->user_surname}}</li>
+                    <li class="mb-2"><strong>Indirizzo: </strong>{{$order->address}}</li>
+                    <li class="mb-2"><strong>Totale: </strong>{{$order->total}}</li>
+                    <li class="mb-2"><strong>Creato il: </strong>{{$order->created_at}}</li>
                     {{-- tasto show dettaglio --}}
                     <li class="mb-2"><a href="{{route('orders.show', $order->id)}}" class="btn btn-outline-primary">dettaglio</a></li>
                     {{-- tasto edit --}}
