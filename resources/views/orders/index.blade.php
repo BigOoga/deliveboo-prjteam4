@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
-    <title>Document</title>
-</head>
-<body>
+@extends('layouts.app')
+
+@section('content')
+
     <div class="container mt-5 mb-5">
         <div class="mb-3">
             <button type="button" class="btn btn-outline-success"><a href="{{route('orders.create')}}" class="link-dark text-decoration-none">Crea nuovo ordine</a></button>
@@ -41,5 +35,4 @@
             @endforeach
         </ul>
     </div>
-</body>
-</html>
+@endsection
