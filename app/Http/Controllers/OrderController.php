@@ -23,17 +23,15 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //todo return only logged user orders
-        $user_id = Auth::id();
-        $dishes = Dish::where('restaurant_id', $user_id)->get();
 
-        foreach ($dishes as $dish => $value) {
-            $orders = $value->orders;
-            foreach ($orders as $order => $value) {
-                $response[] = $value;
-            }
-        }
-        $orders = $response;
+        $user_id = Auth::id();
+        $orders = DB::table('orders')
+            ->select('orders.*')
+            ->join('dish_order', 'dish_order.order_id', '=', 'orders.id')
+            ->join('dishes', 'dish_order.dish_id', '=', 'dishes.id')
+            ->join('restaurants', 'dishes.restaurant_id', '=', 'restaurants.id')
+            ->where('restaurants.id', $user_id)->groupBy('order_id')
+            ->get();
         return view('orders.index', compact('orders'));
     }
 
