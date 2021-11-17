@@ -54,7 +54,7 @@
                 <h5 class="card-header">Statistiche ordini</h5>
                 <div class="card-body">
                     <p class="card-text">Visualizza le statistiche relative ai tuoi ordini</p>
-                    <a href="#" class="btn btn-primary">Vai</a>
+                    <a href="{{ route('orders.statistic') }}" class="btn btn-primary">Vai</a>
                 </div>
             </div>
         </section>
