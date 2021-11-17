@@ -1,11 +1,7 @@
 <template>
-    <div class="container-fluid">
-        <div class="row">
-            <h4>This is the sidebar component :)</h4>
-        </div>
-
-        <div class="row">
-            <div class="col-12">Categorie:</div>
+    <div id="sidebar" class="row pl-3">
+        <div class="col-12">
+            <h5>Categorie:</h5>
             <div>
                 <div v-for="(type, i) in types" :key="i">
                     <label :for="type.name">{{ type.name }}</label>
@@ -60,4 +56,10 @@ export default {
     },
 };
 </script>
-<style></style>
+<style lang="scss" scoped>
+#sidebar {
+    position: fixed;
+    left: 0;
+    padding-top: 60px;
+}
+</style>

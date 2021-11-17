@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid">
+    <div id="results" class="container-fluid">
         <div class="row">
             <h3>Risultati della ricerca:</h3>
         </div>
@@ -116,4 +116,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+#results {
+    padding-top: 60px;
+}
+</style>
