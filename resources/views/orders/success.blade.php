@@ -10,8 +10,11 @@
 </head>
 
 <body>
-    <h1>Ordine avvenuto con successo</h1>
-    <a href="{{route('restaurants.index')}}" class="btn btn-primary rounded">Ritorna ai ristoranti</a>
+    <div class="container mt-5 mb-5 text-center">
+        <h1>Pagamento avvenuto con successo</h1>
+        <h2 class="mb-5">il tuo ordine è stato preso in carico</h2>
+        <a href="{{route('restaurants.index')}}" class="btn btn-primary rounded">Ritorna ai ristoranti</a>
+    </div>
 </body>
 
 </html>
