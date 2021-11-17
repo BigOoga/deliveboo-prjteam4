@@ -87,8 +87,8 @@ class BraintreeController extends Controller
                 ]
             ]);
 
-            //TODO: rendere dinamico l'indirizzo mail
-            Mail::to('client@test')->send(new PaymentConfirmationMail());
+
+            Mail::to($email)->send(new PaymentConfirmationMail());
             return view('orders.success');
         }
 
