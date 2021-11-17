@@ -56,5 +56,3 @@
 
     </section>
 @endsection
-<<<<<<< HEAD @section('secondaryscript') <script src="{{ asset('js/delete_confirmation.js') }}"></script> @endsection=======>>>>>>>
-    53ce3e916ccfebd3fa5c18d7ae4dd882d1269522
