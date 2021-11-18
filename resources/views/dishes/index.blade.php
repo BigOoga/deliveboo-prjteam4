@@ -4,9 +4,12 @@
 
     <section class="container">
         <div class="d-flex justify-content-between m-3">
+            <div><a href="{{ route('restaurants.dashboard') }}" class="btn btn-primary p-2  my-1">Torna alla dashboard</a>
+            </div>
             <h1>I miei piatti</h1>
             <div><a href="{{ route('dishes.create') }}" class="btn btn-primary p-2  my-1">Aggiungi un piatto</a></div>
         </div>
+
         @if (session('deleted'))
             <div class="alert alert-success d-flex align-items-center m-3" role="alert">
                 <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
@@ -59,4 +62,3 @@
 
     </section>
 @endsection
-
