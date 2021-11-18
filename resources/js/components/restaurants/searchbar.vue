@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light border fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <a class="navbar-brand" href="/home">
             <img
                 src="/images/logo-text.png "
@@ -31,7 +31,7 @@
                 />
                 <button
                     @click="startSearch"
-                    class="btn btn-outline-success my-2 my-sm-0"
+                    class="btn btn-dark my-2 my-sm-0"
                     type="button"
                 >
                     Search
@@ -42,7 +42,7 @@
             <button
                 @click="goToRestaurant"
                 type="button"
-                class="btn btn-primary"
+                class="btn btn-dark"
             >
                 Carrello
             </button>
@@ -78,4 +78,16 @@ export default {
     },
 };
 </script>
-<style></style>
+<style lang="scss" scoped>
+nav{ 
+    padding: 10px 40px;
+    height: 90px;
+    background-color: rgba(0, 204, 188, 1);
+}
+form{ 
+    display: flex;
+    input[type="search"]{
+        margin-right: 5px;
+    }
+}
+</style>

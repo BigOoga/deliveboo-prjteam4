@@ -1,10 +1,9 @@
 <template>
-    <div id="sidebar" class="row pl-3">
+    <div id="sidebar" class="row">
         <div class="col-12">
-            <h5>Categorie:</h5>
+            <h4>Categorie:</h4>
             <div>
                 <div v-for="(type, i) in types" :key="i">
-                    <label :for="type.name">{{ type.name }}</label>
                     <input
                         type="checkbox"
                         :name="type.name"
@@ -12,6 +11,7 @@
                         v-model="selection"
                         :value="type.id"
                     />
+                    <label :for="type.name">{{ type.name }}</label>
                 </div>
             </div>
         </div>
@@ -57,9 +57,26 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+h4{
+    margin-bottom: 20px;
+    font-weight: bold;
+}
 #sidebar {
     position: fixed;
+    width: 200px;
+    height:100vh;
     left: 0;
-    padding-top: 70px;
+    padding: 120px 0 0 40px;
+    background: linear-gradient(
+        176deg,
+        rgba(0, 204, 188, 1) 49.7%,
+        rgba(208, 235, 153, 1) 50%
+    );
+    
 }
+input[type="checkbox"] {
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
 </style>

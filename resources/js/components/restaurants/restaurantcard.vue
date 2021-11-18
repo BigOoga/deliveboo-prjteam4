@@ -1,5 +1,5 @@
 <template>
-    <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
+    <div class="col-lg-3 col-md-4 col-sm-6 mb-5">
         <div @click="goToRestaurant" class="card mb-2 h-100">
             <div class="img-container">
                 <img
@@ -51,5 +51,6 @@ img {
     max-height: 400px;
     overflow: hidden;
     overflow-wrap: break-word;
+    margin-bottom: 20px;
 }
 </style>

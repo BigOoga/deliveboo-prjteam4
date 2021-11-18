@@ -20,10 +20,10 @@
         <searchbar></searchbar>
         <div class="container-fluid ">
             <div class="row">
-                <div class="col-4 col-md-3 col-lg-2 border">
+                <div id="sidebar-menu" class="col-4 col-md-3 col-lg-2">
                     <sidebar></sidebar>
                 </div>
-                <div class="col-8 col-md-9 col-lg-10 border">
+                <div id="main-section" class="col-8 col-md-9 col-lg-10">
 
                     <results></results>
 
@@ -36,3 +36,16 @@
 </body>
 
 </html>
+
+<style lang="scss" scoped>
+#sidebar-menu{
+    width: 200px;
+}
+
+#main-section{
+    margin-left: 200px;
+    width: calc(100% - 200px);
+    max-width: 100vw;
+}
+
+</style>
