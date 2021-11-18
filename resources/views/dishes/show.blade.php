@@ -3,10 +3,14 @@
 @section('content')
     <section class="container">
         <div class="d-flex justify-content-between m-3">
-            <div><a href="{{ route('dishes.index') }}" class="btn btn-primary p-2  my-1">Torna indietro</a>
+            <div class="col-4"><a href="{{ route('dishes.index') }}" class="btn btn-primary p-2  my-1">Torna
+                    indietro</a>
             </div>
-            <h1>Dettagli del piatto</h1>
-            <div><a href="{{ route('restaurants.dashboard') }}" class="btn btn-primary p-2  my-1">Torna alla dashboard</a>
+            <div class="col-4">
+                <h1 class="h3 text-center ">Dettagli del piatto</h1>
+            </div>
+            <div class="col-4 text-right"><a href="{{ route('restaurants.dashboard') }}"
+                    class="btn btn-primary p-2  my-1">Torna alla dashboard</a>
             </div>
         </div>
         <div class="card mb-2">

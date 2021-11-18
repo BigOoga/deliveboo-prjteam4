@@ -2,13 +2,16 @@
 
 @section('content')
 
-    <div class="container mt-5 mb-5">
-        <div class="d-flex justify-content-between m-3">
+    <div class="container my-2 mb-3">
+        <div class="d-flex justify-content-between my-2">
             <div><a href="{{ route('restaurants.dashboard') }}" class="btn btn-primary p-2  my-1">Torna alla dashboard</a>
             </div>
-            <h1>I miei ordini</h1>
-            <div><a href="{{ route('orders.statistic') }}" class="btn btn-primary p-2  my-1">Vedi statistiche</a></div>
+            <h1 class="h3 text-center ">I miei ordini</h1>
+            <div class="col-4 text-right"><a href="{{ route('orders.statistic') }}" class="btn btn-primary p-2  my-1">Vedi
+                    statistiche</a>
+            </div>
         </div>
+
         <ul class="list-group list-unstyled">
             @foreach ($orders as $order)
                 <div class="border p-5">

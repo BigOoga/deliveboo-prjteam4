@@ -3,11 +3,16 @@
 @section('content')
 
     <section class="container">
-        <div class="d-flex justify-content-between m-3">
-            <div><a href="{{ route('restaurants.dashboard') }}" class="btn btn-primary p-2  my-1">Torna alla dashboard</a>
+        <div class="row justify-content-between m-3">
+            <div class="col-4"><a href="{{ route('restaurants.dashboard') }}"
+                    class="btn btn-primary p-2  my-1">Torna alla dashboard</a>
             </div>
-            <h1>I miei piatti</h1>
-            <div><a href="{{ route('dishes.create') }}" class="btn btn-primary p-2  my-1">Aggiungi un piatto</a></div>
+            <div class="col-4">
+                <h1>I miei piatti</h1>
+            </div>
+            <div class="col-4 text-right"><a href="{{ route('dishes.create') }}" class="btn btn-primary p-2 my-1 ">Aggiungi
+                    un
+                    piatto</a></div>
         </div>
 
         @if (session('deleted'))
@@ -20,45 +25,46 @@
                 </div>
             </div>
         @endif
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Foto</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Prezzo</th>
-                    <th scope="col">Portata</th>
-                    <th scope="col">Controlli</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse($dishes as $dish)
+        <div class="row">
+            <table class="table">
+                <thead>
                     <tr>
-                        <td><img class="dish-thumb" src="{{ asset('storage/' . $dish->picture) }}"
-                                alt="{{ $dish->name }}"></td>
-                        <td>{{ $dish->name }}</td>
-                        <td>€{{ $dish->price }}</td>
-                        <td>{{ $dish->entry }}</td>
-                        <td><a href="{{ route('dishes.show', $dish->id) }}" class="btn btn-info my-1">Dettaglio</a>
-                            <a href="{{ route('dishes.edit', $dish->id) }}" class="btn my-2">
-                                <i class="fas fa-pen fs-4"></i>
-                            </a>
-                            <form action="{{ route('dishes.destroy', $dish->id) }}" method="POST"
-                                class="d-inline delete-form  my-1">
-                                @csrf
-                                @method('DELETE')
-                                {{-- <button type="submit" class="btn btn-danger p-2">Elimina</button> --}}
-                                @include('dishes.includes.modal')
-                            </form>
-                        </td>
-
+                        <th scope="col">Foto</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Prezzo</th>
+                        <th scope="col">Portata</th>
+                        <th scope="col">Controlli</th>
                     </tr>
-                @empty
-                    <div>
-                        <h3 class="text-center">Non ci sono piatti</h3>
-                    </div>
-                @endforelse
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @forelse($dishes as $dish)
+                        <tr>
+                            <td><img class="dish-thumb" src="{{ asset('storage/' . $dish->picture) }}"
+                                    alt="{{ $dish->name }}"></td>
+                            <td>{{ $dish->name }}</td>
+                            <td>€{{ $dish->price }}</td>
+                            <td>{{ $dish->entry }}</td>
+                            <td><a href="{{ route('dishes.show', $dish->id) }}" class="btn btn-info my-1">Dettaglio</a>
+                                <a href="{{ route('dishes.edit', $dish->id) }}" class="btn my-2">
+                                    <i class="fas fa-pen fs-4"></i>
+                                </a>
+                                <form action="{{ route('dishes.destroy', $dish->id) }}" method="POST"
+                                    class="d-inline delete-form  my-1">
+                                    @csrf
+                                    @method('DELETE')
+                                    {{-- <button type="submit" class="btn btn-danger p-2">Elimina</button> --}}
+                                    @include('dishes.includes.modal')
+                                </form>
+                            </td>
+                        </tr>
+                    @empty
+                        <div>
+                            <h3 class="text-center">Non ci sono piatti</h3>
+                        </div>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
 
     </section>
 @endsection
