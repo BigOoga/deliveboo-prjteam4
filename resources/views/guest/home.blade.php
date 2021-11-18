@@ -31,7 +31,6 @@
                 </div>
                 {{-- Navbar buttons --}}
                 <div>
-                    <a class="btn btn-light" href="#" role="button">Carrello</a>
                     @if (Auth::guest())
                         <a class="btn btn-light" href="{{ route('login') }}" role="button">Accedi o registrati</a>
                     @endif
@@ -67,29 +66,14 @@
             </nav>
         </div>
 
-        <div id="hero" class="d-flex align-items-end py-4">
+        <div id="hero">
             <div class="container">
-                <h1>I piatti che ami, a domicilio.</h1>
-                <div class="row mt-5">
-                    {{-- Search location --}}
-                    <div id="search-form" class="col-6 px-4">
-                        <div class="form-inline mr-auto">
-                            <label for="search" class="w-100 d-block">VAI AI RISTORANTI</label>
-                            <div class="d-flex">
-                                <input class="form-control me-3" type="text" placeholder="Search" aria-label="Search"
-                                    id="search">
-                                <a class="btn btn-light" href="{{ route('restaurants.index') }}" role="button">Vai ai
-                                    ristoranti</a>
-
-                            </div>
-                        </div>
-
-                        <p><a href="{{ route('login') }}">Accedi</a> per visualizzare i tuoi indirizzi recenti.</p>
+                <div class="row">
+                    <div class="col-6 d-flex align-items-center">
+                        <h1>I piatti che ami, a domicilio.</h1>
                     </div>
-
                 </div>
             </div>
-
         </div>
 
 
@@ -108,7 +92,7 @@
                         <div class="card flex-grow-1" style="width: 18rem;">
                             <a class="text-decoration-none text-dark" href="{{ route('restaurants.index') }}">
                                 {{-- Card image --}}
-                                <img src="..." class="card-img-top" alt="...">
+                                <img src="{{ asset('images/comfortFood.png')}}" class="card-img-top" alt="Comfort food" style="height: 8rem;">
                                 <div class="card-body">
                                     {{-- Card title --}}
                                     <h5 class="card-title">Comfort food</h5>
@@ -125,7 +109,7 @@
                         <div class="card flex-grow-1" style="width: 18rem;">
                             <a class="text-decoration-none text-dark" href="{{ route('restaurants.index') }}">
                                 {{-- Card image --}}
-                                <img src="..." class="card-img-top" alt="...">
+                                <img src="{{ asset('images/dessert.png')}}" class="card-img-top img-fluid" alt="dessert" style="height: 8rem;" >
                                 <div class="card-body">
                                     {{-- Card title --}}
                                     <h5 class="card-title">Dolci e dessert</h5>
@@ -142,14 +126,13 @@
                         <div class="card flex-grow-1" style="width: 18rem;">
                             <a class="text-decoration-none text-dark" href="{{ route('restaurants.index') }}">
                                 {{-- Card image --}}
-                                <img src="..." class="card-img-top" alt="...">
+                                <img src="{{asset('images/toshare.jpg')}}" class="card-img-top img-fluid" alt="food" style="height: 8rem;">
                                 <div class="card-body">
                                     {{-- Card title --}}
                                     <h5 class="card-title">Perfetti da condividere</h5>
                                     {{-- Description --}}
                                     <p class="card-text">Serve una scusa per stare insieme? Ordina dai ristoranti
-                                        che
-                                        trasformeranno la tua serata in un vera festa.</p>
+                                        che trasformeranno la tua serata in un vera festa.</p>
                                     {{-- Link to card object --}}
                                     <p>Scopri Perfetti da condividere</p>
                                 </div>
@@ -160,7 +143,7 @@
                         <div class="card flex-grow-1" style="width: 18rem;">
                             <a class="text-decoration-none text-dark" href="{{ route('restaurants.index') }}">
                                 {{-- Card image --}}
-                                <img src="..." class="card-img-top" alt="...">
+                                <img src="{{ asset('images/exclusive.png')}}" class="card-img-top img-fluid" alt="food" style="height: 8rem;">
                                 <div class="card-body">
                                     {{-- Card title --}}
                                     <h5 class="card-title">Esclusiva deliveroo</h5>
@@ -189,7 +172,7 @@
                         <div class="card flex-grow-1" style="width: 18rem;">
                             <a class="text-decoration-none text-dark" href="{{ route('restaurants.index') }}">
                                 {{-- Card image --}}
-                                <img src="..." class="card-img-top" alt="...">
+                                <img src="{{ asset('img/dessert.png')}}" class="card-img-top" alt="...">
                                 <div class="card-body">
                                     {{-- Card title --}}
                                     <h5 class="card-title">Comfort food</h5>
