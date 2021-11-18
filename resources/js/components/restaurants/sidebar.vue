@@ -72,6 +72,7 @@ h4{
         rgba(0, 204, 188, 1) 49.7%,
         rgba(208, 235, 153, 1) 50%
     );
+    border-right: 2px solid #00aabc;
     
 }
 input[type="checkbox"] {

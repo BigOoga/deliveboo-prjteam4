@@ -31,7 +31,7 @@
                 />
                 <button
                     @click="startSearch"
-                    class="btn btn-dark my-2 my-sm-0"
+                    class="btn my-2 my-sm-0"
                     type="button"
                 >
                     Search
@@ -42,7 +42,7 @@
             <button
                 @click="goToRestaurant"
                 type="button"
-                class="btn btn-dark"
+                class="btn"
             >
                 Carrello
             </button>
@@ -83,11 +83,25 @@ nav{
     padding: 10px 40px;
     height: 90px;
     background-color: rgba(0, 204, 188, 1);
+    border-bottom: 2px solid #00aabc;
 }
 form{ 
     display: flex;
     input[type="search"]{
         margin-right: 5px;
+        border: 2px solid #00aabc;
+    }
+    button[type="button"]{
+        background-color: #00bbbb;
+        color: white;
     }
 }
+button[type="button"]{
+        width: 100px;
+        height: 50px;
+        background-color: #00bb55;
+        color: white;
+        font-size: 1rem;
+        font-weight: bold;
+    }
 </style>

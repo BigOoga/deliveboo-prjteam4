@@ -40,6 +40,7 @@
 <style lang="scss" scoped>
 #sidebar-menu{
     width: 200px;
+    
 }
 
 #main-section{
