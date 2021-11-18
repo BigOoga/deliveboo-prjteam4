@@ -83,7 +83,6 @@ nav{
     padding: 10px 40px;
     height: 90px;
     background-color: rgba(0, 204, 188, 1);
-    border-bottom: 2px solid #00aabc;
 }
 form{ 
     display: flex;
