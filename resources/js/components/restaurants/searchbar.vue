@@ -1,6 +1,13 @@
 <template>
     <nav class="navbar navbar-expand-lg navbar-light bg-light border fixed-top">
-        <a class="navbar-brand" href="#">LogoDeliveboo</a>
+        <a class="navbar-brand" href="/home">
+            <img
+                src="/images/logo-text.png "
+                width="100"
+                height="40"
+                class="d-inline-block align-top"
+                alt="Logo"
+        /></a>
         <button
             class="navbar-toggler"
             type="button"

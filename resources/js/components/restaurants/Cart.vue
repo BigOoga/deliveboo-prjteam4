@@ -200,11 +200,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#main-row {
-    position: fixed;
-    right: 15px;
-}
-
 .btn-rnd {
     border-radius: 1rem;
     padding: 3px 12px;

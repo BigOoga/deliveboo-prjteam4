@@ -21,7 +21,7 @@
                 <li class="mb-2"><strong>Indirizzo: </strong>{{ $order->address }}</li>
                 <li class="mb-2"><strong>Telefono: </strong>{{ $order->phone }}</li>
                 <li class="mb-2"><strong>E-mail: </strong>{{ $order->email }}</li>
-                <li class="mb-2"><strong>Totale: </strong>{{ $order->total }}</li>
+                <li class="mb-2"><strong>Totale: </strong>€{{ $order->total }}</li>
                 <li class="mb-2"><strong>Data: </strong>{{ $order->created_at }}</li>
                 <hr class="my-5">
                 <h2><strong>Piatti ordinati</strong></h2>
@@ -35,20 +35,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($dishes as $dish)
-                        <tr>
-                        <th scope="row">{{$dish->id}}</th>
-                        <td>{{$dish->name}}</td>
-                        <td>{{$dish->quantity}}</td>
-                        <td>{{$dish->price * $dish->quantity}}</td>
-                      </tr>
-                      @endforeach
+                        @foreach ($dishes as $dish)
+                            <tr>
+                                <th scope="row">{{ $dish->id }}</th>
+                                <td>{{ $dish->name }}</td>
+                                <td>{{ $dish->quantity }}</td>
+                                <td>€{{ $dish->price * $dish->quantity }}</td>
+                            </tr>
+                        @endforeach
                     </tbody>
-                  </table>
+                </table>
                 <div class="d-flex py-3">
                 </div>
             </div>
-        </div>
+    </div>
     </ul>
     </div>
 @endsection

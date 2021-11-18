@@ -118,6 +118,6 @@ export default {
 
 <style lang="scss" scoped>
 #results {
-    padding-top: 60px;
+    padding-top: 70px;
 }
 </style>

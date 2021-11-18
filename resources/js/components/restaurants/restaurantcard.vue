@@ -44,7 +44,12 @@ export default {
 }
 
 img {
-    //max-width: 200px;
     max-height: 200px;
+}
+
+.card {
+    max-height: 400px;
+    overflow: hidden;
+    overflow-wrap: break-word;
 }
 </style>

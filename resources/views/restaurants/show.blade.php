@@ -15,7 +15,7 @@
         <topbar></topbar>
         <div class="container pt-3">
             {{-- RESTAURANT DETAILS --}}
-
+            <a class="btn btn-primary" href="{{ route('restaurants.index') }}" role="button">Indietro</a>
             <div class="row border">
 
                 <div class="col-8 border">
