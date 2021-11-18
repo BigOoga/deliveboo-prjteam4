@@ -1,5 +1,5 @@
 <template>
-    <div class="col-4 border p-5" id="main-row">
+    <div class="col-6 col-md-4 border p-5" id="main-row">
         <div class="col-12">
             <h4>Il tuo ordine</h4>
             <!-- qui ci andranno i prodotti selezionati -->
@@ -8,10 +8,11 @@
             <div v-for="(dish, i) in loadedDishes" :key="i">
                 <p>
                     €{{ dish.price }} {{ dish.name }}
-                    <button @click="decreaseQuant(i)" class="btn btn-primary">
-                        -</button
-                    >{{ dish.quantity }}
-                    <button @click="increaseQuant(i)" class="btn btn-primary">
+                    <button @click="decreaseQuant(i)" class="btn btn-rnd">
+                        -
+                    </button>
+                    {{ dish.quantity }}
+                    <button @click="increaseQuant(i)" class="btn btn-rnd">
                         +
                     </button>
                 </p>
@@ -38,7 +39,7 @@
             <button @click="goToCheckout" class="btn btn-primary">
                 Checkout
             </button>
-            <button @click="emptyCart" class="btn btn-danger">Empty</button>
+            <button @click="emptyCart" class="btn btn-danger">Svuota</button>
         </div>
     </div>
 </template>
@@ -198,4 +199,11 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.btn-rnd {
+    border-radius: 1rem;
+    padding: 3px 12px;
+    background-color: #3490dc;
+    color: white;
+}
+</style>

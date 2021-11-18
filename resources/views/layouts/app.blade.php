@@ -29,6 +29,8 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
+                    <img src="{{ asset('images/logo-small.png') }}" width="30" height="30"
+                        class="d-inline-block align-top" alt="Logo">
                     {{ config('app.name', 'Deliveboo') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -66,8 +68,9 @@
                                     <a class="dropdown-item" href="{{ route('restaurants.dashboard') }}">La mia
                                         dashboard</a>
                                     <a class="dropdown-item" href="{{ route('dishes.index') }}">Piatti</a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                                    document.getElementById('logout-form').submit();">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                                                            document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 

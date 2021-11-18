@@ -1,13 +1,14 @@
 <template>
-    <div class="col-8 d-flex flex-wrap">
+    <div class="col-6 col-md-8 d-flex flex-wrap">
         <div
             v-for="(dish, i) in dishes"
             :key="i"
-            class="card col-6"
+            class="card col-12 col-md-6 my-2"
             :class="[dish.available ? 'available' : 'unavailable']"
-            style="width: 18rem"
         >
             <img
+                class="pt-2"
+                style="object-fit: cover"
                 :src="
                     dish.picture
                         ? '/storage/' + dish.picture
@@ -18,13 +19,17 @@
             <div class="card-body">
                 <h5 class="card-title">{{ dish.name }}</h5>
                 <p class="card-text">{{ dish.description }}</p>
-                <p class="card-text">€{{ dish.price }}</p>
-                <button
-                    @click="addToCart(dish.id, dish.price)"
-                    class="btn btn-primary"
-                >
-                    Add
-                </button>
+                <div class="pos-bot">
+                    <p class="card-text">
+                        <span class="price">€{{ dish.price }}</span>
+                    </p>
+                    <button
+                        @click="addToCart(dish.id, dish.price)"
+                        class="btn btn-primary"
+                    >
+                        Aggiungi
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -141,6 +146,11 @@ img {
     object-fit: cover;
     width: 100px;
     height: 100px;
+}
+
+.price {
+    background-color: rgb(255, 255, 43);
+    padding: 2px 10px;
 }
 
 .card.unavailable {

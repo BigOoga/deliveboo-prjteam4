@@ -60,6 +60,6 @@ export default {
 #sidebar {
     position: fixed;
     left: 0;
-    padding-top: 60px;
+    padding-top: 70px;
 }
 </style>
