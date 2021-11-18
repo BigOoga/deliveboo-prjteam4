@@ -66,8 +66,9 @@
                                     <a class="dropdown-item" href="{{ route('restaurants.dashboard') }}">La mia
                                         dashboard</a>
                                     <a class="dropdown-item" href="{{ route('dishes.index') }}">Piatti</a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                                    document.getElementById('logout-form').submit();">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                                            document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
