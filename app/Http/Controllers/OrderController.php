@@ -85,7 +85,13 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        return view('orders.show', compact('order'));
+
+        $dishes = DB::table('dishes')
+            ->join('dish_order', 'dishes.id', '=', 'dish_order.dish_id')
+            ->join('orders', 'dish_order.order_id', '=', 'orders.id')
+            ->select('dishes.*', 'dish_order.quantity')->where('order_id', $order->id)
+            ->get();
+        return view('orders.show', compact('order', 'dishes'));
     }
 
     /**
