@@ -2,6 +2,13 @@
 
 @section('content')
     <section class="container">
+        <div class="d-flex justify-content-between m-3">
+            <div><a href="{{ route('dishes.index') }}" class="btn btn-primary p-2  my-1">Torna indietro</a>
+            </div>
+            <h1>Dettagli del piatto</h1>
+            <div><a href="{{ route('restaurants.dashboard') }}" class="btn btn-primary p-2  my-1">Torna alla dashboard</a>
+            </div>
+        </div>
         <div class="card mb-2">
             <div class="row">
                 <div class="col-md-3">
@@ -12,9 +19,18 @@
                         {{-- PRINT DISHES --}}
                         <div class="card-title d-flex align-items-center justify-content-between">
                             <h5>Nome piatto: <strong>{{ $dish->name }}</strong></h5>
-                            <a href="{{ route('dishes.edit', $dish->id) }}" class="btn my-2">
-                                <i class="fas fa-pen fs-4"></i>
-                            </a>
+                            <div>
+                                <a href="{{ route('dishes.edit', $dish->id) }}" class="btn my-2">
+                                    <i class="fas fa-pen fs-4"></i>
+                                </a>
+                                <form action="{{ route('dishes.destroy', $dish->id) }}" method="POST"
+                                    class="delete-form" class="delete-form">
+                                    @csrf
+                                    @method('DELETE')
+                                    {{-- <button type="submit" class="btn btn-danger">Elimina</button> --}}
+                                    @include('dishes.includes.modal')
+                                </form>
+                            </div>
                         </div>
                         <p class="card-text">
                             Descrizione: <strong>{{ $dish->description }}</strong>
@@ -24,9 +40,6 @@
                         </p>
                         <p class="card-text">
                             Prezzo: <strong>€ {{ $dish->price }}</strong>
-                        </p>
-                        <p class="card-text">
-                            Id: <strong>{{ $dish->id }}</strong>
                         </p>
                         {{-- BOOLEANS --}}
                         <div class="card-text d-flex justify-content-between">
@@ -51,21 +64,9 @@
                                 @endif
                             </span>
                         </div>
-                        {{-- LINK AND BUTTON --}}
-                        <div class="d-flex align-items-center">
-                            <a href="{{ route('dishes.index', $dish->id) }}" class="btn btn-success my-2">Lista</a>
-                            <form action="{{ route('dishes.destroy', $dish->id) }}" method="POST" class="delete-form"
-                                class="delete-form">
-                                @csrf
-                                @method('DELETE')
-                                {{-- <button type="submit" class="btn btn-danger">Elimina</button> --}}
-                                @include('dishes.includes.modal')
-                            </form>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 @endsection
-
