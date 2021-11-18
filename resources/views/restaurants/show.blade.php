@@ -32,7 +32,7 @@
                 {{-- RESTAURANT PIC --}}
                 <div class="col-4 border">
                     <img src="{{ asset('storage/' . $restaurant->image) }}" alt="{{ $restaurant->name }}"
-                        class="img-fluid rounded px-3" style="max-width: 450px;">
+                        class="img-fluid">
                 </div>
             </div>
 
