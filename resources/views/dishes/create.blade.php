@@ -4,7 +4,7 @@
 
     <div class="container">
         {{-- FORM FOR EDIT --}}
-        <div class="d-flex justify-content-between my-2">
+        <div class="row justify-content-between my-2">
             <div><a href="{{ route('dishes.index') }}" class="btn btn-primary p-2  my-1">Torna indietro</a>
             </div>
             <h1>Crea Piatto</h1>

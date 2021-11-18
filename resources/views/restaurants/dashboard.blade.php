@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1>Dashboard</h1>
+        <h2>Dashboard</h2>
         {{-- AT A GLANCE --}}
         <section>
             <div class="card">
