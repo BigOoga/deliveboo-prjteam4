@@ -36,6 +36,9 @@
                         <td>€{{ $dish->price }}</td>
                         <td>{{ $dish->entry }}</td>
                         <td><a href="{{ route('dishes.show', $dish->id) }}" class="btn btn-info my-1">Dettaglio</a>
+                            <a href="{{ route('dishes.edit', $dish->id) }}" class="btn my-2">
+                                <i class="fas fa-pen fs-4"></i>
+                            </a>
                             <form action="{{ route('dishes.destroy', $dish->id) }}" method="POST"
                                 class="d-inline delete-form  my-1">
                                 @csrf
@@ -56,5 +59,4 @@
 
     </section>
 @endsection
-<<<<<<< HEAD @section('secondaryscript') <script src="{{ asset('js/delete_confirmation.js') }}"></script> @endsection=======>>>>>>>
-    53ce3e916ccfebd3fa5c18d7ae4dd882d1269522
+

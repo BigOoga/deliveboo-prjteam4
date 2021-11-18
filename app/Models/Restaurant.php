@@ -16,7 +16,8 @@ class Restaurant extends Authenticatable
 
     public function dishes()
     {
-        return $this->hasMany(Dish::class);
+        // return $this->hasMany(Dish::class);
+        return $this->belongsToMany('App\Models\Dish');
     }
 
     public function reviews()
