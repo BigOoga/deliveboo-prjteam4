@@ -83,7 +83,7 @@
         <div id="deliveboo-section" class="my-5">
             <div class="container">
                 {{-- Section title --}}
-                <h2 class="mb-3">La selezione di Deliveboo</h2>
+                <h2 class="mb-3 font-weight-bold">La selezione di Deliveboo</h2>
                 <div class="row">
                     <div class="col-5 d-flex py-3">
                         <div class="card flex-grow-1 card-animation" style="width: 18rem;">
@@ -159,7 +159,7 @@
         <div id="default-section" class="py-5">
             <div class="container">
                 {{-- Section title --}}
-                <h2 class="mb-3 font-weight-bold">I tuoi piatti preferiti consegnati da noi</h2>
+                <h2 class="mb-4 font-weight-bold">I tuoi piatti preferiti, consegnati da noi</h2>
                 <div class="row row-cols-1 row-cols-md-3">
                     <div class="col mb-4">
                       <div>
@@ -238,11 +238,11 @@
         </div>
 
         {{-- Da aggiungere dati type per il loop --}}
-        <div id="suggested">
+        <div id="suggested" class="mt-5">
             <div class="container">
                 <h2>Cerchi qualcos'altro?</h2>
                 @foreach ($types as $type)
-                    <a href="{{ route('restaurants.index') }}" class="btn btn-primary m-2 rounded-pill">{{ $type->name }}</a>
+                    <button type="button" class="btn m-2"><a href="{{ route('restaurants.index') }}" class="text-dark text-decoration-none">{{ $type->name }}</a></button>
                 @endforeach
             </div>
         </div>

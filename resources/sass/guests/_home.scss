@@ -80,12 +80,14 @@ header {
 
 // Main
 
-#default-section {
-    background-color: rgb(255, 234, 228);
+#default-section{
+    background-color: $pinky;
+    
     h5 {
         text-transform: capitalize;
     }
 }
+
 
 #default-section, #deliveboo-section {  
     h5 {
@@ -111,7 +113,7 @@ header {
 
 
 // ANIMATIONS 
-img {
+img, h1 {
     animation: fadeIn 1s ease-in;
     animation-iteration-count: initial;
 }
