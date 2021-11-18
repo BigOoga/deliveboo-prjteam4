@@ -24,9 +24,8 @@
                 <div>
                     <a class="navbar-brand" href="#">
                         <span class="text-white">
-                            <img src="{{ asset('images/logo-small.png') }}" width="30" height="30"
+                            <img src="{{ asset('images/logo-text.png') }}" width="100" height="40"
                                 class="d-inline-block align-top" alt="Logo">
-                            Deliveboo
                         </span>
                     </a>
                 </div>
@@ -34,10 +33,11 @@
                 <div>
                     <a class="btn btn-light" href="#" role="button">Carrello</a>
                     @if (Auth::guest())
-                    <a class="btn btn-light" href="{{ route('login') }}" role="button">Accedi o registrati</a>
+                        <a class="btn btn-light" href="{{ route('login') }}" role="button">Accedi o registrati</a>
                     @endif
                     @if (Auth::check())
-                    <a class="btn btn-light" href="{{ route('restaurants.dashboard') }}" role="button">Vai alla tua dashboard</a>
+                        <a class="btn btn-light" href="{{ route('restaurants.dashboard') }}" role="button">Vai alla
+                            tua dashboard</a>
                     @endif
                     <a class="btn btn-light" href="#" role="button" onclick="openNav()">Menu</a>
                 </div>
@@ -51,15 +51,18 @@
                     <hr class="mx-3">
                     <div class="d-flex justify-content-center p-3">
                         @if (Auth::guest())
-                        <a class="btn btn-primary text-center" href="{{ route('login') }}" role="button">Accedi</a>
-                        <a class="btn btn-primary text-center" href="{{ route('register') }}" role="button">Registrati</a>
+                            <a class="btn btn-primary text-center" href="{{ route('login') }}"
+                                role="button">Accedi</a>
+                            <a class="btn btn-primary text-center" href="{{ route('register') }}"
+                                role="button">Registrati</a>
                         @endif
                         @if (Auth::check())
-                        <a class="btn btn-primary" href="{{ route('restaurants.dashboard') }}" role="button">Vai alla tua dashboard</a>
+                            <a class="btn btn-primary" href="{{ route('restaurants.dashboard') }}" role="button">Vai
+                                alla tua dashboard</a>
                         @endif
                     </div>
                     <hr class="mx-3">
-                    
+
                 </div>
             </nav>
         </div>
@@ -103,7 +106,7 @@
                 <div class="row">
                     <div class="col-5 d-flex py-3">
                         <div class="card flex-grow-1" style="width: 18rem;">
-                            <a class="text-decoration-none text-dark" href="{{ route('restaurants.index')}}">
+                            <a class="text-decoration-none text-dark" href="{{ route('restaurants.index') }}">
                                 {{-- Card image --}}
                                 <img src="..." class="card-img-top" alt="...">
                                 <div class="card-body">
@@ -115,57 +118,60 @@
                                     {{-- Link to card object --}}
                                     <p>Scopri Comfort Food</p>
                                 </div>
-                            </a>    
+                            </a>
                         </div>
                     </div>
                     <div class="col-7 d-flex py-3">
                         <div class="card flex-grow-1" style="width: 18rem;">
-                            <a class="text-decoration-none text-dark" href="{{ route('restaurants.index')}}">
+                            <a class="text-decoration-none text-dark" href="{{ route('restaurants.index') }}">
                                 {{-- Card image --}}
                                 <img src="..." class="card-img-top" alt="...">
                                 <div class="card-body">
                                     {{-- Card title --}}
                                     <h5 class="card-title">Dolci e dessert</h5>
                                     {{-- Description --}}
-                                    <p class="card-text">Dolci piaceri per rendere la giornata ancora più gustosa.</p>
+                                    <p class="card-text">Dolci piaceri per rendere la giornata ancora più gustosa.
+                                    </p>
                                     {{-- Link to card object --}}
                                     <p>Scopri Dolci e dessert</p>
                                 </div>
-                            </a>    
+                            </a>
                         </div>
                     </div>
                     <div class="col-7 d-flex py-3">
                         <div class="card flex-grow-1" style="width: 18rem;">
-                            <a class="text-decoration-none text-dark" href="{{ route('restaurants.index')}}">
+                            <a class="text-decoration-none text-dark" href="{{ route('restaurants.index') }}">
                                 {{-- Card image --}}
                                 <img src="..." class="card-img-top" alt="...">
                                 <div class="card-body">
                                     {{-- Card title --}}
                                     <h5 class="card-title">Perfetti da condividere</h5>
                                     {{-- Description --}}
-                                    <p class="card-text">Serve una scusa per stare insieme? Ordina dai ristoranti che
+                                    <p class="card-text">Serve una scusa per stare insieme? Ordina dai ristoranti
+                                        che
                                         trasformeranno la tua serata in un vera festa.</p>
                                     {{-- Link to card object --}}
                                     <p>Scopri Perfetti da condividere</p>
                                 </div>
-                            </a>    
+                            </a>
                         </div>
                     </div>
                     <div class="col-5 d-flex py-3">
                         <div class="card flex-grow-1" style="width: 18rem;">
-                            <a class="text-decoration-none text-dark" href="{{ route('restaurants.index')}}">
+                            <a class="text-decoration-none text-dark" href="{{ route('restaurants.index') }}">
                                 {{-- Card image --}}
                                 <img src="..." class="card-img-top" alt="...">
                                 <div class="card-body">
                                     {{-- Card title --}}
                                     <h5 class="card-title">Esclusiva deliveroo</h5>
                                     {{-- Description --}}
-                                    <p class="card-text">I più famosi, i più buoni, i preferiti. Quelli che trovi solo
+                                    <p class="card-text">I più famosi, i più buoni, i preferiti. Quelli che trovi
+                                        solo
                                         su Deliveboo.</p>
                                     {{-- Link to card object --}}
                                     <p>Scopri Esclusiva Deliveboo</p>
                                 </div>
-                            </a>    
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -181,7 +187,7 @@
                 <div class="row">
                     <div class="col-4 d-flex py-3">
                         <div class="card flex-grow-1" style="width: 18rem;">
-                            <a class="text-decoration-none text-dark" href="{{ route('restaurants.index')}}">
+                            <a class="text-decoration-none text-dark" href="{{ route('restaurants.index') }}">
                                 {{-- Card image --}}
                                 <img src="..." class="card-img-top" alt="...">
                                 <div class="card-body">
@@ -191,36 +197,38 @@
                                     <p class="card-text">I grandi classici che scaldano il cuore, perfetti in ogni
                                         momento.</p>
                                 </div>
-                            </a>    
+                            </a>
                         </div>
                     </div>
                     <div class="col-4 d-flex py-3">
                         <div class="card flex-grow-1" style="width: 18rem;">
-                            <a class="text-decoration-none text-dark" href="{{ route('restaurants.index')}}">
+                            <a class="text-decoration-none text-dark" href="{{ route('restaurants.index') }}">
                                 {{-- Card image --}}
                                 <img src="..." class="card-img-top" alt="...">
                                 <div class="card-body">
                                     {{-- Card title --}}
                                     <h5 class="card-title">Dolci e dessert</h5>
                                     {{-- Description --}}
-                                    <p class="card-text">Dolci piaceri per rendere la giornata ancora più gustosa.</p>
+                                    <p class="card-text">Dolci piaceri per rendere la giornata ancora più gustosa.
+                                    </p>
                                 </div>
-                            </a>    
+                            </a>
                         </div>
                     </div>
                     <div class="col-4 d-flex py-3">
                         <div class="card flex-grow-1" style="width: 18rem; max-width: 100%;">
-                            <a class="text-decoration-none text-dark" href="{{ route('restaurants.index')}}">
+                            <a class="text-decoration-none text-dark" href="{{ route('restaurants.index') }}">
                                 {{-- Card image --}}
                                 <img src="..." class="card-img-top" alt="...">
                                 <div class="card-body">
                                     {{-- Card title --}}
                                     <h5 class="card-title">Perfetti da condividere</h5>
                                     {{-- Description --}}
-                                    <p class="card-text">Serve una scusa per stare insieme? Ordina dai ristoranti che
+                                    <p class="card-text">Serve una scusa per stare insieme? Ordina dai ristoranti
+                                        che
                                         trasformeranno la tua serata in un vera festa.</p>
                                 </div>
-                            </a>    
+                            </a>
                         </div>
                     </div>
 
@@ -234,7 +242,7 @@
 
             <div class="container">
                 @foreach ($types as $type)
-                <a href="{{route('restaurants.index')}}" class="btn btn-secondary m-2">{{$type->name}}</a>
+                    <a href="{{ route('restaurants.index') }}" class="btn btn-secondary m-2">{{ $type->name }}</a>
                 @endforeach
             </div>
         </div>
