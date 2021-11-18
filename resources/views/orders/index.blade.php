@@ -1,15 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
-    <title>Document</title>
-</head>
-<body>
+@extends('layouts.app')
+
+@section('content')
+
     <div class="container mt-5 mb-5">
-        <button type="button" class="btn btn-outline-success mb-5"><a href="{{route('orders.create')}}" class="link-dark text-decoration-none">Crea nuovo ordine</a></button>
+        <div class="mb-3">
+            <button type="button" class="btn btn-outline-success"><a href="{{route('orders.create')}}" class="link-dark text-decoration-none">Crea nuovo ordine</a></button>
+            <a href="{{ route('restaurants.dashboard') }}" class="btn btn-primary">Torna alla dashboard</a>
+        </div>
         <ul class="list-group list-unstyled">
             @foreach ($orders as $order)
                 <div class="border p-5">
@@ -19,23 +16,23 @@
                     <li class="mb-2"><strong>Indirizzo: </strong>{{$order->address}}</li>
                     <li class="mb-2"><strong>Totale: </strong>{{$order->total}}</li>
                     <li class="mb-2"><strong>Creato il: </strong>{{$order->created_at}}</li>
-                    {{-- tasto show dettaglio --}}
-                    <li class="mb-2"><a href="{{route('orders.show', $order->id)}}" class="btn btn-outline-primary">Dettaglio</a></li>
-                    {{-- tasto edit --}}
-                    <li class="mb-2"><a href="{{route('orders.edit', $order->id)}}" class="btn btn-outline-warning">Modifica</a></li>
-                    {{-- tasto delete --}}
-                    <form action="{{ route('orders.destroy', $order->id)}}"
-                    method="post">
-                        @csrf
-                        @method('DELETE')
-                        {{-- <input type="submit" value="elimina"> --}}
-                        <button type="submit" class="btn btn-outline-danger mb-2">Elimina</button>
-                        <a href="{{ route('restaurants.dashboard') }}" class="btn btn-primary">Torna alla dashboard</a>
-                    </form>
+                    <div class="d-flex py-3">
+                        {{-- tasto show dettaglio --}}
+                        <li><a href="{{route('orders.show', $order->id)}}" class="btn btn-outline-primary">Dettaglio</a></li>
+                        {{-- tasto edit --}}
+                        <li class="mb-2 mx-2"><a href="{{route('orders.edit', $order->id)}}" class="btn btn-outline-warning">Modifica</a></li>
+                        {{-- tasto delete --}}
+                        <form action="{{ route('orders.destroy', $order->id)}}"
+                        method="post">
+                            @csrf
+                            @method('DELETE')
+                            {{-- <input type="submit" value="elimina"> --}}
+                            <button type="submit" class="btn btn-outline-danger">Elimina</button>
+                        </form>
+                    </div>
                 </div>
                 <br>
             @endforeach
         </ul>
     </div>
-</body>
-</html>
+@endsection
