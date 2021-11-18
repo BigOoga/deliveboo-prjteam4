@@ -10,7 +10,6 @@
         integrity='sha512-BnbUDfEUfV0Slx6TunuB042k9tuKe3xrD6q4mg5Ed72LTgzDIcLPxg6yI2gcMFRyomt+yJJxE+zJwNmxki6/RA=='
         crossorigin='anonymous' />
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css">
 
 
 </head>
@@ -70,7 +69,7 @@
         <div id="hero">
             <div class="container">
                 <div class="row">
-                    <div class="col-6 d-flex align-items-center">
+                    <div class="col-6 mb-5 img-animation">
                         <h1>I piatti che ami, a domicilio.</h1>
                     </div>
                 </div>
@@ -81,17 +80,17 @@
     {{-- Main --}}
     <main>
         {{-- Made first main section, need to make it responsive --}}
-        <div id="deliveboo-section" class="my-3">
+        <div id="deliveboo-section" class="my-5">
             <div class="container">
                 {{-- Section title --}}
                 <h2 class="mb-3">La selezione di Deliveboo</h2>
                 <div class="row">
                     <div class="col-5 d-flex py-3">
-                        <div class="card flex-grow-1" style="width: 18rem;">
+                        <div class="card flex-grow-1 card-animation" style="width: 18rem;">
                             <a class="text-decoration-none text-dark" href="{{ route('restaurants.index') }}">
                                 {{-- Card image --}}
                                 <img src="{{ asset('images/comfortFood.png')}}" class="card-img-top" alt="Comfort-food" style="height: 8rem;">
-                                <div class="card-body">
+                                <div class="ml-2 mt-4">
                                     {{-- Card title --}}
                                     <h5 class="card-title">Comfort food</h5>
                                     {{-- Description --}}
@@ -103,11 +102,11 @@
                         </div>
                     </div>
                     <div class="col-7 d-flex py-3">
-                        <div class="card flex-grow-1" style="width: 18rem;">
+                        <div class="card flex-grow-1 card-animation" style="width: 18rem;">
                             <a class="text-decoration-none text-dark" href="{{ route('restaurants.index') }}">
                                 {{-- Card image --}}
-                                <img src="{{ asset('images/dessert.png')}}" class="card-img-top img-fluid" alt="dessert" style="height: 8rem;" >
-                                <div class="card-body">
+                                <img src="{{ asset('images/dessert.png')}}" class="card-img-top" alt="dessert" style="height: 8rem;" >
+                                <div class="ml-2 mt-4">
                                     {{-- Card title --}}
                                     <h5 class="card-title">Dolci e dessert</h5>
                                     {{-- Description --}}
@@ -120,11 +119,11 @@
                         </div>
                     </div>
                     <div class="col-7 d-flex py-3">
-                        <div class="card flex-grow-1" style="width: 18rem;">
+                        <div class="card flex-grow-1 card-animation" style="width: 18rem;">
                             <a class="text-decoration-none text-dark" href="{{ route('restaurants.index') }}">
                                 {{-- Card image --}}
-                                <img src="{{asset('images/toshare.jpg')}}" class="card-img-top img-fluid" alt="food" style="height: 8rem;">
-                                <div class="card-body">
+                                <img src="{{asset('images/toshare.jpg')}}" class="card-img-top" alt="food" style="height: 8rem;">
+                                <div class="ml-2 mt-4">
                                     {{-- Card title --}}
                                     <h5 class="card-title">Perfetti da condividere</h5>
                                     {{-- Description --}}
@@ -136,11 +135,11 @@
                         </div>
                     </div>
                     <div class="col-5 d-flex py-3">
-                        <div class="card flex-grow-1" style="width: 18rem;">
+                        <div class="card flex-grow-1 card-animation" style="width: 18rem;">
                             <a class="text-decoration-none text-dark" href="{{ route('restaurants.index') }}">
                                 {{-- Card image --}}
-                                <img src="{{ asset('images/exclusive.png')}}" class="card-img-top img-fluid" alt="food" style="height: 8rem;">
-                                <div class="card-body">
+                                <img src="{{ asset('images/exclusive.png')}}" class="card-img-top" alt="food" style="height: 8rem;">
+                                <div class="ml-2 mt-4">
                                     {{-- Card title --}}
                                     <h5 class="card-title">Esclusiva deliveboo</h5>
                                     {{-- Description --}}
@@ -157,16 +156,86 @@
 
 
         {{-- Da moltiplicare le cards e aggiustare le desc --}}
-        <div id="default-section" class="my-3  bg-primary">
+        <div id="default-section" class="py-5">
             <div class="container">
                 {{-- Section title --}}
-                <h2 class="mb-3">I tuoi piatti preferiti consegnati da noi</h2>
-                <h3>Card di ristoranti vari</h3>
-                <div class="row">
+                <h2 class="mb-3 font-weight-bold">I tuoi piatti preferiti consegnati da noi</h2>
+                <div class="row row-cols-1 row-cols-md-3">
+                    <div class="col mb-4">
+                      <div>
+                        <img src="{{ asset('images/sushi.jpg')}}" class="card-img-top" alt="Sushi" style="height: 14rem;">
+                        <div class="mt-2">
+                          <h5 class="card-title text-capitalize">Sushi</h5>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col mb-4">
+                      <div>
+                        <img src="{{ asset('images/pokè.jpg')}}" class="card-img-top" alt="Pokè-bowl" style="height: 14rem;">
+                        <div class="mt-2">
+                          <h5 class="card-title text-capitalize">Pokè bowl</h5>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col mb-4">
+                      <div>
+                        <img src="{{ asset('images/tacos.jpg')}}" class="card-img-top" alt="Cucina-Messico" style="height: 14rem;">
+                        <div class="mt-2">
+                          <h5 class="card-title text-capitalize">Cucina messicana</h5>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col mb-4">
+                      <div>
+                        <img src="{{ asset('images/fastfood.jpg')}}" class="card-img-top" alt="Fast-food" style="height: 14rem;">
+                        <div class="mt-2">
+                          <h5 class="mt-2">Fast Food</h5>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col mb-4">
+                        <div>
+                          <img src="{{ asset('images/pizza.jpg')}}" class="card-img-top" alt="Pizza" style="height: 14rem;">
+                          <div class="mt-2">
+                            <h5 class="card-title text-capitalize">Pizza</h5>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col mb-4">
+                        <div>
+                          <img src="{{ asset('images/pasta.jpg')}}" class="card-img-top" alt="Pasta" style="height: 14rem;">
+                          <div class="mt-2">
+                            <h5 class="card-title text-capitalize">Cucina italiana</h5>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col mb-4">
+                        <div>
+                          <img src="{{ asset('images/pesce.jpg')}}" class="card-img-top" alt="Frittura-di-pesce" style="height: 14rem;">
+                          <div class="mt-2">
+                            <h5 class="card-title text-capitalize">Pesce</h5>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col mb-4">
+                        <div>
+                          <img src="{{ asset('images/kebab.jpg')}}" class="card-img-top" alt="Kebab" style="height: 14rem;">
+                          <div class="mt-2">
+                            <h5 class="card-title text-capitalize">Kebab</h5>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col mb-4">
+                        <div>
+                          <img src="{{ asset('images/vietnamita.jpg')}}" class="card-img-top" alt="Cucina-Vietnam" style="height: 14rem;">
+                          <div class="mt-2">
+                            <h5 class="card-title text-capitalize">Cucina vietnamita</h5>
+                          </div>
+                        </div>
+                      </div>
                 </div>
             </div>
         </div>
-
 
         {{-- Da aggiungere dati type per il loop --}}
         <div id="suggested">
