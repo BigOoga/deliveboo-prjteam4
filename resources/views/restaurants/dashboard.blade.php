@@ -2,11 +2,14 @@
 
 @section('content')
     <div class="container">
-        <h1>Dashboard</h1>
+        <h2>Dashboard</h2>
         {{-- AT A GLANCE --}}
         <section>
             <div class="card">
-                <h5 class="card-header">{{ $restaurant->name }}</h5>
+                <h5 class="card-header d-flex justify-content-between">{{ $restaurant->name }}<a
+                        href="{{ route('restaurants.edit', $restaurant->id) }}" class="btn btn-primary">Modifica
+                        informazioni</a>
+                </h5>
                 <div class="card-body">
                     <img class="img-fluid" style="width: 200px; height: auto"
                         src="{{ asset('storage/' . $restaurant->image) }}" alt="{{ $restaurant->name }}">
