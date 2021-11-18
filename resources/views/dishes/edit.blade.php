@@ -4,8 +4,8 @@
 
     <div class="container">
         {{-- FORM FOR EDIT --}}
-        <div class="d-flex justify-content-between m-3">
-            <div><a href="{{ route('dishes.index') }}" class="btn btn-primary p-2  my-1">Indietro</a>
+        <div class="d-flex justify-content-between my-2">
+            <div><a href="{{ route('dishes.index') }}" class="btn btn-primary p-2 my-1">Torna indietro</a>
             </div>
             <h1>Modifica Piatto</h1>
             <div><a href="{{ route('restaurants.dashboard') }}" class="btn btn-primary p-2  my-1">Torna alla dashboard</a>
