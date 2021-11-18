@@ -4,7 +4,13 @@
 
     <div class="container">
         {{-- FORM FOR EDIT --}}
-        <h1 class="text-center mb-3">Crea Piatto</h1>
+        <div class="d-flex justify-content-between m-3">
+            <div><a href="{{ route('dishes.index') }}" class="btn btn-primary p-2  my-1">Torna indietro</a>
+            </div>
+            <h1>Crea Piatto</h1>
+            <div><a href="{{ route('restaurants.dashboard') }}" class="btn btn-primary p-2  my-1">Torna alla dashboard</a>
+            </div>
+        </div>
         @include('dishes.includes.form')
     </div>
 
@@ -12,6 +18,6 @@
 
 
 @section('scripts')
-{{-- VALUTARE PREVIEW IMMAGINE --}}
+    {{-- VALUTARE PREVIEW IMMAGINE --}}
     {{-- <script src="{{ asset('js/preview.js') }}"></script> --}}
 @endsection

@@ -1,10 +1,9 @@
-
 @if ($dish->exists)
     <form action="{{ route('dishes.update', $dish->id) }}" method="POST" class="row g-3"
         enctype="multipart/form-data">
         @method('PATCH')
-@else
-<form method="POST" action="{{ route('dishes.store') }}" class="row g-3" enctype="multipart/form-data">
+    @else
+        <form method="POST" action="{{ route('dishes.store') }}" class="row g-3" enctype="multipart/form-data">
 @endif
 @csrf
 {{-- NAME --}}
@@ -42,8 +41,8 @@
 </div>
 {{-- PICTURE --}}
 <div class="offset-md-2 col-md-6">
-        <label for="picture" class="form-label">Foto piatto:</label>
-        <input type="file" class="form-control @error('picture') is-invalid @enderror" name="picture" id="picture">
+    <label for="picture" class="form-label">Foto piatto:</label>
+    <input type="file" class="form-control @error('picture') is-invalid @enderror" name="picture" id="picture">
     @error('picture')
         <div class="invalid-feedback">
             {{ $message }}
@@ -90,9 +89,6 @@
     </div>
 </div>
 <div class="col-12 mt-3">
-    <button type="submit" class="btn btn-primary">Salva</button>
-    <a class="btn btn-success my-2" href="{{ route('dishes.index') }}">Torna alla lista</a>
-    <a class="btn btn-success" href="{{ route('restaurants.dashboard') }}">Torna alla dashboard</a>
-
+    <button type="submit" class="btn btn-success py-2 px-3">Salva</button>
 </div>
 </form>
