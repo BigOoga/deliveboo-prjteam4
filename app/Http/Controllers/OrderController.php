@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Dish;
+use Carbon\Carbon;
 
 class OrderController extends Controller
 {
@@ -130,12 +131,24 @@ class OrderController extends Controller
     {
         $user_id = Auth::id();
         $orders = DB::table('orders')
-            ->select('orders.*')
             ->join('dish_order', 'dish_order.order_id', '=', 'orders.id')
             ->join('dishes', 'dish_order.dish_id', '=', 'dishes.id')
             ->join('restaurants', 'dishes.restaurant_id', '=', 'restaurants.id')
-            ->where('restaurants.id', $user_id)->groupBy('order_id')
-            ->get();
+            ->select('orders.created_at')
+            ->where('restaurants.id', $user_id)
+            ->get()
+            ->groupBy(function($date) {
+                return Carbon::parse($date->created_at)->format('M');
+            // })
+            // ->countBy(function($month){
+            //     return substr(strrchr($month), 1);
+            });
+
+            // $orders = collect([$orders]);
+            // $counted = $orders->countBy();
+            // $counted->all();
+            
+            // dd($orders);
         return view('orders.statistic', compact('orders'));
     }
 }
