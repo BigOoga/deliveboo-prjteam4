@@ -31,8 +31,8 @@
               <a class="btn btn-light mx-3" href="{{ route('login') }}" role="button"><i class="fas fa-home mr-2"></i>Accedi o registrati</a>
             @endif
             @if (Auth::check())
-              <a class="btn btn-light" href="{{ route('restaurants.dashboard') }}" role="button">Vai alla
-                tua dashboard<i class="fas fa-home"></i></a>
+              <a class="btn btn-light" href="{{ route('restaurants.dashboard') }}" role="button"><i class="fas fa-home mr-2"></i>Vai alla
+                tua dashboard</a>
             @endif
               <a class="btn btn-light" href="#" role="button" onclick="openNav()"><i class="fas fa-bars mr-2"></i>Menu</a>
           </div>
