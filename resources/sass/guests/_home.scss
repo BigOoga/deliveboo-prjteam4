@@ -4,16 +4,27 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 #root {
     overflow: auto;
 }
 
-// Utils
-.clickable {
-    cursor: pointer;
+
+
+// OUTSIDE MAIN 
+header {
+    height: 455px;
+    background: linear-gradient(
+        176deg,
+        rgba(0, 204, 188, 1) 49.7%,
+        rgba(208, 235, 153, 1) 50%
+    );
+    i {
+        color: #00ccbc;
+    };
 }
 
-// Main
+
 #hero {
     height: 400px;
     display: flex;
@@ -26,22 +37,11 @@
     h1 {
         color: #440063;
         font-weight: bold;
+        font-size: 45px;
     }
 }
 
-header {
-    height: 455px;
-    background: linear-gradient(
-        176deg,
-        rgba(0, 204, 188, 1) 49.7%,
-        rgba(208, 235, 153, 1) 50%
-    );
-}
-#search-form {
-    line-height: calc(177px / 3);
-    background-color: #fff;
-    border-radius: 5px;
-}
+// SIDENAV 
 .sidenav {
     height: 100%;
     width: 0;
@@ -64,6 +64,7 @@ header {
     display: block;
     transition: 0.3s;
 }
+
 .sidenav .btn {
     width: 100%;
     margin: 10px;
@@ -82,9 +83,75 @@ header {
     margin-left: 50px;
 }
 
+
+
+
+
+// Main
+
+#default-section{
+    background-color: #ffeae4;
+    
+    h5 {
+        text-transform: capitalize;
+    }
+}
+
+
+#default-section, #deliveboo-section {  
+   
+    h5 {
+        font-weight: bold;
+    };
+    h2 {
+        font-size: 35px;
+    }
+    a {
+    color: #000;
+    text-decoration: none;
+    };
+
+}
+
+
+// #search-form {
+//     line-height: calc(177px / 3);    
+//     background-color: #fff;
+//     border-radius: 5px;
+// }
+
+
+
 // Order Statistics
 
-#myChart {
-    width: 100%;
-    height: auto;
+// #myChart {
+//     width: 100%;
+//     height: auto;
+// }
+
+
+// ANIMATIONS 
+img, h1 {
+    animation: fadeIn 1s ease-in;
+    animation-iteration-count: initial;
 }
+
+@keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      
+      opacity: 1;
+    }
+}    
+
+.card-animation {
+  transition: transform 0.5s;
+}
+
+.card-animation:hover {
+    transform: scale(1.02);
+
+}
+
