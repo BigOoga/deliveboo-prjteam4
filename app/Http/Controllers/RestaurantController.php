@@ -114,9 +114,15 @@ class RestaurantController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
+        $boundTypes = $restaurant->types;
+        $type_arr = [];
+
+        foreach ($boundTypes as $boundType => $value) {
+            $type_arr[] = $value->id;
+        }
 
         $types = Type::all();
-        return view('restaurants.edit', compact('restaurant', 'types'));
+        return view('restaurants.edit', compact('restaurant', 'types', 'type_arr'));
     }
 
 
@@ -139,11 +145,32 @@ class RestaurantController extends Controller
      */
     public function update(Request $request, Restaurant $restaurant)
     {
+        $request->validate(
+            [
+                'name' => 'required',
+                'address' => 'required',
+                'description' => 'nullable',
+                'opening_time' => 'required',
+                'closing_time' => 'required',
+                'delivery_fee' => 'required|numeric',
+                'image' => 'mimes:jpeg,png,jpg'
+            ],
+            [
+                'required' => 'Questo campo è obbligatorio',
+                'numeric' => 'Questo campo deve essere numerico',
+                'password.min' => 'La password richiede almeno 8 caratteri',
+                'iva.digits' => 'Questo campo richiede 11 numeri',
+                'unique' => 'Il parametro che hai inserito esiste già!',
+                'image.mimes' => 'Il file dev\'essere in formato .jpg o .png'
+            ]
+        );
+
         $data = $request->all();
 
         $restaurant->fill($data);
         $restaurant->save();
-        return redirect()->route('restaurants.show', $restaurant->id);
+        $restaurant->types()->attach($data['types']);
+        return redirect()->route('restaurants.dashboard');
     }
 
     /**
