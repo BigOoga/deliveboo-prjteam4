@@ -23,15 +23,19 @@
                 {{-- formnew --}}
                 <form>
                     <div class="form-group">
-                        <label for="name">Nome</label>
+                        <label for="name">Nome <span style="color: red" class="name-feedback d-none">*Il campo non può
+                                essere vuoto.</span></label>
                         <input type="text" class="form-control" id="name">
-                        <label for="last_name">Cognome</label>
+                        <label for="last_name">Cognome <span style="color: red" class="last-name-feedback d-none">*Il
+                                campo non può essere vuoto.</span></label>
                         <input type="text" class="form-control" id="last_name">
-                        <label for="address">Indirizzo</label>
+                        <label for="address">Indirizzo <span style="color: red" class="address-feedback d-none">*Il campo
+                                non può essere vuoto.</span></label>
                         <input type="text" class="form-control" id="address">
-                        <label for="phone">Telefono</label>
+                        <label for="phone">Telefono <span style="color: red" class="phone-feedback d-none">*Inserisci un
+                                numero di telefono valido.</span></label>
                         <input type="text" class="form-control" id="phone">
-                        <label for="email">Email</label>
+                        <label for="email">Email <span style="color: red" class="email-feedback d-none"></span></label>
                         <input type="email" class="form-control" id="email">
                     </div>
                 </form>
@@ -62,6 +66,19 @@
 
 </body>
 <script>
+    function validateEmail(email) {
+        const re =
+            /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+
+    function validatePhone(phone) {
+        const re =
+            /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/;
+        return re.test(String(phone).toLowerCase());
+    }
+
+
     let button = document.querySelector('#submit-button');
     braintree.dropin.create({
         // Insert your tokenization key here
@@ -72,7 +89,7 @@
 
             let name = document.getElementById('name').value;
             let last_name = document.getElementById('last_name').value;
-            let phone = document.getElementById('phone').value;
+            let phone = document.getElementById('phone').value.replace(/\s+/g, '');;
             let address = document.getElementById('address').value;
             let email = document.getElementById('email').value;
             const currentOrder = JSON.parse(sessionStorage.getItem("order"));
@@ -85,6 +102,49 @@
             currentOrder.dishes.forEach(dish => {
                 arr_quant.push(dish.quantity);
             });
+
+
+            nameFeedback = document.querySelector('.name-feedback');
+            if (name == '') {
+                nameFeedback.classList.remove("d-none");
+            } else {
+                nameFeedback.classList.add("d-none");
+            }
+            lastNameFeedback = document.querySelector('.last-name-feedback');
+            if (last_name == '') {
+                lastNameFeedback.classList.remove("d-none");
+            } else {
+                lastNameFeedback.classList.add("d-none");
+            }
+            addressFeedback = document.querySelector('.address-feedback');
+            if (address == '') {
+                addressFeedback.classList.remove("d-none");
+            } else {
+                addressFeedback.classList.add("d-none");
+            }
+            phoneFeedback = document.querySelector('.phone-feedback');
+            if (phone == '') {
+                phoneFeedback.innerText = '*Il campo non può essere vuoto.'
+                phoneFeedback.classList.remove("d-none");
+            } else if (!validatePhone(phone)) {
+                phoneFeedback.innerText = '*Inserisci un numero valido.'
+                phoneFeedback.classList.remove("d-none");
+            } else {
+                phoneFeedback.classList.add("d-none");
+            }
+            emailFeedback = document.querySelector('.email-feedback');
+
+            if (email == '') {
+                emailFeedback.innerText = '*Il campo non può essere vuoto.'
+                emailFeedback.classList.remove("d-none");
+            } else if (!validateEmail(email)) {
+                emailFeedback.innerText = '*Inserisci un indirizzo email valido.'
+                emailFeedback.classList.remove("d-none");
+            } else {
+                emailFeedback.classList.add("d-none");
+            }
+
+
 
 
             console.log(name);
