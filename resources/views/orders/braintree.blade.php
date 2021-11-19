@@ -78,67 +78,6 @@
         return re.test(String(phone).toLowerCase());
     }
 
-    function validateForm() {
-        console.log('Validating form...')
-        let isValid = true;
-        nameFeedback = document.querySelector('.name-feedback');
-        console.log('Validating name...')
-        if (name == '') {
-            console.log('Name is empty')
-            nameFeedback.classList.remove("d-none");
-            isValid = false;
-        } else {
-            nameFeedback.classList.add("d-none");
-
-        }
-        console.log('Validating last name...')
-        lastNameFeedback = document.querySelector('.last-name-feedback');
-        if (last_name == '') {
-            console.log('Last name is empty')
-            lastNameFeedback.classList.remove("d-none");
-            isValid = false;
-        } else {
-            console.log('Last name is valid')
-            lastNameFeedback.classList.add("d-none");
-        }
-        addressFeedback = document.querySelector('.address-feedback');
-        if (address == '') {
-            addressFeedback.classList.remove("d-none");
-            isValid = false;
-        } else {
-            addressFeedback.classList.add("d-none");
-
-        }
-        phoneFeedback = document.querySelector('.phone-feedback');
-        if (phone == '') {
-            phoneFeedback.innerText = '*Il campo non può essere vuoto.'
-            phoneFeedback.classList.remove("d-none");
-            isValid = false;
-        } else if (!validatePhone(phone)) {
-            phoneFeedback.innerText = '*Inserisci un numero valido.'
-            phoneFeedback.classList.remove("d-none");
-            isValid = false;
-        } else {
-            phoneFeedback.classList.add("d-none");
-
-        }
-        emailFeedback = document.querySelector('.email-feedback');
-
-        if (email == '') {
-            emailFeedback.innerText = '*Il campo non può essere vuoto.'
-            emailFeedback.classList.remove("d-none");
-            isValid = false;
-        } else if (!validateEmail(email)) {
-            emailFeedback.innerText = '*Inserisci un indirizzo email valido.'
-            emailFeedback.classList.remove("d-none");
-            isValid = false;
-        } else {
-            emailFeedback.classList.add("d-none");
-
-        }
-        return isValid;
-    }
-
 
     let button = document.querySelector('#submit-button');
     braintree.dropin.create({
@@ -147,11 +86,11 @@
     }, function(createErr, instance) {
         button.addEventListener('click', function() {
 
-            let name = document.getElementById('name').value.trim();
-            let last_name = document.getElementById('last_name').value.trim();
-            let phone = document.getElementById('phone').value.replace(/\s+/g, '');
-            let address = document.getElementById('address').value.trim();
-            let email = document.getElementById('email').value.trim();
+            let name = document.getElementById('name').value;
+            let last_name = document.getElementById('last_name').value;
+            let phone = document.getElementById('phone').value.replace(/\s+/g, '');;
+            let address = document.getElementById('address').value;
+            let email = document.getElementById('email').value;
             const currentOrder = JSON.parse(sessionStorage.getItem("order"));
             const delivery_fee = currentOrder.delivery_fee;
             let arr_id = [];
@@ -165,19 +104,58 @@
 
 
 
+            let isValid = true;
+            nameFeedback = document.querySelector('.name-feedback');
 
+            if (name == '') {
+                nameFeedback.classList.remove("d-none");
+                isValid = false;
+            } else {
+                nameFeedback.classList.add("d-none");
+            }
+            lastNameFeedback = document.querySelector('.last-name-feedback');
+            if (last_name == '') {
+                lastNameFeedback.classList.remove("d-none");
+                isValid = false;
+            } else {
+                lastNameFeedback.classList.add("d-none");
+            }
+            addressFeedback = document.querySelector('.address-feedback');
+            if (address == '') {
+                addressFeedback.classList.remove("d-none");
+                isValid = false;
+            } else {
+                addressFeedback.classList.add("d-none");
 
+            }
+            phoneFeedback = document.querySelector('.phone-feedback');
+            if (phone == '') {
+                phoneFeedback.innerText = '*Il campo non può essere vuoto.'
+                phoneFeedback.classList.remove("d-none");
+                isValid = false;
+            } else if (!validatePhone(phone)) {
+                phoneFeedback.innerText = '*Inserisci un numero valido.'
+                phoneFeedback.classList.remove("d-none");
+                isValid = false;
+            } else {
+                phoneFeedback.classList.add("d-none");
 
+            }
+            emailFeedback = document.querySelector('.email-feedback');
 
-            console.log(`NAME:${name}`);
-            console.log(`LAST NAME:${last_name}`);
-            console.log(`PHONE: ${phone}`);
-            console.log(`ADDRESS: ${address}`);
-            console.log(`EMAIL: ${email}`);
-            console.log(`IDS: ${arr_id}`);
-            console.log(`QUANTS: ${arr_quant}`);
+            if (email == '') {
+                emailFeedback.innerText = '*Il campo non può essere vuoto.'
+                emailFeedback.classList.remove("d-none");
+                isValid = false;
+            } else if (!validateEmail(email)) {
+                emailFeedback.innerText = '*Inserisci un indirizzo email valido.'
+                emailFeedback.classList.remove("d-none");
+                isValid = false;
+            } else {
+                emailFeedback.classList.add("d-none");
+            }
 
-            if (validateForm()) {
+            if (isValid) {
                 instance.requestPaymentMethod(function(err, payload) {
                     (function($) {
                         $(function() {
