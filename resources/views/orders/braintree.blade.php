@@ -78,20 +78,80 @@
         return re.test(String(phone).toLowerCase());
     }
 
+    function validateForm() {
+        console.log('Validating form...')
+        let isValid = true;
+        nameFeedback = document.querySelector('.name-feedback');
+        console.log('Validating name...')
+        if (name == '') {
+            console.log('Name is empty')
+            nameFeedback.classList.remove("d-none");
+            isValid = false;
+        } else {
+            nameFeedback.classList.add("d-none");
+
+        }
+        console.log('Validating last name...')
+        lastNameFeedback = document.querySelector('.last-name-feedback');
+        if (last_name == '') {
+            console.log('Last name is empty')
+            lastNameFeedback.classList.remove("d-none");
+            isValid = false;
+        } else {
+            console.log('Last name is valid')
+            lastNameFeedback.classList.add("d-none");
+        }
+        addressFeedback = document.querySelector('.address-feedback');
+        if (address == '') {
+            addressFeedback.classList.remove("d-none");
+            isValid = false;
+        } else {
+            addressFeedback.classList.add("d-none");
+
+        }
+        phoneFeedback = document.querySelector('.phone-feedback');
+        if (phone == '') {
+            phoneFeedback.innerText = '*Il campo non può essere vuoto.'
+            phoneFeedback.classList.remove("d-none");
+            isValid = false;
+        } else if (!validatePhone(phone)) {
+            phoneFeedback.innerText = '*Inserisci un numero valido.'
+            phoneFeedback.classList.remove("d-none");
+            isValid = false;
+        } else {
+            phoneFeedback.classList.add("d-none");
+
+        }
+        emailFeedback = document.querySelector('.email-feedback');
+
+        if (email == '') {
+            emailFeedback.innerText = '*Il campo non può essere vuoto.'
+            emailFeedback.classList.remove("d-none");
+            isValid = false;
+        } else if (!validateEmail(email)) {
+            emailFeedback.innerText = '*Inserisci un indirizzo email valido.'
+            emailFeedback.classList.remove("d-none");
+            isValid = false;
+        } else {
+            emailFeedback.classList.add("d-none");
+
+        }
+        return isValid;
+    }
+
 
     let button = document.querySelector('#submit-button');
     braintree.dropin.create({
-        // Insert your tokenization key here
         authorization: '{{ $token }}',
         container: '#dropin-container'
     }, function(createErr, instance) {
         button.addEventListener('click', function() {
 
-            let name = document.getElementById('name').value;
-            let last_name = document.getElementById('last_name').value;
-            let phone = document.getElementById('phone').value.replace(/\s+/g, '');;
-            let address = document.getElementById('address').value;
-            let email = document.getElementById('email').value;
+            let name = document.getElementById('name').value.trim();
+            let last_name = document.getElementById('last_name').value.trim();
+            let phone = document.getElementById('phone').value.replace(/\s+/g, '');
+            let address = document.getElementById('address').value.trim();
+            let email = document.getElementById('email').value.trim();
             const currentOrder = JSON.parse(sessionStorage.getItem("order"));
             const delivery_fee = currentOrder.delivery_fee;
             let arr_id = [];
@@ -104,95 +164,61 @@
             });
 
 
-            nameFeedback = document.querySelector('.name-feedback');
-            if (name == '') {
-                nameFeedback.classList.remove("d-none");
-            } else {
-                nameFeedback.classList.add("d-none");
-            }
-            lastNameFeedback = document.querySelector('.last-name-feedback');
-            if (last_name == '') {
-                lastNameFeedback.classList.remove("d-none");
-            } else {
-                lastNameFeedback.classList.add("d-none");
-            }
-            addressFeedback = document.querySelector('.address-feedback');
-            if (address == '') {
-                addressFeedback.classList.remove("d-none");
-            } else {
-                addressFeedback.classList.add("d-none");
-            }
-            phoneFeedback = document.querySelector('.phone-feedback');
-            if (phone == '') {
-                phoneFeedback.innerText = '*Il campo non può essere vuoto.'
-                phoneFeedback.classList.remove("d-none");
-            } else if (!validatePhone(phone)) {
-                phoneFeedback.innerText = '*Inserisci un numero valido.'
-                phoneFeedback.classList.remove("d-none");
-            } else {
-                phoneFeedback.classList.add("d-none");
-            }
-            emailFeedback = document.querySelector('.email-feedback');
-
-            if (email == '') {
-                emailFeedback.innerText = '*Il campo non può essere vuoto.'
-                emailFeedback.classList.remove("d-none");
-            } else if (!validateEmail(email)) {
-                emailFeedback.innerText = '*Inserisci un indirizzo email valido.'
-                emailFeedback.classList.remove("d-none");
-            } else {
-                emailFeedback.classList.add("d-none");
-            }
 
 
 
 
-            console.log(name);
-            console.log(last_name);
-            console.log(phone);
-            console.log(address);
-            console.log(email);
-            console.log(arr_id);
-            console.log(arr_quant);
 
-            instance.requestPaymentMethod(function(err, payload) {
-                (function($) {
-                    $(function() {
-                        $.ajaxSetup({
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]')
-                                    .attr('content')
-                            }
+            console.log(`NAME:${name}`);
+            console.log(`LAST NAME:${last_name}`);
+            console.log(`PHONE: ${phone}`);
+            console.log(`ADDRESS: ${address}`);
+            console.log(`EMAIL: ${email}`);
+            console.log(`IDS: ${arr_id}`);
+            console.log(`QUANTS: ${arr_quant}`);
 
+            if (validateForm()) {
+                instance.requestPaymentMethod(function(err, payload) {
+                    (function($) {
+                        $(function() {
+                            $.ajaxSetup({
+                                headers: {
+                                    'X-CSRF-TOKEN': $(
+                                            'meta[name="csrf-token"]')
+                                        .attr('content')
+                                }
+
+                            });
+                            $.ajax({
+                                type: "POST",
+                                url: "{{ route('token') }}",
+                                data: {
+                                    nonce: payload.nonce,
+                                    name: name,
+                                    phone: phone,
+                                    delivery_fee: delivery_fee,
+                                    address: address,
+                                    email: email,
+                                    last_name: last_name,
+                                    arr_id: arr_id,
+                                    arr_quant: arr_quant
+                                },
+                                success: function(data) {
+                                    console.log('success', payload
+                                        .nonce)
+                                    sessionStorage.removeItem('order');
+                                    sessionStorage.removeItem('cart');
+                                    window.location.replace(
+                                        '/payment/success');
+                                },
+                                error: function(data) {
+                                    console.log('error', payload.nonce)
+                                }
+                            });
                         });
-                        $.ajax({
-                            type: "POST",
-                            url: "{{ route('token') }}",
-                            data: {
-                                nonce: payload.nonce,
-                                name: name,
-                                phone: phone,
-                                delivery_fee: delivery_fee,
-                                address: address,
-                                email: email,
-                                last_name: last_name,
-                                arr_id: arr_id,
-                                arr_quant: arr_quant
-                            },
-                            success: function(data) {
-                                console.log('success', payload.nonce)
-                                sessionStorage.removeItem('order');
-                                sessionStorage.removeItem('cart');
-                                window.location.replace(
-                                    '/payment/success');
-                            },
-                            error: function(data) {
-                                console.log('error', payload.nonce)
-                            }
-                        });
-                    });
-                })(jQuery);
-            });
+                    })(jQuery);
+                });
+            }
         });
     });
 </script>
