@@ -1,24 +1,43 @@
 <template>
     <div class="col-4 col-md-4 p-4" id="main-row">
-        
         <div>
             <h4>Il tuo ordine</h4>
             <!-- qui ci andranno i prodotti selezionati -->
-        
+
             <div v-for="(dish, i) in loadedDishes" :key="i" class="mb-2">
                 <div class="row d-flex justify-content-between">
-                    <span class="col-6">{{ dish.name }} X {{ dish.quantity }}</span>
-                    <span class="col-6 d-flex justify-content-between align-items-center">
+                    <span class="col-6"
+                        >{{ dish.name }} X {{ dish.quantity }}</span
+                    >
+                    <span
+                        class="
+                            col-6
+                            d-flex
+                            justify-content-between
+                            align-items-center
+                        "
+                    >
                         <span>
-                    <button @click="decreaseQuant(i)" class="btn btn-rnd ms-2">
-                        -
-                    </button>
-                    <button @click="increaseQuant(i)" class="btn btn-rnd">
-                        +
-                    </button>
+                            <button
+                                @click="decreaseQuant(i)"
+                                class="btn btn-rnd ms-2"
+                            >
+                                -
+                            </button>
+                            <button
+                                @click="increaseQuant(i)"
+                                class="btn btn-rnd"
+                            >
+                                +
+                            </button>
                         </span>
-                    €{{ dish.price * dish.quantity }}</span>
-                    
+                        €{{
+                            (
+                                Math.round(dish.price * dish.quantity * 100) /
+                                100
+                            ).toFixed(2)
+                        }}</span
+                    >
                 </div>
             </div>
         </div>
@@ -69,10 +88,12 @@ export default {
             this.loadedDishes.forEach((dish) => {
                 subTotal += dish.price * dish.quantity;
             });
+            subTotal = (Math.round(subTotal * 100) / 100).toFixed(2);
             return subTotal;
         },
         total: function () {
             let total = this.subTotal + this.restaurant.delivery_fee;
+            total = (Math.round(total * 100) / 100).toFixed(2);
             return total;
         },
     },
@@ -204,20 +225,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.btn{
-color: white;
-
+.btn {
+    color: white;
 }
 .btn-rnd {
     border-radius: 8px;
-padding: 0 5px;
-background-color: #3490dc;
-font-size: 16px;
-width: 25px;
-
+    padding: 0 5px;
+    background-color: #3490dc;
+    font-size: 16px;
+    width: 25px;
 }
 #main-row {
-          border: 2px solid #00aabc;
-        border-radius: 5px;
+    border: 2px solid #00aabc;
+    border-radius: 5px;
 }
 </style>
