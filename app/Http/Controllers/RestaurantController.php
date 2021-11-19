@@ -168,6 +168,10 @@ class RestaurantController extends Controller
         $data = $request->all();
 
         $restaurant->fill($data);
+        if ($request->has('image')) {
+            $img_path = Storage::put('uploads', $data['image']);
+            $restaurant->image = $img_path;
+        }
         $restaurant->save();
         $restaurant->types()->attach($data['types']);
         return redirect()->route('restaurants.dashboard');
