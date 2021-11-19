@@ -2,19 +2,20 @@
 
 @section('content')
 
+
     <section class="container">
         <div class="row justify-content-between m-3">
             <div class="col-4"><a href="{{ route('restaurants.dashboard') }}"
-                    class="btn btn-primary p-2  my-1">Torna alla dashboard</a>
+                class="btn btn-primary p-2  my-1">Torna alla dashboard</a>
             </div>
             <div class="col-4">
                 <h1>I miei piatti</h1>
             </div>
-            <div class="col-4 text-right"><a href="{{ route('dishes.create') }}" class="btn btn-primary p-2 my-1 ">Aggiungi
-                    un
-                    piatto</a></div>
+            <div class="col-4 text-right"><a href="{{ route('dishes.create') }}" class="btn btn-primary p-2 my-1 ">Aggiungi    
+                un
+                piatto</a>
+            </div>
         </div>
-
         @if (session('deleted'))
             <div class="alert alert-success d-flex align-items-center m-3" role="alert">
                 <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
@@ -49,22 +50,21 @@
                                     <i class="fas fa-pen fs-4"></i>
                                 </a>
                                 <form action="{{ route('dishes.destroy', $dish->id) }}" method="POST"
-                                    class="d-inline delete-form  my-1">
+                                    class="d-inline delete-form  my-1" id="delete-form"> 
                                     @csrf
                                     @method('DELETE')
-                                    {{-- <button type="submit" class="btn btn-danger p-2">Elimina</button> --}}
-                                    @include('dishes.includes.modal')
+                                      <!-- Modal -->
+                                      @include('dishes.includes.modal')                                
                                 </form>
                             </td>
                         </tr>
-                    @empty
-                        <div>
-                            <h3 class="text-center">Non ci sono piatti</h3>
-                        </div>
-                    @endforelse
+                        @empty
+                            <div>
+                                <h3 class="text-center">Non ci sono piatti</h3>
+                            </div>
+                    @endforelse                                 
                 </tbody>
             </table>
         </div>
-
     </section>
 @endsection

@@ -132,10 +132,14 @@ header {
 // }
 
 // ANIMATIONS
-img,
-h1 {
-    animation: fadeIn 1s ease-in;
-    animation-iteration-count: initial;
+
+#hero, #deliveboo-section, #default-section {
+    img,
+    h1 {
+        animation: fadeIn 1s ease-in;
+        animation-iteration-count: initial;
+    }
+
 }
 
 @keyframes fadeIn {

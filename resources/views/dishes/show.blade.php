@@ -31,7 +31,6 @@
                                     class="delete-form" class="delete-form">
                                     @csrf
                                     @method('DELETE')
-                                    {{-- <button type="submit" class="btn btn-danger">Elimina</button> --}}
                                     @include('dishes.includes.modal')
                                 </form>
                             </div>
