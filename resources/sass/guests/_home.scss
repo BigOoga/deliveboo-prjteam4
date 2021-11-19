@@ -37,6 +37,12 @@ header {
     @media screen and (max-width: 768px) {
         height: 300px;
     }
+    @media screen and (max-width: 500px) {
+        background-image: none;
+        #hero-text {
+            width: 100%;
+        }
+    }
     h1 {
         color: #440063;
         font-weight: bold;

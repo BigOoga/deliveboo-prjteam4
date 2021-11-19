@@ -64,7 +64,7 @@
         <div id="hero">
           <div class="container">
             <div class="row">
-              <div class="col-6 mb-5 img-animation">
+              <div id="hero-text" class="col-6 mb-5 img-animation">
                 <h1>I piatti che ami, a domicilio.</h1>
               </div>
             </div>
