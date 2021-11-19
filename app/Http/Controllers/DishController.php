@@ -54,9 +54,8 @@ class DishController extends Controller
         $request->validate(
             [
                 'name' => 'required|between:2,50',
-                'description' => 'required|between:15,250',
+                'description' => 'required|between:10,250',
                 'entry' => 'required|between:5,50',
-                // ho commentato questa validazione perchè improvvisamente le immagini non riuscivano più a passare
                 'picture' => 'nullable|mimes:jpeg,jpg,png',
                 'price' => 'required|numeric',
             ],
@@ -66,7 +65,7 @@ class DishController extends Controller
                 'numeric' => 'Questo campo deve essere numerico',
                 'name.between' => 'Questo campo deve avere tra 2 e 50 caratteri',
                 'entry.between' => 'Questo campo deve avere tra 5 e 50 caratteri',
-                'description.between' => 'Questo campo deve avere tra 15 e 255 caratteri',
+                'description.between' => 'Questo campo deve avere tra 10 e 255 caratteri',
             ]
         );
 
@@ -145,7 +144,7 @@ class DishController extends Controller
         $request->validate(
             [
                 'name' => 'required|between:2,50',
-                'description' => 'required|between:15,250',
+                'description' => 'required|between:10,250',
                 'entry' => 'required|between:5,50',
                 'picture' => 'nullable|mimes:jpeg,jpg,png',
                 'price' => 'required|numeric',
@@ -156,7 +155,7 @@ class DishController extends Controller
                 'numeric' => 'Questo campo deve essere numerico',
                 'name.between' => 'Questo campo deve avere tra 2 e 50 caratteri',
                 'entry.between' => 'Questo campo deve avere tra 5 e 50 caratteri',
-                'description.between' => 'Questo campo deve avere tra 15 e 255 caratteri',
+                'description.between' => 'Questo campo deve avere tra 10 e 255 caratteri',
             ]
         );
 
