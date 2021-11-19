@@ -11,7 +11,7 @@
 
 
 
-// OUTSIDE MAIN 
+// COMPONENTS 
 header {
     height: 455px;
     background: linear-gradient(
@@ -113,7 +113,6 @@ header {
 
 }
 
-
 // #search-form {
 //     line-height: calc(177px / 3);    
 //     background-color: #fff;
@@ -145,13 +144,4 @@ img, h1 {
       opacity: 1;
     }
 }    
-
-.card-animation {
-  transition: transform 0.5s;
-}
-
-.card-animation:hover {
-    transform: scale(1.02);
-
-}
 
