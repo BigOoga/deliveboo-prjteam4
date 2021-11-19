@@ -1,6 +1,6 @@
 <template>
     <div class="col-lg-3 col-md-4 col-sm-6 mb-5">
-        <div @click="goToRestaurant" class="card mb-2 h-100">
+        <div @click="goToRestaurant" class="card mb-2 h-100 shadow-sm">
             <div class="img-container">
                 <img
                     style="object-fit: cover"

@@ -13,17 +13,19 @@
 
 // COMPONENTS 
 header {
-    height: 455px;
+    height: 380px;
     background: linear-gradient(
         176deg,
         rgba(0, 204, 188, 1) 49.7%,
         rgba(208, 235, 153, 1) 50%
     );
+    @media screen and (max-width: 768px) {
+        height: 340px;
+    }
     i {
         color: #00ccbc;
-    };
+    }
 }
-
 
 #hero {
     height: 400px;
@@ -34,6 +36,15 @@ header {
     background-repeat: no-repeat;
     background-size: contain;
     background-position: bottom 0% right 25%;
+    @media screen and (max-width: 768px) {
+        height: 300px;
+    }
+    @media screen and (max-width: 500px) {
+        background-image: none;
+        #hero-text {
+            width: 100%;
+        }
+    }
     h1 {
         color: #440063;
         font-weight: bold;
@@ -41,7 +52,7 @@ header {
     }
 }
 
-// SIDENAV 
+// SIDENAV
 .sidenav {
     height: 100%;
     width: 0;
@@ -83,43 +94,35 @@ header {
     margin-left: 50px;
 }
 
-
-
-
-
 // Main
 
-#default-section{
+#default-section {
     background-color: #ffeae4;
-    
+
     h5 {
         text-transform: capitalize;
     }
 }
 
-
-#default-section, #deliveboo-section {  
-   
+#default-section,
+#deliveboo-section {
     h5 {
         font-weight: bold;
-    };
+    }
     h2 {
         font-size: 35px;
     }
     a {
-    color: #000;
-    text-decoration: none;
-    };
-
+        color: #000;
+        text-decoration: none;
+    }
 }
 
 // #search-form {
-//     line-height: calc(177px / 3);    
+//     line-height: calc(177px / 3);
 //     background-color: #fff;
 //     border-radius: 5px;
 // }
-
-
 
 // Order Statistics
 
@@ -128,20 +131,29 @@ header {
 //     height: auto;
 // }
 
-
-// ANIMATIONS 
-img, h1 {
+// ANIMATIONS
+img,
+h1 {
     animation: fadeIn 1s ease-in;
     animation-iteration-count: initial;
 }
 
 @keyframes fadeIn {
     0% {
-      opacity: 0;
+        opacity: 0;
     }
     100% {
-      
-      opacity: 1;
+        opacity: 1;
     }
-}    
+}
 
+<<<<<<< HEAD
+=======
+.card-animation {
+    transition: transform 0.5s;
+}
+
+.card-animation:hover {
+    transform: scale(1.02);
+}
+>>>>>>> dd38ae55e54d198fc22e03a6a26de791451165f9
