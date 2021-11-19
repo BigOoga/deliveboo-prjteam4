@@ -1,37 +1,41 @@
 <template>
-    <div class="col-6 col-md-4 border p-5" id="main-row">
-        <div class="col-12">
+    <div class="col-4 col-md-4 border p-4" id="main-row">
+        
+        <div>
             <h4>Il tuo ordine</h4>
             <!-- qui ci andranno i prodotti selezionati -->
-        </div>
-        <div>
-            <div v-for="(dish, i) in loadedDishes" :key="i">
-                <p>
-                    €{{ dish.price }} {{ dish.name }}
-                    <button @click="decreaseQuant(i)" class="btn btn-rnd">
+        
+            <div v-for="(dish, i) in loadedDishes" :key="i" class="mb-2">
+                <div class="row d-flex justify-content-between">
+                    <span class="col-6">{{ dish.name }} X {{ dish.quantity }}</span>
+                    <span class="col-6 d-flex justify-content-between align-items-center">
+                        <span>
+                    <button @click="decreaseQuant(i)" class="btn btn-rnd ms-2">
                         -
                     </button>
-                    {{ dish.quantity }}
                     <button @click="increaseQuant(i)" class="btn btn-rnd">
                         +
                     </button>
-                </p>
+                        </span>
+                    €{{ dish.price * dish.quantity }}</span>
+                    
+                </div>
             </div>
         </div>
         <hr />
         <!-- subtotal -->
-        <div class="col-12 d-flex justify-content-between">
+        <div class="d-flex justify-content-between">
             <span>Subtotale</span>
             <span>€{{ subTotal }}</span>
         </div>
         <!-- delivery fee -->
-        <div class="col-12 d-flex justify-content-between">
+        <div class="d-flex justify-content-between">
             <span>Spese di consegna</span>
             <span>€{{ restaurant.delivery_fee }}</span>
         </div>
         <hr class="mt-2 mb-2" />
         <!-- total -->
-        <div class="col-12 d-flex justify-content-between">
+        <div class="d-flex justify-content-between">
             <span>Total</span>
             <span>€{{ total }}</span>
         </div>
@@ -201,9 +205,13 @@ export default {
 
 <style lang="scss" scoped>
 .btn-rnd {
-    border-radius: 1rem;
-    padding: 3px 12px;
-    background-color: #3490dc;
-    color: white;
+    border-radius: 8px;
+padding: 0 5px;
+background-color: #3490dc;
+color: white;
+font-size: 16px;
+width: 25px;
+
 }
+
 </style>

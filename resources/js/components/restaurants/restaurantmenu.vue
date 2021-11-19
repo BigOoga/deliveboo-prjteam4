@@ -1,34 +1,13 @@
 <template>
-    <div class="col-6 col-md-8 d-flex flex-wrap">
-        <div
-            v-for="(dish, i) in dishes"
-            :key="i"
-            class="card col-12 col-md-6 my-2"
-            :class="[dish.available ? 'available' : 'unavailable']"
-        >
-            <img
-                class="pt-2"
-                style="object-fit: cover"
-                :src="
-                    dish.picture
-                        ? '/storage/' + dish.picture
-                        : '/img/placeholder.svg'
-                "
-                alt=""
-            />
-            <div class="card-body">
-                <h5 class="card-title">{{ dish.name }}</h5>
+    <div class="col-8 col-md-8 p-0 d-flex flex-wrap">
+        <div id="dish-card" v-for="(dish, i) in dishes" :key="i" class="card p-3 d-flex" :class="[dish.available ? 'available' : 'unavailable']">
+            <img style="object-fit: cover" :src="dish.picture ? '/storage/' + dish.picture : '/img/placeholder.svg'" alt=""/>
+            <div class="card-body p-0 mt-3">
+                <h4 class="card-title">{{ dish.name }}</h4>
                 <p class="card-text">{{ dish.description }}</p>
-                <div class="pos-bot">
-                    <p class="card-text">
-                        <span class="price">€{{ dish.price }}</span>
-                    </p>
-                    <button
-                        @click="addToCart(dish.id, dish.price)"
-                        class="btn btn-primary"
-                    >
-                        Aggiungi
-                    </button>
+                <div class="pos-bot d-flex align-items-end justify-content-between">
+                    <span class="price"><strong>Prezzo: </strong>€ {{ dish.price }}</span>
+                    <button @click="addToCart(dish.id, dish.price)" class="btn" type="button">Aggiungi</button>
                 </div>
             </div>
         </div>
@@ -141,17 +120,30 @@ export default {
 .card:hover {
     // cursor: pointer;
 }
-
+#dish-card {
+    border: 2px solid #00aabc;
+    border-radius: 5px;
+    @media screen and (min-width: 980px) {
+        width: 50%;
+    }
+    @media screen and (min-width: 1200px) {
+        width: calc(100% / 3);
+    }
+}
 img {
     object-fit: cover;
     width: 100px;
     height: 100px;
+    
 }
 
-.price {
-    background-color: rgb(255, 255, 43);
-    padding: 2px 10px;
-}
+button[type="button"]{
+        background-color: #00bb55;
+        color: white;
+        font-size: 1rem;
+        font-weight: bold;
+    }
+
 
 .card.unavailable {
     display: none;
