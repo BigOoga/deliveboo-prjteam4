@@ -82,7 +82,7 @@
           <div class="row">
             {{-- Card Comfort Food --}}
             <div class="col-lg-6 col-md-12 d-flex py-3">
-              <div class="card flex-grow-1 shadow" style="width: 18rem;">
+              <div class="card flex-grow-1 shadow-sm" style="width: 18rem;">
                 <a class="text-decoration-none text-dark" href="{{ route('restaurants.index') }}">
                   {{-- Card image --}}
                   <img src="{{ asset('images/comfortFood.png')}}" class="card-img-top" alt="Comfort-food">
@@ -98,7 +98,7 @@
             </div>
             {{-- Card Dessert --}}
             <div class="col-lg-6 col-md-12 d-flex py-3">
-              <div class="card flex-grow-1 shadow" style="width: 18rem;" >
+              <div class="card flex-grow-1 shadow-sm" style="width: 18rem;" >
                 <a class="text-decoration-none text-dark" href="{{ route('restaurants.index') }}">
                   {{-- Card image --}}
                   <img src="{{ asset('images/dessert.png')}}" class="card-img-top" alt="dessert">
@@ -114,7 +114,7 @@
             </div>
             {{-- Card Food To Share  --}}
             <div class="col-lg-6 col-md-12 d-flex py-3">
-              <div class="card flex-grow-1 shadow" style="width: 18rem;">
+              <div class="card flex-grow-1 shadow-sm" style="width: 18rem;">
                 <a class="text-decoration-none text-dark" href="{{ route('restaurants.index') }}">
                   {{-- Card image --}}
                   <img src="{{asset('images/toshare.png')}}" class="card-img-top" alt="food">
@@ -130,7 +130,7 @@
             </div>
             {{-- Card Exclusive Deliveboo  --}}
             <div class="col-lg-6 col-md-12 d-flex py-3">
-              <div class="card flex-grow-1 shadow" style="width: 18rem;" >
+              <div class="card flex-grow-1 shadow-sm" style="width: 18rem;" >
                 <a class="text-decoration-none text-dark" href="{{ route('restaurants.index') }}">
                   {{-- Card image --}}
                   <img src="{{ asset('images/exclusive.png')}}" class="card-img-top" alt="food" >
@@ -158,7 +158,7 @@
               <div>
                 <a href="{{ route('restaurants.index') }}">
                   {{-- Card image --}}
-                  <img src="{{ asset('images/sushi.jpg')}}" class="card-img-top shadow" alt="Sushi" >
+                  <img src="{{ asset('images/sushi.jpg')}}" class="card-img-top shadow-sm" alt="Sushi" >
                     <div class="mt-2">
                       {{-- Card title --}}
                       <h5 class="card-title text-capitalize">Sushi</h5>
@@ -171,7 +171,7 @@
               <div>
                 <a href="{{ route('restaurants.index') }}">
                   {{-- Card Image  --}}
-                  <img src="{{ asset('images/pokè.jpg')}}" class="card-img-top shadow" alt="Pokè-bowl">
+                  <img src="{{ asset('images/pokè.jpg')}}" class="card-img-top shadow-sm" alt="Pokè-bowl">
                   <div class="mt-2">
                     {{-- Card title --}}
                     <h5 class="card-title text-capitalize">Pokè bowl</h5>
@@ -184,7 +184,7 @@
               <div>
                 <a href="{{ route('restaurants.index') }}">
                   {{-- Card Image  --}}
-                  <img src="{{ asset('images/tacos.jpg')}}" class="card-img-top shadow" alt="Cucina-Messico">
+                  <img src="{{ asset('images/tacos.jpg')}}" class="card-img-top shadow-sm" alt="Cucina-Messico">
                   <div class="mt-2">
                     {{-- Card title --}}
                     <h5 class="card-title text-capitalize">Cucina messicana</h5>
@@ -197,7 +197,7 @@
               <div>
                 <a href="{{ route('restaurants.index') }}">
                   {{-- Card image --}}
-                  <img src="{{ asset('images/fastfood.jpg')}}" class="card-img-top shadow" alt="Fast-food">
+                  <img src="{{ asset('images/fastfood.jpg')}}" class="card-img-top shadow-sm" alt="Fast-food">
                   <div class="mt-2">
                     {{-- Card title --}}
                     <h5 class="mt-2">Fast Food</h5>
@@ -210,7 +210,7 @@
               <div>
                 <a href="{{ route('restaurants.index') }}">
                   {{-- Card image  --}}
-                  <img src="{{ asset('images/pizza.jpg')}}" class="card-img-top shadow" alt="Pizza">
+                  <img src="{{ asset('images/pizza.jpg')}}" class="card-img-top shadow-sm" alt="Pizza">
                   <div class="mt-2">
                     {{-- Card title --}}
                     <h5 class="card-title text-capitalize">Pizza</h5>
@@ -223,7 +223,7 @@
               <div>
                 <a href="{{ route('restaurants.index') }}">
                   {{-- Card Image  --}}
-                  <img src="{{ asset('images/pasta.jpg')}}" class="card-img-top shadow" alt="Pasta">
+                  <img src="{{ asset('images/pasta.jpg')}}" class="card-img-top shadow-sm" alt="Pasta">
                   <div class="mt-2">
                     {{-- Card title --}}
                     <h5 class="card-title text-capitalize">Cucina italiana</h5>
@@ -236,7 +236,7 @@
               <div>
                 <a href="{{ route('restaurants.index') }}">
                   {{-- Card Image  --}}
-                  <img src="{{ asset('images/pesce.jpg')}}" class="card-img-top shadow" alt="Frittura-di-pesce">
+                  <img src="{{ asset('images/pesce.jpg')}}" class="card-img-top shadow-sm" alt="Frittura-di-pesce">
                   <div class="mt-2">
                     {{-- Card title --}}
                     <h5 class="card-title text-capitalize">Pesce</h5>
@@ -249,7 +249,7 @@
               <div>
                 <a href="{{ route('restaurants.index') }}">
                   {{-- Card Image  --}} 
-                  <img src="{{ asset('images/kebab.jpg')}}" class="card-img-top shadow" alt="Kebab">
+                  <img src="{{ asset('images/kebab.jpg')}}" class="card-img-top shadow-sm" alt="Kebab">
                   <div class="mt-2">
                     {{-- Card title --}}
                     <h5 class="card-title text-capitalize">Kebab</h5>
@@ -262,7 +262,7 @@
               <div>
                 <a href="{{ route('restaurants.index') }}">
                   {{-- Card Image  --}}
-                  <img src="{{ asset('images/vietnamita.jpg')}}" class="card-img-top shadow" alt="Cucina-Vietnam">
+                  <img src="{{ asset('images/vietnamita.jpg')}}" class="card-img-top shadow-sm" alt="Cucina-Vietnam">
                   <div class="mt-2">
                     {{-- Card title --}}
                     <h5 class="card-title text-capitalize">Cucina vietnamita</h5>
