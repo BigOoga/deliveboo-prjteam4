@@ -11,7 +11,7 @@
 </head>
 <body>
     <div>
-        <img class="logo" src="https://1000marche.net/wp-content/uploads/2021/01/Deliveroo-logo.png" alt="">
+        <img class="logo" src="{{ asset('images/logo-text.png') }}" alt="">
     </div>
     <div class="main-container">
         <div class="wrapper">
