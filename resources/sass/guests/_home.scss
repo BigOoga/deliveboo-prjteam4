@@ -9,6 +9,8 @@
     overflow: auto;
 }
 
+
+
 // OUTSIDE MAIN 
 header {
     height: 455px;
@@ -17,6 +19,9 @@ header {
         rgba(0, 204, 188, 1) 49.7%,
         rgba(208, 235, 153, 1) 50%
     );
+    i {
+        color: #00ccbc;
+    };
 }
 
 
@@ -78,10 +83,14 @@ header {
     margin-left: 50px;
 }
 
+
+
+
+
 // Main
 
 #default-section{
-    background-color: $pinky;
+    background-color: #ffeae4;
     
     h5 {
         text-transform: capitalize;
@@ -90,9 +99,18 @@ header {
 
 
 #default-section, #deliveboo-section {  
+   
     h5 {
         font-weight: bold;
+    };
+    h2 {
+        font-size: 35px;
     }
+    a {
+    color: #000;
+    text-decoration: none;
+    };
+
 }
 
 
