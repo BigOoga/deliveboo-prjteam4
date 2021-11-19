@@ -1,5 +1,5 @@
 <template>
-    <div class="col-4 col-md-4 border p-4" id="main-row">
+    <div class="col-4 col-md-4 p-4" id="main-row">
         
         <div>
             <h4>Il tuo ordine</h4>
@@ -204,14 +204,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.btn{
+color: white;
+
+}
 .btn-rnd {
     border-radius: 8px;
 padding: 0 5px;
 background-color: #3490dc;
-color: white;
 font-size: 16px;
 width: 25px;
 
 }
-
+#main-row {
+          border: 2px solid #00aabc;
+        border-radius: 5px;
+}
 </style>
