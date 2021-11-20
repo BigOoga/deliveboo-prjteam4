@@ -105,8 +105,8 @@
         min-height: 100vh;
         background: linear-gradient(
         176deg,
-        rgba(0, 204, 188, 1) 49.7%,
-        rgba(208, 235, 153, 1) 50%
+        rgba(0, 204, 188, 0.8) 49.7%,
+        rgba(208, 235, 153, 0.8) 50%
     );
     }
 </style>
