@@ -284,17 +284,39 @@
       </section>
     </main>
 
-    {{-- Scripts --}}
+    
     <script>
-      function openNav() {
-        document.getElementById("mySidenav").style.width = "375px";
-        document.getElementById("root").style.overflow = "hidden";
-      }
+      //recupero elementi pagina
+      const sideNavBarElem = document.getElementById("mySidenav");
+      const rootElem = document.getElementById("root");
+      const bodyElem = document.querySelector('body');
 
-      function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-        document.getElementById("root").style.overflow = "auto";
+      //open function
+      function openNav() {
+        sideNavBarElem.style.width = "375px";
+        rootElem.style.overflow = "hidden";
+        //ritardo aggancio event listener finchè la sidebar non si apre
+        setTimeout(function() {
+          bodyElem.addEventListener('click', bodyNavListener);
+        }, 500);
       }
+      //close function
+      function closeNav() {
+        sideNavBarElem.style.width = "0";
+        rootElem.style.overflow = "auto";
+        bodyElem.removeEventListener('click', bodyNavListener);
+      }
+       
+      function bodyNavListener(){
+        if(sideNavBarElem.style.width !== "0"){
+          closeNav();
+        }
+      }
+       
+      //stoppo propagazione evento 
+      sideNavBarElem.addEventListener('click', function(event){
+        event.stopPropagation();
+      })
     </script>
   </body>
 </html>
