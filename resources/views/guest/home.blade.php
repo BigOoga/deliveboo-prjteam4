@@ -28,13 +28,13 @@
           {{-- Navbar buttons --}}
           <div>
             @if (Auth::guest())
-              <a class="btn btn-light mx-3" href="{{ route('login') }}" role="button"><i class="fas fa-home me-2"></i>Accedi o registrati</a>
+              <a class="btn btn-light mx-3" href="{{ route('login') }}" role="button"><i class="fas fa-home me-2 mr-2"></i>Accedi o registrati</a>
             @endif
             @if (Auth::check())
-              <a class="btn btn-light" href="{{ route('restaurants.dashboard') }}" role="button"><i class="fas fa-home me-2"></i>Vai alla
+              <a class="btn btn-light" href="{{ route('restaurants.dashboard') }}" role="button"><i class="fas fa-home me-2 mr-2"></i>Vai alla
                 tua dashboard</a>
             @endif
-              <a class="btn btn-light" href="#" role="button" onclick="openNav()"><i class="fas fa-bars me-2"></i>Menu</a>
+              <a class="btn btn-light" href="#" role="button" onclick="openNav()"><i class="fas fa-bars me-2 mr-2"></i>Menu</a>
           </div>
           {{-- Sidebar --}}
           <div id="mySidenav" class="sidenav">
