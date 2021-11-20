@@ -19,7 +19,7 @@
     <div id="app">
         <searchbar></searchbar>
         <div class="container-fluid ">
-            <div class="row">
+            <div id="bg-layer" class="row">
                 <div id="sidebar-menu" class="col-4 col-md-3 col-lg-2">
                     <sidebar></sidebar>
                 </div>
@@ -42,11 +42,20 @@
     width: 200px;
     
 }
+#bg-layer{
+    background: linear-gradient(
+        176deg,
+        rgba(0, 204, 188, 0.8) 49.7%,
+        rgba(208, 235, 153, 0.8) 50%
+    );
+    background-attachment: fixed;
 
+}
 #main-section{
     margin-left: 200px;
     width: calc(100% - 200px);
     max-width: 100vw;
+    
 }
 
 </style>
