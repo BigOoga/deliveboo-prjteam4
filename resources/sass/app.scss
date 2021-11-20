@@ -1,17 +1,22 @@
+// Bootstrap
+@import "~bootstrap/scss/bootstrap";
+
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Nunito");
 
+// ------------GUESTS--------------
 // Guests Home
 @import "guests/home";
 
 // Guests Success
 @import "guests/success";
 
+// ------------RESTAURANTS--------------
+// Restaurants dashboard
+@import "restaurants/dashboard";
+
 // Variables
 @import "variables";
-
-// Bootstrap
-@import "~bootstrap/scss/bootstrap";
 
 // my Styles
 @import "dishes.index";

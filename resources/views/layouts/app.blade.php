@@ -26,7 +26,7 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="{{ asset('images/logo-small.png') }}" width="30" height="30"
@@ -97,6 +97,18 @@
 
 </body>
 
-
+<style lang="scss" scoped>
+    .navbar{
+        background-color: #00ccbc;
+    }
+    main{
+        min-height: 100vh;
+        background: linear-gradient(
+        176deg,
+        rgba(0, 204, 188, 1) 49.7%,
+        rgba(208, 235, 153, 1) 50%
+    );
+    }
+</style>
 
 </html>
