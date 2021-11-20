@@ -78,7 +78,7 @@
       <section id="deliveboo-section" class="my-5">
         <div class="container">
           {{-- Section title --}}
-          <h2 class="mb-3 font-weight-bold">La selezione di Deliveboo</h2>
+          <h2 class="mb-3 fw-bolder">La selezione di Deliveboo</h2>
           <div class="row">
             {{-- Card Comfort Food --}}
             <div class="col-lg-6 col-md-12 d-flex py-3">
@@ -151,7 +151,7 @@
       <section id="default-section" class="py-5">
         <div class="container">
           {{-- Section title --}}
-          <h2 class="mb-4 font-weight-bold">I tuoi piatti preferiti, consegnati da noi</h2>
+          <h2 class="mb-4 fw-bolder">I tuoi piatti preferiti, consegnati da noi</h2>
           <div class="row row-cols-1 row-cols-md-3 justify-content-center">
             {{-- FOOD CARD  --}}
             <div class="col-lg-4 col-md-6 mb-4">
