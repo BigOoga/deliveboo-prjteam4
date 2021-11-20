@@ -135,13 +135,13 @@ class OrderController extends Controller
     public function statistic()
     {
         $user_id = Auth::id();
-        $orders = DB::table('orders')
-            ->select('orders.*')
-            ->join('dish_order', 'dish_order.order_id', '=', 'orders.id')
-            ->join('dishes', 'dish_order.dish_id', '=', 'dishes.id')
-            ->join('restaurants', 'dishes.restaurant_id', '=', 'restaurants.id')
-            ->where('restaurants.id', $user_id)->groupBy('order_id')
-            ->get();
+
+        $orders = DB::select("SELECT MONTH(o.created_at) AS month, count(DISTINCT o.id) AS sales FROM `orders`as o
+        INNER JOIN dish_order as do ON do.order_id=o.id
+        INNER JOIN dishes as d on d.id=do.dish_id
+        WHERE d.restaurant_id = $user_id
+        GROUP BY month(o.created_at)");
+        $orders = json_encode($orders);
         return view('orders.statistic', compact('orders'));
     }
 }

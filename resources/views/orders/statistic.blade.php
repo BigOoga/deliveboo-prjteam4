@@ -1,23 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
-    <title>Statistics</title>
-</head>
 
-<body>
+@section('content')
+
     <div class="container">
-        <h2 class="text-center my-5">Statistiche Ristorante</h2>
+
+        <div class="justify-content-between m-3">
+            <div><a href="{{ route('restaurants.dashboard') }}" class="btn btn-primary p-2 mr-3 my-1">Torna
+                    indietro</a>
+                <h3 style="vertical-align: middle" class="d-inline-block self-align-center pl-3 ml-3">Statistiche Ristorante
+                </h3>
+            </div>
+        </div>
+
         <div class="m-5">
             <canvas id="myChart"></canvas>
         </div>
+
+
     </div>
 
-    <script src="{{ asset('js/chart.js') }}"></script>
+    <script type="application/javascript">
+        var sales = {!! $orders !!};
+        // <block:setup:1>
+        const labels = [
+            'Gennaio',
+            'Febraio',
+            'Marzo',
+            'Aprile',
+            'Maggio',
+            'Giugno',
+            'Luglio',
+            'Agosto',
+            'Settembre',
+            'Ottobre',
+            'Novembre',
+            'Dicembre'
+        ];
+        let data = {
+            labels: labels,
+            datasets: [{
+                label: 'Vendite mensili',
+                backgroundColor: 'rgb(5, 29, 161)',
+                borderColor: 'rgb(5, 29, 161)',
+                data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            }]
+        };
+        // </block:setup>
+
+
+        sales.forEach(saleGroup => {
+            data.datasets[0].data[saleGroup.month] = saleGroup.sales;
+        });
+
+
+
+
+        // <block:config:0>
+        const config = {
+            type: 'line',
+            data: data,
+            options: {}
+        };
+        // </block:config>
+
+        module.exports = {
+            actions: [],
+            config: config,
+        };
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         // === include 'setup' then 'config' above ===
@@ -28,4 +79,4 @@
         );
     </script>
 
-</body>
+@endsection
