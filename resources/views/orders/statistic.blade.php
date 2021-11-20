@@ -50,7 +50,7 @@
 
 
         sales.forEach(saleGroup => {
-            data.datasets[0].data[saleGroup.month] = saleGroup.sales;
+            data.datasets[0].data[saleGroup.month - 1] = saleGroup.sales;
         });
 
 
