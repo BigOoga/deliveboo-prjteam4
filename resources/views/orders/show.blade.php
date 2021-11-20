@@ -12,7 +12,7 @@
                     alla dashboard</a>
             </div>
         </div>
-        <ul class="list-group list-unstyled">
+        <ul class="list-group list-unstyled rounded p-3 bg-light">
             <div class="border p-5">
                 <h2><strong>Dettagli ordine</strong></h2>
                 <li class="mb-2"><strong>ID: </strong>{{ $order->id }}</li>

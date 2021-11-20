@@ -13,7 +13,7 @@
             </div>
         </div>
 
-        <div class="m-5">
+        <div class="m-5 rounded p-3 bg-light">
             <canvas id="myChart"></canvas>
         </div>
 
