@@ -19,8 +19,10 @@
             <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
             <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
         </svg>
+        {{-- gif rider --}}
+        <img class="gif-rider d-flex justify-content-center m-0" src="https://media3.giphy.com/media/gsr9MG7bDvSRWWSD1Y/giphy.gif?cid=6c09b952q0ll6ul7gsttnb2gx2zas9nw3b1y1eggho5c87o5&rid=giphy.gif&ct=s" alt="">
         <div id="btn-return" class="text-center">
-            <a href="{{route('restaurants.index')}}" class="btn btn-primary rounded-pill">Torna ai ristoranti</a> 
+            <a href="{{route('restaurants.index')}}" id="restaurants-btn" class="btn rounded-pill">Torna ai ristoranti</a> 
         </div>
     </div>
 </body>
