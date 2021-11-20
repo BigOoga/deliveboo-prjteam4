@@ -136,13 +136,12 @@ class OrderController extends Controller
     {
         $user_id = Auth::id();
 
-        $orders = DB::select("SELECT MONTH(o.created_at), count(DISTINCT o.id) FROM `orders`as o
+        $orders = DB::select("SELECT MONTH(o.created_at) AS month, count(DISTINCT o.id) AS sales FROM `orders`as o
         INNER JOIN dish_order as do ON do.order_id=o.id
         INNER JOIN dishes as d on d.id=do.dish_id
-        WHERE d.restaurant_id = 14
+        WHERE d.restaurant_id = $user_id
         GROUP BY month(o.created_at)");
-
-        dd($orders);
+        $orders = json_encode($orders);
         return view('orders.statistic', compact('orders'));
     }
 }
