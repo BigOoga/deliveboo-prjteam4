@@ -50,16 +50,9 @@
                         <div id="dropin-container" style="display: flex;justify-content: center;align-items: center;">
                         </div>
                         <div style="display: flex;justify-content: center;align-items: center; color: white">
-                            <a id="submit-button" class="btn btn-sm btn-success">Invia pagamento</a>
+                            <a id="submit-button" class="btn btn-sm btn-success">Submit payment</a>
                         </div>
                         {{-- BRAINTREE TEST --}}
-
-                        <div class="payment-loader d-none">
-                            <h4>Elaboro il pagamento...</h4>
-                        </div>
-                        <div class="error-feedback text-center pt-3 d-none">
-                            <h4 style="color: red">Si è verificato un errore :(</h3>
-                        </div>
 
                     </div>
                 </div>
@@ -86,15 +79,13 @@
     }
 
 
-    let loader = document.querySelector('.payment-loader');
-    let errorFeedback = document.querySelector('.error-feedback');
     let button = document.querySelector('#submit-button');
     braintree.dropin.create({
         authorization: '{{ $token }}',
         container: '#dropin-container'
     }, function(createErr, instance) {
         button.addEventListener('click', function() {
-            errorFeedback.classList.add('d-none');
+
             let name = document.getElementById('name').value;
             let last_name = document.getElementById('last_name').value;
             let phone = document.getElementById('phone').value.replace(/\s+/g, '');;
@@ -165,8 +156,6 @@
             }
 
             if (isValid) {
-                loader.classList.add("d-flex")
-
                 instance.requestPaymentMethod(function(err, payload) {
                     (function($) {
                         $(function() {
@@ -202,10 +191,6 @@
                                 },
                                 error: function(data) {
                                     console.log('error', payload.nonce)
-                                    loader.classList.remove("d-flex")
-                                    loader.classList.add("d-none")
-                                    errorFeedback.classList.remove(
-                                        "d-none")
                                 }
                             });
                         });

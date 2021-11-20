@@ -1,17 +1,22 @@
-// Fonts
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,700;1,400;1,900&display=swap");
+// Bootstrap
+@import "~bootstrap/scss/bootstrap";
 
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,700;1,400;1,900&display=swap');
+
+// ------------GUESTS--------------
 // Guests Home
 @import "guests/home";
 
 // Guests Success
 @import "guests/success";
 
+// ------------RESTAURANTS--------------
+// Restaurants dashboard
+@import "restaurants/dashboard";
+
 // Variables
 @import "variables";
 
-// Bootstrap
-@import "~bootstrap/scss/bootstrap";
-
 // my Styles
-@import "mystyles";
+@import "dishes.index";
