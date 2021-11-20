@@ -8,7 +8,7 @@
         <div class="justify-content-between m-3">
             <div><a href="{{ route('restaurants.dashboard') }}" class="btn btn-primary p-2 mr-3 my-1">Torna
                     indietro</a>
-                <h3 style="vertical-align: middle" class="d-inline-block self-align-center pl-3 ml-3">Statistiche Ristorante
+                <h3 style="vertical-align: middle" class="d-inline-block self-align-center pl-3 mx-3">Statistiche Ristorante
                 </h3>
             </div>
         </div>

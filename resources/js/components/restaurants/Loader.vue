@@ -1,7 +1,7 @@
 <template>
     <div class="loader d-flex justify-content-center align-items-center">
         <div class="spinner-border text-primary" role="status">
-            <span class="sr-only">Loading...</span>
+            <span class="sr-only"></span>
         </div>
     </div>
 </template>
