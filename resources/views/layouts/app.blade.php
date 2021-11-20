@@ -31,7 +31,7 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="{{ asset('images/logo-small.png') }}" width="30" height="30"
                         class="d-inline-block align-top" alt="Logo">
-                    {{ config('app.name', 'Deliveboo') }}
+                    Deliveboo
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -70,7 +70,7 @@
                                     <a class="dropdown-item" href="{{ route('dishes.index') }}">Piatti</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                                document.getElementById('logout-form').submit();">
+                                        document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
