@@ -10,7 +10,12 @@
     <title>Success!</title>
 </head>
 
-<body>
+<body onload="myFunction()" style="margin:0;">
+    <div id="loader"></div>
+
+<div style="display:none;" id="myDiv" class="animate-bottom">
+ 
+
     <div class="container">
         <div id="order-success" class="position-relative">
             <h1 class="text-center" id="bau" >Ordine completato con successo!</h1>
@@ -25,6 +30,21 @@
             <a href="{{route('restaurants.index')}}" id="restaurants-btn" class="btn rounded-pill">Torna ai ristoranti</a> 
         </div>
     </div>
+
+</div>
 </body>
+
+<script>
+    var myVar;
+    
+    function myFunction() {
+      myVar = setTimeout(showPage, 3000);
+    }
+    
+    function showPage() {
+      document.getElementById("loader").style.display = "none";
+      document.getElementById("myDiv").style.display = "block";
+    }
+    </script>
 
 </html>

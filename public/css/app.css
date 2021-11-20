@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,700;1,400;1,900&display=swap);@charset "UTF-8";
 * {
   margin: 0;
   padding: 0;
@@ -9,8 +9,17 @@
   overflow: auto;
 }
 
-.clickable {
-  cursor: pointer;
+header {
+  height: 380px;
+  background: linear-gradient(176deg, #00ccbc 49.7%, #d0eb99 50%);
+}
+@media screen and (max-width: 768px) {
+  header {
+    height: 340px;
+  }
+}
+header i {
+  color: #00ccbc;
 }
 
 #hero {
@@ -23,20 +32,23 @@
   background-size: contain;
   background-position: bottom 0% right 25%;
 }
+@media screen and (max-width: 768px) {
+  #hero {
+    height: 300px;
+  }
+}
+@media screen and (max-width: 500px) {
+  #hero {
+    background-image: none;
+  }
+  #hero #hero-text {
+    width: 100%;
+  }
+}
 #hero h1, #hero .h1 {
   color: #440063;
   font-weight: bold;
-}
-
-header {
-  height: 455px;
-  background: linear-gradient(176deg, #00ccbc 49.7%, #d0eb99 50%);
-}
-
-#search-form {
-  line-height: 59px;
-  background-color: #fff;
-  border-radius: 5px;
+  font-size: 45px;
 }
 
 .sidenav {
@@ -80,11 +92,209 @@ header {
   margin-left: 50px;
 }
 
-#myChart {
-  width: 100%;
-  height: auto;
+#default-section {
+  background-color: #ffeae4;
+}
+#default-section h5, #default-section .h5 {
+  text-transform: capitalize;
 }
 
+#default-section h5, #default-section .h5,
+#deliveboo-section h5,
+#deliveboo-section .h5 {
+  font-weight: bold;
+}
+#default-section h2, #default-section .h2,
+#deliveboo-section h2,
+#deliveboo-section .h2 {
+  font-size: 35px;
+}
+#default-section a,
+#deliveboo-section a {
+  color: #000;
+  text-decoration: none;
+}
+
+#hero img,
+#hero h1,
+#hero .h1, #deliveboo-section img,
+#deliveboo-section h1,
+#deliveboo-section .h1, #default-section img,
+#default-section h1,
+#default-section .h1 {
+  -webkit-animation: fadeIn 1s ease-in;
+          animation: fadeIn 1s ease-in;
+  -webkit-animation-iteration-count: initial;
+          animation-iteration-count: initial;
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+#order-success {
+  -webkit-animation: mymove 1s ease;
+          animation: mymove 1s ease;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes mymove {
+  from {
+    top: 300px;
+  }
+  to {
+    top: 270px;
+  }
+}
+
+@keyframes mymove {
+  from {
+    top: 300px;
+  }
+  to {
+    top: 270px;
+  }
+}
+#btn-return {
+  -webkit-animation: fadeIn 1s ease;
+          animation: fadeIn 1s ease;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-delay: 2s;
+          animation-delay: 2s;
+  visibility: hidden;
+  margin-top: 50px;
+}
+
+#btn-return:hover {
+  border-radius: 50%;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+.checkmark__circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 2;
+  stroke-miterlimit: 10;
+  stroke: #7ac142;
+  fill: none;
+  -webkit-animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+          animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.checkmark {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: block;
+  stroke-width: 2;
+  stroke: #fff;
+  stroke-miterlimit: 10;
+  margin: 10% auto;
+  box-shadow: inset 0px 0px 0px #7ac142;
+  -webkit-animation: fill 0.4s ease-in-out 0.4s forwards, scale 0.3s ease-in-out 0.9s both;
+          animation: fill 0.4s ease-in-out 0.4s forwards, scale 0.3s ease-in-out 0.9s both;
+}
+
+.checkmark__check {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  -webkit-animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+          animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+@-webkit-keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+@-webkit-keyframes scale {
+  0%, 100% {
+    transform: none;
+  }
+  50% {
+    transform: scale3d(1.1, 1.1, 1);
+  }
+}
+@keyframes scale {
+  0%, 100% {
+    transform: none;
+  }
+  50% {
+    transform: scale3d(1.1, 1.1, 1);
+  }
+}
+@-webkit-keyframes fill {
+  100% {
+    box-shadow: inset 0px 0px 0px 30px #7ac142;
+  }
+}
+@keyframes fill {
+  100% {
+    box-shadow: inset 0px 0px 0px 30px #7ac142;
+  }
+}
+#restaurants-btn {
+  background-color: #00CDBD;
+  color: #007C89;
+  font-weight: bolder;
+}
+
+.gif-rider {
+  height: 300px;
+  position: relative;
+  -webkit-animation: slide 5s forwards;
+          animation: slide 5s forwards;
+  -webkit-animation-iteration-count: 1;
+          animation-iteration-count: 1;
+}
+
+@-webkit-keyframes slide {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: 38%;
+  }
+}
+
+@keyframes slide {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: 38%;
+  }
+}
 /*!
  * Bootstrap v5.1.3 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
