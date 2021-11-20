@@ -68,14 +68,7 @@ h4{
     left: 0;
     padding: 120px 0 0 40px;
     background-color: transparent;
-     background-attachment: scroll;
-    // background: linear-gradient(
-    //     176deg,
-    //     rgba(0, 204, 188, 1) 49.7%,
-    //     rgba(208, 235, 153, 1) 50%
-    // );
-    // border-right: 2px solid rgba(0, 204, 188, 1);
-    
+
 }
 input[type="checkbox"] {
     margin-right: 5px;
