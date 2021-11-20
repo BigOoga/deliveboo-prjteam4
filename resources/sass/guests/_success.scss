@@ -14,7 +14,7 @@
     animation-fill-mode: forwards;
     animation-delay: 2s;
     visibility: hidden;
-    margin-top: 350px;
+    margin-top: 50px;
 }
 
 #btn-return:hover {
@@ -86,3 +86,26 @@
       box-shadow: inset 0px 0px 0px 30px #7ac142;
     }
   }
+
+  #restaurants-btn{
+    background-color:#00CDBD;
+    color: #007C89;
+    font-weight: bolder;
+  }
+
+
+  .gif-rider{
+    height: 300px;
+    position: relative;
+    animation: slide 5s forwards;
+    animation-iteration-count: 1;
+}
+
+  @keyframes slide {
+    0% {
+      left: 0;
+    }
+    100% {
+      left: 38%;
+    }
+}
