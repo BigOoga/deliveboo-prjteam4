@@ -86,14 +86,17 @@ export default {
         subTotal: function () {
             let subTotal = 0;
             this.loadedDishes.forEach((dish) => {
-                subTotal += dish.price * dish.quantity;
+                subTotal += parseFloat(dish.price) * dish.quantity;
             });
-            subTotal = (Math.round(subTotal * 100) / 100).toFixed(2);
+            //subTotal = (Math.round(subTotal * 100) / 100).toFixed(2);
             return subTotal;
         },
         total: function () {
-            let total = this.subTotal + this.restaurant.delivery_fee;
-            total = (Math.round(total * 100) / 100).toFixed(2);
+            console.log(this.restaurant.delivery_fee);
+            let total =
+                parseFloat(this.subTotal) +
+                parseFloat(this.restaurant.delivery_fee);
+            //total = (Math.round(total * 100) / 100).toFixed(2);
             return total;
         },
     },
