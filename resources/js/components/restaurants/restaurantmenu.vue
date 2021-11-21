@@ -1,5 +1,5 @@
 <template>
-    <div class=" col-lg-7 col-md-6 p-0 d-flex flex-wrap">
+    <div class=" col-lg-8 col-md-6 p-0 d-flex flex-wrap">
         <div id="dish-card" v-for="(dish, i) in dishes" :key="i" class="card col-lg-5 col-md-12 shadow-sm p-3 mb-3 me-3 d-flex" :class="[dish.available ? 'available' : 'unavailable']">
             <img style="object-fit: cover" :src="dish.picture ? '/storage/' + dish.picture : '/img/placeholder.svg'" alt=""/>
             <div class="card-body p-0 mt-3 d-flex flex-column justify-content-between">

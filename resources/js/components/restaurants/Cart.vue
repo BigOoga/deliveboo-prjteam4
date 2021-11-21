@@ -1,5 +1,5 @@
 <template>
-<div class="col-lg-5 col-md-6" >
+<div class="col-lg-4 col-md-6" >
         <div class="card p-3 shadow-sm">
             <div>
                 <h4>Il tuo ordine</h4>
