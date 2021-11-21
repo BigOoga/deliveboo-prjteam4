@@ -1,5 +1,5 @@
 <a href="#" class="clickable text-dark" data-toggle="modal" data-target="#delete{{$dish->id}}">
-  <i class="far fa-trash-alt"></i>
+  <i class="far fa-trash-alt fs-4 p-2"></i>
 </a>
 
 <div class="modal fade" id="delete{{$dish->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

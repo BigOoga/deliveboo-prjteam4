@@ -39,18 +39,19 @@
                 </thead>
                 <tbody>
                     @forelse($dishes as $dish)
-                        <tr>
+                        <tr class="align-middle">
                             <td><img class="dish-thumb" src="{{ asset('storage/' . $dish->picture) }}"
                                     alt="{{ $dish->name }}"></td>
                             <td>{{ $dish->name }}</td>
                             <td>€{{ $dish->price }}</td>
                             <td>{{ $dish->entry }}</td>
-                            <td><a href="{{ route('dishes.show', $dish->id) }}" class="btn btn-info my-1">Dettaglio</a>
-                                <a href="{{ route('dishes.edit', $dish->id) }}" class="btn my-2">
+                            <td  class="d-flex align-items-center">
+                                <a href="{{ route('dishes.show', $dish->id) }}" class="btn btn-info">Dettaglio</a>
+                                <a href="{{ route('dishes.edit', $dish->id) }}" class="btn">
                                     <i class="fas fa-pen fs-4"></i>
                                 </a>
                                 <form action="{{ route('dishes.destroy', $dish->id) }}" method="POST"
-                                    class="d-inline delete-form  my-1" id="delete-form">
+                                    class="d-inline delete-form" id="delete-form">
                                     @csrf
                                     @method('DELETE')
                                     <!-- Modal -->
