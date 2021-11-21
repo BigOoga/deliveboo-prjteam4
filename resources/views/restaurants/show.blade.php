@@ -18,7 +18,7 @@
             {{-- RESTAURANT DETAILS --}}
             <a class="btn mb-3" href="{{ route('restaurants.index') }}" role="button">Indietro</a>
                 <div class="row">
-                    <div class="card mb-3 p-0">
+                    <div class="card mb-3 p-0 shadow-sm">
                         {{-- RESTAURANT PIC --}}
                         <div class="row g-0">
                             <div class="col-lg-4 col-md-6 d-flex align-items-center">
