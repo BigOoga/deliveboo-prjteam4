@@ -28,10 +28,10 @@
     <div id="root">
         <nav class="navbar navbar-expand-md navbar-light shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ asset('images/logo-small.png') }}" width="30" height="30"
+                <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
+                    <img src="{{ asset('images/logo-small.png') }}" width="40" height="40"
                         class="d-inline-block align-top" alt="Logo">
-                    Deliveboo
+                    <strong class="mx-1 text-logo">Deliveboo</strong>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -68,9 +68,8 @@
                                     <a class="dropdown-item" href="{{ route('restaurants.dashboard') }}">La mia
                                         dashboard</a>
                                     <a class="dropdown-item" href="{{ route('dishes.index') }}">Piatti</a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -98,17 +97,17 @@
 </body>
 
 <style lang="scss" scoped>
-    .navbar{
+    .navbar {
         background-color: #00ccbc;
     }
-    main{
+
+    main {
         min-height: 100vh;
-        background: linear-gradient(
-        176deg,
-        rgba(0, 204, 188, 0.8) 49.7%,
-        rgba(208, 235, 153, 0.8) 50%
-    );
+        background: linear-gradient(176deg,
+                rgba(0, 204, 188, 0.8) 49.7%,
+                rgba(208, 235, 153, 0.8) 50%);
     }
+
 </style>
 
 </html>

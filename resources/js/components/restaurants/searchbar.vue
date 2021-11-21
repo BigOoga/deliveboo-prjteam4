@@ -1,13 +1,15 @@
 <template>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-        <a class="navbar-brand" href="/home">
+        <a class="navbar-brand d-flex align-items-center" href="/home">
             <img
-                src="/images/logo-text.png "
-                width="100"
+                src="/images/logo-small.png "
+                width="40"
                 height="40"
                 class="d-inline-block align-top"
                 alt="Logo"
-        /></a>
+            />
+            <strong class="mx-1 text-logo">Deliveboo</strong>
+        </a>
         <button
             class="navbar-toggler"
             type="button"
