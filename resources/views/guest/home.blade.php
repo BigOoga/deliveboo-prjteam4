@@ -16,7 +16,7 @@
       {{-- HEADER --}}
       <header>
           <div id="nav-bg">
-              <nav class="navbar navbar-light d-flex justify-content-space-between container">
+              <nav class="navbar navbar-light container d-flex justify-content-between">
                   {{-- LOGO --}}
                   <div>
                       <a class="navbar-brand d-flex align-items-center" href="#">
@@ -33,8 +33,7 @@
                       @endif
                       @if (Auth::check())
                           <a class="btn btn-light" href="{{ route('restaurants.dashboard') }}" role="button"><i
-                                  class="fas fa-home me-2 mr-2"></i>Vai alla
-                              tua dashboard</a>
+                                  class="fas fa-home me-2 mr-2"></i>Vai alla dashboard</a>
                       @endif
                       <a class="btn btn-light" href="#" role="button" onclick="openNav()"><i
                               class="fas fa-bars me-2 mr-2"></i>Menu</a>
@@ -55,8 +54,8 @@
                                   role="button">Registrati</a>
                           @endif
                           @if (Auth::check())
-                              <a class="btn btn-primary" href="{{ route('restaurants.dashboard') }}" role="button">Vai
-                                  alla tua dashboard</a>
+                              <a class="btn btn-primary" href="{{ route('restaurants.dashboard') }}" role="button">
+                                  Vai alla dashboard</a>
                           @endif
                       </div>
                       <hr class="mx-3">
