@@ -1,5 +1,5 @@
 <template>
-    <div class=" col-lg-8 col-md-6 p-0 d-flex flex-wrap">
+    <div id="dish-card-wrapper" class="col-lg-8 col-md-6 p-0 d-flex flex-wrap">
         <div id="dish-card" v-for="(dish, i) in dishes" :key="i" class="card col-lg-5 col-md-12 shadow-sm p-3 mb-3 me-3 d-flex" :class="[dish.available ? 'available' : 'unavailable']">
             <img style="object-fit: cover" :src="dish.picture ? '/storage/' + dish.picture : '/img/placeholder.svg'" alt=""/>
             <div class="card-body p-0 mt-3 d-flex flex-column justify-content-between">
@@ -131,7 +131,13 @@ export default {
     //     width: calc(100% / 3 - 20px);
         
     // }
+    
 }
+#dish-card:last-child{
+            @media screen and (max-width:780px){
+                width:100%;
+            }
+        }
 #dish-card:hover {
     transform: scale(1.02);
 }
@@ -143,7 +149,7 @@ img {
 }
 
 button[type="button"]{
-        background-color: #00bb55;
+    background-color: #00bb55;
         color: white;
         font-size: 1rem;
         font-weight: bold;
@@ -153,4 +159,5 @@ button[type="button"]{
 .card.unavailable {
     display: none;
 }
+
 </style>
