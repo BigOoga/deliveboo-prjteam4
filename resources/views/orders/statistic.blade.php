@@ -5,15 +5,14 @@
 
     <div class="container">
 
-        <div class="justify-content-between m-3">
-            <div><a href="{{ route('restaurants.dashboard') }}" class="btn btn-primary p-2 mr-3 my-1">Torna
-                    indietro</a>
-                <h3 style="vertical-align: middle" class="d-inline-block self-align-center pl-3 mx-3">Statistiche Ristorante
-                </h3>
+        <div class="d-flex align-items-center justify-content-between">                
+            <h3 style="vertical-align: middle" class="d-inline-block self-align-center">Le tue statistiche</h3>
+            <a href="{{ route('restaurants.dashboard') }}" class="btn btn-primary">
+                Torna indietro</a>
             </div>
         </div>
 
-        <div class="m-5 rounded p-3 bg-light">
+        <div class="rounded p-3 bg-light">
             <canvas id="myChart"></canvas>
         </div>
 

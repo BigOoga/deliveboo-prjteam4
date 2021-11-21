@@ -2,19 +2,17 @@
 
 @section('content')
 
-    <div class="container my-2 mb-3">
-        <div class="d-flex justify-content-between my-2">
-            <div><a href="{{ route('restaurants.dashboard') }}" class="btn btn-primary p-2  my-1">Torna alla dashboard</a>
-            </div>
+    <div class="container">
+        <div class=" d-flex align-items-center justify-content-between my-2">
+            <a href="{{ route('restaurants.dashboard') }}" class="btn btn-primary">Torna alla dashboard</a>
             <h1 class="h3 text-center ">I miei ordini</h1>
-            <div class="col-4 text-right"><a href="{{ route('orders.statistic') }}" class="btn btn-primary p-2  my-1">Vedi
-                    statistiche</a>
-            </div>
+            <a href="{{ route('orders.statistic') }}" class="btn btn-primary">Vedi
+                statistiche</a>
         </div>
 
         <ul class="list-group list-unstyled rounded p-3 bg-light">
             @foreach ($orders as $order)
-                <div class="border p-3">
+                <div class="border p-3 mb-3">
                     <li class="mb-2"><strong>ID Ordine: </strong>{{ $order->id }}</li>
                     <li class="mb-2"><strong>Nome: </strong>{{ $order->user_name }}</li>
                     <li class="mb-2"><strong>Cognome: </strong>{{ $order->user_surname }}</li>
