@@ -2,11 +2,14 @@
 
 @section('content')
     <div class="container">
-        <div class="justify-content-between m-3">
+        <div class="d-flex justify-content-between my-2">
             <div><a href="{{ route('restaurants.dashboard') }}" class="btn btn-primary p-2 mr-3 my-1">Torna
                     indietro</a>
-                <h1 style="vertical-align: middle" class="d-inline-block self-align-center pl-3 ml-3">Modifica informazioni
-                </h1>
+            </div>
+            <h1 style="vertical-align: middle" class="d-inline-block self-align-center pl-3 ml-3">Modifica informazioni
+            </h1>
+            <div>
+                <a href="{{ url('/') }}" class="btn btn-primary">Torna alla home</a>
             </div>
         </div>
 
@@ -112,9 +115,7 @@
                     <div class="col-6">
                         <button type="submit" class="btn btn-primary px-4">Salva modifiche</button>
                     </div>
-                    <div class="col-6">
-                        <a href="{{ url('/') }}" class="btn btn-primary">Torna alla home</a>
-                    </div>
+                    
 
                 </div>
 
