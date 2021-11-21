@@ -5,14 +5,14 @@
         <div class="d-flex align-items-center justify-content-between mb-3">
             <a href="{{ route('dishes.index') }}" class="btn btn-primary p-2  my-1">
                 Torna indietro</a>
-            <h1 class="h3 text-center m-0 align-middle">
+            <h1 class="text-center m-0 align-middle">
                 Dettagli del piatto</h1>
             <a href="{{ route('restaurants.dashboard') }}" class="btn btn-primary p-2  my-1">
                 Torna alla dashboard</a>
         </div>
-        <div class="card mb-2">
+        <div class="card mb-2 px-3">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-3 d-flex align-items-center">
                     <img class="img-fluid" src="{{ asset('storage/' . $dish->picture) }}" alt="{{ $dish->name }}">
                 </div>
                 <div class="col-md-9">
