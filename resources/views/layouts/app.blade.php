@@ -39,7 +39,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse d-flex" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse flex-column align-items-end" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
 
