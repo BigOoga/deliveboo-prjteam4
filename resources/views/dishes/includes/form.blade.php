@@ -1,10 +1,10 @@
 <div class="row rounded p-3 bg-light">
     @if ($dish->exists)
-        <form action="{{ route('dishes.update', $dish->id) }}" method="POST" class="row g-3"
+        <form action="{{ route('dishes.update', $dish->id) }}" method="POST" class="row"
             enctype="multipart/form-data">
             @method('PATCH')
         @else
-            <form method="POST" action="{{ route('dishes.store') }}" class="row g-3"
+            <form method="POST" action="{{ route('dishes.store') }}" class="row"
                 enctype="multipart/form-data">
     @endif
     @csrf
