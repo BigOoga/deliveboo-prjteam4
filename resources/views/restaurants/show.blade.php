@@ -21,24 +21,23 @@
             <div class="row">
                     
                 {{-- RESTAURANT INFO --}}
-                        <div id="restaurant-infos" class="col-lg-8 col-md-6 p-3">
-                        <h1><strong>{{ $restaurant->name }}</strong></h1>
-                        <hr>
-                        <ul class="list-unstyled">
-                                <li><time><strong>Orario di apertura: </strong>{{ $restaurant->opening_time }}</time></li>
-                                <li><time><strong>Orario di chiusura: </strong>{{ $restaurant->closing_time }}</time></li>
-                                <li><strong>Contatti: </strong>{{ $restaurant->email }}</li>
-                                <li><strong>Spese di spedizione: € </strong>{{ $restaurant->delivery_fee }}</li>
-                        </ul> 
-                        {{-- INSERT DESCRIPTION --}}
-                        <h5><strong>Descrizione:</strong></h5>
-                        <p>{{ $restaurant->description }}</p>
-                    </div>
-                    {{-- RESTAURANT PIC --}}
-                    <div id="restaurant-image" class="col-lg-4 col-md-6 d-flex align-items-center">
-                        <img src="{{ asset('storage/' . $restaurant->image) }}" alt="{{ $restaurant->name }}"
-                        class="img-fluid">
-                    </div> 
+                <div id="restaurant-infos" class="col-lg-8 col-md-6 p-3">
+                    <h1><strong>{{ $restaurant->name }}</strong></h1>
+                    <hr>
+                    <ul class="list-unstyled">
+                        <li><time><strong>Orario di apertura: </strong>{{ $restaurant->opening_time }}</time></li>
+                            <li><time><strong>Orario di chiusura: </strong>{{ $restaurant->closing_time }}</time></li>
+                            <li><strong>Contatti: </strong>{{ $restaurant->email }}</li>
+                            <li><strong>Spese di spedizione: € </strong>{{ $restaurant->delivery_fee }}</li>
+                    </ul> 
+                    {{-- INSERT DESCRIPTION --}}
+                    <h5><strong>Descrizione:</strong></h5>
+                    <p>{{ $restaurant->description }}</p>
+                </div>
+                {{-- RESTAURANT PIC --}}
+                <div id="restaurant-image" class="col-lg-4 col-md-6 d-flex align-items-center">
+                    <img src="{{ asset('storage/' . $restaurant->image) }}" alt="{{ $restaurant->name }}"
+                    class="img-fluid">
                 </div> 
             </div>
 
