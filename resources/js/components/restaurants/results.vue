@@ -1,7 +1,7 @@
 <template>
     <div id="results" class="container-fluid">
         <div class="row">
-            <h3>Risultati della ricerca:</h3>
+            <h3 class="my-3">Risultati della ricerca:</h3>
         </div>
         <Loader v-if="isLoading" />
         <div class="row">
