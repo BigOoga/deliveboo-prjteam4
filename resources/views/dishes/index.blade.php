@@ -4,17 +4,13 @@
 
 
     <section class="container">
-        <div class="row justify-content-between m-3">
-            <div class="col-4"><a href="{{ route('restaurants.dashboard') }}"
+        <div class="d-flex justify-content-between mb-3">
+            <a href="{{ route('restaurants.dashboard') }}"
                     class="btn btn-primary p-2  my-1">Torna alla dashboard</a>
-            </div>
-            <div class="col-4">
                 <h1>I miei piatti</h1>
-            </div>
-            <div class="col-4 text-right"><a href="{{ route('dishes.create') }}" class="btn btn-primary p-2 my-1 ">Aggiungi
+            <a href="{{ route('dishes.create') }}" class="btn btn-primary p-2 my-1 ">Aggiungi
                     un
                     piatto</a>
-            </div>
         </div>
         @if (session('deleted'))
             <div class="alert alert-success d-flex align-items-center m-3" role="alert">

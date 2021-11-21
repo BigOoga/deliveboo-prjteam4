@@ -5,14 +5,13 @@
 
     <div class="container">
 
-        <div class="d-flex align-items-center justify-content-between">                
+        <div class="d-flex align-items-center justify-content-between my-3">                
             <h3 style="vertical-align: middle" class="d-inline-block self-align-center">Le tue statistiche</h3>
             <a href="{{ route('restaurants.dashboard') }}" class="btn btn-primary">
                 Torna indietro</a>
-            </div>
         </div>
 
-        <div class="rounded p-3 bg-light">
+        <div class="rounded w-100 p-3 bg-light mx-auto">
             <canvas id="myChart"></canvas>
         </div>
 
