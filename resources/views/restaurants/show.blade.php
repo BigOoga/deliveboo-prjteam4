@@ -1,18 +1,9 @@
-</html>
+@extends('layouts.app')
 
-<title>Deliveboo</title>
-
-<!-- Scripts -->
-<script src="{{ asset('js/app.js') }}" defer></script>
-
-<!-- Styles -->
-<link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-</head>
+@section('content')
 
 <body>
     <div id="app">
-        <topbar></topbar>
         <div class="container pt-5">
             {{-- fixare il responsive  --}}
             {{-- RESTAURANT DETAILS --}}
@@ -56,6 +47,8 @@
 
 
 </body>
+
+@endsection 
 
 </html>
 <style lang="scss" scoped>
