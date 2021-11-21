@@ -1,5 +1,5 @@
 <template>
-    <div class="border p-3" id="receipt">
+    <div class="border rounded bg-white p-3" id="receipt">
         <div v-for="(product, i) in products" :key="i">
             {{ product.name }} x{{ product.quantity }}
         </div>
