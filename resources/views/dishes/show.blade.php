@@ -2,16 +2,13 @@
 
 @section('content')
     <section class="container">
-        <div class="d-flex justify-content-between m-3">
-            <div class="col-4"><a href="{{ route('dishes.index') }}" class="btn btn-primary p-2  my-1">Torna
-                    indietro</a>
-            </div>
-            <div class="col-4">
-                <h1 class="h3 text-center ">Dettagli del piatto</h1>
-            </div>
-            <div class="col-4 text-right"><a href="{{ route('restaurants.dashboard') }}"
-                    class="btn btn-primary p-2  my-1">Torna alla dashboard</a>
-            </div>
+        <div class="d-flex align-items-center justify-content-between mb-3">
+            <a href="{{ route('dishes.index') }}" class="btn btn-primary p-2  my-1">
+                Torna indietro</a>
+            <h1 class="h3 text-center m-0 align-middle">
+                Dettagli del piatto</h1>
+            <a href="{{ route('restaurants.dashboard') }}" class="btn btn-primary p-2  my-1">
+                Torna alla dashboard</a>
         </div>
         <div class="card mb-2">
             <div class="row">
@@ -28,7 +25,7 @@
                                     <i class="fas fa-pen fs-4"></i>
                                 </a>
                                 <form action="{{ route('dishes.destroy', $dish->id) }}" method="POST"
-                                    class="delete-form" class="delete-form">
+                                    class="delete-form d-inline" class="delete-form">
                                     @csrf
                                     @method('DELETE')
                                     @include('dishes.includes.modal')
