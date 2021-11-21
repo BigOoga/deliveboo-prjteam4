@@ -1,5 +1,5 @@
 <template>
-<div class="col-lg-4 col-md-4 " >
+<div class="col-lg-4 col-md-6 " >
         <div class="card p-3 shadow-sm">
             <div>
                 <h4>Il tuo ordine</h4>
@@ -239,8 +239,8 @@ export default {
     font-size: 16px;
     width: 25px;
 }
-#main-row {
-    border: 2px solid #00aabc;
-    border-radius: 5px;
-}
+// #main-row {
+//     border: 2px solid #00aabc;
+//     border-radius: 5px;
+// }
 </style>

@@ -1,13 +1,13 @@
 <template>
-    <div class=" col-8  p-0 d-flex flex-wrap">
-        <div id="dish-card" v-for="(dish, i) in dishes" :key="i" class="card col-lg-5 col-md-12  shadow-sm mb-4 me-5 p-3 d-flex" :class="[dish.available ? 'available' : 'unavailable']">
+    <div class=" col-lg-8 col-md-6 p-0 d-flex flex-wrap">
+        <div id="dish-card" v-for="(dish, i) in dishes" :key="i" class="card col-lg-5 col-md-12 shadow-sm p-3 mb-3 me-3 d-flex" :class="[dish.available ? 'available' : 'unavailable']">
             <img style="object-fit: cover" :src="dish.picture ? '/storage/' + dish.picture : '/img/placeholder.svg'" alt=""/>
             <div class="card-body p-0 mt-3 d-flex flex-column justify-content-between">
                 <div>
                     <h4 class="card-title">{{ dish.name }}</h4>
                     <p class="card-text">{{ dish.description }}</p>
                 </div>
-                <div class="pos-bot d-flex align-items-end justify-content-between">
+                <div class="pos-bot d-flex align-items-end justify-content-between mt-4">
                     <span class="price"><strong>Prezzo: </strong>€ {{ dish.price }}</span>
                     <button @click="addToCart(dish.id, dish.price)" class="btn" type="button">Aggiungi</button>
                 </div>
