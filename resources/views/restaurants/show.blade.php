@@ -1,24 +1,15 @@
-</html>
+@extends('layouts.app')
 
-<title>Deliveboo</title>
-
-<!-- Scripts -->
-<script src="{{ asset('js/app.js') }}" defer></script>
-
-<!-- Styles -->
-<link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-</head>
+@section('content')
 
 <body>
     <div id="app">
-        <topbar></topbar>
         <div class="container pt-5">
             {{-- fixare il responsive  --}}
             {{-- RESTAURANT DETAILS --}}
             <a class="btn mb-3" href="{{ route('restaurants.index') }}" role="button">Indietro</a>
                 <div class="row">
-                    <div class="card mb-3 p-0">
+                    <div class="card mb-3 p-0 shadow-sm">
                         {{-- RESTAURANT PIC --}}
                         <div class="row g-0">
                             <div class="col-lg-4 col-md-6 d-flex align-items-center">
@@ -56,6 +47,8 @@
 
 
 </body>
+
+@endsection 
 
 </html>
 <style lang="scss" scoped>
