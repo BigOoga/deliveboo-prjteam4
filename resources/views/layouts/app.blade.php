@@ -27,7 +27,7 @@
 <body>
     <div id="root">
         <nav class="navbar navbar-expand-md navbar-light shadow-sm">
-            <div class="container">
+            <div class="container d-flex justify-content-space-between">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="{{ asset('images/logo-small.png') }}" width="30" height="30"
                         class="d-inline-block align-top" alt="Logo">
@@ -39,7 +39,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse d-flex" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
 
