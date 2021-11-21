@@ -1,69 +1,70 @@
 <template>
-    <div class="col-4 col-md-4 p-4" id="main-row">
-        <div>
-            <h4>Il tuo ordine</h4>
-            <!-- qui ci andranno i prodotti selezionati -->
-
-            <div v-for="(dish, i) in loadedDishes" :key="i" class="mb-2">
-                <div class="row d-flex justify-content-between">
-                    <span class="col-6"
-                        >{{ dish.name }} X {{ dish.quantity }}</span
-                    >
-                    <span
-                        class="
-                            col-6
-                            d-flex
-                            justify-content-between
-                            align-items-center
-                        "
-                    >
-                        <span>
-                            <button
-                                @click="decreaseQuant(i)"
-                                class="btn btn-rnd ms-2"
-                            >
-                                -
-                            </button>
-                            <button
-                                @click="increaseQuant(i)"
-                                class="btn btn-rnd"
-                            >
-                                +
-                            </button>
-                        </span>
-                        €{{
-                            (
-                                Math.round(dish.price * dish.quantity * 100) /
-                                100
-                            ).toFixed(2)
-                        }}</span
-                    >
+<div class="col-lg-4 col-md-6" >
+        <div class="card p-3 shadow-sm">
+            <div>
+                <h4>Il tuo ordine</h4>
+                <!-- qui ci andranno i prodotti selezionati -->
+                <div v-for="(dish, i) in loadedDishes" :key="i" class="mb-2">
+                    <div class="row d-flex justify-content-between">
+                        <span class="col-6"
+                            >{{ dish.name }} X {{ dish.quantity }}</span
+                        >
+                        <span
+                            class="
+                                col-6
+                                d-flex
+                                justify-content-between
+                                align-items-center
+                            "
+                        >
+                            <span>
+                                <button
+                                    @click="decreaseQuant(i)"
+                                    class="btn btn-rnd ms-2"
+                                >
+                                    -
+                                </button>
+                                <button
+                                    @click="increaseQuant(i)"
+                                    class="btn btn-rnd"
+                                >
+                                    +
+                                </button>
+                            </span>
+                            €{{
+                                (
+                                    Math.round(dish.price * dish.quantity * 100) /
+                                    100
+                                ).toFixed(2)
+                            }}</span
+                        >
+                    </div>
                 </div>
             </div>
-        </div>
-        <hr />
-        <!-- subtotal -->
-        <div class="d-flex justify-content-between">
-            <span>Subtotale</span>
-            <span>€{{ subTotal }}</span>
-        </div>
-        <!-- delivery fee -->
-        <div class="d-flex justify-content-between">
-            <span>Spese di consegna</span>
-            <span>€{{ restaurant.delivery_fee }}</span>
-        </div>
-        <hr class="mt-2 mb-2" />
-        <!-- total -->
-        <div class="d-flex justify-content-between">
-            <span>Total</span>
-            <span>€{{ total }}</span>
-        </div>
-        <div class="mt-3">
-            <button @click="goToCheckout" class="btn btn-primary">
-                Checkout
-            </button>
-            <button @click="emptyCart" class="btn btn-danger">Svuota</button>
-        </div>
+            <hr />
+            <!-- subtotal -->
+            <div class="d-flex justify-content-between">
+                <span>Subtotale</span>
+                <span>€{{ subTotal }}</span>
+            </div>
+            <!-- delivery fee -->
+            <div class="d-flex justify-content-between">
+                <span>Spese di consegna</span>
+                <span>€{{ restaurant.delivery_fee }}</span>
+            </div>
+            <hr class="mt-2 mb-2" />
+            <!-- total -->
+            <div class="d-flex justify-content-between">
+                <span>Totale</span>
+                <span>€{{ total }}</span>
+            </div>
+            <div class="mt-3">
+                <button @click="goToCheckout" class="btn btn-primary">
+                    Checkout
+                </button>
+                <button @click="emptyCart" class="btn btn-danger">Svuota</button>
+            </div>
+        </div>    
     </div>
 </template>
 
@@ -238,8 +239,8 @@ export default {
     font-size: 16px;
     width: 25px;
 }
-#main-row {
-    border: 2px solid #00aabc;
-    border-radius: 5px;
-}
+// #main-row {
+//     border: 2px solid #00aabc;
+//     border-radius: 5px;
+// }
 </style>
