@@ -14,6 +14,7 @@
     <div id="app">
         <topbar></topbar>
         <div class="container pt-5">
+            {{-- fixare il responsive  --}}
             {{-- RESTAURANT DETAILS --}}
             <a class="btn mb-3" href="{{ route('restaurants.index') }}" role="button">Indietro</a>
             <div>

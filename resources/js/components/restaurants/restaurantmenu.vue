@@ -120,8 +120,8 @@ export default {
 
 <style scoped lang="scss">
 
-// #dish-card {
-    // animation: transform 3s ease;  
+#dish-card {
+    transition: transform 0.2s;  
   
     // @media screen and (min-width: 980px) {
     //     width: 50%; 
@@ -131,7 +131,7 @@ export default {
     //     width: calc(100% / 3 - 20px);
         
     // }
-// }
+}
 #dish-card:hover {
     transform: scale(1.02);
 }
