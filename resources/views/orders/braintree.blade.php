@@ -1,20 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
+@section('head')
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Checkout</title>
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
     {{-- Braintree drop-in --}}
     <script src="https://js.braintreegateway.com/web/dropin/1.32.0/js/dropin.min.js"></script>
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
+@endsection
 
+@section('content')
 <body>
     <div class="container" id="checkout">
         <div class="row">
@@ -65,6 +60,9 @@
 
 
 </body>
+@endsection
+
+@section('scripts')
 <script>
     function validateEmail(email) {
         const re =
@@ -200,5 +198,4 @@
         });
     });
 </script>
-
-</html>
+@endsection
