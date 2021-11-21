@@ -3,11 +3,11 @@
 @section('content')
 
     <div class="container">
-        <div class=" d-flex align-items-center justify-content-between my-2">
-            <a href="{{ route('restaurants.dashboard') }}" class="btn btn-primary">Torna alla dashboard</a>
-            <h1 class="h3 text-center ">I miei ordini</h1>
-            <a href="{{ route('orders.statistic') }}" class="btn btn-primary">Vedi
-                statistiche</a>
+        <div class=" d-flex align-items-center justify-content-between my-3">
+            <div><a href="{{ route('restaurants.dashboard') }}" class="btn btn-primary">Torna alla dashboard</a></div>
+            <h1 class="h3 text-center">I miei ordini</h1>
+            <div><a href="{{ route('orders.statistic') }}" class="btn btn-primary">Vedi
+                statistiche</a></div>
         </div>
 
         <ul class="list-group list-unstyled rounded p-3 bg-light">
