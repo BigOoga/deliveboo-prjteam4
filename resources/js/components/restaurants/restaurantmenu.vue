@@ -1,6 +1,6 @@
 <template>
-    <div class="col-8 col-md-8 p-0 d-flex flex-wrap">
-        <div id="dish-card" v-for="(dish, i) in dishes" :key="i" class="card p-3 d-flex" :class="[dish.available ? 'available' : 'unavailable']">
+    <div class=" col-8  p-0 d-flex flex-wrap">
+        <div id="dish-card" v-for="(dish, i) in dishes" :key="i" class="card col-lg-5 col-md-12  shadow-sm mb-4 me-5 p-3 d-flex" :class="[dish.available ? 'available' : 'unavailable']">
             <img style="object-fit: cover" :src="dish.picture ? '/storage/' + dish.picture : '/img/placeholder.svg'" alt=""/>
             <div class="card-body p-0 mt-3 d-flex flex-column justify-content-between">
                 <div>
@@ -119,21 +119,24 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.card:hover {
-    // cursor: pointer;
+
+// #dish-card {
+    // animation: transform 3s ease;  
+  
+    // @media screen and (min-width: 980px) {
+    //     width: 50%; 
+    //     // aggiustare qui
+    // }
+    // @media screen and (min-width: 1200px) {
+    //     width: calc(100% / 3 - 20px);
+        
+    // }
+// }
+#dish-card:hover {
+    transform: scale(1.02);
 }
-#dish-card {
-    border: 2px solid #00aabc;
-    border-radius: 5px;
-    @media screen and (min-width: 980px) {
-        width: 50%;
-    }
-    @media screen and (min-width: 1200px) {
-        width: calc(100% / 3);
-    }
-}
+
 img {
-    object-fit: cover;
     width: 100px;
     height: 100px;
     
