@@ -5525,6 +5525,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Cart",
@@ -5688,10 +5689,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
 //
 //
 //
@@ -6151,6 +6148,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Searchbar",
@@ -6261,6 +6260,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -11317,7 +11318,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".btn[data-v-d059fab8] {\n  color: white;\n}\n.btn-rnd[data-v-d059fab8] {\n  border-radius: 8px;\n  padding: 0 5px;\n  background-color: #3490dc;\n  font-size: 16px;\n  width: 25px;\n}\n#main-row[data-v-d059fab8] {\n  border: 2px solid #00aabc;\n  border-radius: 5px;\n}", ""]);
+exports.push([module.i, ".btn[data-v-d059fab8] {\n  color: white;\n}\n.btn-rnd[data-v-d059fab8] {\n  border-radius: 8px;\n  padding: 0 5px;\n  background-color: #3490dc;\n  font-size: 16px;\n  width: 25px;\n}", ""]);
 
 // exports
 
@@ -11336,7 +11337,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".loader[data-v-6acb09d2] {\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  top: 0;\n}\n.loader .spinner-border[data-v-6acb09d2] {\n  width: 100px;\n  height: 100px;\n}", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
@@ -11374,7 +11375,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#dish-card[data-v-3b843080] {\n  border: 2px solid #00aabc;\n  border-radius: 5px;\n}\n@media screen and (min-width: 980px) {\n#dish-card[data-v-3b843080] {\n    width: 50%;\n}\n}\n@media screen and (min-width: 1200px) {\n#dish-card[data-v-3b843080] {\n    width: 33.3333333333%;\n}\n}\nimg[data-v-3b843080] {\n  -o-object-fit: cover;\n     object-fit: cover;\n  width: 100px;\n  height: 100px;\n}\nbutton[type=button][data-v-3b843080] {\n  background-color: #00bb55;\n  color: white;\n  font-size: 1rem;\n  font-weight: bold;\n}\n.card.unavailable[data-v-3b843080] {\n  display: none;\n}", ""]);
+exports.push([module.i, "#dish-card[data-v-3b843080] {\n  transition: transform 0.2s;\n}\n@media screen and (max-width: 780px) {\n#dish-card[data-v-3b843080]:last-child {\n    width: 100%;\n}\n}\n#dish-card[data-v-3b843080]:hover {\n  transform: scale(1.02);\n}\nimg[data-v-3b843080] {\n  width: 100px;\n  height: 100px;\n}\nbutton[type=button][data-v-3b843080] {\n  background-color: #00bb55;\n  color: white;\n  font-size: 1rem;\n  font-weight: bold;\n}\n.card.unavailable[data-v-3b843080] {\n  display: none;\n}", ""]);
 
 // exports
 
@@ -11431,7 +11432,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "h4[data-v-2b2b28b0] {\n  margin-bottom: 20px;\n  font-weight: bold;\n}\n#sidebar[data-v-2b2b28b0] {\n  position: fixed;\n  width: 200px;\n  height: 100vh;\n  left: 0;\n  padding: 120px 0 0 40px;\n  background: linear-gradient(176deg, #00ccbc 49.7%, #d0eb99 50%);\n  border-right: 2px solid #00ccbc;\n}\ninput[type=checkbox][data-v-2b2b28b0] {\n  margin-right: 5px;\n  margin-bottom: 5px;\n}", ""]);
+exports.push([module.i, "h4[data-v-2b2b28b0] {\n  margin-bottom: 20px;\n  font-weight: bold;\n}\n#sidebar[data-v-2b2b28b0] {\n  position: fixed;\n  width: 200px;\n  height: 100vh;\n  left: 0;\n  padding: 120px 0 0 40px;\n  background-color: transparent;\n}\ninput[type=checkbox][data-v-2b2b28b0] {\n  margin-right: 5px;\n  margin-bottom: 5px;\n}", ""]);
 
 // exports
 
@@ -44324,10 +44325,8 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "col-4 col-md-4 p-4", attrs: { id: "main-row" } },
-    [
+  return _c("div", { staticClass: "col-lg-4 col-md-6" }, [
+    _c("div", { staticClass: "card p-3 shadow-sm" }, [
       _c(
         "div",
         [
@@ -44344,7 +44343,7 @@ var render = function () {
                   "span",
                   {
                     staticClass:
-                      "\n                        col-6\n                        d-flex\n                        justify-content-between\n                        align-items-center\n                    ",
+                      "\r\n                                col-6\r\n                                d-flex\r\n                                justify-content-between\r\n                                align-items-center\r\n                            ",
                   },
                   [
                     _c("span", [
@@ -44360,7 +44359,7 @@ var render = function () {
                         },
                         [
                           _vm._v(
-                            "\n                            -\n                        "
+                            "\r\n                                    -\r\n                                "
                           ),
                         ]
                       ),
@@ -44377,13 +44376,13 @@ var render = function () {
                         },
                         [
                           _vm._v(
-                            "\n                            +\n                        "
+                            "\r\n                                    +\r\n                                "
                           ),
                         ]
                       ),
                     ]),
                     _vm._v(
-                      "\n                    €" +
+                      "\r\n                            €" +
                         _vm._s(
                           (
                             Math.round(dish.price * dish.quantity * 100) / 100
@@ -44416,7 +44415,7 @@ var render = function () {
       _c("hr", { staticClass: "mt-2 mb-2" }),
       _vm._v(" "),
       _c("div", { staticClass: "d-flex justify-content-between" }, [
-        _c("span", [_vm._v("Total")]),
+        _c("span", [_vm._v("Totale")]),
         _vm._v(" "),
         _c("span", [_vm._v("€" + _vm._s(_vm.total))]),
       ]),
@@ -44425,7 +44424,7 @@ var render = function () {
         _c(
           "button",
           { staticClass: "btn btn-primary", on: { click: _vm.goToCheckout } },
-          [_vm._v("\n            Checkout\n        ")]
+          [_vm._v("\r\n                    Checkout\r\n                ")]
         ),
         _vm._v(" "),
         _c(
@@ -44434,8 +44433,8 @@ var render = function () {
           [_vm._v("Svuota")]
         ),
       ]),
-    ]
-  )
+    ]),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -44459,31 +44458,9 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { attrs: { id: "loader" } })
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "loader d-flex justify-content-center align-items-center",
-      },
-      [
-        _c(
-          "div",
-          {
-            staticClass: "spinner-border text-primary",
-            attrs: { role: "status" },
-          },
-          [_c("span", { staticClass: "sr-only" })]
-        ),
-      ]
-    )
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -44507,7 +44484,7 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "border p-3", attrs: { id: "receipt" } },
+    { staticClass: "border rounded bg-white p-3", attrs: { id: "receipt" } },
     [
       _vm._l(_vm.products, function (product, i) {
         return _c("div", { key: i }, [
@@ -44619,13 +44596,16 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "col-8 col-md-8 p-0 d-flex flex-wrap" },
+    {
+      staticClass: "col-lg-8 col-md-6 p-0 d-flex flex-wrap",
+      attrs: { id: "dish-card-wrapper" },
+    },
     _vm._l(_vm.dishes, function (dish, i) {
       return _c(
         "div",
         {
           key: i,
-          staticClass: "card p-3 d-flex",
+          staticClass: "card col-lg-5 col-md-12 shadow-sm p-3 mb-3 me-3 d-flex",
           class: [dish.available ? "available" : "unavailable"],
           attrs: { id: "dish-card" },
         },
@@ -44661,7 +44641,7 @@ var render = function () {
                 "div",
                 {
                   staticClass:
-                    "pos-bot d-flex align-items-end justify-content-between",
+                    "pos-bot d-flex align-items-end justify-content-between mt-4",
                 },
                 [
                   _c("span", { staticClass: "price" }, [
@@ -44743,7 +44723,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row" }, [
-      _c("h3", [_vm._v("Risultati della ricerca:")]),
+      _c("h3", { staticClass: "my-3" }, [_vm._v("Risultati della ricerca:")]),
     ])
   },
 ]
@@ -44852,17 +44832,26 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "navbar-brand", attrs: { href: "/home" } }, [
-      _c("img", {
-        staticClass: "d-inline-block align-top",
-        attrs: {
-          src: "/images/logo-text.png ",
-          width: "100",
-          height: "40",
-          alt: "Logo",
-        },
-      }),
-    ])
+    return _c(
+      "a",
+      {
+        staticClass: "navbar-brand d-flex align-items-center",
+        attrs: { href: "/home" },
+      },
+      [
+        _c("img", {
+          staticClass: "d-inline-block align-top",
+          attrs: {
+            src: "/images/logo-small.png ",
+            width: "40",
+            height: "40",
+            alt: "Logo",
+          },
+        }),
+        _vm._v(" "),
+        _c("strong", { staticClass: "mx-1 text-logo" }, [_vm._v("Deliveboo")]),
+      ]
+    )
   },
   function () {
     var _vm = this
@@ -44993,17 +44982,28 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("nav", { staticClass: "navbar navbar-expand-lg navbar-light" }, [
-      _c("a", { staticClass: "navbar-brand", attrs: { href: "/home" } }, [
-        _c("img", {
-          staticClass: "d-inline-block align-top",
-          attrs: {
-            src: "/images/logo-text.png ",
-            width: "100",
-            height: "40",
-            alt: "Logo",
-          },
-        }),
-      ]),
+      _c(
+        "a",
+        {
+          staticClass: "navbar-brand d-flex align-items-center",
+          attrs: { href: "/home" },
+        },
+        [
+          _c("img", {
+            staticClass: "d-inline-block align-top",
+            attrs: {
+              src: "/images/logo-small.png ",
+              width: "40",
+              height: "40",
+              alt: "Logo",
+            },
+          }),
+          _vm._v(" "),
+          _c("strong", { staticClass: "mx-1 text-logo" }, [
+            _vm._v("Deliveboo"),
+          ]),
+        ]
+      ),
     ])
   },
 ]

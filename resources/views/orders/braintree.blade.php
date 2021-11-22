@@ -16,7 +16,7 @@
         <div class="container" id="checkout">
             <div class="row">
 
-                <div class="col-12 col-md-4 my-3">
+                <div class="col-12 offset-md-2 col-md-4 my-3">
                     {{-- formnew --}}
                     <form>
                         <div class="form-group">
@@ -45,13 +45,13 @@
                         <div id="dropin-container" style="display: flex;justify-content: center;align-items: center;">
                         </div>
                         <div style="display: flex;justify-content: center;align-items: center; color: white">
-                            <a id="submit-button" class="btn btn-sm btn-success">Submit payment</a>
+                            <a id="submit-button" class="btn btn-sm btn-success mt-1">Invia pagamento</a>
                         </div>
                         {{-- BRAINTREE TEST --}}
 
                     </div>
                 </div>
-                <div id="app" class="col-12 col-md-8 my-3">
+                <div id="app" class="col-12 offset-md-2 col-md-4 my-3">
                     {{-- Riepologo carrello qui --}}
                     <Receipt></Receipt>
                 </div>

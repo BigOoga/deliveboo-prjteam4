@@ -30,7 +30,7 @@
                         <th scope="col">Nome</th>
                         <th scope="col">Prezzo</th>
                         <th scope="col">Portata</th>
-                        <th scope="col">Azioni</th>
+                        <th scope="col"  class="text-center">Azioni</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,9 +41,9 @@
                             <td>{{ $dish->name }}</td>
                             <td>€{{ $dish->price }}</td>
                             <td>{{ $dish->entry }}</td>
-                            <td>
-                                <a href="{{ route('dishes.show', $dish->id) }}" class="btn btn-info">Dettaglio</a>
-                                <a href="{{ route('dishes.edit', $dish->id) }}" class="btn">
+                            <td class="text-center">
+                                <a href="{{ route('dishes.show', $dish->id) }}" class="btn btn-info mx-2">Dettaglio</a>
+                                <a href="{{ route('dishes.edit', $dish->id) }}" class="btn  mx-2">
                                     <i class="fas fa-pen fs-4"></i>
                                 </a>
                                 <form action="{{ route('dishes.destroy', $dish->id) }}" method="POST"
