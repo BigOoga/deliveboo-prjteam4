@@ -21,7 +21,7 @@
                         <div class="card-title d-flex align-items-center justify-content-between">
                             <h5>Nome piatto: <strong>{{ $dish->name }}</strong></h5>
                             <div>
-                                <a href="{{ route('dishes.edit', $dish->id) }}" class="btn my-2">
+                                <a href="{{ route('dishes.edit', $dish->id) }}" class="btn">
                                     <i class="fas fa-pen fs-4"></i>
                                 </a>
                                 <form action="{{ route('dishes.destroy', $dish->id) }}" method="POST"
