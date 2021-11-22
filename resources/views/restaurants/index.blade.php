@@ -42,12 +42,16 @@
     width: 200px;
     
 }
+#app{
+    min-height: 100vh;
+}
 #bg-layer{
     background: linear-gradient(
         176deg,
         rgba(0, 204, 188, 0.8) 49.7%,
         rgba(208, 235, 153, 0.8) 50%
     );
+    height: 100%;
     background-attachment: fixed;
 
 }
@@ -55,7 +59,7 @@
     margin-left: 200px;
     width: calc(100% - 200px);
     max-width: 100vw;
-    
+    min-height: 100vh;
 }
 
 </style>
