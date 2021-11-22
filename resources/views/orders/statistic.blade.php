@@ -7,11 +7,13 @@
 
         <div class="d-flex align-items-center justify-content-between my-3">                
             <h3 style="vertical-align: middle" class="d-inline-block self-align-center">Le tue statistiche</h3>
+            {{-- Bottone torna indietro --}}
             <a href="{{ route('restaurants.dashboard') }}" class="btn btn-primary">
                 Torna indietro</a>
         </div>
 
         <div class="rounded w-100 p-3 bg-light mx-auto">
+            {{-- Grafico --}}
             <canvas id="myChart"></canvas>
         </div>
 
@@ -20,7 +22,7 @@
 
     <script type="application/javascript">
         var sales = {!! $orders !!};
-        // <block:setup:1>
+        // Labek mensilità
         const labels = [
             'Gennaio',
             'Febraio',
@@ -41,26 +43,21 @@
                 label: 'Vendite mensili',
                 backgroundColor: 'rgb(5, 29, 161)',
                 borderColor: 'rgb(5, 29, 161)',
+                //setto a 0 ogni mese
                 data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             }]
         };
-        // </block:setup>
-
-
+        // ciclo per stampa dati per mese
         sales.forEach(saleGroup => {
             data.datasets[0].data[saleGroup.month - 1] = saleGroup.sales;
         });
 
-
-
-
-        // <block:config:0>
+        // stampa della linea a pari passo dei dati
         const config = {
             type: 'line',
             data: data,
             options: {}
         };
-        // </block:config>
 
         module.exports = {
             actions: [],
