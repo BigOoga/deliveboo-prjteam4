@@ -135,7 +135,8 @@ class OrderController extends Controller
     public function statistic()
     {
         $user_id = Auth::id();
-
+        
+        // filtro per ragruppare dati mensilmente
         $orders = DB::select("SELECT MONTH(o.created_at) AS month, count(DISTINCT o.id) AS sales FROM `orders`as o
         INNER JOIN dish_order as do ON do.order_id=o.id
         INNER JOIN dishes as d on d.id=do.dish_id
