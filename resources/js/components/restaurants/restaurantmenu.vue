@@ -1,15 +1,54 @@
 <template>
     <div id="dish-card-wrapper" class="col-lg-8 col-md-6 p-0 d-flex flex-wrap">
-        <div id="dish-card" v-for="(dish, i) in dishes" :key="i" class="card col-lg-5 col-md-12 shadow-sm p-3 mb-3 me-3 d-flex" :class="[dish.available ? 'available' : 'unavailable']">
-            <img style="object-fit: cover" :src="dish.picture ? '/storage/' + dish.picture : '/img/placeholder.svg'" alt=""/>
-            <div class="card-body p-0 mt-3 d-flex flex-column justify-content-between">
+        <div
+            id="dish-card"
+            v-for="(dish, i) in dishes"
+            :key="i"
+            class="card col-lg-5 col-md-12 shadow-sm p-3 mb-3 me-3 d-flex"
+            :class="[dish.available ? 'available' : 'unavailable']"
+        >
+            <img
+                style="object-fit: cover"
+                :src="
+                    dish.picture
+                        ? '/storage/' + dish.picture
+                        : '/img/placeholder.svg'
+                "
+                alt=""
+            />
+            <div
+                class="
+                    card-body
+                    p-0
+                    mt-3
+                    d-flex
+                    flex-column
+                    justify-content-between
+                "
+            >
                 <div>
                     <h4 class="card-title">{{ dish.name }}</h4>
                     <p class="card-text">{{ dish.description }}</p>
                 </div>
-                <div class="pos-bot d-flex align-items-end justify-content-between mt-4">
-                    <span class="price"><strong>Prezzo: </strong>€ {{ dish.price }}</span>
-                    <button @click="addToCart(dish.id, dish.price)" class="btn" type="button">Aggiungi</button>
+                <div
+                    class="
+                        pos-bot
+                        d-flex
+                        align-items-end
+                        justify-content-between
+                        mt-4
+                    "
+                >
+                    <span class="price"
+                        ><strong>Prezzo: </strong>€ {{ dish.price }}</span
+                    >
+                    <button
+                        @click="addToCart(dish.id, dish.price)"
+                        class="btn"
+                        type="button"
+                    >
+                        Aggiungi
+                    </button>
                 </div>
             </div>
         </div>
@@ -119,25 +158,23 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
 #dish-card {
-    transition: transform 0.2s;  
-  
+    transition: transform 0.2s;
+
     // @media screen and (min-width: 980px) {
-    //     width: 50%; 
+    //     width: 50%;
     //     // aggiustare qui
     // }
     // @media screen and (min-width: 1200px) {
     //     width: calc(100% / 3 - 20px);
-        
+
     // }
-    
 }
-#dish-card:last-child{
-            @media screen and (max-width:780px){
-                width:100%;
-            }
-        }
+#dish-card {
+    @media screen and (max-width: 780px) {
+        width: 100%;
+    }
+}
 #dish-card:hover {
     transform: scale(1.02);
 }
@@ -145,19 +182,16 @@ export default {
 img {
     width: 100px;
     height: 100px;
-    
 }
 
-button[type="button"]{
+button[type="button"] {
     background-color: #00bb55;
-        color: white;
-        font-size: 1rem;
-        font-weight: bold;
-    }
-
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+}
 
 .card.unavailable {
     display: none;
 }
-
 </style>
