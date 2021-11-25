@@ -51,7 +51,9 @@ export default {
         initBar() {
             let params = new URL(document.location).searchParams;
             let category = params.get("category");
-            this.selection.push(category);
+            if (category) {
+                this.selection.push(category);
+            }
             this.$store.commit("changeSelection", this.selection);
             eventBus.$emit("startSearch");
         },

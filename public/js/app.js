@@ -2475,13 +2475,15 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       // prendo il cart dallo storage
-      var currentCart = JSON.parse(sessionStorage.getItem("cart")); // storo gli ordini per comodità
+      if (sessionStorage.getItem("cart") !== null) {
+        var currentCart = JSON.parse(sessionStorage.getItem("cart")); // storo gli ordini per comodità
 
-      var orders = currentCart.orders; // carico un array con tutti gli ID di piatti presenti nel carrello
+        var orders = currentCart.orders; // carico un array con tutti gli ID di piatti presenti nel carrello
 
-      orders.forEach(function (order) {
-        _this.getDishByID(order.dish_id, order.quantity);
-      });
+        orders.forEach(function (order) {
+          _this.getDishByID(order.dish_id, order.quantity);
+        });
+      }
     },
     getRestaurantByID: function getRestaurantByID() {
       var _this2 = this;
@@ -2878,8 +2880,11 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     addToCart: function addToCart(dish_id, price) {
+      if (sessionStorage.getItem("cart") === null) {
+        this.initCart();
+      }
+
       var currentCart = JSON.parse(sessionStorage.getItem("cart"));
-      console.log("restaurant id match");
       var isDuplicate = false;
       currentCart.orders.forEach(function (order) {
         if (order.dish_id === dish_id) {
@@ -2901,24 +2906,19 @@ __webpack_require__.r(__webpack_exports__);
     },
     initCart: function initCart() {
       console.log("Initializing cart...");
-
-      if (sessionStorage.getItem("cart") === null) {
-        console.log("Cart did not exist, creating...");
-        var cart = {
-          restaurantID: 0,
-          orders: []
-        };
-        console.log("Cart created...");
-        cart.restaurantID = this.currenRestaurantID;
-        sessionStorage.setItem("cart", JSON.stringify(cart));
-      } // se esiste già, ne leggiamo il contenuto
-
+      console.log("Cart did not exist, creating...");
+      var cart = {
+        restaurantID: 0,
+        orders: []
+      };
+      console.log("Cart created...");
+      cart.restaurantID = this.currenRestaurantID;
+      sessionStorage.setItem("cart", JSON.stringify(cart)); // se esiste già, ne leggiamo il contenuto
     }
   },
   created: function created() {
     console.log("---Currently in restaurantmenu---");
     this.getDishes();
-    this.initCart();
   }
 });
 
@@ -2980,7 +2980,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       this.isLoading = true; // Azzero restaurants per far ricomparire il loader e far scomparire i vecchi risultati
 
-      this.restaurants = []; // caso: ricerca vuota e nessuna categoria selezionata
+      this.restaurants = []; //! caso: ricerca vuota e nessuna categoria selezionata
 
       if (this.$store.state.selection.length == 0) {
         console.log("Fetching ALL restaurants...");
@@ -2997,7 +2997,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         })["catch"](function (e) {
           console.error(e);
         });
-      } //caso categorie selezionata
+      } //! caso categorie selezionata
       else {
         var selection = this.$store.state.selection;
         var baseUri = this.baseUri; //# variabile d'appoggio
@@ -3237,7 +3237,11 @@ __webpack_require__.r(__webpack_exports__);
     initBar: function initBar() {
       var params = new URL(document.location).searchParams;
       var category = params.get("category");
-      this.selection.push(category);
+
+      if (category) {
+        this.selection.push(category);
+      }
+
       this.$store.commit("changeSelection", this.selection);
       _js_app__WEBPACK_IMPORTED_MODULE_0__["eventBus"].$emit("startSearch");
     }

@@ -160,15 +160,17 @@ export default {
         },
         restoreCart() {
             // prendo il cart dallo storage
-            const currentCart = JSON.parse(sessionStorage.getItem("cart"));
-            // storo gli ordini per comodità
-            const orders = currentCart.orders;
+            if (sessionStorage.getItem("cart") !== null) {
+                const currentCart = JSON.parse(sessionStorage.getItem("cart"));
+                // storo gli ordini per comodità
+                const orders = currentCart.orders;
 
-            // carico un array con tutti gli ID di piatti presenti nel carrello
+                // carico un array con tutti gli ID di piatti presenti nel carrello
 
-            orders.forEach((order) => {
-                this.getDishByID(order.dish_id, order.quantity);
-            });
+                orders.forEach((order) => {
+                    this.getDishByID(order.dish_id, order.quantity);
+                });
+            }
         },
         getRestaurantByID() {
             this.isLoading = true;

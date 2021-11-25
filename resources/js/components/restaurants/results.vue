@@ -33,7 +33,8 @@ export default {
             this.isLoading = true;
             // Azzero restaurants per far ricomparire il loader e far scomparire i vecchi risultati
             this.restaurants = [];
-            // caso: ricerca vuota e nessuna categoria selezionata
+
+            //! caso: ricerca vuota e nessuna categoria selezionata
             if (this.$store.state.selection.length == 0) {
                 console.log("Fetching ALL restaurants...");
                 axios
@@ -52,7 +53,7 @@ export default {
                     });
             }
 
-            //caso categorie selezionata
+            //! caso categorie selezionata
             else {
                 const selection = this.$store.state.selection;
                 const baseUri = this.baseUri;

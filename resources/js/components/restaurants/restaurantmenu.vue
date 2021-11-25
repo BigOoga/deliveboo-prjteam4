@@ -101,9 +101,10 @@ export default {
                 });
         },
         addToCart(dish_id, price) {
+            if (sessionStorage.getItem("cart") === null) {
+                this.initCart();
+            }
             const currentCart = JSON.parse(sessionStorage.getItem("cart"));
-
-            console.log("restaurant id match");
             let isDuplicate = false;
             currentCart.orders.forEach((order) => {
                 if (order.dish_id === dish_id) {
@@ -126,24 +127,22 @@ export default {
         },
         initCart() {
             console.log("Initializing cart...");
-            if (sessionStorage.getItem("cart") === null) {
-                console.log("Cart did not exist, creating...");
-                let cart = {
-                    restaurantID: 0,
-                    orders: [],
-                };
+            console.log("Cart did not exist, creating...");
+            let cart = {
+                restaurantID: 0,
+                orders: [],
+            };
 
-                console.log("Cart created...");
-                cart.restaurantID = this.currenRestaurantID;
-                sessionStorage.setItem("cart", JSON.stringify(cart));
-            }
+            console.log("Cart created...");
+            cart.restaurantID = this.currenRestaurantID;
+            sessionStorage.setItem("cart", JSON.stringify(cart));
+
             // se esiste già, ne leggiamo il contenuto
         },
     },
     created() {
         console.log("---Currently in restaurantmenu---");
         this.getDishes();
-        this.initCart();
     },
 };
 </script>
