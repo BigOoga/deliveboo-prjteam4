@@ -17,7 +17,8 @@
 
 <body>
     <div id="app">
-        <searchbar></searchbar>
+        <RestaurantIndex></RestaurantIndex>
+        {{-- <searchbar></searchbar>
         <div class="container-fluid ">
             <div id="bg-layer" class="row">
                 <div id="sidebar-menu" class="col-4 col-md-3 col-lg-2">
@@ -27,9 +28,9 @@
 
                     <results></results>
 
-                </div>
-            </div>
-        </div>
+    </div>
+    </div>
+    </div> --}}
     </div>
 
 
@@ -38,28 +39,29 @@
 </html>
 
 <style lang="scss" scoped>
-#sidebar-menu{
-    width: 200px;
-    
-}
-#app{
-    min-height: 100vh;
-}
-#bg-layer{
-    background: linear-gradient(
-        176deg,
-        rgba(0, 204, 188, 0.8) 49.7%,
-        rgba(208, 235, 153, 0.8) 50%
-    );
-    height: 100%;
-    background-attachment: fixed;
+    #sidebar-menu {
+        width: 200px;
 
-}
-#main-section{
-    margin-left: 200px;
-    width: calc(100% - 200px);
-    max-width: 100vw;
-    min-height: 100vh;
-}
+    }
+
+    #app {
+        min-height: 100vh;
+    }
+
+    #bg-layer {
+        background: linear-gradient(176deg,
+                rgba(0, 204, 188, 0.8) 49.7%,
+                rgba(208, 235, 153, 0.8) 50%);
+        height: 100%;
+        background-attachment: fixed;
+
+    }
+
+    #main-section {
+        margin-left: 200px;
+        width: calc(100% - 200px);
+        max-width: 100vw;
+        min-height: 100vh;
+    }
 
 </style>

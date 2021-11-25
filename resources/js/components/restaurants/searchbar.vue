@@ -41,11 +41,7 @@
             </form>
         </div>
         <div class="button-container">
-            <button
-                @click="goToRestaurant"
-                type="button"
-                class="btn"
-            >
+            <button @click="goToRestaurant" type="button" class="btn">
                 Carrello
             </button>
         </div>
@@ -62,11 +58,15 @@ export default {
     methods: {
         startSearch() {
             console.log("Starting search...");
-            this.$store.commit("changeSearchInput", this.searchInput);
-
-            eventBus.$emit("requestSelection");
-            eventBus.$emit("startSearch");
+            this.$emit("startSearch", this.searchInput);
         },
+        // startSearch() {
+        //     console.log("Starting search...");
+        //     this.$store.commit("changeSearchInput", this.searchInput);
+
+        //     eventBus.$emit("requestSelection");
+        //     eventBus.$emit("startSearch");
+        // },
         goToRestaurant() {
             const currentCart = JSON.parse(sessionStorage.getItem("cart"));
             let openSessionId = currentCart.restaurantID;
@@ -81,28 +81,28 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-nav{ 
+nav {
     padding: 10px 40px;
     height: 90px;
     background-color: rgba(0, 204, 188, 1);
 }
-form{ 
+form {
     display: flex;
-    input[type="search"]{
+    input[type="search"] {
         margin-right: 5px;
         border: 2px solid #00aabc;
     }
-    button[type="button"]{
+    button[type="button"] {
         background-color: #00bbbb;
         color: white;
     }
 }
-button[type="button"]{
-        width: 100px;
-        height: 50px;
-        background-color: #00bb55;
-        color: white;
-        font-size: 1rem;
-        font-weight: bold;
-    }
+button[type="button"] {
+    width: 100px;
+    height: 50px;
+    background-color: #00bb55;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+}
 </style>

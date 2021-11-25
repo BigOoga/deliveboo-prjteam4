@@ -10,6 +10,7 @@
                         :id="type.name"
                         v-model="selection"
                         :value="type.id"
+                        @click="sendSelection"
                     />
                     <label :for="type.name">{{ type.name }}</label>
                 </div>
@@ -30,6 +31,9 @@ export default {
         };
     },
     methods: {
+        sendSelection() {
+            this.$emit("sendSelection", this.selection);
+        },
         getTypes() {
             console.log(`Fetching all types from API...`);
             axios
@@ -43,9 +47,9 @@ export default {
                 });
         },
         // sends selection to searchbar when requested
-        sendSelection() {
-            this.$store.commit("changeSelection", this.selection);
-        },
+        // sendSelection() {
+        //     this.$store.commit("changeSelection", this.selection);
+        // },
     },
     mounted() {
         console.log("Component mounted.");
@@ -57,22 +61,20 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-h4{
+h4 {
     margin-bottom: 20px;
     font-weight: bold;
 }
 #sidebar {
     position: fixed;
     width: 200px;
-    height:100vh;
+    height: 100vh;
     left: 0;
     padding: 120px 0 0 40px;
     background-color: transparent;
-
 }
 input[type="checkbox"] {
     margin-right: 5px;
     margin-bottom: 5px;
 }
-
 </style>
