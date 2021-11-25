@@ -2839,7 +2839,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3234,6 +3233,13 @@ __webpack_require__.r(__webpack_exports__);
     startSearch: function startSearch() {
       this.$store.commit("changeSelection", this.selection);
       _js_app__WEBPACK_IMPORTED_MODULE_0__["eventBus"].$emit("startSearch");
+    },
+    initBar: function initBar() {
+      var params = new URL(document.location).searchParams;
+      var category = params.get("category");
+      this.selection.push(category);
+      this.$store.commit("changeSelection", this.selection);
+      _js_app__WEBPACK_IMPORTED_MODULE_0__["eventBus"].$emit("startSearch");
     }
   },
   mounted: function mounted() {
@@ -3241,6 +3247,7 @@ __webpack_require__.r(__webpack_exports__);
 
     console.log("Component mounted.");
     this.getTypes();
+    this.initBar();
     _js_app__WEBPACK_IMPORTED_MODULE_0__["eventBus"].$on("requestSelection", function () {
       _this2.sendSelection();
     });
@@ -41046,87 +41053,76 @@ var render = function () {
       staticClass: "col-lg-8 col-md-6 p-0 d-flex flex-wrap",
       attrs: { id: "dish-card-wrapper" },
     },
-    [
-      _vm.modal
-        ? _c("modal", { on: { "modal-click": _vm.modalClick } })
-        : _vm._e(),
-      _vm._v(" "),
-      _vm._l(_vm.dishes, function (dish, i) {
-        return _c(
-          "div",
-          {
-            key: i,
-            staticClass:
-              "card col-lg-5 col-md-12 shadow-sm p-3 mb-3 me-3 d-flex",
-            class: [dish.available ? "available" : "unavailable"],
-            attrs: { id: "dish-card" },
-          },
-          [
-            _c("img", {
-              staticStyle: { "object-fit": "cover" },
-              attrs: {
-                src: dish.picture
-                  ? "/storage/" + dish.picture
-                  : "/img/placeholder.svg",
-                alt: "",
-              },
-            }),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass:
-                  "\n                card-body\n                p-0\n                mt-3\n                d-flex\n                flex-column\n                justify-content-between\n            ",
-              },
-              [
-                _c("div", [
-                  _c("h4", { staticClass: "card-title" }, [
-                    _vm._v(_vm._s(dish.name)),
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "card-text" }, [
-                    _vm._v(_vm._s(dish.description)),
-                  ]),
+    _vm._l(_vm.dishes, function (dish, i) {
+      return _c(
+        "div",
+        {
+          key: i,
+          staticClass: "card col-lg-5 col-md-12 shadow-sm p-3 mb-3 me-3 d-flex",
+          class: [dish.available ? "available" : "unavailable"],
+          attrs: { id: "dish-card" },
+        },
+        [
+          _c("img", {
+            staticStyle: { "object-fit": "cover" },
+            attrs: {
+              src: dish.picture
+                ? "/storage/" + dish.picture
+                : "/img/placeholder.svg",
+              alt: "",
+            },
+          }),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "\n                card-body\n                p-0\n                mt-3\n                d-flex\n                flex-column\n                justify-content-between\n            ",
+            },
+            [
+              _c("div", [
+                _c("h4", { staticClass: "card-title" }, [
+                  _vm._v(_vm._s(dish.name)),
                 ]),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "\n                    pos-bot\n                    d-flex\n                    align-items-end\n                    justify-content-between\n                    mt-4\n                ",
-                  },
-                  [
-                    _c("span", { staticClass: "price" }, [
-                      _c("strong", [_vm._v("Prezzo: ")]),
-                      _vm._v("€ " + _vm._s(dish.price)),
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn",
-                        attrs: { type: "button" },
-                        on: {
-                          click: function ($event) {
-                            return _vm.addToCart(dish.id, dish.price)
-                          },
+                _c("p", { staticClass: "card-text" }, [
+                  _vm._v(_vm._s(dish.description)),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "\n                    pos-bot\n                    d-flex\n                    align-items-end\n                    justify-content-between\n                    mt-4\n                ",
+                },
+                [
+                  _c("span", { staticClass: "price" }, [
+                    _c("strong", [_vm._v("Prezzo: ")]),
+                    _vm._v("€ " + _vm._s(dish.price)),
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function ($event) {
+                          return _vm.addToCart(dish.id, dish.price)
                         },
                       },
-                      [
-                        _vm._v(
-                          "\n                    Aggiungi\n                "
-                        ),
-                      ]
-                    ),
-                  ]
-                ),
-              ]
-            ),
-          ]
-        )
-      }),
-    ],
-    2
+                    },
+                    [_vm._v("\n                    Aggiungi\n                ")]
+                  ),
+                ]
+              ),
+            ]
+          ),
+        ]
+      )
+    }),
+    0
   )
 }
 var staticRenderFns = []

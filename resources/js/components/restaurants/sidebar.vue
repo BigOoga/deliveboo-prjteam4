@@ -48,10 +48,18 @@ export default {
             this.$store.commit("changeSelection", this.selection);
             eventBus.$emit("startSearch");
         },
+        initBar() {
+            let params = new URL(document.location).searchParams;
+            let category = params.get("category");
+            this.selection.push(category);
+            this.$store.commit("changeSelection", this.selection);
+            eventBus.$emit("startSearch");
+        },
     },
     mounted() {
         console.log("Component mounted.");
         this.getTypes();
+        this.initBar();
         eventBus.$on("requestSelection", () => {
             this.sendSelection();
         });

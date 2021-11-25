@@ -294,7 +294,8 @@
               <div class="container">
                   <h2 class="mb-4">Cerchi qualcos'altro?</h2>
                   @foreach ($types as $type)
-                      <a href="{{ route('restaurants.index') }}" class="btn btn-secondary px-2 m-2">{{ $type->name }}</a>
+                      <a href="{{ route('restaurants.index', ['category' => $type]) }}"
+                          class="btn btn-secondary px-2 m-2">{{ $type->name }}</a>
                   @endforeach
               </div>
           </section>
@@ -329,7 +330,7 @@
               }
           }
 
-          //stoppo propagazione evento 
+          //stoppo propagazione evento
           sideNavBarElem.addEventListener('click', function(event) {
               event.stopPropagation();
           })
