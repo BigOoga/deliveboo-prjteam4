@@ -10,6 +10,7 @@
                         :id="type.name"
                         v-model="selection"
                         :value="type.id"
+                        @change="startSearch"
                     />
                     <label :for="type.name">{{ type.name }}</label>
                 </div>
@@ -42,9 +43,10 @@ export default {
                     console.error(e);
                 });
         },
-        // sends selection to searchbar when requested
-        sendSelection() {
+        // sends selection to vuex and starts search
+        startSearch() {
             this.$store.commit("changeSelection", this.selection);
+            eventBus.$emit("startSearch");
         },
     },
     mounted() {
@@ -57,22 +59,20 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-h4{
+h4 {
     margin-bottom: 20px;
     font-weight: bold;
 }
 #sidebar {
     position: fixed;
     width: 200px;
-    height:100vh;
+    height: 100vh;
     left: 0;
     padding: 120px 0 0 40px;
     background-color: transparent;
-
 }
 input[type="checkbox"] {
     margin-right: 5px;
     margin-bottom: 5px;
 }
-
 </style>
