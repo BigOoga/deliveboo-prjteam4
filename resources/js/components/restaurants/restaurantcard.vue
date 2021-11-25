@@ -1,5 +1,6 @@
 <template>
     <div class="col-lg-3 col-md-4 col-sm-6 mb-5">
+        <modal v-if="modal" v-on:modal-click="modalClick" />
         <div @click="goToRestaurant" class="card mb-2 h-100 shadow-sm">
             <div class="img-container">
                 <img
@@ -26,13 +27,44 @@
 <script>
 export default {
     name: "RestaurantCard",
+    data() {
+        return {
+            modal: false,
+            caller: null,
+        };
+    },
     props: {
         restaurant: Object,
     },
     methods: {
+        showModal() {
+            this.modal = true;
+        },
+        modalClick(feedback) {
+            this.modal = false;
+
+            if (feedback) {
+                console.log("User decided to empty cart...");
+                console.log("dropping order...");
+                sessionStorage.removeItem("order");
+                console.log("dropping cart...");
+                sessionStorage.removeItem("cart");
+                this.goToRestaurant();
+            }
+        },
         goToRestaurant() {
             console.log("Firing");
-            window.location.href = `http://127.0.0.1:8000/restaurants/${this.restaurant.id}`;
+            const currentCart = JSON.parse(sessionStorage.getItem("cart"));
+            if (
+                currentCart == null ||
+                currentCart.restaurantID == this.restaurant.id
+            ) {
+                this.caller = this.restaurant.id;
+                window.location.href = `http://127.0.0.1:8000/restaurants/${this.caller}`;
+            } else {
+                console.log("restaurant id did not match");
+                this.showModal();
+            }
         },
     },
 };

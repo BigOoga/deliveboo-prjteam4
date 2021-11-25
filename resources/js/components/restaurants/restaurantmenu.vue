@@ -57,13 +57,16 @@
 
 <script>
 import { eventBus } from "../../../js/app";
+import modal from "./modal.vue";
 export default {
+    components: { modal },
     name: "restaurantmenu",
     data() {
         return {
             baseUri: "http://127.0.0.1:8000",
             dishes: [],
             isLoading: false,
+            modal: false,
         };
     },
     computed: {
@@ -77,6 +80,7 @@ export default {
     },
     methods: {
         // Fetch dishes with an API call
+
         getDishes() {
             this.isLoading = true;
             const restaurantID = window.location.pathname.replace(
@@ -98,6 +102,8 @@ export default {
         },
         addToCart(dish_id, price) {
             const currentCart = JSON.parse(sessionStorage.getItem("cart"));
+
+            console.log("restaurant id match");
             let isDuplicate = false;
             currentCart.orders.forEach((order) => {
                 if (order.dish_id === dish_id) {
@@ -115,6 +121,8 @@ export default {
                 sessionStorage.setItem("cart", JSON.stringify(currentCart));
                 eventBus.$emit("update", currentCart.orders.length);
             }
+
+            //............................................................
         },
         initCart() {
             console.log("Initializing cart...");
@@ -125,28 +133,11 @@ export default {
                     orders: [],
                 };
 
-                console.log("everything's fine");
+                console.log("Cart created...");
                 cart.restaurantID = this.currenRestaurantID;
                 sessionStorage.setItem("cart", JSON.stringify(cart));
             }
             // se esiste già, ne leggiamo il contenuto
-            const currentCart = JSON.parse(sessionStorage.getItem("cart"));
-            // soluzione provvisoria: svuota il carrello se visito un'altro ristorante
-            if (currentCart.restaurantID !== this.currenRestaurantID) {
-                console.log("restaurant id did not match");
-                let cart = {
-                    restaurantID: 0,
-                    orders: [],
-                };
-                console.log("dropping order...");
-                sessionStorage.removeItem("order");
-
-                console.log("reinitializing...");
-                cart.restaurantID = this.currenRestaurantID;
-                sessionStorage.setItem("cart", JSON.stringify(cart));
-            } else {
-                console.log("restaurant id match");
-            }
         },
     },
     created() {

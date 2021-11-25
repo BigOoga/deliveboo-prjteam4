@@ -1,5 +1,5 @@
 <template>
-<div class="col-lg-4 col-md-6" >
+    <div class="col-lg-4 col-md-6">
         <div class="card p-3 shadow-sm">
             <div>
                 <h4>Il tuo ordine</h4>
@@ -33,8 +33,9 @@
                             </span>
                             €{{
                                 (
-                                    Math.round(dish.price * dish.quantity * 100) /
-                                    100
+                                    Math.round(
+                                        dish.price * dish.quantity * 100
+                                    ) / 100
                                 ).toFixed(2)
                             }}</span
                         >
@@ -62,9 +63,11 @@
                 <button @click="goToCheckout" class="btn btn-primary">
                     Checkout
                 </button>
-                <button @click="emptyCart" class="btn btn-danger">Svuota</button>
+                <button @click="emptyCart" class="btn btn-danger">
+                    Svuota
+                </button>
             </div>
-        </div>    
+        </div>
     </div>
 </template>
 
@@ -219,9 +222,15 @@ export default {
             const orders = currentCart.orders;
             // carico un array con tutti gli ID di piatti presenti nel carrello
             const id_array = [];
-            orders.forEach((order) => {
-                id_array.push(order.dish_id);
-            });
+            if (orders.length == 0) {
+                console.log("Carrello vuoto!");
+                this.loadedDishes = [];
+                this.dishes = [];
+            } else {
+                orders.forEach((order) => {
+                    id_array.push(order.dish_id);
+                });
+            }
             this.restoreCart();
         });
     },
